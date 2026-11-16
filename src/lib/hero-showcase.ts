@@ -1,6 +1,3 @@
-import { BANKS } from '@/data/banks';
-import { cashToClose, emi } from '@/lib/math';
-
 export type HeroScene = {
   index: string;
   label: string;
@@ -19,7 +16,7 @@ export const HERO_SCENES: readonly HeroScene[] = [
     index: '01',
     label: 'Waterfront Villa',
     location: 'Palm & Jumeirah Bay',
-    mandate: 'Resident & private-client mortgages · up to 80% LTV',
+    mandate: 'Resident mortgages · CBUAE up to 80% / 85% LTV',
     href: '/mortgages/uae-residents',
     src: '/images/dubai-waterfront-3344.webp',
     srcSet: '/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w',
@@ -31,7 +28,7 @@ export const HERO_SCENES: readonly HeroScene[] = [
     index: '02',
     label: 'Marina Horizon',
     location: 'Dubai Marina & Harbour',
-    mandate: 'Non-resident & overseas income · 20 jurisdictions',
+    mandate: 'Non-resident & overseas documentation · 25 country guides',
     href: '/mortgages/non-resident-dubai',
     src: '/images/marina-evening-2752.webp',
     srcSet: '/images/marina-evening.webp 1376w, /images/marina-evening-2752.webp 2752w',
@@ -43,7 +40,7 @@ export const HERO_SCENES: readonly HeroScene[] = [
     index: '03',
     label: 'Transfer Desk',
     location: 'DLD Trustee & Closing',
-    mandate: 'Valuation, final offer & trustee cheque execution',
+    mandate: 'Valuation, Final Offer Letter & trustee cheque execution',
     href: '/guides/complete-dld-trustee-transfer-day-checklist',
     src: '/images/guide-transfer-day-2752.webp',
     srcSet: '/images/guide-transfer-day.webp 1376w, /images/guide-transfer-day-2752.webp 2752w',
@@ -64,21 +61,14 @@ export function nextSceneIndex(current: number, total: number, step: 1 | -1 = 1)
   return (((current + step) % total) + total) % total;
 }
 
-export function buildHeroDossier(price: number, downPct: number, eibor3m: number) {
-  const cash = cashToClose({ price, downPct });
-  const twoYearRates = BANKS.filter((b) => b.introTerm === '2Y').map((b) => b.intro);
-  const indicativeRate = Math.min(...twoYearRates);
-  const indicativeEmi = Math.round(emi(cash.loan, indicativeRate, 25));
+export function buildHeroDossier(eibor3m: number) {
   const safeEibor = Number.isFinite(eibor3m) ? eibor3m : 4.21;
 
   return {
-    price,
-    downPct,
-    loan: Math.round(cash.loan),
-    upfrontCash: Math.round(cash.total),
-    indicativeRate,
-    indicativeEmi,
     eiborFormatted: `${safeEibor.toFixed(2)}%`,
+    residentMaxLtv: '80%',
+    nationalMaxLtv: '85%',
+    maxDbr: '50%',
   };
 }
 
@@ -89,4 +79,3 @@ export function interpolateCount(target: number, progress: number): number {
   const eased = 1 - Math.pow(1 - progress, 3);
   return Math.round(target * eased);
 }
-

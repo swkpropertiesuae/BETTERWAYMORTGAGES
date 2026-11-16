@@ -56,7 +56,7 @@ export default function HomeHero() {
   };
 
   const scene = HERO_SCENES[sceneIdx] ?? HERO_SCENES[0];
-  const dossier = buildHeroDossier(2_000_000, 20, data.latest.threeMonth);
+  const dossier = buildHeroDossier(data.latest.threeMonth);
 
   return (
     <section
@@ -91,7 +91,7 @@ export default function HomeHero() {
           </h1>
 
           <p className="bw-hero__lead">
-            Independent mortgage structuring across {BANKS.length} UAE lenders. Compare fixed periods, EIBOR revert margins, and itemised DLD closing costs before a single application is filed.
+            Independent mortgage structuring across {BANKS.length} UAE lenders. Review statutory CBUAE rules, published EIBOR fixings, and itemised DLD closing costs before a single application is filed.
           </p>
 
           <div className="bw-hero__actions">
@@ -108,12 +108,12 @@ export default function HomeHero() {
 
           <dl className="bw-hero__metrics" aria-label="Advisory coverage">
             <div>
-              <dt>Lender panel</dt>
+              <dt>Lender directory</dt>
               <dd className="num">{BANKS.length} UAE banks</dd>
             </div>
             <div>
               <dt>CBUAE DBR cap</dt>
-              <dd className="num">50% modelled</dd>
+              <dd className="num">50% max</dd>
             </div>
             <div>
               <dt>Advisory desks</dt>
@@ -211,7 +211,7 @@ export default function HomeHero() {
           <div className="bw-hero__dossier">
             <div className="bw-hero__dossier-head">
               <span className="inline-flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.16em] text-brass">
-                <ShieldCheck size={13} /> Live market &amp; budget briefing
+                <ShieldCheck size={13} /> Official CBUAE benchmark &amp; statutory caps
               </span>
               <span className="text-[11px] text-white/65">Published {fmtDate(data.latest.date)}</span>
             </div>
@@ -226,13 +226,12 @@ export default function HomeHero() {
               </Link>
 
               <Link href="#calculator" className="bw-hero__dossier-cell">
-                <span className="bw-hero__dossier-label">AED 2.0M home · 20% down</span>
+                <span className="bw-hero__dossier-label">CBUAE First-Home LTV</span>
                 <strong className="num">
-                  AED {dossier.indicativeEmi.toLocaleString('en-US')}
-                  <small>/mo</small>
+                  Up to {dossier.residentMaxLtv} / {dossier.nationalMaxLtv}
                 </strong>
                 <span className="bw-hero__dossier-sub num">
-                  Cash + DLD: AED {dossier.upfrontCash.toLocaleString('en-US')}
+                  Max DBR: {dossier.maxDbr} · 25-yr max tenure
                 </span>
               </Link>
             </div>
@@ -243,7 +242,7 @@ export default function HomeHero() {
                 <span>{scene.mandate}</span>
                 <ArrowUpRight size={14} className="ms-auto shrink-0 text-brass" />
               </Link>
-              <p>Public benchmark &amp; planning illustration · Your lender confirms final terms in writing.</p>
+              <p>Official CBUAE benchmark &amp; statutory limits · Individual bank offers confirmed in writing.</p>
             </div>
           </div>
         </div>
@@ -264,7 +263,7 @@ export default function HomeHero() {
         <video ref={film} controls playsInline preload="none" poster="/video/betterway-explainer.jpg">
           <source src="/video/betterway-explainer.mp4" type="video/mp4" />
         </video>
-        <p>How Betterway helps you compare offers · 32-second explainer</p>
+        <p>How Betterway structures UAE mortgages · 32-second briefing</p>
       </dialog>
     </section>
   );

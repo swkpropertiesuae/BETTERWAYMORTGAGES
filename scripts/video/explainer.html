@@ -21,7 +21,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy);font
 .scene{position:absolute;inset:0;opacity:0}
 .h{font-family:Inter,Arial,sans-serif;font-weight:500;letter-spacing:-.042em;line-height:1.02}
 .h em{font-family:Serif,Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.015em}
-.num{font-family:Mono,monospace;font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
 .abs{position:absolute}
 .grid-light{background-color:var(--mist);background-image:linear-gradient(to right,rgba(2,17,37,.045) 1px,transparent 1px),linear-gradient(to bottom,rgba(2,17,37,.045) 1px,transparent 1px);background-size:64px 64px}
 .grid-dark{background:linear-gradient(160deg,#021125 0%,#041933 58%,#010915 100%)}
@@ -29,14 +29,14 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy);font
 .card{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:0 30px 64px -32px rgba(2,17,37,.28)}
 .chip{position:absolute;width:252px;height:78px;padding:12px 20px;border-radius:18px;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px -20px rgba(2,17,37,.24)}
 .chip img{max-height:42px;max-width:196px;width:auto;height:auto;object-fit:contain}
-.row{position:absolute;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-radius:18px;font-size:26px;font-weight:600;background:var(--mist);border:1px solid var(--line)}
+.row{position:absolute;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-radius:18px;font-size:25px;font-weight:600;background:var(--mist);border:1px solid var(--line)}
 .row-left{display:flex;align-items:center;gap:18px}
 .row-logo{width:118px;height:50px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:6px 10px}
 .row-logo img{max-height:34px;max-width:96px;object-fit:contain}
 .phone{position:absolute;width:430px;height:860px;border-radius:62px;background:#010915;padding:16px;box-shadow:0 60px 110px -40px rgba(2,17,37,.65);border:2px solid #1c2d44}
 .screen{width:100%;height:100%;border-radius:48px;background:#fff;overflow:hidden;position:relative;padding:86px 28px 0}
 .island{position:absolute;left:50%;top:18px;width:128px;height:36px;border-radius:99px;background:#010915;transform:translateX(-50%)}
-.node{position:absolute;width:78px;height:78px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 28px Mono;border:3px solid var(--line);background:#fff;color:var(--slate)}
+.node{position:absolute;width:78px;height:78px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 28px Inter,Arial,sans-serif;border:3px solid var(--line);background:#fff;color:var(--slate)}
 .lbl{position:absolute;width:280px;text-align:center;font-size:26px;font-weight:600}
 .fine{position:absolute;left:120px;bottom:52px;font-size:19px;color:var(--slate)}
 .watermark{position:absolute;right:120px;top:64px;height:48px;width:auto}
@@ -63,36 +63,36 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy);font
   <div id="chips"></div>
 </div>
 
-<!-- S3: Published EIBOR & Revert Formula Schedule (Poster Scene @ 13.5s) -->
+<!-- S3: Statutory CBUAE Framework & Written Offer Terms (Poster Scene @ 13.5s) -->
 <div class="scene grid-light" id="s3">
   <img class="watermark" src="../../public/brand/logo-primary.svg" alt="">
-  <div class="abs" style="left:120px;top:76px;font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)">02 — PUBLISHED BENCHMARKS &amp; REVERT MARGINS</div>
-  <div class="abs h" style="left:120px;top:122px;font-size:74px">Headline rate vs <em>real 5-year cost</em></div>
-  <div class="abs" style="left:120px;top:222px;font-size:29px;color:var(--slate)">Compare fixed periods, 3M EIBOR revert margins, and contractual floors together.</div>
+  <div class="abs" style="left:120px;top:76px;font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)">02 — STATUTORY CBUAE RULES &amp; WRITTEN OFFERS</div>
+  <div class="abs h" style="left:120px;top:122px;font-size:74px">Every clause reviewed <em>in writing</em></div>
+  <div class="abs" style="left:120px;top:222px;font-size:29px;color:var(--slate)">Compare fixed duration, published EIBOR revert margin, floor clauses and bank fees together.</div>
   <div class="abs card" style="left:120px;top:300px;width:1120px;height:640px;padding:36px"><div id="rows" class="abs" style="left:36px;right:36px;top:36px;bottom:36px"></div></div>
   <div class="abs" style="left:1280px;top:300px;width:520px;height:640px;padding:44px;border-radius:26px;background:var(--navy);color:#fff;border:1px solid rgba(215,176,78,.35);box-shadow:0 36px 72px -32px rgba(2,17,37,.55)">
-    <div style="font-size:17px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)">CBUAE PUBLIC BENCHMARK</div>
-    <div style="margin-top:26px;font-size:24px;color:rgba(255,255,255,.68)">Published 3M EIBOR</div>
-    <div class="num" style="margin-top:6px;font-size:74px;font-weight:600;color:#fff">4.21%</div>
-    <div style="margin-top:34px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12);font-size:24px;color:rgba(255,255,255,.68)">Introductory fixed from</div>
-    <div id="s3fix" class="num" style="margin-top:6px;font-size:88px;font-weight:600;color:var(--gold)">3.75%*</div>
-    <div style="margin-top:26px;font-size:22px;line-height:1.5;color:rgba(255,255,255,.72)">Revert margins from <b style="color:#fff">+1.00%</b> to <b style="color:#fff">+1.99%</b> over 3M EIBOR.</div>
+    <div style="font-size:17px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)">CBUAE STATUTORY FRAMEWORK</div>
+    <div style="margin-top:26px;font-size:24px;color:rgba(255,255,255,.68)">First-home LTV ceiling</div>
+    <div class="num" style="margin-top:6px;font-size:66px;font-weight:600;color:#fff">80% / 85%</div>
+    <div style="margin-top:34px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12);font-size:24px;color:rgba(255,255,255,.68)">Max Debt Burden Ratio</div>
+    <div id="s3fix" class="num" style="margin-top:6px;font-size:86px;font-weight:600;color:var(--gold)">50%</div>
+    <div style="margin-top:24px;font-size:21px;line-height:1.5;color:rgba(255,255,255,.72)">Daily <b style="color:#fff">CBUAE EIBOR</b> benchmark · Up to <b style="color:#fff">25-year</b> tenure.</div>
   </div>
-  <div class="fine">*Illustrative lowest advertised fixed rate, November 2026. Lending decisions and final offers are confirmed by the bank in writing.</div>
+  <div class="fine">Statutory Central Bank of the UAE rules. Individual rates, margins and fees are confirmed by each bank’s written Final Offer Letter.</div>
 </div>
 
 <!-- S4: Every dirham itemised + Mobile workspace -->
 <div class="scene" id="s4" style="background:#fff">
   <img class="watermark" src="../../public/brand/logo-primary.svg" alt="">
-  <div class="abs" style="left:120px;top:128px;font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)">03 — UPFRONT CASH &amp; DLD FEES</div>
+  <div class="abs" style="left:120px;top:128px;font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)">03 — STATUTORY UPFRONT CASH &amp; DLD FEES</div>
   <div class="abs h" style="left:120px;top:182px;font-size:80px">Every dirham itemised<br>before you <em>commit.</em></div>
-  <div class="abs" style="left:120px;top:398px;font-size:30px;color:var(--slate);width:740px">AED 2,000,000 home · 20% deposit · 25-year tenure</div>
+  <div class="abs" style="left:120px;top:398px;font-size:30px;color:var(--slate);width:740px">AED 2,000,000 Dubai home · 20% deposit · statutory DLD fees</div>
   <div id="items" class="abs" style="left:120px;top:484px;width:680px"></div>
   <div class="phone" id="ph" style="left:1180px;top:110px"><div class="screen"><div class="island"></div>
     <div style="display:flex;align-items:center;justify-content:center"><img src="../../public/brand/logo-primary.svg" style="height:36px;width:auto"></div>
     <div style="margin-top:34px;background:var(--navy);color:#fff;border-radius:26px;padding:32px;border:1px solid rgba(215,176,78,.32)">
-      <div style="font-size:18px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)">Estimated payment</div>
-      <div id="emi" class="num" style="font-size:44px;font-weight:600;margin-top:8px;white-space:nowrap">AED 8,349</div>
+      <div style="font-size:18px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)">Loan at 80% LTV</div>
+      <div id="emi" class="num" style="font-size:40px;font-weight:600;margin-top:8px;white-space:nowrap">AED 1,600,000</div>
       <div style="margin-top:22px;height:9px;border-radius:9px;background:rgba(255,255,255,.14)"><div id="bar" style="height:100%;border-radius:9px;background:var(--gold);width:0"></div></div>
     </div>
     <div style="margin-top:20px;background:var(--mist);border:1px solid var(--line);border-radius:18px;padding:20px;font-size:21px;display:flex;justify-content:space-between"><span style="color:var(--slate)">Cash + DLD</span><b id="ctc" class="num" style="white-space:nowrap;color:var(--navy)">AED 534,220</b></div>
@@ -123,7 +123,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy);font
     <span style="padding:16px 28px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)">Al Nasr Plaza · Dubai</span>
   </div>
   <div id="s6u" class="abs num" style="left:120px;top:804px;font-size:40px;color:var(--gold)">betterwaymortgages.com</div>
-  <div class="fine" style="color:rgba(255,255,255,.52)">Public benchmarks &amp; planning illustrations only. Lending decisions and final offers are issued by the bank.</div>
+  <div class="fine" style="color:rgba(255,255,255,.52)">Statutory CBUAE &amp; DLD planning illustrations only. Lending decisions and final offers are issued by the bank.</div>
 </div>
 
 <script>
@@ -137,13 +137,13 @@ const BANK_LOGOS = [
   ['NBQ','nbq.svg'],['Citibank','citi.svg'],['Bank of Baroda','bank-of-baroda.svg'],
   ['Invest Bank','invest-bank.png'],['CBI','cbi.png'],['Amlak','amlak.svg']
 ];
-const RATES = [
-  ['Dubai Islamic Bank','dib.png','3.99%','+1.00%'],
-  ['HSBC UAE','hsbc.svg','3.99%','+1.24%'],
-  ['First Abu Dhabi Bank','fab.svg','3.95%','+1.50%'],
-  ['United Arab Bank','uab.svg','3.89%','+1.50%'],
-  ['Emirates NBD','emirates-nbd.svg','3.89%','+1.65%'],
-  ['Sharjah Islamic Bank','sib.png','3.75%','+1.75%']
+const PANEL_ROWS = [
+  ['Emirates NBD','emirates-nbd.svg','Conventional · Dubai','Written FOL review'],
+  ['Dubai Islamic Bank','dib.png','Islamic · Dubai','Ijara & Murabaha'],
+  ['First Abu Dhabi Bank','fab.svg','Conventional · Abu Dhabi','Fixed & EIBOR margin'],
+  ['HSBC UAE','hsbc.svg','Conventional · Dubai','Resident & overseas'],
+  ['Abu Dhabi Islamic Bank','adib.svg','Islamic · Abu Dhabi','Sharia home finance'],
+  ['ADCB','adcb.svg','Conventional · Abu Dhabi','Floor & fee audit']
 ];
 const STEPS = ['Set budget','Compare 24 banks','Pre-approval','Valuation','Transfer & keys'];
 const COST = [['Down payment (20%)','AED 400,000'],['DLD 4% + title deed','AED 80,580'],['Mortgage registration','AED 4,290'],['Trustee + valuation','AED 7,350'],['Agency 2% + VAT','AED 42,000']];
@@ -165,11 +165,11 @@ BANK_LOGOS.forEach(([name, file]) => {
 });
 
 const rows = $('rows');
-RATES.forEach(([name, file, intro, margin], i) => {
+PANEL_ROWS.forEach(([name, file, structure, check], i) => {
   const d = document.createElement('div');
   d.className = 'row';
   d.style.top = (i * 94) + 'px';
-  d.innerHTML = `<span class="row-left"><span class="row-logo"><img src="../../public/banks/${file}" alt=""></span><span>${name}</span></span><span class="num" style="display:flex;gap:48px"><span>${intro}</span><span class="eib" style="font-size:22px;align-self:center;opacity:.78">EIBOR ${margin}</span></span>`;
+  d.innerHTML = `<span class="row-left"><span class="row-logo"><img src="../../public/banks/${file}" alt=""></span><span>${name}</span></span><span style="display:flex;gap:36px;font-size:21px;font-weight:500"><span>${structure}</span><span class="eib" style="font-weight:600;opacity:.85">${check}</span></span>`;
   rows.appendChild(d);
 });
 
@@ -233,7 +233,7 @@ function render(t) {
     });
   }
 
-  // S3: Rows slide in, lowest revert margin row highlights in Midnight Navy + Sovereign Gold border
+  // S3: Rows slide in, top row highlights in Midnight Navy + Sovereign Gold border
   {
     const l = t - 9.8;
     [...rows.children].forEach((r, i) => {
@@ -251,13 +251,13 @@ function render(t) {
     $('s3fix').style.transformOrigin = 'left center';
   }
 
-  // S4: Phone rises, EMI & Cash-to-close count up
+  // S4: Phone rises, statutory 80% LTV loan & Cash-to-close count up
   {
     const l = t - 15.8, p = eo(seg(l, .2, 1.15));
     set($('ph'), p, 0, (1 - p) * 110);
     const k = eo(seg(l, .75, 2.35));
-    $('emi').textContent = fmt(6200 + (8349 - 6200) * k);
-    $('bar').style.width = (74 * k) + '%';
+    $('emi').textContent = fmt(1200000 + 400000 * k);
+    $('bar').style.width = (80 * k) + '%';
     $('ctc').textContent = fmt(400000 + 134220 * eo(seg(l, 2.2, 4.2)));
     [...items.children].forEach((d, i) => {
       const q = eo(seg(l, 1.45 + i * .36, 1.95 + i * .36));

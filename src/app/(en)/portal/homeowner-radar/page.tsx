@@ -1,25 +1,30 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import AppShell, { PORTAL_NAV } from '@/components/AppShell';
-import { Countdown } from '@/components/AppClient';
 import Calculator from '@/components/calc/Calculator';
 
-export const metadata: Metadata = { title: 'Homeowner Radar' };
+export const metadata: Metadata = { title: 'Refinance & Revert-Date Review Guide', robots: { index: false, follow: false } };
 
 export default function Page() {
   return (
-    <AppShell title="Client portal" sub="portal.betterwaymortgages.com" nav={PORTAL_NAV} active="/portal/homeowner-radar">
-      <h1 className="mb-2 font-display text-2xl font-bold">Homeowner radar</h1>
-      <p className="mb-6 text-slate">We watch your fixed period, EIBOR and the panel so you never drift onto a revert rate.</p>
-      <div className="grid gap-4 sm:grid-cols-3">
-        <Countdown label="Fixed period ends in" days={88} tone="warn" />
-        <div className="card"><p className="text-sm text-slate">Your revert rate today</p><p className="num mt-1 text-3xl font-semibold text-navy">6.10%</p></div>
-        <div className="card"><p className="text-sm text-slate">Best re-fix on panel</p><p className="num mt-1 text-3xl font-semibold text-teal">3.99%</p></div>
+    <AppShell title="Transaction guide" nav={PORTAL_NAV} active="/portal/homeowner-radar">
+      <h1 className="mb-2 font-display text-2xl font-bold">Fixed-period expiry &amp; refinance review</h1>
+      <p className="mb-6 max-w-2xl text-slate">
+        Check your Final Offer Letter for the exact date your initial fixed period ends, compare published CBUAE EIBOR fixings against your contractual revert margin, and model switching costs below.
+      </p>
+      <div className="card">
+        <h2 className="mb-5 font-display text-lg font-semibold">Compare your current loan against a proposed refinance quote</h2>
+        <Calculator slug="buyout-refinance-savings" />
       </div>
-      <div className="card mt-6"><h2 className="mb-5 font-display text-lg font-semibold">Should you switch?</h2><Calculator slug="buyout-refinance-savings" /></div>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <Link href="/mortgages/golden-visa-mortgage" className="card"><p className="font-semibold text-navy">Golden Visa NOC</p><p className="mt-1 text-sm text-slate">Your home is valued above AED 2M—request the bank NOC.</p></Link>
-        <Link href="/advisory/difc-wills-and-estate-planning" className="card"><p className="font-semibold text-navy">DIFC single-property will</p><p className="mt-1 text-sm text-slate">Protect a jointly owned, mortgaged home.</p></Link>
+        <Link href="/rates/eibor-live-tracker" className="card">
+          <p className="font-semibold text-navy">Published CBUAE EIBOR tracker</p>
+          <p className="mt-1 text-sm text-slate">Check daily 1M, 3M and 6M EIBOR fixings from the Central Bank of the UAE.</p>
+        </Link>
+        <Link href="/advisory/difc-wills-and-estate-planning" className="card">
+          <p className="font-semibold text-navy">DIFC wills &amp; estate coordination</p>
+          <p className="mt-1 text-sm text-slate">Understand guardianship and succession planning considerations for UAE property owners.</p>
+        </Link>
       </div>
     </AppShell>
   );

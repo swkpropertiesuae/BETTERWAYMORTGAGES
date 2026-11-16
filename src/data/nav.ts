@@ -17,7 +17,7 @@ export const NAV: NavItem[] = [
         { label: 'Islamic home finance', href: '/mortgages/islamic-home-finance' },
       ] },
       { title: 'Invest & grow', links: [
-        { label: 'Non-resident buyers', href: '/mortgages/non-resident-dubai', desc: 'Up to 65% LTV' },
+        { label: 'Non-resident buyers', href: '/mortgages/non-resident-dubai', desc: '25 country guides' },
         { label: 'Golden Visa mortgages', href: '/mortgages/golden-visa-mortgage' },
         { label: 'Second home & investment', href: '/mortgages/second-home-investment' },
         { label: 'HNW mega loans', href: '/mortgages/mega-loans-luxury-villas' },

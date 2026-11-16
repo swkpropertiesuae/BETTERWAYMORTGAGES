@@ -86,7 +86,7 @@ export default function Calculator({ slug, lang = 'en', compact = false, initial
               onClick={() => { navigator.clipboard?.writeText(out.text!); setCopied(true); setTimeout(() => setCopied(false), 1800); }}>
               {copied ? <Check size={14} /> : <Copy size={14} />} {copied ? 'Copied' : 'Copy clauses'}
             </button>
-            <pre className="max-h-[28rem] overflow-auto whitespace-pre-wrap p-6 pt-14 font-mono text-[13px] leading-relaxed text-ink" dir="ltr">{out.text}</pre>
+            <pre className="max-h-[28rem] overflow-auto whitespace-pre-wrap p-6 pt-14 font-sans text-[13.5px] leading-relaxed text-ink" dir="ltr">{out.text}</pre>
           </div>
         </div>
       )}

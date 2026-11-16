@@ -1,6 +1,6 @@
 import { ROUTES, HUBS, indexable, type Route } from './routes';
-import { SITE, BENCH, LTV_RULES, RULES, DISCLOSURE_FULL, fullAddress } from '@/data/site';
-import { BANKS, revert } from '@/data/banks';
+import { SITE, LTV_RULES, RULES, DISCLOSURE_FULL, fullAddress } from '@/data/site';
+import { BANKS } from '@/data/banks';
 import { PRODUCTS } from '@/data/products';
 import { COUNTRIES } from '@/data/countries';
 import { PROJECTS } from '@/data/handover';
@@ -19,9 +19,9 @@ export function llms() {
   const by = (s: number) => ROUTES.filter((r) => r.silo === s);
   return `# ${SITE.name}
 
-> UAE mortgage information and planning tools from ${SITE.name}. The EIBOR tracker uses the CBUAE public publication with source dates and a dated fallback snapshot. Lender offers, country criteria and property figures elsewhere are illustrative. Lenders decide eligibility. Confirm current terms and fees in writing.
+> UAE mortgage information and statutory CBUAE/DLD planning tools from ${SITE.name}. The EIBOR tracker reads the public CBUAE publication with source dates and a dated fallback snapshot. Individual bank profit/interest rates, margins, floor rates and approval criteria vary by borrower profile and must be confirmed directly in a written Final Offer Letter.
 
-Machine-readable planning guide: ${SITE.url}/llms-full.txt
+Machine-readable reference guide: ${SITE.url}/llms-full.txt
 
 ${sec('Core', by(1).filter((r) => !r.path.endsWith('.txt')))}
 
@@ -29,7 +29,7 @@ ${sec('Mortgage products', by(2))}
 
 ${sec('Calculators & tools', by(3))}
 
-${sec('Rates (rate bible, EIBOR, 24 banks, comparisons)', by(4))}
+${sec('Lenders & EIBOR (24 UAE banks, EIBOR tracker, comparisons)', by(4))}
 
 ${sec('Cornerstone guides', by(10))}
 
@@ -44,39 +44,35 @@ ${sec('Cornerstone guides', by(10))}
 }
 
 export function llmsFull() {
-  const bankRows = BANKS.map((b) => `| ${b.name} | ${b.type} | ${b.intro}% (${b.introTerm}) | ${b.fixed3}% | ${b.fixed5}% | +${b.margin.toFixed(2)}% | ${revert(b).toFixed(2)}% | ${b.floor}% | ${b.feePurchase} / ${b.feeBuyout} | ${b.overpay}% | ${b.nrLtv ? b.nrLtv + '%' : 'No'} | ${b.ccFactor}% |`).join('\n');
-  return `# ${SITE.name} — complete knowledge base (${SITE.asOf})
+  const bankRows = BANKS.map((b) => `| ${b.name} | ${b.type} | ${b.hq} | ${b.note} |`).join('\n');
+  return `# ${SITE.name} — UAE mortgage regulatory & directory reference
 
-Entity: ${SITE.name}, ${fullAddress}. Website ${SITE.url}. Client portal ${SITE.portalUrl}. Agent hub ${SITE.hubUrl}.
+Entity: ${SITE.name}, ${fullAddress}. Website ${SITE.url}.
 Fees and remuneration: confirm all broker fees and lender remuneration in writing. Do not infer a fee policy or regulatory licence from this website.
 
-## Illustrative planning assumptions — not live market data
-The following legacy assumptions and bank examples are not current offers or verified market statistics. For dated official EIBOR fixings use /rates/eibor-live-tracker or /api/market/eibor.
-- Illustrative base-rate assumption: ${BENCH.baseRate}%
-- EIBOR: 1M ${BENCH.eibor1m}%, 3M ${BENCH.eibor3m}%, 6M ${BENCH.eibor6m}%
-- Dubai 2026 YTD: AED ${BENCH.dldYtdAedBn}B across ${BENCH.dldYtdSales} sales; median AED ${BENCH.medianPsf}/sq.ft.; off-plan ${BENCH.offPlanShare}% of transactions
+## Official CBUAE EIBOR benchmark
+For dated official EIBOR fixings published by the Central Bank of the UAE, consult ${SITE.url}/rates/eibor-live-tracker or ${SITE.url}/api/market/eibor. Individual mortgage pricing is determined by each bank's written Final Offer Letter.
 
-## Illustrative bank comparison table — confirm every term with the lender
-| Bank | Type | Intro fixed | 3Y | 5Y | Revert margin (3M EIBOR +) | Example revert | Floor | Purchase / buyout fee | Free overpay/yr | Non-resident LTV | Card limits in DBR |
-|---|---|---|---|---|---|---|---|---|---|---|---|
+## UAE mortgage lender directory (24 banks)
+| Bank | Structure | Headquarters | Profile |
+|---|---|---|---|
 ${bankRows}
 
-## CBUAE rules
-${LTV_RULES.map((l) => `- ${l.profile}: max LTV ${l.ltv} (min down ${l.down})`).join('\n')}
+## Statutory CBUAE & DLD framework
+${LTV_RULES.map((l) => `- ${l.profile}: max LTV ${l.ltv} (min down payment ${l.down})`).join('\n')}
 ${RULES.map((x) => `- ${x.k}: ${x.v}`).join('\n')}
 
-## Golden Visa (February 2026)
-Mortgaged property with Title Deed, Oqood or DLD valuation ≥ AED 2,000,000 qualifies for the 10-year Golden Visa with a bank NOC; the AED 1M paid-equity rule was removed. Investor package AED 9,421–10,111; dependants ~AED 7,200–7,680 each plus AED 318.75 family file. A buyout does not cancel the visa.
+## Golden Visa property threshold
+Real estate investors holding a Dubai Title Deed, registered Oqood, or DLD property valuation meeting the AED 2,000,000 statutory threshold may apply for long-term residency subject to current Dubai Land Department and ICP/GDRFA rules and a lender No-Objection Certificate where the property is mortgaged.
 
-## Non-resident lending
-14 banks lend to non-residents. Up to 60%: HSBC, Emirates NBD, FAB, ADCB, Standard Chartered, DIB. Up to 65%: Mashreq, CBD, Amlak. Remote closing by 15-minute Dubai Courts video PoA (must include borrowing and first-degree mortgage registration powers, dated within 2 years).
-${COUNTRIES.map((c) => `- ${c.name}: LTV ${c.ltv}; FX ${c.fx}; salaried ${c.salaried}; self-employed ${c.selfEmp}; bureau ${c.bureau}`).join('\n')}
+## Non-resident documentation guides (25 jurisdictions)
+${COUNTRIES.map((c) => `- ${c.name} (${c.currency}): salaried (${c.salaried}); self-employed (${c.selfEmp}); credit bureau (${c.bureau})`).join('\n')}
 
 ## Products
 ${PRODUCTS.map((p) => `### ${p.name} (${SITE.url}/mortgages/${p.slug})\n${p.capsule}`).join('\n\n')}
 
-## Off-plan handover projects (priority 50)
-${PROJECTS.filter((p) => p.launch).map((p) => `- ${p.name} (${p.community}): ${p.window}, ${p.plan}, AED ${p.launch}M → ${p.value}M, ${p.apl} APL banks (${p.top.join(', ')})`).join('\n')}
+## Off-plan handover communities & projects (${PROJECTS.length} tracked developments)
+${PROJECTS.map((p) => `- ${p.name} (${p.community})`).join('\n')}
 
 ## Disclosure
 ${DISCLOSURE_FULL}

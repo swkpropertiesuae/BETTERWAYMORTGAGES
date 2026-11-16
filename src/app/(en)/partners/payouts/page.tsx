@@ -1,21 +1,37 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import AppShell, { HUB_NAV } from '@/components/AppShell';
-import { aed } from '@/components/ui';
 
-export const metadata: Metadata = { title: 'Payouts' };
+export const metadata: Metadata = { title: 'Partner Commercial & Settlement Terms', robots: { index: false, follow: false } };
 
-const PAY = [['DLD transfer +18h', 'Business Bay buyout', 1_400_000, 'Paid'], ['DLD transfer +22h', 'Arabian Ranches villa', 4_100_000, 'Paid'], ['DLD transfer +9h', 'Creek Harbour apartment', 1_650_000, 'Paid']] as const;
+const TERMS = [
+  ['Written introducer agreement', 'Any referral fee share, eligibility criteria and settlement schedule are governed strictly by a signed written agreement between Betterway and the licensed brokerage or introducer.'],
+  ['Client disclosure & consent', 'Buyers must consent to the introduction and may request written disclosure of any referral remuneration in accordance with UAE consumer protection principles.'],
+  ['Disbursement & invoice verification', 'Referral settlements apply only to completed loans after bank disbursement, lender commission receipt and submission of a compliant UAE corporate tax invoice.'],
+] as const;
 
 export default function Page() {
   return (
-    <AppShell title="Partner Hub" sub="hub.betterwaymortgages.com" nav={HUB_NAV} active="/partners/payouts">
-      <h1 className="mb-6 font-display text-2xl font-bold">Payouts</h1>
-      <div className="overflow-x-auto rounded-card border border-line bg-white">
-        <table className="table-bw min-w-[560px]"><thead><tr><th>Settled</th><th>Deal</th><th>Loan</th><th>Payout (35% of 0.80%)</th><th>Status</th></tr></thead>
-          <tbody className="num">{PAY.map(([t, d, l, s]) => <tr key={d}><td className="font-sans">{t}</td><td className="font-sans">{d}</td><td>{aed(l)}</td><td className="text-teal">{aed(l * 0.008 * 0.35)}</td><td className="font-sans"><span className="tag">{s}</span></td></tr>)}</tbody>
-        </table>
+    <AppShell title="Partner Hub" nav={HUB_NAV} active="/partners/payouts">
+      <div className="card">
+        <h1 className="font-display text-2xl font-bold">Commercial &amp; settlement principles</h1>
+        <p className="mt-2 max-w-2xl text-sm text-slate">
+          We do not publish generic commission percentages or sample payout tables online. Commercial schedules are agreed in writing with verified corporate partners.
+        </p>
+        <div className="mt-6 space-y-4">
+          {TERMS.map(([h, p]) => (
+            <div key={h} className="rounded-xl border border-line bg-mist/50 p-4">
+              <h2 className="font-display text-base font-semibold text-navy">{h}</h2>
+              <p className="mt-1.5 text-sm leading-relaxed text-slate">{p}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-6">
+          <Link href="/partners/register" className="btn btn-primary">
+            Request written partner terms
+          </Link>
+        </div>
       </div>
-      <p className="mt-3 text-xs text-slate">Paid by UAE IBAN transfer.</p>
     </AppShell>
   );
 }

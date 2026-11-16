@@ -38,7 +38,7 @@ const ltv = (match: string) => LTV_RULES.find((r) => r.profile.startsWith(match)
 
 const STAYS = [
   { tag: 'Residents', name: 'Expat resident mortgages', body: 'Buying your first UAE home on a local salary. Start with your budget, deposit and purchase fees.', href: '/mortgages/uae-residents', img: '/images/dubai-interior-2560.webp', srcSet: '/images/dubai-interior-1280.webp 1280w, /images/dubai-interior-2560.webp 2560w', w: 2560, h: 1440, alt: 'Concept image: a bright Dubai apartment interior with a waterfront view',
-    facts: [['Max LTV', ltv('Expat resident — first home ≤')], ['DBR cap', '50%'], ['Tenure', '25 yrs']], more: ['UAE Nationals', '/mortgages/uae-nationals'] },
+    facts: [['Max LTV', ltv('Expat resident — first home up to')], ['DBR cap', '50%'], ['Tenure', '25 yrs']], more: ['UAE Nationals', '/mortgages/uae-nationals'] },
   { tag: 'Overseas buyers', name: 'Non-resident mortgages', body: 'Financing a Dubai property on overseas salary or business income, with currency and document checks explained.', href: '/mortgages/non-resident-dubai', img: '/images/marina-evening-2752.webp', srcSet: '/images/marina-evening.webp 1376w, /images/marina-evening-2752.webp 2752w', w: 2752, h: 1536, alt: 'Concept image: a Dubai marina at dusk seen from a terrace',
     facts: [['Max LTV', ltv('Non-resident')], ['Countries', String(COUNTRIES.length)], ['Income', 'Overseas']], more: ['Golden Visa mortgages', '/mortgages/golden-visa-mortgage'] },
   { tag: 'Handover', name: 'Off-plan & handover finance', body: 'Plan the final developer payment before your handover date, with project eligibility and valuation in view.', href: '/handover/dubai-off-plan-handover-mortgage-guide', img: '/images/offplan-dusk-2752.webp', srcSet: '/images/offplan-dusk.webp 1376w, /images/offplan-dusk-2752.webp 2752w', w: 2752, h: 1536, alt: 'Concept image: a residential tower nearing completion at blue hour',
@@ -47,15 +47,10 @@ const STAYS = [
     facts: [['Exit fee cap', '1% / 10k'], ['Compare', 'Revert'], ['Tool', 'Savings']], more: ['Equity release', '/mortgages/equity-release'] },
 ] as const;
 
-const emirateStats = (e: Emirate) => {
-  const list = COMMUNITIES.filter((c) => c.emirate === e);
-  const y = list.map((c) => c.yieldPct);
-  return { count: list.length, yields: `${Math.min(...y).toFixed(1)}–${Math.max(...y).toFixed(1)}%` };
-};
 const MARKETS = [
   ...(['dubai', 'abu-dhabi', 'northern'] as Emirate[]).map((e) => {
-    const s = emirateStats(e);
-    return { name: EMIRATES[e].name, chip: e === 'dubai' ? 'DLD' : e === 'abu-dhabi' ? 'ADREC' : 'RAK · SRERD', body: EMIRATES[e].regulator, href: `/areas/${e}`, k1: 'Communities', v1: String(s.count), k2: 'Gross yields', v2: s.yields };
+    const count = COMMUNITIES.filter((c) => c.emirate === e).length;
+    return { name: EMIRATES[e].name, chip: e === 'dubai' ? 'DLD' : e === 'abu-dhabi' ? 'ADREC' : 'RAK · SRERD', body: EMIRATES[e].regulator, href: `/areas/${e}`, k1: 'Communities', v1: String(count), k2: 'Expat 1st-home LTV', v2: 'Up to 80%' };
   }),
   { name: 'Overseas', chip: 'Non-resident', body: 'Guidance for buyers earning outside the UAE.', href: '/mortgages/non-resident-dubai', k1: 'Countries', v1: String(COUNTRIES.length), k2: 'Max LTV', v2: ltv('Non-resident') },
 ];
@@ -197,7 +192,7 @@ export default function Home() {
                 </div>
                 <div className="bw-bench__rule">
                   <dt>Minimum rate floor</dt>
-                  <dd className="num">1.99% – 3.99% by lender</dd>
+                  <dd>Stated in written offer letter</dd>
                 </div>
               </dl>
             </div>
@@ -214,7 +209,7 @@ export default function Home() {
           <div className="bw-head__meta"><span className="bw-index">(06)</span><span className="bw-label"><i />Coverage</span></div>
           <h2 className="bw-h2 mb-12" data-reveal="rise">Quietly, <em>thorough.</em></h2>
           <div className="bw-stats">
-            {[[BANKS.length, '', 'UAE lenders in our comparison directory'], [TOOLS.length, '', 'Free calculators and planning tools'], [COMMUNITIES.length, '', 'Communities with price and yield guides'], [COUNTRIES.length, '', 'Countries with non-resident guidance']].map(([v, s, l], i) => (
+            {[[BANKS.length, '', 'UAE lenders in our comparison directory'], [TOOLS.length, '', 'Free calculators and planning tools'], [COMMUNITIES.length, '', 'Freehold communities covered across the UAE'], [COUNTRIES.length, '', 'Countries with non-resident guidance']].map(([v, s, l], i) => (
               <div key={l as string} className="bw-stat" data-reveal="rise" style={{ ['--i' as string]: i }}>
                 <strong><StatCounter value={v as number} suffix={s as string} /></strong>
                 <p>{l}</p>
@@ -255,7 +250,7 @@ export default function Home() {
               </Link>
             ))}
           </div>
-          <p className="mt-6 text-xs text-slate">Yields are indicative gross figures from our community guides, not forecasts.</p>
+          <p className="mt-6 text-xs text-slate">Land-registry rules and lender property appetite vary by emirate and community.</p>
         </div>
       </section>
 
@@ -277,7 +272,7 @@ export default function Home() {
               <div className="bw-ltv__row" role="row"><span role="columnheader">Profile</span><span role="columnheader">Max LTV</span><span role="columnheader">Deposit</span></div>
               {LTV_RULES.map((r) => <div key={r.profile} className="bw-ltv__row" role="row"><span role="cell">{r.profile}</span><b role="cell">{r.ltv}</b><span role="cell">{r.down}</span></div>)}
             </div>
-            <p className="mt-4 text-xs text-slate">Source: CBUAE mortgage loan regulations. Lender policies can be stricter. Updated {SITE.asOf}.</p>
+            <p className="mt-4 text-xs text-slate">Source: CBUAE mortgage loan regulations. Lender policies can be stricter.</p>
           </div>
         </div>
       </section>

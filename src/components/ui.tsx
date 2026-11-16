@@ -85,11 +85,11 @@ export function MiniPhone() {
         <span className="absolute start-1/2 top-2.5 h-[22px] w-[80px] -translate-x-1/2 rounded-full bg-[#0b1220] rtl:translate-x-1/2" />
         <div className="flex items-center gap-2"><img src="/brand/icon-gold.svg" alt="" width={22} height={22} className="h-[22px] w-[22px]" /><span className="text-[13px] font-semibold text-navy">Betterway</span></div>
         <div className="mt-4 rounded-2xl bg-navy p-4 text-white">
-          <p className="text-[11px] text-white/60">Example fixed rate</p>
-          <p className="num text-[26px] font-semibold">{BENCH.lowestFixed}%</p>
+          <p className="text-[11px] text-white/60">CBUAE max DBR</p>
+          <p className="num text-[26px] font-semibold">{BENCH.maxDbrPct}%</p>
         </div>
         <div className="mt-2 space-y-1.5 text-[11px]">
-          {[['Planning rate', `${BENCH.lowestFixed}%`], ['Lender directory', '24'], ['Costs', 'Itemised'], ['Approval', 'Bank assessed']].map(([a, b]) => (
+          {[['Expat first home', `Up to ${BENCH.expatFirstHomeLtv}% LTV`], ['UAE National', `Up to ${BENCH.nationalFirstHomeLtv}% LTV`], ['Max tenure', `${BENCH.maxTenureYears} years`], ['Lender directory', `${BENCH.bankCount} banks`]].map(([a, b]) => (
             <div key={a} className="flex justify-between rounded-lg bg-mist px-3 py-2"><span className="text-slate">{a}</span><span className="num font-semibold text-navy">{b}</span></div>
           ))}
         </div>
@@ -121,7 +121,7 @@ export function PageHero({ crumbs, eyebrow, title, capsule, children, aside, upd
             {capsule && (
               <div className="bw-capsule mt-7 max-w-2xl" data-capsule>
                 <p className="text-[15.5px] leading-relaxed text-ink">{capsule}</p>
-                {updated && <p className="mt-2 text-xs text-slate">Updated {SITE.asOf}</p>}
+                {updated && <p className="mt-2 text-xs text-slate">{SITE.asOf}</p>}
               </div>
             )}
             {children}
@@ -233,7 +233,7 @@ export function CtaBand({ title = 'Your next move starts *here.*', body = 'Under
 const FOOT: { title: string; links: [string, string][] }[] = [
   { title: 'Mortgages', links: [['Expat residents', '/mortgages/uae-residents'], ['UAE Nationals', '/mortgages/uae-nationals'], ['Non-resident', '/mortgages/non-resident-dubai'], ['Golden Visa', '/mortgages/golden-visa-mortgage'], ['Islamic finance', '/mortgages/islamic-home-finance'], ['Switch bank', '/mortgages/mortgage-buyout-refinance'], ['All products', '/mortgages']] },
   { title: 'Rates & tools', links: [['UAE mortgage rates', '/rates/uae-mortgage-rates-eibor-revert-bible'], ['EIBOR tracker', '/rates/eibor-live-tracker'], ['Mortgage calculator', '/calculators/mortgage-calculator'], ['DBR calculator', '/calculators/dbr-borrowing-power'], ['Form F clauses', '/tools/form-f-clause-generator'], ['All calculators', '/calculators']] },
-  { title: 'Explore', links: [['Off-plan handover', '/handover/dubai-off-plan-handover-mortgage-guide'], ['Areas & yields', '/areas'], ['Affordability', '/affordability'], ['Guides', '/guides'], ['Advisory', '/advisory'], ['Sitemap', '/sitemap']] },
+  { title: 'Explore', links: [['Off-plan handover', '/handover/dubai-off-plan-handover-mortgage-guide'], ['Freehold communities', '/areas'], ['Affordability', '/affordability'], ['Guides', '/guides'], ['Advisory', '/advisory'], ['Sitemap', '/sitemap']] },
   { title: 'Company', links: [['About us', '/about-us'], ['Why not go direct?', '/why-betterway-vs-direct-bank'], ['Underwriters', '/our-underwriters'], ['Reviews', '/reviews'], ['Careers', '/careers'], ['Contact', '/contact'], ['For agents', '/partners']] },
 ];
 

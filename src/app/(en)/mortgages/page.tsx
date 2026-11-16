@@ -3,15 +3,34 @@ import { PageHero, Section, LinkGrid, CtaBand } from '@/components/ui';
 import { PRODUCTS } from '@/data/products';
 import { COUNTRIES } from '@/data/countries';
 
-export const metadata: Metadata = { title: 'UAE Mortgage Products & Buyer Profiles', description: 'All 14 Betterway mortgage products and 25 non-resident country guides.', alternates: { canonical: '/mortgages' } };
+export const metadata: Metadata = {
+  title: 'UAE Mortgage Products & Non-Resident Country Documentation Guides',
+  description: 'All 14 UAE mortgage product guides with CBUAE statutory LTV & DBR rules, plus 25 non-resident country documentation checklists.',
+  alternates: { canonical: '/mortgages' },
+};
 
 export default function Page() {
   return (
     <>
-      <PageHero crumbs={[{ name: 'Mortgages', href: '/mortgages' }]} eyebrow="Mortgages" title="Every UAE mortgage, for every kind of buyer"
-        capsule="Betterway arranges residential, Islamic, off-plan, buyout, equity-release, non-resident, Golden Visa, construction and mega-loan finance across 24 UAE lenders. Each product page sets out CBUAE LTV caps, the documents banks ask for and a live calculator." />
-      <Section title="14 mortgage products"><LinkGrid links={PRODUCTS.map((p) => ({ title: p.name, body: p.card, href: `/mortgages/${p.slug}`, tag: p.badge }))} /></Section>
-      <Section tone="mist" title="Non-resident guides by country"><LinkGrid cols={4} links={COUNTRIES.map((c) => ({ title: c.name, body: `${c.ltv} LTV · ${c.fx}`, href: `/mortgages/non-resident-${c.slug}` }))} /></Section>
+      <PageHero
+        crumbs={[{ name: 'Mortgages', href: '/mortgages' }]}
+        eyebrow="Mortgages"
+        title="UAE mortgage guides for residents, nationals & overseas buyers"
+        capsule="Explore 14 UAE mortgage product structures across 24 licensed lenders—covering residential purchases, Islamic home finance, off-plan handovers, bank buyouts, equity release, non-resident applications and Golden Visa property thresholds. Each guide outlines statutory CBUAE rules, required documents and an interactive calculator."
+      />
+      <Section title="14 mortgage product guides">
+        <LinkGrid links={PRODUCTS.map((p) => ({ title: p.name, body: p.card, href: `/mortgages/${p.slug}`, tag: p.badge }))} />
+      </Section>
+      <Section tone="mist" title="Non-resident documentation guides by country">
+        <LinkGrid
+          cols={4}
+          links={COUNTRIES.map((c) => ({
+            title: c.name,
+            body: `${c.currency} · ${c.bureau}`,
+            href: `/mortgages/non-resident-${c.slug}`,
+          }))}
+        />
+      </Section>
       <CtaBand />
     </>
   );

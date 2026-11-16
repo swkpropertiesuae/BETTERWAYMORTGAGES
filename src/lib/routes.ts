@@ -29,7 +29,7 @@ export const ROUTES: Route[] = [
   // Silo 05 (95)
   r('/handover/dubai-off-plan-handover-mortgage-guide', 5, 2, 'Off-plan handover guide', 'handover'),
   ...DEVELOPERS.filter((d) => d.hub).map((d) => r(`/handover/${d.slug}`, 5, 3, d.name, 'handover')),
-  ...PROJECTS.map((p) => r(`/handover/${p.dev}/${p.slug}`, 5, p.wave, p.name, 'handover')),
+  ...PROJECTS.map((p) => r(`/handover/${p.dev}/${p.slug}`, 5, 2, p.name, 'handover')),
   // Silo 06 (60)
   ...COMMUNITIES.map((c) => r(`/areas/${c.emirate}/${c.slug}`, 6, 3, c.name, 'communities')),
   // Silo 07 (25)
