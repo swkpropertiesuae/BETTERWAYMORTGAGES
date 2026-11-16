@@ -5,6 +5,10 @@ import HomeHero from '@/components/home/HomeHero';
 import DisclosureToast from '@/components/home/DisclosureToast';
 import RevertBriefing from '@/components/home/RevertBriefing';
 import StatCounter from '@/components/home/StatCounter';
+import Manifesto from '@/components/home/Manifesto';
+import ServicesIndex from '@/components/home/ServicesIndex';
+import JourneyPhone from '@/components/home/JourneyPhone';
+import Wordmark from '@/components/home/Wordmark';
 import Qualifier from '@/components/Qualifier';
 import { LiveBenchmark } from '@/components/StartupExperience';
 import LogoMarquee from '@/components/LogoMarquee';
@@ -61,6 +65,13 @@ const JOURNAL_IMG = [
   { src: '/images/guide-transfer-day-2752.webp', srcSet: '/images/guide-transfer-day.webp 1376w, /images/guide-transfer-day-2752.webp 2752w', alt: 'Concept image: modern Dubai boardroom with house keys and leather portfolio overlooking Palm Jumeirah' },
 ] as const;
 
+const JOURNEY = [
+  { title: 'Set your budget', body: 'Check income, deposit and purchase costs against the 50% debt cap.', screen: { head: 'Budget', rows: [['Debt burden cap', '50%'], ['Max tenure', '25 yrs'], ['Purchase costs', 'Itemised']] } },
+  { title: 'Compare your options', body: 'Review rates, revert margins, fees and lender requirements.', screen: { head: 'Compare', rows: [['Fixed period', 'Listed'], ['Revert margin', 'Listed'], ['Floor and fees', 'Listed']] } },
+  { title: 'Apply for pre-approval', body: 'Submit documents for the bank’s assessment.', screen: { head: 'Pre-approval', rows: [['Identity', 'Documents'], ['Income', 'Documents'], ['Liabilities', 'Documents']] } },
+  { title: 'Value, finalise, transfer', body: 'Complete valuation, final offer and registration at the trustee.', screen: { head: 'Transfer day', rows: [['Valuation', 'Bank'], ['Final offer', 'Written'], ['Registration', 'Trustee']] } },
+] as const;
+
 const FAQS = [
   { q: 'How does a mortgage broker in Dubai help?', a: 'A broker helps you compare suitable lenders, prepare documents and understand the application process. The bank makes the lending decision and issues your final offer.' },
   { q: 'How much cash do I need for an AED 2M home?', a: `With a 20% deposit, this calculator estimates ${aed(cashToClose({ price: 2_000_000, downPct: 20 }).total)} including the deposit and typical Dubai purchase fees. Bank processing fees, insurance and property-specific charges may add to this. Adjust the assumptions in the mortgage calculator.` },
@@ -107,7 +118,8 @@ export default function Home() {
       {/* Statement + pillars (Caldren) */}
       <section className="bw-section bg-white">
         <div className="wrap">
-          <Head n="01" label="Why Betterway" title="We read mortgage offers the way *lenders* write them." lead="A home loan is more than a rate. We walk you through the whole offer, so the number you sign is the number you expected." />
+          <div className="bw-head__meta"><span className="bw-index">(01)</span><span className="bw-label"><i />Why Betterway</span></div>
+          <Manifesto text="A home loan is more than a rate. We read mortgage offers the way lenders write them, so the number you sign is the number you expected." />
           <ol className="bw-pillars">
             {PILLARS.map(([t, b], i) => (
               <li key={t} className="bw-pillar" data-reveal="rise" style={{ ['--i' as string]: i }}>
@@ -124,23 +136,7 @@ export default function Home() {
       <section className="bw-section bg-mist">
         <div className="wrap">
           <Head n="02" label="Mortgages" title="A mortgage for every *next move.*" lead="Four common starting points. Each one opens a full guide with lender criteria, costs and the documents you will need." action={{ label: 'All mortgage options', href: '/mortgages' }} />
-          <div className="bw-stays">
-            {STAYS.map((s) => (
-              <article key={s.name} className="bw-stay">
-                <div className="bw-window" data-reveal="horizon"><img src={s.img} srcSet={s.srcSet} sizes="(min-width: 960px) 60vw, 100vw" alt={s.alt} width={s.w} height={s.h} decoding="sync" /></div>
-                <div className="bw-stay__card bw-solid" data-reveal="frost">
-                  <span className="bw-label"><i />{s.tag}</span>
-                  <h3>{s.name}</h3>
-                  <p>{s.body}</p>
-                  <dl className="bw-stay__facts">{s.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-                  <div className="bw-stay__links">
-                    <Cta href={s.href} size="sm">Explore</Cta>
-                    <Link href={s.more[1]} className="text-sm font-medium text-teal-700 ulink">{s.more[0]} ↗</Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+          <ServicesIndex items={[...STAYS] as never} />
           <p className="mt-10 text-xs text-slate">LTV figures are CBUAE caps for typical profiles. Lenders may offer less. Concept images are AI-generated.</p>
         </div>
       </section>
@@ -220,19 +216,12 @@ export default function Home() {
       </section>
 
       {/* Journey on a navy ground */}
-      <section className="bw-section bw-journey">
-        <div className="wrap bw-journey__grid">
-          <div className="bw-journey__media"><div className="bw-window" data-reveal="horizon"><img src="/images/abudhabi-corniche-1792.webp" srcSet="/images/abudhabi-corniche.webp 896w, /images/abudhabi-corniche-1792.webp 1792w" sizes="(min-width: 1000px) 46vw, 100vw" width={1792} height={2400} decoding="sync" alt="Concept image: low-rise coastal villas and palms in soft morning light" /></div></div>
-          <div className="bw-dark !bg-transparent !overflow-visible">
-            <div className="bw-head__meta"><span className="bw-index">(07)</span><span className="bw-label bw-label--light"><i />Your journey</span></div>
-            <h2 className="bw-h2" data-reveal="rise">Know what <em>comes next.</em></h2>
-            <ol className="bw-steps mt-12">
-              {[['Set your budget', 'Check income, deposit and purchase costs against the 50% debt cap.'], ['Compare your options', 'Review rates, revert margins, fees and lender requirements.'], ['Apply for pre-approval', 'Submit documents for the bank’s assessment.'], ['Value, finalise, transfer', 'Complete valuation, final offer and registration at the trustee.']].map(([t, b], i) => (
-                <li key={t} data-reveal="rise" style={{ ['--i' as string]: i }}><span>{String(i + 1).padStart(2, '0')}</span><div><h3>{t}</h3><p>{b}</p></div></li>
-              ))}
-            </ol>
-            <div className="mt-10"><Cta href="/guides/complete-dld-trustee-transfer-day-checklist" tone="brass">Transfer-day checklist</Cta></div>
-          </div>
+      <section className="bw-section bw-journey bw-sheet">
+        <div className="wrap">
+          <div className="bw-head__meta"><span className="bw-index">(07)</span><span className="bw-label bw-label--light"><i />Your journey</span></div>
+          <h2 className="bw-h2 bw-h2--light" data-reveal="rise">Know what <em>comes next.</em></h2>
+          <JourneyPhone steps={JOURNEY as never} />
+          <div className="mt-10"><Cta href="/guides/complete-dld-trustee-transfer-day-checklist" tone="brass">Transfer-day checklist</Cta></div>
         </div>
       </section>
 
@@ -342,6 +331,7 @@ export default function Home() {
           </div>
           <div className="bw-window" data-reveal="horizon"><img src="/images/villa-courtyard-1792.webp" srcSet="/images/villa-courtyard.webp 896w, /images/villa-courtyard-1792.webp 1792w" sizes="(min-width: 1000px) 460px, 100vw" alt="Concept image: a calm villa courtyard with a reflecting pool at golden hour" width={1792} height={2400} decoding="sync" /></div>
         </div>
+        <Wordmark text="Betterway" />
       </section>
     </>
   );
