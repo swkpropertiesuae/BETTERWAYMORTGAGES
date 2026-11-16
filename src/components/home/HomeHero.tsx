@@ -70,7 +70,11 @@ export default function HomeHero() {
         <span />
         <span />
       </div>
-      <div className="bw-hero__glow" aria-hidden="true" />
+      <div className="bw-hero__aurora" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
 
       <div className="wrap bw-hero__inner">
         <div className="bw-hero__copy">
