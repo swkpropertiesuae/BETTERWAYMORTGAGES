@@ -65,13 +65,6 @@ ${bankRows}
 ${LTV_RULES.map((l) => `- ${l.profile}: max LTV ${l.ltv} (min down ${l.down})`).join('\n')}
 ${RULES.map((x) => `- ${x.k}: ${x.v}`).join('\n')}
 
-## Formulas
-- EMI = P × r(1+r)^n / ((1+r)^n − 1); r = annual rate/12; n = years × 12; tenure = min(25, 65 − age) salaried, min(25, 70 − age) self-employed/nationals
-- DBR: available EMI = 0.5 × gross salary − existing EMIs − card limits × 5% (3% at HSBC, ADCB, DIB)
-- Cash to close (Dubai ready purchase): down payment + 4% DLD + AED 580 title deed + 0.25% of loan + AED 290 mortgage registration + AED 4,200 trustee (≥ AED 500k, incl. VAT) + AED 3,150 valuation + 2% agency + 5% VAT
-- Off-plan handover: no 4% DLD (Oqood paid); loan up to 80% of fresh valuation for residents
-- Early settlement: min(1% of balance, AED 10,000) + 5% VAT
-
 ## Golden Visa (February 2026)
 Mortgaged property with Title Deed, Oqood or DLD valuation ≥ AED 2,000,000 qualifies for the 10-year Golden Visa with a bank NOC; the AED 1M paid-equity rule was removed. Investor package AED 9,421–10,111; dependants ~AED 7,200–7,680 each plus AED 318.75 family file. A buyout does not cancel the visa.
 
