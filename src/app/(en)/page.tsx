@@ -8,7 +8,6 @@ import StatCounter from '@/components/home/StatCounter';
 import Manifesto from '@/components/home/Manifesto';
 import ServicesIndex from '@/components/home/ServicesIndex';
 import JourneyPhone from '@/components/home/JourneyPhone';
-import Wordmark from '@/components/home/Wordmark';
 import Qualifier from '@/components/Qualifier';
 import { LiveBenchmark } from '@/components/StartupExperience';
 import LogoMarquee from '@/components/LogoMarquee';
@@ -331,7 +330,6 @@ export default function Home() {
           </div>
           <div className="bw-window" data-reveal="horizon"><img src="/images/villa-courtyard-1792.webp" srcSet="/images/villa-courtyard.webp 896w, /images/villa-courtyard-1792.webp 1792w" sizes="(min-width: 1000px) 460px, 100vw" alt="Concept image: a calm villa courtyard with a reflecting pool at golden hour" width={1792} height={2400} decoding="sync" /></div>
         </div>
-        <Wordmark text="Betterway" />
       </section>
     </>
   );
