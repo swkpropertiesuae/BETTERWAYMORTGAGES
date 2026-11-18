@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Lock, ShieldCheck } from 'lucide-react';
+import { SITE } from '@/data/site';
 
-export const metadata: Metadata = { title: 'Client Workflow & Checklist Guide', robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: 'Client Portal & Betterway OS Access', robots: { index: false, follow: false } };
 
 export default function Page() {
   return (
@@ -10,15 +11,21 @@ export default function Page() {
       <div className="wrap max-w-md">
         <div className="card !p-8 text-center">
           <img src="/brand/icon-gold.svg" alt="" width={56} height={56} className="mx-auto h-14 w-14" />
-          <h1 className="mt-5 text-2xl font-semibold">Client workflow &amp; checklists</h1>
+          <h1 className="mt-5 text-2xl font-semibold">Betterway OS &amp; Client Portal</h1>
           <p className="mt-3 text-sm leading-relaxed text-slate">
-            Live client login, UAE PASS authentication and online document uploads are not enabled on this public website. Browse our standard UAE transaction stages and closing checklists below, or contact an advisor directly.
+            Access your encrypted document vault, CBUAE Key Facts Statement (KFS) sign-off, 5-stage mortgage progression tracker, or internal staff workspace on Betterway OS.
           </p>
-          <Link href="/portal/dashboard" className="btn btn-ghost mt-6 w-full">
-            View transaction workflow <ArrowRight size={16} />
-          </Link>
-          <Link href="/contact" className="btn btn-primary mt-3 w-full">
-            Contact an advisor
+          <a href={SITE.osPortalUrl} className="btn btn-primary mt-6 w-full">
+            <Lock size={15} /> Open Live Client Portal <ArrowRight size={16} />
+          </a>
+          <a href={SITE.osPartnerHubUrl} className="btn btn-ghost mt-3 w-full">
+            Open RERA Partner Hub
+          </a>
+          <a href={SITE.osLoginUrl} className="btn btn-ghost mt-3 w-full">
+            <ShieldCheck size={15} /> Staff OS Sign-In
+          </a>
+          <Link href="/portal/dashboard" className="mt-4 inline-block text-xs text-slate underline hover:text-navy">
+            Browse public transaction workflow guide
           </Link>
         </div>
       </div>

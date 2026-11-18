@@ -1,9 +1,16 @@
 // Single source of truth for corporate details and statutory CBUAE / DLD mortgage rules.
 
+const OS_BASE_URL = process.env.NEXT_PUBLIC_OS_URL || 'https://os.betterwaymortgages.com';
+
 export const SITE = {
   name: 'Betterway Mortgages',
   legalName: 'Betterway Mortgages',
   url: 'https://betterwaymortgages.com',
+  osUrl: OS_BASE_URL,
+  osPortalUrl: `${OS_BASE_URL}/portal`,
+  osPartnerHubUrl: `${OS_BASE_URL}/partners`,
+  osLoginUrl: `${OS_BASE_URL}/login`,
+  osLeadIntakeUrl: `${OS_BASE_URL}/api/v1/intake/leads`,
   portalUrl: 'https://portal.betterwaymortgages.com',
   hubUrl: 'https://hub.betterwaymortgages.com',
   address: {
