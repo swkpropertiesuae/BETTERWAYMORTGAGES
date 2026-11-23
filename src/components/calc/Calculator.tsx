@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { CALCS, type Row } from './registry';
 
@@ -23,8 +23,24 @@ export default function Calculator({ slug, lang = 'en', compact = false, initial
   const [v, setV] = useState<Record<string, number>>(() => ({ ...Object.fromEntries(def.inputs.map((i) => [i.k, i.def])), ...initial }));
   const out = useMemo(() => def.compute(v), [def, v]);
   const [copied, setCopied] = useState(false);
+  const [partnerRef, setPartnerRef] = useState<string | null>(null);
   const maxBar = out.bars ? Math.max(...out.bars.map((b) => Math.abs(b.v))) || 1 : 1;
   const inputs = compact ? def.inputs.slice(0, 4) : def.inputs;
+
+  useEffect(() => {
+    try {
+      const ref = new URLSearchParams(window.location.search).get('ref');
+      if (ref) {
+        const clean = ref.replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 64);
+        if (clean) {
+          sessionStorage.setItem('bw_partner_ref', clean);
+          setPartnerRef(clean);
+        }
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
 
   return (
     <div className="calc grid gap-6 lg:grid-cols-[1.1fr_1fr]" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
@@ -77,6 +93,11 @@ export default function Calculator({ slug, lang = 'en', compact = false, initial
           </div>
         )}
         {out.note && <p className="mt-4 text-xs text-white/60">{out.note[lang]}</p>}
+        {partnerRef && (
+          <p className="mt-3 rounded-xl border border-brass/35 bg-white/[0.06] px-3 py-1.5 font-mono text-[11px] text-brass-200">
+            {lang === 'ar' ? 'مرجع الشريك:' : 'Partner reference:'} {partnerRef}
+          </p>
+        )}
       </div>
 
       {out.text && (

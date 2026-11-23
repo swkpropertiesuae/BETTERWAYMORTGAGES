@@ -20,10 +20,10 @@ export async function POST(req: Request) {
     }
 
     const candidateEndpoints = [
-      process.env.BW_OS_INTERNAL_URL ? `${process.env.BW_OS_INTERNAL_URL}/api/v1/intake/leads` : null,
-      'http://localhost:3001/api/v1/intake/leads',
+      process.env.BW_OS_INTERNAL_URL ? `${process.env.BW_OS_INTERNAL_URL.replace(/\/$/, '')}/api/v1/intake/leads` : null,
+      process.env.NODE_ENV === 'development' ? 'http://localhost:3001/api/v1/intake/leads' : null,
       SITE.osLeadIntakeUrl,
-    ].filter((u): u is string => Boolean(u));
+    ].filter((u, idx, arr): u is string => Boolean(u) && arr.indexOf(u) === idx);
 
     for (const url of candidateEndpoints) {
       try {
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
           method: 'POST',
           headers,
           body: rawBody,
-          signal: AbortSignal.timeout(3000),
+          signal: AbortSignal.timeout(4500),
         });
         if (res.ok) {
           const data = await res.json();
@@ -53,17 +53,21 @@ export async function POST(req: Request) {
       }
     }
 
-    return NextResponse.json({
-      ok: true,
-      syncedToOs: false,
-      referenceCode: createLocalEnquiryReference(contactName, contactPhone),
-      assignedAdvisor: {
-        name: 'Betterway Advisory Desk',
-        designation: 'Mortgage Specialist',
-        email: SITE.email,
+    // Honest 202 response: never misrepresent an unsynced submission as persisted in Betterway OS
+    return NextResponse.json(
+      {
+        ok: true,
+        syncedToOs: false,
+        referenceCode: createLocalEnquiryReference(contactName, contactPhone),
+        assignedAdvisor: {
+          name: 'Betterway Advisory Desk',
+          designation: 'Mortgage Specialist',
+          email: SITE.email,
+        },
+        osPortalUrl: SITE.osPortalUrl,
       },
-      osPortalUrl: SITE.osPortalUrl,
-    });
+      { status: 202 },
+    );
   } catch (err) {
     return NextResponse.json(
       { error: err instanceof Error ? err.message : 'Unable to process enquiry' },

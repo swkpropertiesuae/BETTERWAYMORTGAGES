@@ -9,6 +9,7 @@ import Manifesto from '@/components/home/Manifesto';
 import ServicesIndex from '@/components/home/ServicesIndex';
 import JourneyPhone from '@/components/home/JourneyPhone';
 import Qualifier from '@/components/Qualifier';
+import { TeamPortfolio } from '@/components/TeamPortfolio';
 import { LiveBenchmark } from '@/components/StartupExperience';
 import LogoMarquee from '@/components/LogoMarquee';
 import Calculator from '@/components/calc/Calculator';
@@ -279,10 +280,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Team Portfolio — Authentic 8K-mastered Betterway Dubai specialists */}
+      <section className="bw-section bg-white">
+        <div className="wrap">
+          <Head
+            n="11"
+            label="Our people"
+            title="Real advisors behind *every file.*"
+            lead="Led by Founder & Managing Director Shabib Siraj in Dubai. Inspect our advisory, conveyancing, and client-support specialists before you speak with a lender."
+            action={{ label: 'Meet the full team', href: '/our-underwriters' }}
+          />
+          <TeamPortfolio compact showLeadership={false} />
+        </div>
+      </section>
+
       {/* Journal (Caldren "Notes on living well") */}
       <section className="bw-section bg-mist">
         <div className="wrap">
-          <Head n="11" label="Guides" title="Notes on *buying well.*" lead="Plain-English guides to valuations, deposits, transfer day and the clauses that matter in a Form F." action={{ label: 'Read the guides', href: '/guides' }} />
+          <Head n="12" label="Guides" title="Notes on *buying well.*" lead="Plain-English guides to valuations, deposits, transfer day and the clauses that matter in a Form F." action={{ label: 'Read the guides', href: '/guides' }} />
           <div className="bw-journal">
             {GUIDES.slice(0, 3).map((g, i) => (
               <Link key={g.slug} href={`/guides/${g.slug}`} className="bw-post" data-reveal="rise" style={{ ['--i' as string]: i }}>
@@ -299,7 +314,7 @@ export default function Home() {
       <section className="bw-section bg-white">
         <div className="wrap bw-faq">
           <div className="bw-faq__intro">
-            <div className="bw-head__meta"><span className="bw-index">(12)</span><span className="bw-label"><i />FAQs</span></div>
+            <div className="bw-head__meta"><span className="bw-index">(13)</span><span className="bw-label"><i />FAQs</span></div>
             <h2 className="bw-h2" data-reveal="rise">Your questions, <em>answered.</em></h2>
             <p className="bw-lead mt-6">Don’t see what you’re looking for?</p>
             <div className="mt-6"><Cta href="/contact" tone="ghost" size="sm">Ask an advisor</Cta></div>
@@ -320,7 +335,7 @@ export default function Home() {
       <section className="bw-section bw-invite">
         <div className="wrap bw-invite__grid">
           <div>
-            <div className="bw-head__meta"><span className="bw-index">(13)</span><span className="bw-label"><i />Talk to an advisor</span></div>
+            <div className="bw-head__meta"><span className="bw-index">(14)</span><span className="bw-label"><i />Talk to an advisor</span></div>
             <h2 className="bw-display bw-invite__title" data-reveal="rise">Let’s find your <em>better way</em> home.</h2>
             <p className="bw-lead mt-7 max-w-xl">Tell us how you want to buy. We will come back with a short, considered set of options and the documents to prepare.</p>
             <div className="bw-invite__actions">

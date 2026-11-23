@@ -15,6 +15,7 @@ export interface WebsiteEnquiryInput {
   agencyName?: string;
   reraOrn?: string;
   reraBrn?: string;
+  partnerRef?: string;
 }
 
 export interface OsLeadPayload {
@@ -32,6 +33,7 @@ export interface OsLeadPayload {
   agencyName?: string;
   reraOrn?: string;
   reraBrn?: string;
+  partnerRef?: string;
 }
 
 export function buildOsLeadPayload(input: WebsiteEnquiryInput): OsLeadPayload {
@@ -52,9 +54,10 @@ export function buildOsLeadPayload(input: WebsiteEnquiryInput): OsLeadPayload {
     topic: String(input.topic || 'Website Mortgage Enquiry'),
     preferredSlot: input.preferredSlot ? String(input.preferredSlot) : undefined,
     sourcePage: String(input.sourcePage || '/contact'),
-    agencyName: input.agencyName ? String(input.agencyName) : undefined,
-    reraOrn: input.reraOrn ? String(input.reraOrn) : undefined,
-    reraBrn: input.reraBrn ? String(input.reraBrn) : undefined,
+    agencyName: input.agencyName ? String(input.agencyName).trim() : undefined,
+    reraOrn: input.reraOrn ? String(input.reraOrn).trim() : undefined,
+    reraBrn: input.reraBrn ? String(input.reraBrn).trim() : undefined,
+    partnerRef: input.partnerRef ? String(input.partnerRef).trim() : undefined,
   };
 }
 
@@ -71,6 +74,7 @@ export function createLocalEnquiryReference(name: string, phone: string): string
 
 export async function submitWebsiteLeadToOs(input: WebsiteEnquiryInput): Promise<{
   ok: boolean;
+  syncedToOs: boolean;
   referenceCode: string;
   assignedAdvisor?: { name: string; designation: string; email: string };
   osPortalUrl: string;
@@ -82,20 +86,22 @@ export async function submitWebsiteLeadToOs(input: WebsiteEnquiryInput): Promise
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
+    const data = await res.json().catch(() => ({}));
     if (res.ok) {
-      const data = await res.json();
       return {
         ok: true,
+        syncedToOs: Boolean(data.syncedToOs),
         referenceCode: data.referenceCode || createLocalEnquiryReference(payload.contactName, payload.contactPhone),
         assignedAdvisor: data.assignedAdvisor,
         osPortalUrl: SITE.osPortalUrl,
       };
     }
   } catch {
-    /* fallback below */
+    /* explicit unsynced fallback below */
   }
   return {
-    ok: true,
+    ok: false,
+    syncedToOs: false,
     referenceCode: createLocalEnquiryReference(payload.contactName, payload.contactPhone),
     osPortalUrl: SITE.osPortalUrl,
   };

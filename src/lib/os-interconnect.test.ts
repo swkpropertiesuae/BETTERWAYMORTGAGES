@@ -1,19 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { SITE } from '../data/site.ts';
+import { EXECUTIVE_LEADERSHIP, TEAM_SPECIALISTS } from '../data/team.ts';
 import { buildOsLeadPayload, createLocalEnquiryReference } from './os-interconnect.ts';
-
-function walkSrc(dir: string): string[] {
-  const out: string[] = [];
-  for (const e of readdirSync(dir)) {
-    const full = path.join(dir, e);
-    if (statSync(full).isDirectory()) out.push(...walkSrc(full));
-    else if (/\.(?:ts|tsx)$/.test(e) && !e.endsWith('.test.ts')) out.push(full);
-  }
-  return out;
-}
 
 test('SITE exposes Betterway OS interconnection URLs (osUrl, osPortalUrl, osPartnerHubUrl, osLoginUrl)', () => {
   assert.ok(SITE.osUrl);
@@ -22,7 +13,7 @@ test('SITE exposes Betterway OS interconnection URLs (osUrl, osPortalUrl, osPart
   assert.ok(SITE.osLoginUrl.endsWith('/login'));
 });
 
-test('buildOsLeadPayload normalizes website enquiries, calculator scenarios, and consultation slots for Betterway OS', () => {
+test('buildOsLeadPayload normalizes website enquiries, partner RERA metadata, and consultation slots for Betterway OS', () => {
   const payload = buildOsLeadPayload({
     name: 'Zayed Al Mansoori',
     phone: '+971 50 123 4567',
@@ -33,24 +24,41 @@ test('buildOsLeadPayload normalizes website enquiries, calculator scenarios, and
     topic: 'Calculator scenario: mortgage-repayment',
     preferredSlot: 'Today 3:00 PM',
     sourcePage: '/calculators/mortgage-repayment',
+    agencyName: 'SWK Properties LLC',
+    reraOrn: 'ORN-51517',
+    reraBrn: 'BRN-44210',
+    partnerRef: 'swk-brn44210',
   });
 
   assert.equal(payload.contactName, 'Zayed Al Mansoori');
   assert.equal(payload.contactPhone, '+971 50 123 4567');
   assert.equal(payload.propertyPriceAed, 3_500_000);
   assert.equal(payload.preferredSlot, 'Today 3:00 PM');
+  assert.equal(payload.agencyName, 'SWK Properties LLC');
+  assert.equal(payload.reraOrn, 'ORN-51517');
+  assert.equal(payload.partnerRef, 'swk-brn44210');
   assert.match(createLocalEnquiryReference('Zayed Al Mansoori', '+971501234567'), /^BW-ENQ-/);
 });
 
-test('main website never embeds internal staff portrait photos (/staff/) while interconnecting forms and portals with Betterway OS', () => {
-  const files = walkSrc(path.resolve(process.cwd(), 'src'));
-  for (const f of files) {
-    const src = readFileSync(f, 'utf8');
-    assert.doesNotMatch(src, /\/staff\/(?:daniel|rahaba|mohammad|elton|reshma|asif)/i);
+test('official Betterway leadership and 6-specialist 8K studio portfolio assets exist and are wired into pages & forms', () => {
+  assert.equal(EXECUTIVE_LEADERSHIP[0]?.name, 'Shabib Siraj');
+  assert.equal(EXECUTIVE_LEADERSHIP[0]?.tier, 'Owner');
+  assert.equal(TEAM_SPECIALISTS.length, 6);
+
+  for (const m of TEAM_SPECIALISTS) {
+    for (const rel of [m.portrait8k, m.portrait, m.portrait1080, m.avatar, m.avatarWebp]) {
+      const full = path.resolve(process.cwd(), 'public', rel.replace(/^\//, ''));
+      assert.ok(existsSync(full), `Missing staff portrait asset: ${rel}`);
+      assert.ok(statSync(full).size > 20_000, `Staff portrait asset looks empty: ${rel}`);
+    }
   }
 
   const clientSrc = readFileSync(path.resolve(process.cwd(), 'src/components/client.tsx'), 'utf8');
   const portalLoginSrc = readFileSync(path.resolve(process.cwd(), 'src/app/(en)/portal/login/page.tsx'), 'utf8');
-  assert.match(clientSrc, /\/api\/os\/leads/);
+  const underwritersSrc = readFileSync(path.resolve(process.cwd(), 'src/app/(en)/our-underwriters/page.tsx'), 'utf8');
+  assert.match(clientSrc, /submitWebsiteLeadToOs/);
+  assert.match(clientSrc, /partnerMode/);
+  assert.match(clientSrc, /syncedToOs/);
   assert.match(portalLoginSrc, /osPortalUrl|osLoginUrl/);
+  assert.match(underwritersSrc, /TeamPortfolio/);
 });

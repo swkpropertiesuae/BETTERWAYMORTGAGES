@@ -8,7 +8,7 @@ import { AR_UI } from '@/data/ar';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
   title: { default: 'بيترواي للتمويل العقاري — قارن 24 بنكاً في الإمارات', template: '%s | بيترواي للتمويل العقاري' },
   description: 'استشارات تمويل عقاري في النصر بلازا، عود ميثاء، دبي. قارن خيارات التمويل وافهم التكاليف قبل التقديم.',
   icons: {

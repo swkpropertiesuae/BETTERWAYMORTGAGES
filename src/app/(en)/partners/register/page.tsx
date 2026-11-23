@@ -12,7 +12,7 @@ export default function Page() {
         Share your brokerage name, RERA registration details and contact information. Our team will respond with onboarding requirements and written introducer terms.
       </p>
       <div className="max-w-xl">
-        <LeadForm topic="Partner Hub enquiry (include agency & RERA BRN)" />
+        <LeadForm topic="Partner Hub enquiry (RERA brokerage onboarding)" partnerMode />
       </div>
     </AppShell>
   );

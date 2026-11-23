@@ -1,10 +1,10 @@
 // Single source of truth for corporate details and statutory CBUAE / DLD mortgage rules.
 
-const OS_BASE_URL = process.env.NEXT_PUBLIC_OS_URL || 'https://os.betterwaymortgages.com';
+const OS_BASE_URL = process.env.NEXT_PUBLIC_OS_URL || 'https://betterwayos.vercel.app';
 
 export const SITE = {
   name: 'Betterway Mortgages',
-  legalName: 'Betterway Mortgages',
+  legalName: 'Betterway Mortgages LLC',
   url: 'https://betterwaymortgages.com',
   osUrl: OS_BASE_URL,
   osPortalUrl: `${OS_BASE_URL}/portal`,
@@ -22,14 +22,14 @@ export const SITE = {
     country: 'United Arab Emirates',
     countryCode: 'AE',
   },
-  phone: '',
-  phoneHref: '',
-  whatsapp: '',
+  phone: process.env.NEXT_PUBLIC_PHONE || '',
+  phoneHref: process.env.NEXT_PUBLIC_PHONE ? `tel:${process.env.NEXT_PUBLIC_PHONE.replace(/[^+\d]/g, '')}` : '',
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || '',
   email: 'hello@betterwaymortgages.com',
-  licence: '',
+  licence: process.env.NEXT_PUBLIC_LICENCE || '',
   hours: 'Mon–Sat 09:00–19:00 GST',
   asOf: 'CBUAE & DLD statutory framework',
-  asOfISO: '2025-01-01',
+  asOfISO: '2026-11-23',
 } as const;
 
 export const fullAddress = `${SITE.address.building}, ${SITE.address.plot}, ${SITE.address.street}, ${SITE.address.district}, ${SITE.address.city}, UAE`;
