@@ -41,6 +41,8 @@ test('uploaded Betterway brand assets and complete favicon suite exist on disk',
     'public/favicon.ico',
     'public/favicon-16x16.png',
     'public/favicon-32x32.png',
+    'public/favicon-128x128.png',
+    'public/favicon-256x256.png',
     'public/apple-touch-icon.png',
     'public/safari-pinned-tab.svg',
     'public/site.webmanifest',
@@ -92,7 +94,7 @@ test('English and Arabic Homy headers render uploaded logo-light.svg with 1200px
 test('desktop header container and fluid nav sizing prevent horizontal overflow at 1200px+', () => {
   const brand = read('src/app/brand.css');
   assert.match(brand, /\.bw-header\s+\.wrap\s*\{[^}]*max-width:\s*1320px/);
-  assert.match(brand, /\.bw-header__bar\s*\{[^}]*height:\s*84px/);
+  assert.match(brand, /\.bw-header__bar\s*\{[^}]*height:\s*92px/);
   assert.match(brand, /\.bw-nav\s+a,[\s\S]*?white-space:\s*nowrap/);
 });
 

@@ -34,11 +34,13 @@ test('Footer removes the oversized bw-footer__mark Betterway wordmark while keep
   assert.doesNotMatch(brand, /\.bw-footer__mark\b/);
 });
 
-test('explainer.html uses Midnight Banking Navy (#021125) and Sovereign Gold (#d7b04e) with zero legacy emerald/mint colors', () => {
+test('explainer.html uses Homy Obsidian (#0b1117), Betterway Emerald (#179373), and Champagne Gold (#d7b158) with new brand logos', () => {
   const html = readFileSync(repoFile('scripts/video/explainer.html'), 'utf8');
 
   assert.doesNotMatch(html, /#007d78|#081d37|#6fe3c9|rgba\(\s*0\s*,\s*125\s*,\s*120/i);
-  assert.match(html, /#021125/i);
-  assert.match(html, /#d7b04e/i);
+  assert.match(html, /#0b1117/i);
+  assert.match(html, /#179373/i);
+  assert.match(html, /#d7b158/i);
   assert.match(html, /public\/brand\/logo-white\.svg/);
+  assert.match(html, /public\/brand\/icon-fullcolor\.svg/);
 });

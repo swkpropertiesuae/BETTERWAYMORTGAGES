@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight, Award, Briefcase, CheckCircle2, Expand, Mail, ShieldCheck, X } from 'lucide-react';
@@ -21,9 +22,16 @@ export function TeamPortfolio({
   const [cat, setCat] = useState<Category>('All');
   const [selected, setSelected] = useState<TeamSpecialist | null>(null);
   const [view8k, setView8k] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!selected) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setSelected(null);
@@ -31,7 +39,10 @@ export function TeamPortfolio({
       }
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [selected]);
 
   const visible =
@@ -73,7 +84,7 @@ export function TeamPortfolio({
                 />
                 <div className="relative z-10 flex items-start justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-brass/50 bg-[#072244] font-display text-lg font-bold tracking-tight text-brass shadow-inner">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-brass/50 bg-[#141b24] font-display text-lg font-bold tracking-tight text-brass shadow-inner">
                       {exec.initials}
                     </span>
                     <div>
@@ -185,10 +196,10 @@ export function TeamPortfolio({
                 />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#021125]/92 via-[#021125]/40 to-transparent"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080b0f]/92 via-[#080b0f]/40 to-transparent"
                 />
                 <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2">
-                  <span className="rounded-full border border-white/20 bg-[#021125]/70 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brass backdrop-blur-md">
+                  <span className="rounded-full border border-white/20 bg-[#080b0f]/70 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brass backdrop-blur-md">
                     {member.category}
                   </span>
                   <button
@@ -198,7 +209,7 @@ export function TeamPortfolio({
                       setView8k(false);
                     }}
                     aria-label={`Inspect ${member.name} full profile and 8K portrait`}
-                    className="grid h-8 w-8 place-items-center rounded-full border border-white/25 bg-[#021125]/65 text-white backdrop-blur-md transition hover:border-brass hover:text-brass cursor-pointer"
+                    className="grid h-8 w-8 place-items-center rounded-full border border-white/25 bg-[#080b0f]/65 text-white backdrop-blur-md transition hover:border-brass hover:text-brass cursor-pointer"
                   >
                     <Expand size={14} />
                   </button>
@@ -251,19 +262,21 @@ export function TeamPortfolio({
         </div>
       </div>
 
-      {/* Full Profile & 8K Master Portrait Modal */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.2 }}
-            onClick={() => {
-              setSelected(null);
-              setView8k(false);
-            }}
-            className="fixed inset-0 z-[80] flex items-center justify-center bg-[#010915]/80 p-4 backdrop-blur-md"
+      {/* Full Profile & 8K Master Portrait Modal (Portaled above sticky header) */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {selected && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reduce ? 0 : 0.2 }}
+                onClick={() => {
+                  setSelected(null);
+                  setView8k(false);
+                }}
+                className="fixed inset-0 z-[120] flex items-center justify-center bg-[#080b0f]/82 p-4 backdrop-blur-md"
             role="dialog"
             aria-modal="true"
             aria-label={`${selected.name} specialist profile`}
@@ -298,7 +311,7 @@ export function TeamPortfolio({
                   <button
                     type="button"
                     onClick={() => setView8k((v) => !v)}
-                    className="rounded-full border border-brass/50 bg-[#021125]/85 px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-brass backdrop-blur-md transition hover:bg-[#072244] cursor-pointer"
+                    className="rounded-full border border-brass/50 bg-[#080b0f]/85 px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-brass backdrop-blur-md transition hover:bg-[#141b24] cursor-pointer"
                   >
                     {view8k ? '8K UHD Master Loaded' : 'Load 8K UHD Master'}
                   </button>
@@ -306,7 +319,7 @@ export function TeamPortfolio({
                     href={selected.portrait8k}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full border border-white/25 bg-[#021125]/75 px-3 py-1.5 font-mono text-[10.5px] font-semibold text-white backdrop-blur-md hover:border-brass hover:text-brass"
+                    className="rounded-full border border-white/25 bg-[#080b0f]/75 px-3 py-1.5 font-mono text-[10.5px] font-semibold text-white backdrop-blur-md hover:border-brass hover:text-brass"
                   >
                     Open 8K ↗
                   </a>
@@ -367,8 +380,10 @@ export function TeamPortfolio({
               </div>
             </motion.div>
           </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </div>
   );
 }

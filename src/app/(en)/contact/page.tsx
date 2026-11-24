@@ -41,9 +41,9 @@ export default function Page() {
                   <img
                     src="/brand/icon-fullcolor.svg"
                     alt="Betterway Mortgages"
-                    width={48}
-                    height={48}
-                    className="h-12 w-12"
+                    width={64}
+                    height={64}
+                    className="h-16 w-16 drop-shadow-[0_10px_24px_rgba(23,147,115,0.3)]"
                   />
                   <h2 className="font-display text-2xl font-semibold text-white">Our Commitment</h2>
                   <p className="max-w-md text-sm leading-relaxed text-white/75">

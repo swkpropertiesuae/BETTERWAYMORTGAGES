@@ -150,7 +150,7 @@ export function MiniPhone() {
       aria-hidden="true"
     >
       <div className="flex items-center gap-2.5">
-        <img src="/brand/icon-fullcolor.svg" alt="" width={26} height={26} className="h-[26px] w-[26px]" />
+        <img src="/brand/icon-fullcolor.svg" alt="" width={34} height={34} className="h-[34px] w-[34px]" />
         <span className="font-display text-sm font-semibold text-[#080b0f]">Betterway CBUAE Caps</span>
       </div>
       <div className="mt-4 rounded-[16px] bg-[#080b0f] p-4 text-white">
@@ -444,8 +444,8 @@ export function Footer() {
             <img
               src="/images/footer-dubai-night-villa.webp"
               alt="Concept image: modern Dubai waterfront luxury villa illuminated at twilight"
-              width={1376}
-              height={768}
+              width={3840}
+              height={2160}
               loading="lazy"
             />
             <div className="homy-footer-watermark" aria-hidden="true">
@@ -464,7 +464,7 @@ export function Footer() {
                   alt="Betterway Mortgages"
                   width={1450}
                   height={468}
-                  className="h-10 w-auto"
+                  className="h-14 w-auto sm:h-16"
                 />
               </Link>
               <p className="max-w-xs text-sm leading-relaxed text-white/68">

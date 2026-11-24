@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Section, CtaBand, LinkGrid, SectionTag } from '@/components/ui';
+import { SpotlightCard } from '@/components/ui/MotionPrimitives';
 import { TeamPortfolio } from '@/components/TeamPortfolio';
 import LogoMarquee from '@/components/LogoMarquee';
 import { BANKS } from '@/data/banks';
@@ -77,10 +78,10 @@ export default function Page() {
               'Start with statutory DBR and LTV caps, verify documents early, and confirm every rate, floor, and fee in writing.',
             ],
           ].map(([h, p]) => (
-            <div key={h} className="card">
+            <SpotlightCard key={h} className="card">
               <h3 className="h3 text-[#080b0f]">{h}</h3>
               <p className="mt-3 text-sm leading-relaxed text-[#606060]">{p}</p>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
       </Section>

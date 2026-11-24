@@ -1,129 +1,136 @@
 <!doctype html>
-<!-- Betterway Mortgages corporate briefing, 32.5s @ 1920x1080. Deterministic render(t) driven by Midnight Banking Navy + Sovereign Gold Master Brand Kit. -->
+<!-- Betterway Mortgages corporate briefing, 24s @ 1920x1080. Deterministic render(t) — Homy Editorial + Betterway Emerald & Gold + 4K Dubai Architecture. -->
 <html><head><meta charset="utf-8">
 <style>
-@font-face{font-family:Inter;src:url(../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2) format('woff2');font-weight:100 900}
-@font-face{font-family:Mono;src:url(../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2) format('woff2');font-weight:100 800}
-@font-face{font-family:Serif;src:url(../../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2) format('woff2');font-style:italic;font-weight:400}
+@font-face{font-family:'Plus Jakarta Sans';src:url(../../node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2) format('woff2');font-weight:200 800}
+@font-face{font-family:'Plus Jakarta Sans';src:url(../../node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-italic.woff2) format('woff2');font-style:italic;font-weight:200 800}
 :root{
-  --navy:#021125;
-  --navy-800:#072244;
-  --obsidian:#010915;
-  --gold:#d7b04e;
-  --gold-light:#f2dcb3;
-  --gold-deep:#8a6518;
-  --mist:#f8f9fa;
-  --slate:#4a5868;
-  --line:#e2e6ea;
+  --ink:#080b0f;
+  --obsidian:#0b1117;
+  --emerald:#179373;
+  --emerald-soft:#2fc49b;
+  --gold:#d7b158;
+  --gold-light:#f1d57e;
+  --surface:#f6f6f6;
+  --slate:#4b5b63;
+  --muted:#606060;
+  --line:#e5e7eb;
 }
 *{box-sizing:border-box;margin:0}
-html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy);font-family:Inter,Arial,sans-serif;color:var(--navy);-webkit-font-smoothing:antialiased}
-.scene{position:absolute;inset:0;opacity:0}
-.h{font-family:Inter,Arial,sans-serif;font-weight:500;letter-spacing:-.042em;line-height:1.02}
-.h em{font-family:Serif,Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.015em}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--obsidian);font-family:'Plus Jakarta Sans',Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+.h{font-weight:700;letter-spacing:-.035em;line-height:1.04}
+.h em{font-style:italic;font-weight:700;color:var(--gold-light)}
 .num{font-variant-numeric:tabular-nums}
 .abs{position:absolute}
-.grid-light{background-color:var(--mist);background-image:linear-gradient(to right,rgba(2,17,37,.045) 1px,transparent 1px),linear-gradient(to bottom,rgba(2,17,37,.045) 1px,transparent 1px);background-size:64px 64px}
-.grid-dark{background:linear-gradient(160deg,#021125 0%,#041933 58%,#010915 100%)}
-.rails{position:absolute;inset:0 120px;border-left:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.06);pointer-events:none}
-.card{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:0 30px 64px -32px rgba(2,17,37,.28)}
-.chip{position:absolute;width:252px;height:78px;padding:12px 20px;border-radius:18px;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px -20px rgba(2,17,37,.24)}
+.bg-photo{position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);object-fit:cover;will-change:transform}
+.scrim-dark{position:absolute;inset:0;background:linear-gradient(115deg,rgba(8,11,15,.92) 0%,rgba(11,17,23,.76) 52%,rgba(11,17,23,.52) 100%)}
+.scrim-center{position:absolute;inset:0;background:radial-gradient(ellipse 75% 75% at 50% 48%,rgba(8,11,15,.72) 0%,rgba(11,17,23,.92) 100%)}
+.grid-light{background:#ffffff;background-image:radial-gradient(rgba(8,11,15,.06) 1px,transparent 1px);background-size:32px 32px}
+.tag{display:inline-flex;align-items:center;gap:12px;font-size:18px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+.tag i{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:99px;border:1.5px solid currentColor}
+.tag i::after{content:'';width:7px;height:7px;border-radius:99px;background:currentColor}
+.tag--light{color:rgba(255,255,255,.82)}
+.glass-card{background:rgba(11,17,23,.62);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.15);border-radius:28px;box-shadow:0 40px 90px -28px rgba(0,0,0,.6)}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 28px 60px -30px rgba(8,11,15,.16)}
+.chip{position:absolute;width:252px;height:78px;padding:12px 20px;border-radius:16px;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px -18px rgba(8,11,15,.18)}
 .chip img{max-height:42px;max-width:196px;width:auto;height:auto;object-fit:contain}
-.row{position:absolute;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-radius:18px;font-size:25px;font-weight:600;background:var(--mist);border:1px solid var(--line)}
+.row{position:absolute;left:0;right:0;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;border-radius:16px;font-size:24px;font-weight:600;background:var(--surface);border:1px solid var(--line)}
 .row-left{display:flex;align-items:center;gap:18px}
 .row-logo{width:118px;height:50px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:6px 10px}
 .row-logo img{max-height:34px;max-width:96px;object-fit:contain}
-.phone{position:absolute;width:430px;height:860px;border-radius:62px;background:#010915;padding:16px;box-shadow:0 60px 110px -40px rgba(2,17,37,.65);border:2px solid #1c2d44}
-.screen{width:100%;height:100%;border-radius:48px;background:#fff;overflow:hidden;position:relative;padding:86px 28px 0}
-.island{position:absolute;left:50%;top:18px;width:128px;height:36px;border-radius:99px;background:#010915;transform:translateX(-50%)}
-.node{position:absolute;width:78px;height:78px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 28px Inter,Arial,sans-serif;border:3px solid var(--line);background:#fff;color:var(--slate)}
-.lbl{position:absolute;width:280px;text-align:center;font-size:26px;font-weight:600}
-.fine{position:absolute;left:120px;bottom:52px;font-size:19px;color:var(--slate)}
-.watermark{position:absolute;right:120px;top:64px;height:48px;width:auto}
+.phone{position:absolute;width:430px;height:850px;border-radius:58px;background:var(--ink);padding:15px;box-shadow:0 55px 100px -35px rgba(8,11,15,.5);border:2px solid rgba(255,255,255,.16)}
+.screen{width:100%;height:100%;border-radius:45px;background:#fff;overflow:hidden;position:relative;padding:78px 26px 0}
+.island{position:absolute;left:50%;top:18px;width:124px;height:34px;border-radius:99px;background:var(--ink);transform:translateX(-50%)}
+.node{position:absolute;width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 28px 'Plus Jakarta Sans',Arial,sans-serif;border:3px solid var(--line);background:#fff;color:var(--slate)}
+.lbl{position:absolute;width:280px;text-align:center;font-size:25px;font-weight:600}
+.fine{position:absolute;left:120px;bottom:46px;font-size:18px;color:var(--muted)}
+.watermark{position:absolute;right:120px;top:56px;height:54px;width:auto}
 </style></head><body>
 
-<!-- S1: Midnight Banking Navy Master Brand Reveal -->
-<div class="scene grid-dark" id="s1">
-  <div class="rails"></div>
-  <div class="abs" style="left:50%;top:42%;width:920px;height:920px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(215,176,78,.18),transparent 65%)"></div>
-  <img id="s1sym" class="abs" src="../../public/brand/icon-gold.svg" style="left:868px;top:240px;width:184px;height:184px">
-  <img id="s1word" class="abs" src="../../public/brand/logo-white.svg" style="left:590px;top:276px;width:740px;opacity:0">
-  <div id="s1rule" class="abs" style="left:840px;top:468px;width:240px;height:2px;background:var(--gold);transform:scaleX(0)"></div>
-  <div id="s1tag" class="abs h" style="left:0;right:0;top:528px;text-align:center;font-size:78px;color:#fff">Private-grade clarity for your UAE <em style="color:var(--gold-light)">mortgage.</em></div>
-  <div id="s1sub" class="abs" style="left:0;right:0;top:650px;text-align:center;font-size:32px;color:rgba(255,255,255,.72);letter-spacing:.02em">24 UAE lenders compared · CBUAE-aligned advisory · EN &amp; العربية</div>
+<!-- S1: 4K Dubai Waterfront Residence + New Betterway Brand Reveal -->
+<div class="scene" id="s1">
+  <img id="s1bg" class="bg-photo" src="../../public/images/hero-dubai-residence.webp" alt="">
+  <div class="scrim-center"></div>
+  <div class="abs" style="left:50%;top:42%;width:920px;height:920px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(23,147,115,.22),rgba(215,177,88,.14) 40%,transparent 68%)"></div>
+  <img id="s1sym" class="abs" src="../../public/brand/icon-fullcolor.svg" style="left:860px;top:210px;width:200px;height:200px">
+  <img id="s1word" class="abs" src="../../public/brand/logo-white.svg" style="left:580px;top:236px;width:760px;opacity:0">
+  <div id="s1rule" class="abs" style="left:820px;top:492px;width:280px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--emerald),var(--gold));transform:scaleX(0)"></div>
+  <div id="s1tag" class="abs h" style="left:0;right:0;top:542px;text-align:center;font-size:78px;color:#fff">Dubai Mortgages, <em>structured clearly.</em></div>
+  <div id="s1sub" class="abs" style="left:0;right:0;top:666px;text-align:center;font-size:30px;color:rgba(255,255,255,.78)">24 UAE lenders compared · CBUAE-aligned advisory · EN &amp; العربية</div>
 </div>
 
 <!-- S2: One bank vs 24 authentic UAE bank logos -->
 <div class="scene grid-light" id="s2">
-  <img class="watermark" src="../../public/brand/logo-primary.svg" alt="">
-  <div class="abs" style="left:120px;top:82px;font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)">01 — LENDER DIRECTORY</div>
-  <div id="s2h1" class="abs h" style="left:120px;top:136px;font-size:78px">Going direct?<br>You see <em>one</em> offer.</div>
-  <div id="s2h2" class="abs h" style="left:120px;top:136px;font-size:78px;opacity:0">We compare <span style="color:var(--gold-deep)">24 banks</span><br>side by side.</div>
-  <div class="abs" style="left:120px;top:368px;width:620px;font-size:28px;line-height:1.5;color:var(--slate)">Independent structuring across conventional and Islamic lenders across Dubai and the UAE.</div>
+  <img class="watermark" src="../../public/brand/logo-light.svg" alt="">
+  <div class="abs tag" style="left:120px;top:82px"><i></i><span>01 — Lender Directory</span></div>
+  <div id="s2h1" class="abs h" style="left:120px;top:140px;font-size:76px;color:var(--ink)">Going direct?<br>You see <span style="color:var(--emerald)">one</span> offer.</div>
+  <div id="s2h2" class="abs h" style="left:120px;top:140px;font-size:76px;color:var(--ink);opacity:0">We compare <span style="color:var(--emerald)">24 banks</span><br>side by side.</div>
+  <div class="abs" style="left:120px;top:372px;width:620px;font-size:27px;line-height:1.55;color:var(--slate)">Independent structuring across conventional and Islamic home finance lenders across Dubai and the UAE.</div>
   <div id="chips"></div>
 </div>
 
-<!-- S3: Statutory CBUAE Framework & Written Offer Terms (Poster Scene @ 13.5s) -->
+<!-- S3: Statutory CBUAE Framework & Written Offer Terms (Poster Scene @ 10.5s) -->
 <div class="scene grid-light" id="s3">
-  <img class="watermark" src="../../public/brand/logo-primary.svg" alt="">
-  <div class="abs" style="left:120px;top:76px;font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)">02 — STATUTORY CBUAE RULES &amp; WRITTEN OFFERS</div>
-  <div class="abs h" style="left:120px;top:122px;font-size:74px">Every clause reviewed <em>in writing</em></div>
-  <div class="abs" style="left:120px;top:222px;font-size:29px;color:var(--slate)">Compare fixed duration, published EIBOR revert margin, floor clauses and bank fees together.</div>
-  <div class="abs card" style="left:120px;top:300px;width:1120px;height:640px;padding:36px"><div id="rows" class="abs" style="left:36px;right:36px;top:36px;bottom:36px"></div></div>
-  <div class="abs" style="left:1280px;top:300px;width:520px;height:640px;padding:44px;border-radius:26px;background:var(--navy);color:#fff;border:1px solid rgba(215,176,78,.35);box-shadow:0 36px 72px -32px rgba(2,17,37,.55)">
-    <div style="font-size:17px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)">CBUAE STATUTORY FRAMEWORK</div>
-    <div style="margin-top:26px;font-size:24px;color:rgba(255,255,255,.68)">First-home LTV ceiling</div>
-    <div class="num" style="margin-top:6px;font-size:66px;font-weight:600;color:#fff">80% / 85%</div>
-    <div style="margin-top:34px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12);font-size:24px;color:rgba(255,255,255,.68)">Max Debt Burden Ratio</div>
-    <div id="s3fix" class="num" style="margin-top:6px;font-size:86px;font-weight:600;color:var(--gold)">50%</div>
-    <div style="margin-top:24px;font-size:21px;line-height:1.5;color:rgba(255,255,255,.72)">Daily <b style="color:#fff">CBUAE EIBOR</b> benchmark · Up to <b style="color:#fff">25-year</b> tenure.</div>
+  <img class="watermark" src="../../public/brand/logo-light.svg" alt="">
+  <div class="abs tag" style="left:120px;top:72px"><i></i><span>02 — Statutory CBUAE Rules &amp; Written Offers</span></div>
+  <div class="abs h" style="left:120px;top:122px;font-size:72px;color:var(--ink)">Every clause reviewed <span style="color:var(--emerald)">in writing</span></div>
+  <div class="abs" style="left:120px;top:218px;font-size:27px;color:var(--slate)">Compare fixed duration, published EIBOR revert margin, floor clauses and bank fees together.</div>
+  <div class="abs card" style="left:120px;top:292px;width:1120px;height:648px;padding:36px"><div id="rows" class="abs" style="left:36px;right:36px;top:36px;bottom:36px"></div></div>
+  <div class="abs" style="left:1280px;top:292px;width:520px;height:648px;padding:44px;border-radius:26px;background:var(--obsidian);color:#fff;border:1px solid rgba(215,177,88,.35);box-shadow:0 36px 72px -30px rgba(8,11,15,.48)">
+    <div class="tag tag--light"><i></i><span style="color:var(--gold-light)">CBUAE Statutory Caps</span></div>
+    <div style="margin-top:30px;font-size:23px;color:rgba(255,255,255,.68)">First-home LTV ceiling</div>
+    <div class="num" style="margin-top:6px;font-size:66px;font-weight:700;color:#fff">80% / 85%</div>
+    <div style="margin-top:34px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12);font-size:23px;color:rgba(255,255,255,.68)">Max Debt Burden Ratio</div>
+    <div id="s3fix" class="num" style="margin-top:6px;font-size:88px;font-weight:700;color:var(--gold)">50%</div>
+    <div style="margin-top:24px;font-size:21px;line-height:1.55;color:rgba(255,255,255,.76)">Daily <b style="color:#fff">CBUAE EIBOR</b> benchmark · Up to <b style="color:#fff">25-year</b> tenure.</div>
   </div>
   <div class="fine">Statutory Central Bank of the UAE rules. Individual rates, margins and fees are confirmed by each bank’s written Final Offer Letter.</div>
 </div>
 
 <!-- S4: Every dirham itemised + Mobile workspace -->
-<div class="scene" id="s4" style="background:#fff">
-  <img class="watermark" src="../../public/brand/logo-primary.svg" alt="">
-  <div class="abs" style="left:120px;top:128px;font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)">03 — STATUTORY UPFRONT CASH &amp; DLD FEES</div>
-  <div class="abs h" style="left:120px;top:182px;font-size:80px">Every dirham itemised<br>before you <em>commit.</em></div>
-  <div class="abs" style="left:120px;top:398px;font-size:30px;color:var(--slate);width:740px">AED 2,000,000 Dubai home · 20% deposit · statutory DLD fees</div>
-  <div id="items" class="abs" style="left:120px;top:484px;width:680px"></div>
-  <div class="phone" id="ph" style="left:1180px;top:110px"><div class="screen"><div class="island"></div>
-    <div style="display:flex;align-items:center;justify-content:center"><img src="../../public/brand/logo-primary.svg" style="height:36px;width:auto"></div>
-    <div style="margin-top:34px;background:var(--navy);color:#fff;border-radius:26px;padding:32px;border:1px solid rgba(215,176,78,.32)">
-      <div style="font-size:18px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)">Loan at 80% LTV</div>
-      <div id="emi" class="num" style="font-size:40px;font-weight:600;margin-top:8px;white-space:nowrap">AED 1,600,000</div>
-      <div style="margin-top:22px;height:9px;border-radius:9px;background:rgba(255,255,255,.14)"><div id="bar" style="height:100%;border-radius:9px;background:var(--gold);width:0"></div></div>
+<div class="scene" id="s4" style="background:#ffffff">
+  <img class="watermark" src="../../public/brand/logo-light.svg" alt="">
+  <div class="abs tag" style="left:120px;top:116px"><i></i><span>03 — Statutory Upfront Cash &amp; DLD Fees</span></div>
+  <div class="abs h" style="left:120px;top:172px;font-size:78px;color:var(--ink)">Every dirham itemised<br>before you <span style="color:var(--emerald)">commit.</span></div>
+  <div class="abs" style="left:120px;top:384px;font-size:28px;color:var(--slate);width:760px">AED 2,000,000 Dubai home · 20% deposit · statutory DLD fees</div>
+  <div id="items" class="abs" style="left:120px;top:468px;width:700px"></div>
+  <div class="phone" id="ph" style="left:1190px;top:114px"><div class="screen"><div class="island"></div>
+    <div style="display:flex;align-items:center;justify-content:center"><img src="../../public/brand/logo-light.svg" style="height:44px;width:auto"></div>
+    <div style="margin-top:30px;background:var(--obsidian);color:#fff;border-radius:24px;padding:30px;border:1px solid rgba(215,177,88,.3)">
+      <div style="font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light)">Loan at 80% LTV</div>
+      <div id="emi" class="num" style="font-size:40px;font-weight:700;margin-top:8px;white-space:nowrap">AED 1,600,000</div>
+      <div style="margin-top:20px;height:9px;border-radius:9px;background:rgba(255,255,255,.14)"><div id="bar" style="height:100%;border-radius:9px;background:linear-gradient(90deg,var(--emerald),var(--gold));width:0"></div></div>
     </div>
-    <div style="margin-top:20px;background:var(--mist);border:1px solid var(--line);border-radius:18px;padding:20px;font-size:21px;display:flex;justify-content:space-between"><span style="color:var(--slate)">Cash + DLD</span><b id="ctc" class="num" style="white-space:nowrap;color:var(--navy)">AED 534,220</b></div>
-    <div style="margin-top:12px;background:var(--mist);border:1px solid var(--line);border-radius:18px;padding:20px;font-size:21px;display:flex;justify-content:space-between"><span style="color:var(--slate)">CBUAE DBR cap</span><b class="num" style="color:var(--navy)">50%</b></div>
-    <div style="margin-top:24px;border-radius:999px;background:var(--gold);color:var(--navy);padding:16px;text-align:center;font-size:20px;font-weight:700">Build my mortgage plan ↗</div>
+    <div style="margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;font-size:21px;display:flex;justify-content:space-between"><span style="color:var(--slate)">Cash + DLD</span><b id="ctc" class="num" style="white-space:nowrap;color:var(--ink)">AED 534,220</b></div>
+    <div style="margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;font-size:21px;display:flex;justify-content:space-between"><span style="color:var(--slate)">CBUAE DBR cap</span><b class="num" style="color:var(--ink)">50%</b></div>
+    <div style="margin-top:22px;border-radius:14px;background:var(--ink);color:#fff;padding:17px;text-align:center;font-size:20px;font-weight:600">Build my mortgage plan →</div>
   </div></div>
 </div>
 
 <!-- S5: 5-step advisory execution -->
 <div class="scene grid-light" id="s5">
-  <img class="watermark" src="../../public/brand/logo-primary.svg" alt="">
-  <div class="abs" style="left:0;right:0;top:116px;text-align:center;font-size:18px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)">04 — STRUCTURED EXECUTION</div>
-  <div class="abs h" style="left:0;right:0;top:166px;text-align:center;font-size:82px">Ready <em>before</em> the bank asks.</div>
-  <div class="abs" style="left:0;right:0;top:278px;text-align:center;font-size:32px;color:var(--slate)">From income &amp; DBR check to trustee transfer day.</div>
-  <div class="abs" style="left:300px;width:1320px;top:574px;height:6px;border-radius:6px;background:var(--line)"><div id="prog" style="height:100%;border-radius:6px;background:var(--gold);width:0"></div></div>
+  <img class="watermark" src="../../public/brand/logo-light.svg" alt="">
+  <div class="abs" style="left:0;right:0;top:116px;text-align:center"><span class="tag"><i></i><span>04 — Structured Execution</span></span></div>
+  <div class="abs h" style="left:0;right:0;top:174px;text-align:center;font-size:80px;color:var(--ink)">Ready <span style="color:var(--emerald)">before</span> the bank asks.</div>
+  <div class="abs" style="left:0;right:0;top:284px;text-align:center;font-size:30px;color:var(--slate)">From income &amp; DBR check to trustee transfer day.</div>
+  <div class="abs" style="left:300px;width:1320px;top:574px;height:6px;border-radius:6px;background:var(--line)"><div id="prog" style="height:100%;border-radius:6px;background:linear-gradient(90deg,var(--emerald),var(--gold));width:0"></div></div>
   <div id="steps"></div>
 </div>
 
-<!-- S6: Midnight Banking Navy Closing Mandate -->
-<div class="scene grid-dark" id="s6" style="color:#fff">
-  <div class="rails"></div>
-  <div class="abs" style="right:-220px;top:-220px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(215,176,78,.22),transparent 65%)"></div>
-  <img id="s6logo" class="abs" src="../../public/brand/logo-white.svg" style="left:120px;top:130px;width:520px">
-  <div id="s6h" class="abs h" style="left:120px;top:336px;font-size:104px;color:#fff">Let’s find your<br><em style="color:var(--gold-light)">better way</em> home.</div>
-  <div id="s6c" class="abs" style="left:120px;top:648px;display:flex;gap:18px;font-size:26px;font-weight:500">
-    <span style="padding:16px 28px;border-radius:99px;background:var(--gold);color:var(--navy);font-weight:700">24 UAE lenders compared</span>
-    <span style="padding:16px 28px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)">Residents &amp; non-residents</span>
-    <span style="padding:16px 28px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)">Al Nasr Plaza · Dubai</span>
+<!-- S6: 4K Twilight Dubai Mansion Closing Mandate -->
+<div class="scene" id="s6" style="color:#fff">
+  <img id="s6bg" class="bg-photo" src="../../public/images/footer-dubai-night-villa.webp" alt="">
+  <div class="scrim-dark"></div>
+  <img id="s6logo" class="abs" src="../../public/brand/logo-white.svg" style="left:120px;top:118px;width:580px">
+  <div id="s6h" class="abs h" style="left:120px;top:336px;font-size:102px;color:#fff">Let’s find your<br><em>better way</em> home.</div>
+  <div id="s6c" class="abs" style="left:120px;top:636px;display:flex;gap:16px;font-size:24px;font-weight:600">
+    <span style="padding:15px 28px;border-radius:14px;background:#fff;color:var(--ink)">24 UAE lenders compared</span>
+    <span style="padding:15px 28px;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px)">Residents &amp; non-residents</span>
+    <span style="padding:15px 28px;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px)">Oud Metha · Dubai</span>
   </div>
-  <div id="s6u" class="abs num" style="left:120px;top:804px;font-size:40px;color:var(--gold)">betterwaymortgages.com</div>
-  <div class="fine" style="color:rgba(255,255,255,.52)">Statutory CBUAE &amp; DLD planning illustrations only. Lending decisions and final offers are issued by the bank.</div>
+  <div id="s6u" class="abs num" style="left:120px;top:794px;font-size:40px;font-weight:700;color:var(--gold-light)">betterwaymortgages.com</div>
+  <div class="fine" style="color:rgba(255,255,255,.6)">Statutory CBUAE &amp; DLD planning illustrations only. Lending decisions and final offers are issued by the bank.</div>
 </div>
 
 <script>
@@ -169,15 +176,15 @@ PANEL_ROWS.forEach(([name, file, structure, check], i) => {
   const d = document.createElement('div');
   d.className = 'row';
   d.style.top = (i * 94) + 'px';
-  d.innerHTML = `<span class="row-left"><span class="row-logo"><img src="../../public/banks/${file}" alt=""></span><span>${name}</span></span><span style="display:flex;gap:36px;font-size:21px;font-weight:500"><span>${structure}</span><span class="eib" style="font-weight:600;opacity:.85">${check}</span></span>`;
+  d.innerHTML = `<span class="row-left"><span class="row-logo"><img src="../../public/banks/${file}" alt=""></span><span>${name}</span></span><span style="display:flex;gap:34px;font-size:20px;font-weight:500"><span>${structure}</span><span class="eib" style="font-weight:600;opacity:.9">${check}</span></span>`;
   rows.appendChild(d);
 });
 
 const items = $('items');
 COST.forEach(([a, b]) => {
   const d = document.createElement('div');
-  d.style.cssText = 'display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid #e2e6ea;font-size:27px';
-  d.innerHTML = `<span style="color:#4a5868">${a}</span><b class="num" style="color:#021125">${b}</b>`;
+  d.style.cssText = 'display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid #e5e7eb;font-size:26px';
+  d.innerHTML = `<span style="color:#4b5b63">${a}</span><b class="num" style="color:#080b0f">${b}</b>`;
   items.appendChild(d);
 });
 
@@ -186,7 +193,7 @@ STEPS.forEach((s, i) => {
   const x = 300 + i * 330;
   const n = document.createElement('div');
   n.className = 'node';
-  n.style.left = (x - 39) + 'px';
+  n.style.left = (x - 40) + 'px';
   n.style.top = '538px';
   n.textContent = i + 1;
   stepsEl.appendChild(n);
@@ -198,98 +205,102 @@ STEPS.forEach((s, i) => {
   stepsEl.appendChild(l);
 });
 
-const SC = [['s1', 0, 4.8], ['s2', 4.8, 9.8], ['s3', 9.8, 15.8], ['s4', 15.8, 21.8], ['s5', 21.8, 27.5], ['s6', 27.5, 32.5]];
+const SC = [['s1', 0, 4.0], ['s2', 4.0, 8.2], ['s3', 8.2, 12.6], ['s4', 12.6, 16.8], ['s5', 16.8, 20.6], ['s6', 20.6, 24.0]];
 
 function render(t) {
   for (const [id, a, b] of SC) {
-    const o = id === 's1' ? (t < b - .4 ? 1 : 1 - seg(t, b - .4, b)) : id === 's6' ? seg(t, a, a + .4) : Math.min(seg(t, a, a + .4), 1 - seg(t, b - .4, b));
+    const o = id === 's1' ? (t < b - .35 ? 1 : 1 - seg(t, b - .35, b)) : id === 's6' ? seg(t, a, a + .35) : Math.min(seg(t, a, a + .35), 1 - seg(t, b - .35, b));
     $(id).style.opacity = o;
   }
 
-  // S1: Gold emblem -> White & Gold master logo lockup
+  // S1: 4K Dubai Residence Ken Burns + New Emerald/Gold Icon -> White Logo Reveal
   {
-    const p = eo(seg(t, .15, 1.1)), q = eio(seg(t, 1.25, 2.15));
-    set($('s1sym'), p * (1 - q), 0, (1 - p) * 34, .82 + .18 * p);
-    set($('s1word'), q, 0, (1 - q) * 18, .96 + .04 * q);
-    $('s1rule').style.transform = `scaleX(${eo(seg(t, 1.9, 2.7))})`;
-    set($('s1tag'), eo(seg(t, 2.1, 2.95)), 0, (1 - eo(seg(t, 2.1, 2.95))) * 26);
-    set($('s1sub'), eo(seg(t, 2.5, 3.35)), 0, (1 - eo(seg(t, 2.5, 3.35))) * 22);
+    const k = seg(t, 0, 4.0);
+    $('s1bg').style.transform = `scale(${1.0 + 0.06 * k}) translate(${-18 * k}px, ${-8 * k}px)`;
+    const p = eo(seg(t, .1, .85)), q = eio(seg(t, .95, 1.75));
+    set($('s1sym'), p * (1 - q), 0, (1 - p) * 28, .82 + .18 * p);
+    set($('s1word'), q, 0, (1 - q) * 16, .96 + .04 * q);
+    $('s1rule').style.transform = `scaleX(${eo(seg(t, 1.45, 2.2))})`;
+    set($('s1tag'), eo(seg(t, 1.6, 2.4)), 0, (1 - eo(seg(t, 1.6, 2.4))) * 24);
+    set($('s1sub'), eo(seg(t, 1.95, 2.75)), 0, (1 - eo(seg(t, 1.95, 2.75))) * 18);
   }
 
   // S2: One bank card -> 24 authentic UAE bank logo cards
   {
-    const l = t - 4.8, swap = eio(seg(l, 1.8, 2.45));
-    set($('s2h1'), 1 - swap, 0, -swap * 18);
-    set($('s2h2'), swap, 0, (1 - swap) * 18);
+    const l = t - 4.0, swap = eio(seg(l, 1.3, 1.9));
+    set($('s2h1'), 1 - swap, 0, -swap * 16);
+    set($('s2h2'), swap, 0, (1 - swap) * 16);
     [...chips.children].forEach((c, i) => {
       const col = i % 3, row = Math.floor(i / 3), gx = 960 + col * 276, gy = 166 + row * 98;
       const sx = 1236, sy = 460;
-      const p = i === 0 ? 1 : eo(seg(l, 1.85 + i * .045, 2.55 + i * .045));
+      const p = i === 0 ? 1 : eo(seg(l, 1.35 + i * .038, 1.95 + i * .038));
       c.style.left = (sx + (gx - sx) * p) + 'px';
       c.style.top = (sy + (gy - sy) * p) + 'px';
-      c.style.opacity = i === 0 ? eo(seg(l, .25, .85)) : p;
-      c.style.transform = `scale(${i === 0 ? 1.22 - .22 * swap : .92 + .08 * p})`;
-      c.style.borderColor = i === 0 ? '#d7b04e' : '#e2e6ea';
+      c.style.opacity = i === 0 ? eo(seg(l, .2, .7)) : p;
+      c.style.transform = `scale(${i === 0 ? 1.2 - .2 * swap : .92 + .08 * p})`;
+      c.style.borderColor = i === 0 ? '#179373' : '#e5e7eb';
     });
   }
 
-  // S3: Rows slide in, top row highlights in Midnight Navy + Sovereign Gold border
+  // S3: Rows slide in, top row highlights in Homy Obsidian + Champagne Gold accent
   {
-    const l = t - 9.8;
+    const l = t - 8.2;
     [...rows.children].forEach((r, i) => {
-      const p = eo(seg(l, .45 + i * .16, 1.05 + i * .16));
-      set(r, p, (1 - p) * 52, 0);
-      const hl = i === 0 ? eo(seg(l, 2.1, 2.75)) : 0;
-      r.style.background = hl > .5 ? '#021125' : '#f8f9fa';
-      r.style.borderColor = hl > .5 ? '#d7b04e' : '#e2e6ea';
-      r.style.color = hl > .5 ? '#ffffff' : '#021125';
+      const p = eo(seg(l, .3 + i * .12, .85 + i * .12));
+      set(r, p, (1 - p) * 44, 0);
+      const hl = i === 0 ? eo(seg(l, 1.65, 2.2)) : 0;
+      r.style.background = hl > .5 ? '#0b1117' : '#f6f6f6';
+      r.style.borderColor = hl > .5 ? '#d7b158' : '#e5e7eb';
+      r.style.color = hl > .5 ? '#ffffff' : '#080b0f';
       const eib = r.querySelector('.eib');
-      if (eib) eib.style.color = hl > .5 ? '#d7b04e' : '#4a5868';
+      if (eib) eib.style.color = hl > .5 ? '#f1d57e' : '#4b5b63';
     });
-    const p = eo(seg(l, 2.1, 2.9));
+    const p = eo(seg(l, 1.65, 2.35));
     $('s3fix').style.transform = `scale(${.88 + .12 * p})`;
     $('s3fix').style.transformOrigin = 'left center';
   }
 
   // S4: Phone rises, statutory 80% LTV loan & Cash-to-close count up
   {
-    const l = t - 15.8, p = eo(seg(l, .2, 1.15));
-    set($('ph'), p, 0, (1 - p) * 110);
-    const k = eo(seg(l, .75, 2.35));
+    const l = t - 12.6, p = eo(seg(l, .15, .95));
+    set($('ph'), p, 0, (1 - p) * 90);
+    const k = eo(seg(l, .6, 1.9));
     $('emi').textContent = fmt(1200000 + 400000 * k);
     $('bar').style.width = (80 * k) + '%';
-    $('ctc').textContent = fmt(400000 + 134220 * eo(seg(l, 2.2, 4.2)));
+    $('ctc').textContent = fmt(400000 + 134220 * eo(seg(l, 1.5, 3.1)));
     [...items.children].forEach((d, i) => {
-      const q = eo(seg(l, 1.45 + i * .36, 1.95 + i * .36));
-      set(d, q, (1 - q) * -28, 0);
+      const q = eo(seg(l, .95 + i * .26, 1.35 + i * .26));
+      set(d, q, (1 - q) * -26, 0);
     });
   }
 
-  // S5: Gold progress line runs, Midnight Navy + Gold nodes check off
+  // S5: Emerald-to-Gold progress line runs, Homy Obsidian nodes check off
   {
-    const l = t - 21.8, p = eio(seg(l, .7, 4.4));
+    const l = t - 16.8, p = eio(seg(l, .45, 3.1));
     $('prog').style.width = (p * 100) + '%';
     [...stepsEl.children].forEach((el, j) => {
-      const i = j >> 1, on = p * 4 >= i - .001 && l > .7 + i * .05;
+      const i = j >> 1, on = p * 4 >= i - .001 && l > .45 + i * .04;
       if (el.className === 'node') {
-        el.style.background = on ? '#021125' : '#ffffff';
-        el.style.borderColor = on ? '#d7b04e' : '#e2e6ea';
-        el.style.color = on ? '#d7b04e' : '#4a5868';
+        el.style.background = on ? '#0b1117' : '#ffffff';
+        el.style.borderColor = on ? '#179373' : '#e5e7eb';
+        el.style.color = on ? '#f1d57e' : '#4b5b63';
         el.textContent = on ? '✓' : String(i + 1);
         el.style.transform = `scale(${on ? 1.08 : 1})`;
       } else {
-        el.style.color = on ? '#021125' : '#4a5868';
+        el.style.color = on ? '#080b0f' : '#4b5b63';
       }
     });
   }
 
-  // S6: Closing Midnight Navy + Sovereign Gold build
+  // S6: Closing 4K Twilight Dubai Mansion + New Betterway White Logo
   {
-    const l = t - 27.5;
-    set($('s6logo'), eo(seg(l, .25, .95)), 0, (1 - eo(seg(l, .25, .95))) * 20);
-    set($('s6h'), eo(seg(l, .55, 1.35)), 0, (1 - eo(seg(l, .55, 1.35))) * 28);
-    set($('s6c'), eo(seg(l, 1.15, 1.9)), 0, (1 - eo(seg(l, 1.15, 1.9))) * 24);
-    set($('s6u'), eo(seg(l, 1.55, 2.3)), 0, 0);
+    const l = t - 20.6;
+    const kz = seg(l, 0, 3.4);
+    $('s6bg').style.transform = `scale(${1.02 + 0.05 * kz}) translate(${-12 * kz}px, 0px)`;
+    set($('s6logo'), eo(seg(l, .2, .85)), 0, (1 - eo(seg(l, .2, .85))) * 18);
+    set($('s6h'), eo(seg(l, .45, 1.15)), 0, (1 - eo(seg(l, .45, 1.15))) * 24);
+    set($('s6c'), eo(seg(l, .9, 1.55)), 0, (1 - eo(seg(l, .9, 1.55))) * 20);
+    set($('s6u'), eo(seg(l, 1.2, 1.85)), 0, 0);
   }
 }
 window.render = render;

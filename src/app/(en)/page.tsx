@@ -7,6 +7,7 @@ import RevertBriefing from '@/components/home/RevertBriefing';
 import StatCounter from '@/components/home/StatCounter';
 import Manifesto from '@/components/home/Manifesto';
 import { HomyAdvisorsCarousel, HomyFaqAccordion, HomyServicesAccordion } from '@/components/home/HomySections';
+import { ScrollScaleFrame, SpotlightCard, VideoBriefingShowcase } from '@/components/ui/MotionPrimitives';
 import { LiveBenchmark } from '@/components/StartupExperience';
 import LogoMarquee from '@/components/LogoMarquee';
 import Calculator from '@/components/calc/Calculator';
@@ -63,7 +64,7 @@ const HOMY_SERVICES = [
     title: 'Resident & Villa Mortgages',
     body: 'Compare fixed-rate periods, post-fixed EIBOR revert margins, minimum floors, and DLD fees across 24 UAE lenders before selecting an offer.',
     href: '/mortgages/uae-residents',
-    img: '/images/dubai-waterfront-1280.webp',
+    img: '/images/dubai-waterfront-3344.webp',
     alt: 'Concept image: waterfront travertine Dubai villa with palm garden and Burj Khalifa skyline',
   },
   {
@@ -94,7 +95,7 @@ const MORTGAGE_PROGRAMS = [
     figure: `Up to ${ltv('UAE National — first home up to')} / ${ltv('Expat resident — first home up to')} LTV`,
     specs: ['50% Max DBR', '25 Yrs Max', '4% DLD Fee'],
     href: '/mortgages/uae-nationals',
-    img: '/images/dubai-waterfront-1280.webp',
+    img: '/images/dubai-waterfront-3344.webp',
     alt: 'Concept image: modern Dubai waterfront villa overlooking the skyline',
   },
   {
@@ -183,33 +184,35 @@ export default function Home() {
             <div className="homy-impact-grid">
               <div className="homy-impact-photo" data-reveal="rise">
                 <img
-                  src="/images/dubai-waterfront-1280.webp"
+                  src="/images/dubai-waterfront-1672.webp"
+                  srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w"
+                  sizes="(min-width: 960px) 26vw, 100vw"
                   alt="Concept image: luxury Dubai waterfront residence with Burj Khalifa horizon"
-                  width={1280}
-                  height={720}
+                  width={1672}
+                  height={941}
                   loading="lazy"
                 />
               </div>
 
               <div className="homy-impact-stats" data-reveal="rise" style={{ ['--i' as string]: 1 }}>
-                <div className="homy-stat-card">
+                <SpotlightCard className="homy-stat-card">
                   <span className="homy-stat-card__num">
                     <StatCounter value={BANKS.length} />
                   </span>
                   <span className="homy-stat-card__label">UAE Lenders</span>
-                </div>
-                <div className="homy-stat-card">
+                </SpotlightCard>
+                <SpotlightCard className="homy-stat-card">
                   <span className="homy-stat-card__num">
                     <StatCounter value={COMMUNITIES.length} suffix="+" />
                   </span>
                   <span className="homy-stat-card__label">Freehold Areas</span>
-                </div>
-                <div className="homy-stat-card">
+                </SpotlightCard>
+                <SpotlightCard className="homy-stat-card">
                   <span className="homy-stat-card__num">
                     <StatCounter value={50} suffix="%" />
                   </span>
                   <span className="homy-stat-card__label">CBUAE Max DBR</span>
-                </div>
+                </SpotlightCard>
               </div>
 
               <div className="homy-impact-photo" data-reveal="rise" style={{ ['--i' as string]: 2 }}>
@@ -217,7 +220,7 @@ export default function Home() {
                   src="/images/villa-courtyard-1792.webp"
                   alt="Concept image: calm Arabian courtyard villa with reflecting pool"
                   width={1792}
-                  height={2400}
+                  height={2389}
                   loading="lazy"
                 />
               </div>
@@ -329,40 +332,41 @@ export default function Home() {
 
             <div className="homy-listings-grid">
               {MORTGAGE_PROGRAMS.map((item, i) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="homy-listing-card group"
-                  data-reveal="rise"
-                  style={{ ['--i' as string]: i % 2 }}
-                >
-                  <img src={item.img} alt={item.alt} decoding="async" />
-                  <span className="homy-listing-card__badge">
-                    <HomeIcon size={13} strokeWidth={2.2} />
-                    {item.badge}
-                  </span>
-                  <div className="homy-listing-card__overlay">
-                    <span className="homy-listing-card__name">{item.title}</span>
-                    <strong className="homy-listing-card__figure">{item.figure}</strong>
-                    <div className="homy-listing-card__specs">
-                      <span>
-                        <ShieldCheck size={14} /> {item.specs[0]}
-                      </span>
-                      <span className="homy-listing-card__sep" aria-hidden="true">
-                        |
-                      </span>
-                      <span>
-                        <Clock size={14} /> {item.specs[1]}
-                      </span>
-                      <span className="homy-listing-card__sep" aria-hidden="true">
-                        |
-                      </span>
-                      <span>
-                        <Building2 size={14} /> {item.specs[2]}
-                      </span>
+                <SpotlightCard key={item.title} dark className="rounded-[18px]">
+                  <Link
+                    href={item.href}
+                    className="homy-listing-card group"
+                    data-reveal="rise"
+                    style={{ ['--i' as string]: i % 2 }}
+                  >
+                    <img src={item.img} alt={item.alt} decoding="async" />
+                    <span className="homy-listing-card__badge">
+                      <HomeIcon size={13} strokeWidth={2.2} />
+                      {item.badge}
+                    </span>
+                    <div className="homy-listing-card__overlay">
+                      <span className="homy-listing-card__name">{item.title}</span>
+                      <strong className="homy-listing-card__figure">{item.figure}</strong>
+                      <div className="homy-listing-card__specs">
+                        <span>
+                          <ShieldCheck size={14} /> {item.specs[0]}
+                        </span>
+                        <span className="homy-listing-card__sep" aria-hidden="true">
+                          |
+                        </span>
+                        <span>
+                          <Clock size={14} /> {item.specs[1]}
+                        </span>
+                        <span className="homy-listing-card__sep" aria-hidden="true">
+                          |
+                        </span>
+                        <span>
+                          <Building2 size={14} /> {item.specs[2]}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </SpotlightCard>
               ))}
             </div>
             <p className="mt-5 text-xs text-[#606060]">
@@ -421,7 +425,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 8. HIGHLIGHTED ADVISORY — Exact Homy Infinite Text Marquee behind Rounded Architecture */}
+        {/* 7B. 24-SECOND FULL-HD CORPORATE VIDEO BRIEFING SHOWCASE */}
+        <section className="homy-section pt-0" aria-label="24-second corporate briefing film">
+          <div className="wrap">
+            <VideoBriefingShowcase />
+          </div>
+        </section>
+
+        {/* 8. HIGHLIGHTED ADVISORY — Exact Homy Infinite Text Marquee behind Scroll-Scaled 4K Architecture */}
         <section className="homy-section" aria-labelledby="highlight-title">
           <div className="wrap">
             <div className="homy-head">
@@ -450,15 +461,19 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <Link href="/areas" className="homy-highlight-frame block" aria-label="Explore UAE freehold communities">
-              <img
-                src="/images/abudhabi-corniche-1792.webp"
-                alt="Concept image: coastal UAE waterfront villas along turquoise water and skyline"
-                width={1792}
-                height={2400}
-                loading="lazy"
-              />
-            </Link>
+            <ScrollScaleFrame>
+              <Link href="/areas" className="homy-highlight-frame block" aria-label="Explore UAE freehold communities">
+                <img
+                  src="/images/abudhabi-corniche-2752.webp"
+                  srcSet="/images/abudhabi-corniche.webp 1376w, /images/abudhabi-corniche-1792.webp 1792w, /images/abudhabi-corniche-2752.webp 2752w"
+                  sizes="(min-width: 960px) 920px, 95vw"
+                  alt="Concept image: coastal UAE waterfront villas along turquoise water and skyline"
+                  width={2752}
+                  height={1536}
+                  loading="lazy"
+                />
+              </Link>
+            </ScrollScaleFrame>
           </div>
         </section>
 
