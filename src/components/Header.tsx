@@ -26,7 +26,7 @@ export default function Header() {
   const active = NAV.find((n) => n.label === open);
 
   return (
-    <header ref={ref} className="bw-header hm-header" data-home={path === '/' || undefined}>
+    <header ref={ref} className="bw-header hm-header">
       <div className="wrap bw-header__bar">
         <Link href="/" aria-label="Betterway Mortgages home" className="bw-header__logo shrink-0">
           <img src="/brand/bw/betterway-logo-horizontal-light-bg.svg" alt="Betterway Mortgages" width={1514} height={468} fetchPriority="high" />
@@ -56,11 +56,11 @@ export default function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <AlertCenter />
-          <Link href="/ar" className="hidden rounded-full px-2.5 py-2 text-xs font-semibold tracking-wider text-[#070e1a]/75 transition hover:text-[#179373] min-[1200px]:inline" lang="ar">العربية</Link>
+          <Link href="/ar" className="hidden rounded-full px-2.5 py-2 text-xs font-semibold tracking-wider text-navy/75 transition hover:text-teal min-[1200px]:inline" lang="ar">العربية</Link>
           <span className="hidden min-[1200px]:inline-flex"><Link href="/contact" className="hm-btn hm-btn--sm">Contact us<span className="hm-btn__tile"><ArrowRight size={15} /></span></Link></span>
           <button
             type="button"
-            className="grid h-10 w-10 place-items-center rounded-xl border border-[#e7e9ec] bg-white text-[#070e1a] transition hover:border-[#070e1a] min-[1200px]:hidden"
+            className="grid h-10 w-10 place-items-center rounded-xl border border-line bg-white text-navy transition hover:border-[#070e1a] min-[1200px]:hidden"
             aria-label={mobile ? 'Close menu' : 'Open menu'}
             aria-expanded={mobile}
             onClick={() => setMobile((m) => !m)}
@@ -102,8 +102,8 @@ export default function Header() {
               ))}
               {active.cols.length < 3 && <div />}
               <div className="hm-mega__feature">
-                <p className="font-display text-lg font-semibold text-[#070e1a]">{active.feature?.title ?? 'Plan your next move'}</p>
-                <p className="mt-2 text-sm leading-relaxed text-[#59636f]">{active.feature?.body ?? 'Every calculator is free to use, with no sign-up.'}</p>
+                <p className="font-display text-lg font-semibold text-navy">{active.feature?.title ?? 'Plan your next move'}</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate">{active.feature?.body ?? 'Every calculator is free to use, with no sign-up.'}</p>
                 <Link href={active.feature?.href ?? active.href} className="hm-btn hm-btn--sm mt-5">
                   {active.feature?.cta ?? `All ${active.label.toLowerCase()}`}<span className="hm-btn__tile"><ArrowRight size={14} /></span>
                 </Link>
@@ -120,20 +120,20 @@ export default function Header() {
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
             transition={{ duration: reduce ? 0 : 0.25 }}
-            className="overflow-hidden border-t border-[#e7e9ec] bg-white text-[#070e1a] min-[1200px]:hidden"
+            className="overflow-hidden border-t border-line bg-white text-navy min-[1200px]:hidden"
           >
             <nav aria-label="Mobile" className="wrap max-h-[calc(100dvh-72px)] overflow-y-auto pb-8 pt-2">
               <Link
                 href="/"
                 aria-current={isNavActive(path, 'Home') ? 'page' : undefined}
-                className={`flex items-center justify-between border-b border-[#e7e9ec] py-4 text-sm font-semibold uppercase tracking-[0.1em] ${isNavActive(path, 'Home') ? 'text-[#179373]' : 'text-[#070e1a]'}`}
+                className={`flex items-center justify-between border-b border-line py-4 text-sm font-semibold uppercase tracking-[0.1em] ${isNavActive(path, 'Home') ? 'text-teal' : 'text-navy'}`}
               >
                 Home
               </Link>
               {NAV.map((n) => (
-                <details key={n.label} className="group border-b border-[#e7e9ec]">
-                  <summary className={`flex cursor-pointer list-none items-center justify-between py-4 text-sm font-semibold uppercase tracking-[0.1em] ${isNavActive(path, n.label) ? 'text-[#179373]' : 'text-[#070e1a]'}`}>
-                    {n.label}<ChevronDown size={18} className="text-[#179373] transition group-open:rotate-180" />
+                <details key={n.label} className="group border-b border-line">
+                  <summary className={`flex cursor-pointer list-none items-center justify-between py-4 text-sm font-semibold uppercase tracking-[0.1em] ${isNavActive(path, n.label) ? 'text-teal' : 'text-navy'}`}>
+                    {n.label}<ChevronDown size={18} className="text-teal transition group-open:rotate-180" />
                   </summary>
                   <ul className="space-y-3 pb-4">
                     {n.cols?.flatMap((c) => c.links).map((l) => (
@@ -141,7 +141,7 @@ export default function Header() {
                         <Link
                           href={l.href}
                           aria-current={path === l.href ? 'page' : undefined}
-                          className="block text-[15px] text-[#59636f] transition hover:text-[#179373]"
+                          className="block text-[15px] text-slate transition hover:text-teal"
                         >
                           {l.label}
                         </Link>
@@ -152,7 +152,7 @@ export default function Header() {
               ))}
               <div className="mt-6 grid gap-3">
                 <Link href="/contact" className="hm-btn w-full justify-between">Contact us<span className="hm-btn__tile"><ArrowRight size={15} /></span></Link>
-                <Link href="/ar" className="btn w-full border border-[#e7e9ec] bg-white text-[#070e1a] hover:border-[#070e1a]" lang="ar">العربية</Link>
+                <Link href="/ar" className="btn w-full border border-line bg-white text-navy hover:border-[#070e1a]" lang="ar">العربية</Link>
               </div>
             </nav>
           </motion.div>

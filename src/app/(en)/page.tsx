@@ -116,7 +116,7 @@ export default function Home() {
 
       <section className="hm-lenders" aria-label="UAE lenders in the directory">
         <div className="hm-wrap">
-          <p>Comparing terms across <b className="text-[#070e1a]">{BANKS.length} UAE lenders</b> in one directory. Listing is not a partnership or a live offer.</p>
+          <p>Comparing terms across <b className="text-navy">{BANKS.length} UAE lenders</b> in one directory. Listing is not a partnership or a live offer.</p>
           <LogoMarquee label="UAE banks in the lender directory" items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))} />
         </div>
       </section>
@@ -225,7 +225,7 @@ export default function Home() {
             <span className="hm-label">FAQ</span>
             <h2 className="hm-h2" data-reveal="rise">Things You Should Know</h2>
             <p className="hm-sub mt-5">We’ve answered the most common questions to help you start with clarity.</p>
-            <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#179373]">Ask an advisor <ArrowRight size={15} /></Link>
+            <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-teal">Ask an advisor <ArrowRight size={15} /></Link>
           </div>
           <div className="hm-faq__list">
             {FAQS.map((f, i) => (

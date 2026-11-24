@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { ArrowRight, ArrowUpRight, Info, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Info, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { SITE, BENCH, DISCLOSURE_SHORT, DISCLOSURE_FULL, fullAddress, waLink } from '@/data/site';
 import MotionReveal from '@/components/MotionReveal';
 import type { Faq as FaqT } from '@/data/products';
@@ -21,13 +21,9 @@ export const plain = (text: string) => text.replace(/\*/g, '');
 
 /** Pill button with a rolling label and an accent disc (8B glamping button-primary). */
 export function Cta({ href, children, tone = 'dark', size, external, className = '' }: { href: string; children: string; tone?: 'dark' | 'light' | 'emerald' | 'gold' | 'brass' | 'ghost'; size?: 'sm'; external?: boolean; className?: string }) {
-  const cls = `bw-btn ${tone !== 'dark' ? `bw-btn--${tone}` : ''} ${size === 'sm' ? 'bw-btn--sm' : ''} ${className}`;
-  const inner = (
-    <>
-      <span className="bw-btn__label"><span>{children}</span><span aria-hidden="true">{children}</span></span>
-      <span className="bw-btn__disc" aria-hidden="true"><ArrowUpRight size={18} strokeWidth={1.8} /></span>
-    </>
-  );
+  const t = tone === 'dark' ? '' : tone === 'light' || tone === 'ghost' ? tone : 'emerald';
+  const cls = `hm-btn ${t ? `hm-btn--${t}` : ''} ${size === 'sm' ? 'hm-btn--sm' : ''} ${className}`;
+  const inner = <>{children}{tone !== 'ghost' && <span className="hm-btn__tile" aria-hidden="true"><ArrowRight size={16} /></span>}</>;
   return external || /^(https?:|mailto:|tel:)/.test(href)
     ? <a href={href} className={cls} rel="noopener">{inner}</a>
     : <Link href={href} className={cls}>{inner}</Link>;
@@ -93,7 +89,7 @@ export function MiniPhone() {
             <div key={a} className="flex justify-between rounded-lg bg-mist px-3 py-2"><span className="text-slate">{a}</span><span className="num font-semibold text-navy">{b}</span></div>
           ))}
         </div>
-        <div className="mt-3 rounded-btn bg-brass py-2.5 text-center text-[12px] font-semibold text-navy">Plan your mortgage</div>
+        <div className="mt-3 rounded-btn bg-navy py-2.5 text-center text-[12px] font-semibold text-white">Plan your mortgage</div>
       </div>
     </div>
   );
@@ -108,18 +104,19 @@ export function PageHero({ crumbs, eyebrow, title, capsule, children, aside, upd
   const side = aside === undefined ? <MiniPhone /> : aside;
   const sideCols = aside === undefined ? 'lg:grid-cols-[minmax(0,1fr)_250px]' : side ? 'lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,0.85fr)]' : '';
   return (
-    <section className="bw-pagehero">
-      <div className="wrap relative py-10 lg:py-16">
+    <section className="bw-pagehero hm-pagehero">
+      <div className="hm-hero__clouds" aria-hidden="true" />
+      <div className="wrap relative pb-14 pt-6 lg:pb-20 lg:pt-10">
         <Crumbs items={crumbs} />
         <div className={`mt-8 grid gap-10 ${sideCols ? `${sideCols} lg:items-center` : ''}`}>
           <div>
-            {eyebrow && <p className="bw-label mb-5"><i />{eyebrow}</p>}
+            {eyebrow && <p className="hm-label mb-5">{eyebrow}</p>}
             <h1 className="max-w-4xl">
               {head}
               {sub && <span className="mt-4 block font-sans text-lg font-normal leading-snug tracking-normal text-slate sm:text-xl">{sub}</span>}
             </h1>
             {capsule && (
-              <div className="bw-capsule mt-7 max-w-2xl" data-capsule>
+              <div className="hm-capsule mt-7 max-w-2xl" data-capsule>
                 <p className="text-[15.5px] leading-relaxed text-ink">{capsule}</p>
                 {updated && <p className="mt-2 text-xs text-slate">{SITE.asOf}</p>}
               </div>
@@ -134,19 +131,19 @@ export function PageHero({ crumbs, eyebrow, title, capsule, children, aside, upd
 }
 
 export function Section({ id, title, eyebrow, intro, children, tone = 'white', action }: { id?: string; title: string; eyebrow?: string; intro?: string; children: ReactNode; tone?: 'white' | 'mist' | 'navy'; action?: { label: string; href: string } }) {
-  const bg = tone === 'mist' ? 'bg-mist' : tone === 'navy' ? 'bg-navy text-white' : 'bg-white';
+  const bg = tone === 'mist' ? 'bg-white hm-sec--mist' : tone === 'navy' ? 'bg-navy text-white' : 'bg-white';
   const dark = tone === 'navy';
   return (
     <section id={id} className={`${bg} py-16 lg:py-24`}>
       <MotionReveal className="wrap">
         <div className="mb-10 grid gap-6 lg:mb-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
           <div>
-            {eyebrow && <p className={`bw-label mb-5 ${dark ? 'bw-label--light' : ''}`}><i />{eyebrow}</p>}
-            <h2 className={`h2 ${dark ? '!text-white' : ''} [&_em]:font-serif [&_em]:font-normal [&_em]:italic`}><Rich text={title} /></h2>
+            {eyebrow && <p className={`hm-label mb-1 ${dark ? 'hm-label--light' : ''}`}>{eyebrow}</p>}
+            <h2 className={`hm-h2 !max-w-[22ch] ${dark ? '!text-white' : ''} [&_em]:not-italic`}><Rich text={title} /></h2>
           </div>
           {(intro || action) && (
             <div className="grid justify-items-start gap-6 lg:justify-self-end lg:max-w-[460px]">
-              {intro && <p className={`text-lg leading-relaxed ${dark ? 'text-white/70' : 'text-slate'}`}>{intro}</p>}
+              {intro && <p className={`text-[15px] leading-relaxed ${dark ? 'text-white/70' : 'text-slate'}`}>{intro}</p>}
               {action && <Cta href={action.href} tone={dark ? 'light' : 'ghost'} size="sm">{action.label}</Cta>}
             </div>
           )}
@@ -159,9 +156,9 @@ export function Section({ id, title, eyebrow, intro, children, tone = 'white', a
 
 export function Facts({ facts }: { facts: [string, string][] }) {
   return (
-    <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-3">
+    <dl className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
       {facts.map(([k, v]) => (
-        <div key={k} className="bg-white p-5 max-sm:odd:last:col-span-2 sm:[&:nth-child(3n+1):last-child]:col-span-3">
+        <div key={k} className="rounded-[14px] bg-mist p-5 max-sm:odd:last:col-span-2 sm:[&:nth-child(3n+1):last-child]:col-span-3">
           <dt className="text-xs font-medium uppercase tracking-wide text-slate">{k}</dt>
           <dd className={`mt-1.5 text-lg font-semibold text-navy ${/^[\d+−-]|^AED|^3M/.test(v) ? 'num' : 'font-display'}`}>{v}</dd>
         </div>
@@ -174,13 +171,13 @@ export function FaqList({ faqs }: { faqs: FaqT[] }) {
   if (!faqs.length) return null;
   return (
     <>
-      <div className="divide-y divide-line rounded-card border border-line bg-white">
+      <div className="hm-faq__list">
         {faqs.map((f) => (
-          <details key={f.q} className="group p-5">
-            <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-semibold text-navy">
-              {f.q}<span className="mt-0.5 text-teal transition group-open:rotate-45" aria-hidden="true">+</span>
+          <details key={f.q}>
+            <summary>
+              {f.q}<i aria-hidden="true">+</i>
             </summary>
-            <p className="mt-3 leading-relaxed text-slate">{f.a}</p>
+            <p>{f.a}</p>
           </details>
         ))}
       </div>
@@ -212,17 +209,17 @@ export function LinkGrid({ links, cols = 3 }: { links: { title: string; body?: s
 
 export function CtaBand({ title = 'Your next move starts *here.*', body = 'Understand your mortgage options, prepare your documents and plan your budget.' }: { title?: string; body?: string }) {
   return (
-    <section className="bw-invite py-16 lg:py-24">
+    <section className="bg-white py-14 lg:py-20">
       <div className="wrap">
-        <div className="grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
+        <div className="hm-band">
           <div>
-            <p className="bw-label mb-5"><i />Talk to an advisor</p>
-            <h2 className="bw-h2"><Rich text={title.includes('*') ? title : title.replace(/(\S+)\s*$/, '*$1*')} /></h2>
-            <p className="bw-lead mt-5 max-w-2xl">{body}</p>
+            <p className="hm-label">Talk to an advisor</p>
+            <h2 className="hm-h2 !max-w-[20ch] [&_em]:not-italic"><Rich text={title} /></h2>
+            <p className="hm-sub mt-4 !max-w-[52ch]">{body}</p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+          <div className="flex flex-wrap gap-2.5 lg:justify-end">
             <Cta href="/contact">Discuss my mortgage</Cta>
-            <Cta href={waLink()} tone="light">Ask a question</Cta>
+            <Cta href={waLink()} tone="ghost">Ask a question</Cta>
           </div>
         </div>
       </div>

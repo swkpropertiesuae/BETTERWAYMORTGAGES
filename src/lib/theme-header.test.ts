@@ -21,15 +21,13 @@ function contrastRatio(hexA: string, hexB: string): number {
   return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
 }
 
-test('global theme defines Midnight Banking Navy (#021125) and Sovereign Gold (#d7b04e / #8a6518) tokens', () => {
+test('global theme defines brand-pack Midnight Navy (#070e1a), Gold (#d7b158) and AA-safe emerald text tokens', () => {
   const css = read('src/app/globals.css');
-  assert.match(css, /--color-navy:\s*#021125/i);
-  assert.match(css, /--color-obsidian:\s*#010915/i);
-  assert.match(css, /--color-brass:\s*#d7b04e/i);
-  assert.match(css, /--color-teal:\s*#8a6518/i);
-  assert.match(css, /--color-teal-700:\s*#735312/i);
-  assert.match(css, /--color-teal-50:\s*#faf3e0/i);
-  assert.match(css, /--color-mint:\s*#d7b04e/i);
+  assert.match(css, /--color-navy:\s*#070e1a/i);
+  assert.match(css, /--color-brass:\s*#d7b158/i);
+  assert.match(css, /--color-teal:\s*#0f7a5f/i);
+  assert.match(css, /--color-teal-50:\s*#e6f6f0/i);
+  assert.match(css, /--color-mist:\s*#f4f5f6/i);
   assert.match(css, /\.btn-gold\b/);
 });
 
@@ -64,10 +62,9 @@ test('isNavActive highlights Home only on / and maps nested routes to their mega
   assert.equal(isNavActive('/about-us', 'Resources'), true);
 });
 
-test('English header renders the brand-pack light logo on a light bar; Arabic header keeps logo-white.svg on Midnight Navy', () => {
+test('English and Arabic headers render the brand-pack light logo on the light Homy bar', () => {
   const header = read('src/components/Header.tsx');
   const arLayout = read('src/app/(ar)/layout.tsx');
-  const brand = read('src/app/brand.css');
 
   assert.match(header, /\/brand\/bw\/betterway-logo-horizontal-light-bg\.svg/);
   assert.match(header, /hm-header/);
@@ -77,8 +74,8 @@ test('English header renders the brand-pack light logo on a light bar; Arabic he
   assert.match(header, /min-\[1200px\]/);
   assert.doesNotMatch(header, /min-\[1100px\]/);
 
-  assert.match(arLayout, /<header[\s\S]*\/brand\/logo-white\.svg[\s\S]*<\/header>/);
-  assert.match(brand, /\.bw-header\s*\{[^}]*background:\s*rgb\(2\s+17\s+37|background:\s*var\(--color-navy\)/i);
+  assert.match(arLayout, /<header[\s\S]*\/brand\/bw\/betterway-logo-horizontal-light-bg\.svg[\s\S]*<\/header>/);
+  assert.match(arLayout, /hm-header/);
 });
 
 test('desktop header container and fluid nav sizing prevent horizontal overflow at 1200px+', () => {
@@ -104,7 +101,7 @@ test('light-surface --color-teal and startup text links meet WCAG 2.1 AA 4.5:1 c
   assert.ok(tealMatch, 'Expected --color-teal hex token');
   const tealHex = tealMatch[1];
 
-  for (const bg of ['#ffffff', '#f8f9fa', '#faf3e0']) {
+  for (const bg of ['#ffffff', '#f4f5f6', '#e6f6f0']) {
     const ratio = contrastRatio(tealHex, bg);
     assert.ok(ratio >= 4.5, `Expected ${tealHex} on ${bg} >= 4.5:1, got ${ratio.toFixed(2)}:1`);
   }

@@ -7,38 +7,38 @@
 @import '@fontsource/ibm-plex-sans-arabic/600.css';
 
 /*
-  Betterway Master Brand Kit tokens.
-  Midnight Banking Navy #021125 · Sovereign Gold #D7B04E · Deep Bullion #A67C21 · Institutional Alabaster #F8F9FA.
+  Betterway brand-pack tokens (brand-tokens.json), Homy-style UI.
+  Midnight Navy #070E1A · Emerald #179373 · Gold #D7B158 · card grey #F4F5F6.
   Token names from v1 are kept (teal, navy, mist) so every page inherits the new palette; new names are aliases.
 */
 @theme {
-  --color-teal: #8a6518;
-  --color-teal-700: #735312;
-  --color-teal-50: #faf3e0;
-  --color-emerald: #8a6518;
-  --color-emerald-300: #dfc06d;
-  --color-navy: #021125;
-  --color-navy-800: #072244;
-  --color-obsidian: #010915;
-  --color-mist: #f8f9fa;
-  --color-alabaster: #f8f9fa;
+  --color-teal: #0f7a5f;
+  --color-teal-700: #0a5e4a;
+  --color-teal-50: #e6f6f0;
+  --color-emerald: #179373;
+  --color-emerald-300: #34dfac;
+  --color-navy: #070e1a;
+  --color-navy-800: #0c1524;
+  --color-obsidian: #05090f;
+  --color-mist: #f4f5f6;
+  --color-alabaster: #f4f5f6;
   --color-sand: #f3efe7;
-  --color-gold: #d7b04e;
-  --color-brass: #d7b04e;
-  --color-brass-200: #f2dcb3;
-  --color-brass-700: #a67c21;
-  --color-slate: #4a5868;
-  --color-ink: #0a1628;
-  --color-line: #e2e6ea;
-  --color-mint: #d7b04e;
+  --color-gold: #d7b158;
+  --color-brass: #d7b158;
+  --color-brass-200: #fcf1b7;
+  --color-brass-700: #ba8d36;
+  --color-slate: #59636f;
+  --color-ink: #070e1a;
+  --color-line: #e7e9ec;
+  --color-mint: #34dfac;
   --color-warn: #b45309;
   --font-sans: 'Inter Variable', Arial, sans-serif;
   --font-display: 'Inter Variable', Arial, sans-serif;
   --font-serif: 'Instrument Serif', 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
   --font-arabic: 'IBM Plex Sans Arabic', 'Inter Variable', sans-serif;
-  --radius-btn: 999px;
-  --radius-card: 24px;
+  --radius-btn: 12px;
+  --radius-card: 18px;
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -70,14 +70,14 @@
   .btn { @apply inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-btn px-5 py-3 text-sm font-medium transition duration-200 select-none; }
   .btn:hover { transform: translateY(-1px); }
   .btn:active { transform: translateY(0) scale(0.98); }
-  .btn-primary { @apply bg-navy text-white hover:bg-navy-800; box-shadow: 0 14px 30px -18px rgb(2 17 37 / 0.65), inset 0 0 0 1px rgb(215 176 78 / 0.28); }
-  .btn-gold { @apply bg-brass font-semibold text-navy hover:bg-brass-200; box-shadow: 0 12px 28px -14px rgb(215 176 78 / 0.55); }
+  .btn-primary { @apply bg-navy text-white hover:bg-navy-800; box-shadow: 0 14px 30px -18px rgb(7 14 26 / 0.65), inset 0 0 0 1px rgb(215 177 88 / 0.28); }
+  .btn-gold { @apply bg-brass font-semibold text-navy hover:bg-brass-200; box-shadow: 0 12px 28px -14px rgb(215 177 88 / 0.55); }
   .btn-dark { @apply bg-navy text-white hover:bg-navy-800; }
   .btn-ghost { @apply border border-line bg-white text-navy hover:border-navy; }
   .btn-light { @apply bg-white text-navy hover:bg-mist; }
 
   .card { @apply rounded-card border border-line bg-white p-6 transition duration-300; }
-  a.card:hover, .card-link:hover { @apply border-teal/40; transform: translateY(-3px); box-shadow: 0 26px 60px -30px rgb(2 17 37 / 0.35); }
+  a.card:hover, .card-link:hover { @apply border-teal/40; transform: translateY(-3px); box-shadow: 0 26px 60px -30px rgb(7 14 26 / 0.35); }
   .chip { @apply rounded-full border border-line bg-white px-3.5 py-1.5 text-sm font-medium text-navy transition hover:border-teal; }
   .chip-on { @apply border-navy bg-navy text-white hover:border-navy; }
   .tag { @apply inline-flex items-center rounded-full bg-teal-50 px-2.5 py-1 text-xs font-semibold text-teal-700; }
