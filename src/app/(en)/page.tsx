@@ -22,22 +22,22 @@ export const metadata: Metadata = {
 const ltv = (match: string) => LTV_RULES.find((r) => r.profile.startsWith(match))?.ltv ?? '—';
 
 const PATHS = [
-  { chip: `Up to ${ltv('Expat resident — first home up to')} LTV`, name: 'Your First Dubai Home', where: 'Expat residents · salaried & self-employed', href: '/mortgages/uae-residents', img: '/images/dubai-interior-2560.webp', alt: 'Concept image: a bright Dubai apartment interior with a waterfront view' },
-  { chip: 'Non-resident finance', name: 'Buying From Overseas', where: `Non-resident guidance for ${COUNTRIES.length} countries`, href: '/mortgages/non-resident-dubai', img: '/images/marina-evening-2752.webp', alt: 'Concept image: Dubai Marina at dusk seen from a terrace' },
-  { chip: 'Handover finance', name: 'Off-Plan Handover', where: 'Final developer payment, planned early', href: '/handover/dubai-off-plan-handover-mortgage-guide', img: '/images/offplan-dusk-2752.webp', alt: 'Concept image: a residential tower nearing completion at blue hour' },
+  { chip: `Up to ${ltv('Expat resident — first home up to')} LTV`, name: 'Your First Dubai Home', where: 'Expat residents · salaried & self-employed', href: '/mortgages/uae-residents', img: '/images/dubai-interior-3072.webp', alt: 'Concept image: a bright Dubai apartment interior with a waterfront view' },
+  { chip: 'Non-resident finance', name: 'Buying From Overseas', where: `Non-resident guidance for ${COUNTRIES.length} countries`, href: '/mortgages/non-resident-dubai', img: '/images/marina-evening-3072.webp', alt: 'Concept image: Dubai Marina at dusk seen from a terrace' },
+  { chip: 'Handover finance', name: 'Off-Plan Handover', where: 'Final developer payment, planned early', href: '/handover/dubai-off-plan-handover-mortgage-guide', img: '/images/offplan-dusk-3072.webp', alt: 'Concept image: a residential tower nearing completion at blue hour' },
 ];
 
 const SERVICES = [
-  { tag: 'Buy a Home', title: 'Finance Your Dubai Home', body: 'Budget, deposit and purchase fees mapped against the 50% debt cap, then the lenders that fit your profile.', href: '/mortgages', img: '/images/villa-courtyard-1792.webp' },
-  { tag: 'Switch & Save', title: 'Refinance With Confidence', body: 'Compare buyout savings after exit fees, valuation and switching costs, before your fixed period ends.', href: '/mortgages/mortgage-buyout-refinance', img: '/images/keys-handover-2752.webp' },
-  { tag: 'Compare Rates', title: 'See Every Bank Side by Side', body: `Fixed periods, revert margins and fees from ${BANKS.length} UAE lenders, compared on the same terms.`, href: '/rates/uae-mortgage-rates-eibor-revert-bible', img: '/images/guide-dbr-planning-2752.webp' },
+  { tag: 'Buy a Home', title: 'Finance Your Dubai Home', body: 'Budget, deposit and purchase fees mapped against the 50% debt cap, then the lenders that fit your profile.', href: '/mortgages', img: '/images/villa-courtyard-960.webp' },
+  { tag: 'Switch & Save', title: 'Refinance With Confidence', body: 'Compare buyout savings after exit fees, valuation and switching costs, before your fixed period ends.', href: '/mortgages/mortgage-buyout-refinance', img: '/images/keys-handover-3072.webp' },
+  { tag: 'Compare Rates', title: 'See Every Bank Side by Side', body: `Fixed periods, revert margins and fees from ${BANKS.length} UAE lenders, compared on the same terms.`, href: '/rates/uae-mortgage-rates-eibor-revert-bible', img: '/images/guide-dbr-planning-3072.webp' },
 ];
 
 const AREA_IMG: Record<string, [string, string]> = {
-  'dubai-marina': ['/images/marina-evening.webp', 'Concept image: Dubai Marina towers and waterway at night'],
-  'downtown-dubai': ['/images/guide-dbr-planning.webp', 'Concept image: the Downtown Dubai skyline seen from a desk'],
-  'palm-jumeirah': ['/images/dubai-waterfront-1672.webp', 'Concept image: a waterfront villa with the Dubai skyline behind'],
-  'dubai-hills-estate': ['/images/villa-courtyard.webp', 'Concept image: a villa courtyard with palms and a reflecting pool'],
+  'dubai-marina': ['/images/marina-evening-1536.webp', 'Concept image: Dubai Marina towers and waterway at night'],
+  'downtown-dubai': ['/images/guide-dbr-planning-1536.webp', 'Concept image: the Downtown Dubai skyline seen from a desk'],
+  'palm-jumeirah': ['/images/dubai-waterfront-1536.webp', 'Concept image: a waterfront villa with the Dubai skyline behind'],
+  'dubai-hills-estate': ['/images/villa-courtyard-960.webp', 'Concept image: a villa courtyard with palms and a reflecting pool'],
 };
 const AREAS = COMMUNITIES.filter((c) => c.slug in AREA_IMG);
 
@@ -88,7 +88,7 @@ export default function Home() {
           </div>
         </div>
         <div className="hm-hero__stage">
-          <img src="/images/dubai-waterfront-1672.webp" srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w" sizes="100vw" alt="Concept image: a contemporary Dubai villa by the water with the city skyline behind" width={1672} height={941} fetchPriority="high" />
+          <img src="/images/dubai-waterfront-1536.webp" srcSet="/images/dubai-waterfront-768.webp 768w, /images/dubai-waterfront-1536.webp 1536w, /images/dubai-waterfront-3072.webp 3072w" sizes="100vw" alt="Concept image: a contemporary Dubai villa by the water with the city skyline behind" width={1536} height={864} fetchPriority="high" />
           <div className="hm-hero__chips" aria-label="CBUAE mortgage rules">
             <span className="hm-chip"><i />Expat first home <b>{ltv('Expat resident — first home up to')}</b> LTV</span>
             <span className="hm-chip"><i />Debt burden cap <b>50%</b></span>
@@ -103,13 +103,13 @@ export default function Home() {
         <div className="hm-wrap">
           <Head label="Our impact" title="Real clarity behind every mortgage decision" sub="Built to make Dubai home finance simple, transparent and more confident for every buyer." />
           <div className="hm-impact">
-            <div className="hm-impact__img" data-reveal="rise"><img src="/images/abudhabi-corniche.webp" alt="Concept image: beachfront villas along the UAE coast" width={896} height={1200} loading="lazy" /></div>
+            <div className="hm-impact__img" data-reveal="rise"><img src="/images/abudhabi-corniche-960.webp" alt="Concept image: beachfront villas along the UAE coast" width={960} height={1280} loading="lazy" /></div>
             <div className="hm-impact__stats">
               {[[`${BANKS.length}`, 'UAE lenders compared'], [`${COMMUNITIES.length}`, 'Freehold communities'], [`${COUNTRIES.length}`, 'Countries we guide']].map(([v, l], i) => (
                 <div key={l} className="hm-stat" data-reveal="rise" style={{ ['--i' as string]: i }}><strong>{v}+</strong><span>{l}</span></div>
               ))}
             </div>
-            <div className="hm-impact__img" data-reveal="rise"><img src="/images/villa-courtyard.webp" alt="Concept image: a calm villa courtyard with a reflecting pool" width={896} height={1200} loading="lazy" /></div>
+            <div className="hm-impact__img" data-reveal="rise"><img src="/images/villa-courtyard-960.webp" alt="Concept image: a calm villa courtyard with a reflecting pool" width={960} height={1280} loading="lazy" /></div>
           </div>
         </div>
       </section>
@@ -128,7 +128,7 @@ export default function Home() {
       <div className="hm-stack">
         {PATHS.map((p) => (
           <article key={p.name} className="hm-panel">
-            <img src={p.img} alt={p.alt} width={2752} height={1536} loading="lazy" />
+            <img src={p.img} alt={p.alt} width={3072} height={1728} loading="lazy" />
             <div className="hm-panel__glass">
               <span className="hm-panel__price">{p.chip}</span>
               <h3>{p.name}</h3>
@@ -186,7 +186,7 @@ export default function Home() {
         <div className="hm-wrap"><Head label="Mortgage calculator" title="Run the numbers before the bank does" sub="Monthly payment, deposit and purchase fees in one view. No sign-up, nothing submitted." /></div>
         <div className="hm-marquee" aria-hidden="true">
           <div className="hm-marquee__track">{Array.from({ length: 4 }).flatMap((_, k) => ['Compare Banks', 'Know Your Budget', 'Get Pre-Approved'].map((t) => <span key={`${k}${t}`}>{t}</span>))}</div>
-          <div className="hm-marquee__pic"><img src="/images/keys-handover.webp" alt="" loading="lazy" /></div>
+          <div className="hm-marquee__pic"><img src="/images/keys-handover-1536.webp" alt="" loading="lazy" /></div>
         </div>
       </section>
       <section id="calculator" className="hm-section !pt-10">

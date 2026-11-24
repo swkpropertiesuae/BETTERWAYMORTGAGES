@@ -10,7 +10,7 @@ export default function Page() {
     <section className="bg-mist py-20">
       <div className="wrap max-w-md">
         <div className="card !p-8 text-center">
-          <img src="/brand/icon-gold.svg" alt="" width={56} height={56} className="mx-auto h-14 w-14" />
+          <img src="/brand/bw/betterway-icon-fullcolor-tight.svg" alt="" width={56} height={56} className="mx-auto h-14 w-14" />
           <h1 className="mt-5 text-2xl font-semibold">Betterway OS &amp; Client Portal</h1>
           <p className="mt-3 text-sm leading-relaxed text-slate">
             Access your encrypted document vault, CBUAE Key Facts Statement (KFS) sign-off, 5-stage mortgage progression tracker, or internal staff workspace on Betterway OS.

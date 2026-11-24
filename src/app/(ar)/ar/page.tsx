@@ -20,22 +20,22 @@ export const metadata: Metadata = {
 const WA = waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.');
 
 const PATHS = [
-  { chip: 'حتى 80% من قيمة العقار', name: 'منزلك الأول في دبي', where: 'للمقيمين الوافدين · موظفون وأصحاب أعمال', href: '/ar/mortgages/uae-residents', img: '/images/dubai-interior-2560.webp' },
-  { chip: 'تمويل لغير المقيمين', name: 'الشراء من خارج الدولة', where: `إرشادات لغير المقيمين من ${COUNTRIES.length} دولة`, href: '/ar/mortgages/non-resident-dubai', img: '/images/marina-evening-2752.webp' },
-  { chip: 'تمويل التسليم', name: 'عقارات على الخارطة', where: 'خطط للدفعة النهائية للمطور مبكراً', href: '/ar/mortgages/under-construction-off-plan', img: '/images/offplan-dusk-2752.webp' },
+  { chip: 'حتى 80% من قيمة العقار', name: 'منزلك الأول في دبي', where: 'للمقيمين الوافدين · موظفون وأصحاب أعمال', href: '/ar/mortgages/uae-residents', img: '/images/dubai-interior-3072.webp' },
+  { chip: 'تمويل لغير المقيمين', name: 'الشراء من خارج الدولة', where: `إرشادات لغير المقيمين من ${COUNTRIES.length} دولة`, href: '/ar/mortgages/non-resident-dubai', img: '/images/marina-evening-3072.webp' },
+  { chip: 'تمويل التسليم', name: 'عقارات على الخارطة', where: 'خطط للدفعة النهائية للمطور مبكراً', href: '/ar/mortgages/under-construction-off-plan', img: '/images/offplan-dusk-3072.webp' },
 ].filter((p) => p.href.split('/').pop()! in AR_PRODUCTS);
 
 const SERVICES = [
-  { tag: 'شراء منزل', title: 'موّل منزلك في دبي', body: 'الميزانية والدفعة الأولى ورسوم الشراء مقارنة بسقف عبء الدين 50%، ثم البنوك التي تناسب ملفك.', href: '/ar#mortgages', img: '/images/villa-courtyard-1792.webp' },
-  { tag: 'انتقل ووفّر', title: 'إعادة التمويل بثقة', body: 'قارن وفورات نقل القرض بعد رسوم السداد المبكر والتقييم وتكاليف النقل قبل انتهاء الفترة الثابتة.', href: '/ar/calculators/buyout-refinance-savings', img: '/images/keys-handover-2752.webp' },
-  { tag: 'قارن الأسعار', title: 'كل البنوك جنباً إلى جنب', body: `الفترات الثابتة وهوامش الفائدة المتغيرة والرسوم من ${BANKS.length} بنكاً في الإمارات.`, href: '/ar#rates', img: '/images/guide-dbr-planning-2752.webp' },
+  { tag: 'شراء منزل', title: 'موّل منزلك في دبي', body: 'الميزانية والدفعة الأولى ورسوم الشراء مقارنة بسقف عبء الدين 50%، ثم البنوك التي تناسب ملفك.', href: '/ar#mortgages', img: '/images/villa-courtyard-960.webp' },
+  { tag: 'انتقل ووفّر', title: 'إعادة التمويل بثقة', body: 'قارن وفورات نقل القرض بعد رسوم السداد المبكر والتقييم وتكاليف النقل قبل انتهاء الفترة الثابتة.', href: '/ar/calculators/buyout-refinance-savings', img: '/images/keys-handover-3072.webp' },
+  { tag: 'قارن الأسعار', title: 'كل البنوك جنباً إلى جنب', body: `الفترات الثابتة وهوامش الفائدة المتغيرة والرسوم من ${BANKS.length} بنكاً في الإمارات.`, href: '/ar#rates', img: '/images/guide-dbr-planning-3072.webp' },
 ];
 
 const AREA_IMG: Record<string, string> = {
-  'dubai-marina': '/images/marina-evening.webp',
-  'downtown-dubai': '/images/guide-dbr-planning.webp',
-  'palm-jumeirah': '/images/dubai-waterfront-1672.webp',
-  'dubai-hills-estate': '/images/villa-courtyard.webp',
+  'dubai-marina': '/images/marina-evening-1536.webp',
+  'downtown-dubai': '/images/guide-dbr-planning-1536.webp',
+  'palm-jumeirah': '/images/dubai-waterfront-1536.webp',
+  'dubai-hills-estate': '/images/villa-courtyard-960.webp',
 };
 const AREAS = COMMUNITIES.filter((c) => c.slug in AREA_IMG && AR_COMMUNITIES.includes(c.slug));
 
@@ -60,7 +60,7 @@ export default function Page() {
           </div>
         </div>
         <div className="hm-hero__stage">
-          <img src="/images/dubai-waterfront-1672.webp" srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w" sizes="100vw" alt="صورة توضيحية: فيلا عصرية على الماء في دبي مع أفق المدينة" width={1672} height={941} fetchPriority="high" />
+          <img src="/images/dubai-waterfront-1536.webp" srcSet="/images/dubai-waterfront-768.webp 768w, /images/dubai-waterfront-1536.webp 1536w, /images/dubai-waterfront-3072.webp 3072w" sizes="100vw" alt="صورة توضيحية: فيلا عصرية على الماء في دبي مع أفق المدينة" width={1536} height={864} fetchPriority="high" />
           <div className="hm-hero__chips" aria-label="ضوابط مصرف الإمارات المركزي">
             <span className="hm-chip"><i />المسكن الأول للوافدين <b>80%</b></span>
             <span className="hm-chip"><i />سقف عبء الدين <b>50%</b></span>
@@ -76,13 +76,13 @@ export default function Page() {
             <p className="hm-sub">صُممت لتجعل تمويل المنازل في دبي أبسط وأكثر شفافية وثقة لكل مشترٍ.</p>
           </div>
           <div className="hm-impact">
-            <div className="hm-impact__img"><img src="/images/abudhabi-corniche.webp" alt="صورة توضيحية: فلل على شاطئ الإمارات" width={896} height={1200} loading="lazy" /></div>
+            <div className="hm-impact__img"><img src="/images/abudhabi-corniche-960.webp" alt="صورة توضيحية: فلل على شاطئ الإمارات" width={960} height={1280} loading="lazy" /></div>
             <div className="hm-impact__stats">
               {[[BANKS.length, 'بنكاً للمقارنة'], [COMMUNITIES.length, 'مجتمعاً للتملك الحر'], [COUNTRIES.length, 'دولة نرشد منها']].map(([v, l]) => (
                 <div key={l} className="hm-stat"><strong dir="ltr">{v}+</strong><span>{l}</span></div>
               ))}
             </div>
-            <div className="hm-impact__img"><img src="/images/villa-courtyard.webp" alt="صورة توضيحية: فناء فيلا مع بركة عاكسة" width={896} height={1200} loading="lazy" /></div>
+            <div className="hm-impact__img"><img src="/images/villa-courtyard-960.webp" alt="صورة توضيحية: فناء فيلا مع بركة عاكسة" width={960} height={1280} loading="lazy" /></div>
           </div>
         </div>
       </section>
@@ -101,7 +101,7 @@ export default function Page() {
           <div className="hm-stack">
             {PATHS.map((p) => (
               <article key={p.name} className="hm-panel">
-                <img src={p.img} alt="" width={2752} height={1536} loading="lazy" />
+                <img src={p.img} alt="" width={3072} height={1728} loading="lazy" />
                 <div className="hm-panel__glass">
                   <span className="hm-panel__price">{p.chip}</span>
                   <h3>{p.name}</h3>

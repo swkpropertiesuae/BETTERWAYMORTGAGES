@@ -79,7 +79,7 @@ export function ArFooter() {
             <Link href="/ar/calculators/mortgage-calculator" className="hm-btn hm-btn--ghost">احسب الدفعات</Link>
           </div>
           <div className="hm-footer__scene">
-            <img src="/images/dubai-waterfront-1672.webp" srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w" sizes="100vw" alt="" width={1672} height={941} loading="lazy" />
+            <img src="/images/dubai-waterfront-1536.webp" srcSet="/images/dubai-waterfront-768.webp 768w, /images/dubai-waterfront-1536.webp 1536w, /images/dubai-waterfront-3072.webp 3072w" sizes="100vw" alt="" width={1536} height={864} loading="lazy" />
             <span className="hm-footer__word" aria-hidden="true" dir="ltr">betterway</span>
           </div>
         </div>

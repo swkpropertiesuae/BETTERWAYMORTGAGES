@@ -36,7 +36,7 @@ export default function PhoneHero() {
     <div ref={ref} className={`hero-visual ${moving ? 'is-moving' : ''}`} aria-label="Illustrative mortgage planning on mobile">
       <div className="hero-photo">
         {scene === 'skyline' && <video ref={video} className="hero-skyline" muted loop playsInline preload="none" poster="/video/hero-dubai.jpg" aria-hidden="true" tabIndex={-1}><source src="/video/hero-dubai.webm" type="video/webm" /><source src="/video/hero-dubai.mp4" type="video/mp4" /></video>}
-        <img src="/images/dubai-waterfront-3344.webp" srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w" sizes="(min-width: 1024px) 52vw, 100vw" width={3344} height={1882} alt="Conceptual Dubai waterfront home in warm morning light" fetchPriority="high" decoding="async" />
+        <img src="/images/dubai-waterfront-3072.webp" srcSet="/images/dubai-waterfront-768.webp 768w, /images/dubai-waterfront-1536.webp 1536w, /images/dubai-waterfront-3072.webp 3072w" sizes="(min-width: 1024px) 52vw, 100vw" width={3344} height={1882} alt="Conceptual Dubai waterfront home in warm morning light" fetchPriority="high" decoding="async" />
 
       </div>
       <div className="scene-controls" role="group" aria-label="Hero backdrop"><button type="button" aria-pressed={scene === 'home'} onClick={() => setScene('home')}>Residence</button><button type="button" aria-pressed={scene === 'skyline'} onClick={() => setScene('skyline')}>Skyline</button></div>
@@ -45,7 +45,7 @@ export default function PhoneHero() {
       <div className="iphone iphone-back" aria-hidden="true">
         <div className="iphone-screen">
           <div className="island" />
-          <div className="phone-brand"><img src="/brand/icon-gold.svg" alt="" width={22} height={22} /> Betterway</div>
+          <div className="phone-brand"><img src="/brand/bw/betterway-icon-fullcolor-tight.svg" alt="" width={22} height={22} /> Betterway</div>
           <p className="phone-kicker">YOUR NEXT STEPS</p>
           <p className="text-xl font-semibold leading-tight text-navy">From plans<br />to your keys.</p>
           <div className="mt-5 space-y-4">
@@ -60,7 +60,7 @@ export default function PhoneHero() {
         <div className="iphone-screen">
           <div className="phone-status" aria-hidden="true"><span>9:41</span><span className="flex gap-1"><Signal size={10} /><Wifi size={10} /><BatteryFull size={13} /></span></div>
           <div className="island" />
-          <div className="phone-brand"><img src="/brand/icon-gold.svg" alt="" width={22} height={22} /> Betterway <ArrowUpRight size={13} className="ms-auto text-teal" /></div>
+          <div className="phone-brand"><img src="/brand/bw/betterway-icon-fullcolor-tight.svg" alt="" width={22} height={22} /> Betterway <ArrowUpRight size={13} className="ms-auto text-teal" /></div>
           <p className="phone-kicker">YOUR HOME. YOUR NUMBERS.</p>
           <div className="phone-tabs" role="group" aria-label="Mortgage planning view">
             <button type="button" aria-pressed={view === 'payment'} onClick={() => setView('payment')}>Monthly</button>

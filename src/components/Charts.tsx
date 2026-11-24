@@ -58,7 +58,7 @@ export function OfferDashboard() {
   return (
     <div className="flex h-full text-[10px] sm:text-[11px]" aria-hidden="true">
       <aside className="hidden w-[22%] shrink-0 flex-col gap-1.5 bg-navy p-3 text-white/70 sm:flex">
-        <img src="/brand/logo-white.svg" alt="" width={1618} height={276} className="mb-3 h-5 w-auto self-start" />
+        <img src="/brand/bw/betterway-logo-horizontal-dark-bg.svg" alt="" width={1514} height={468} className="mb-3 h-5 w-auto self-start" />
         {['Framework', 'Documents', 'Valuation', 'Transfer'].map((t, i) => (
           <span key={t} className={`rounded px-2 py-1 ${i === 0 ? 'bg-white/15 text-white' : ''}`}>
             {t}
