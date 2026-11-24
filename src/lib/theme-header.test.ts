@@ -64,12 +64,13 @@ test('isNavActive highlights Home only on / and maps nested routes to their mega
   assert.equal(isNavActive('/about-us', 'Resources'), true);
 });
 
-test('English and Arabic headers render logo-white.svg on Midnight Navy with 1200px breakpoint and gold CONTACT US pill', () => {
+test('English header renders the brand-pack light logo on a light bar; Arabic header keeps logo-white.svg on Midnight Navy', () => {
   const header = read('src/components/Header.tsx');
   const arLayout = read('src/app/(ar)/layout.tsx');
   const brand = read('src/app/brand.css');
 
-  assert.match(header, /\/brand\/logo-white\.svg/);
+  assert.match(header, /\/brand\/bw\/betterway-logo-horizontal-light-bg\.svg/);
+  assert.match(header, /hm-header/);
   assert.doesNotMatch(header, /\/brand\/logo-primary\.svg/);
   assert.match(header, />\s*Home\s*</i);
   assert.match(header, /Contact us/i);

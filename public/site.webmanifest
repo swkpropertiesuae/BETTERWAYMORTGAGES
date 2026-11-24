@@ -1,45 +1,26 @@
 {
   "name": "Betterway Mortgages",
   "short_name": "Betterway",
-  "display": "standalone",
-  "theme_color": "#021125",
-  "background_color": "#F8F9FA",
+  "description": "Betterway Mortgage Broker Est. \u2014 Bespoke UAE Mortgage Advisory",
   "icons": [
     {
-      "src": "/favicon-192.png",
+      "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "/favicon-512.png",
+      "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "/favicon-1024.png",
-      "sizes": "1024x1024",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/app-icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/app-icon-512.png",
+      "src": "/maskable-icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/app-icon-1024.png",
-      "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "theme_color": "#070E1A",
+  "background_color": "#070E1A",
+  "display": "standalone"
 }

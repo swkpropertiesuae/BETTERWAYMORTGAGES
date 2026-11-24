@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { ArrowRight, ArrowUpRight, Info, MapPin, ShieldCheck } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Info, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { SITE, BENCH, DISCLOSURE_SHORT, DISCLOSURE_FULL, fullAddress, waLink } from '@/data/site';
 import MotionReveal from '@/components/MotionReveal';
 import type { Faq as FaqT } from '@/data/products';
@@ -237,35 +237,52 @@ const FOOT: { title: string; links: [string, string][] }[] = [
   { title: 'Company', links: [['About us', '/about-us'], ['Why not go direct?', '/why-betterway-vs-direct-bank'], ['Underwriters', '/our-underwriters'], ['Reviews', '/reviews'], ['Careers', '/careers'], ['Contact', '/contact'], ['For agents', '/partners']] },
 ];
 
+export function HmButton({ href, children, tone, size }: { href: string; children: string; tone?: 'ghost' | 'light' | 'emerald'; size?: 'sm' }) {
+  const cls = `hm-btn ${tone ? `hm-btn--${tone}` : ''} ${size === 'sm' ? 'hm-btn--sm' : ''}`;
+  const inner = <>{children}{tone !== 'ghost' && <span className="hm-btn__tile" aria-hidden="true"><ArrowRight size={16} /></span>}</>;
+  return /^(https?:|mailto:|tel:)/.test(href) ? <a href={href} className={cls} rel="noopener">{inner}</a> : <Link href={href} className={cls}>{inner}</Link>;
+}
+
 export function Footer() {
   return (
-    <footer className="bw-footer">
-      <div className="wrap bw-footer__top">
-        <div className="bw-footer__brand">
-          <img src="/brand/logo-white-full.svg" alt="Betterway Mortgages" width={1618} height={276} />
-          <p className="mt-7 max-w-sm text-[15px] leading-relaxed text-white/70">Mortgage advice for residents, overseas buyers and investors across the UAE. Compare the whole offer, not just the rate.</p>
-          <p className="mt-6 flex gap-2 text-sm"><MapPin size={16} className="mt-0.5 shrink-0 text-brass" />{fullAddress}</p>
-          <p className="mt-3 text-sm">{SITE.phone && <><a href={SITE.phoneHref} className="ulink">{SITE.phone}</a> · </>}<a href={`mailto:${SITE.email}`} className="ulink">{SITE.email}</a></p>
-          <p className="mt-1 text-sm">{SITE.hours}</p>
-          {SITE.licence && <p className="mt-4 text-xs text-white/50">{SITE.licence}</p>}
-          <div className="mt-8"><Cta href="/contact" tone="brass" size="sm">Talk to an advisor</Cta></div>
+    <footer className="hm-footer">
+      <div className="hm-footer__card">
+        <div className="hm-footer__cta">
+          <span className="hm-label">Your next home loan</span>
+          <h2>Find the Dubai mortgage that fits your life</h2>
+          <p>Compare UAE lenders, check what you can borrow and plan every dirham before you sign. One advisor, from first question to transfer day.</p>
+          <div className="hm-hero__ctas"><HmButton href="/contact">Get in touch</HmButton><HmButton href="/calculators/mortgage-calculator" tone="ghost">Calculate payments</HmButton></div>
+          <div className="hm-footer__scene">
+            <img src="/images/dubai-waterfront-1672.webp" srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w" sizes="100vw" alt="" width={1672} height={941} loading="lazy" />
+            <span className="hm-footer__word" aria-hidden="true">betterway</span>
+          </div>
         </div>
-        <div className="bw-footer__cols">
-          {FOOT.map((g) => (
-            <div key={g.title}>
-              <h3>{g.title}</h3>
-              <ul>{g.links.map(([l, h]) => <li key={h}><Link href={h} className="ulink">{l}</Link></li>)}</ul>
-            </div>
-          ))}
+        <div className="hm-footer__main">
+          <div className="hm-footer__brand">
+            <img src="/brand/bw/betterway-logo-horizontal-dark-bg.svg" alt="Betterway Mortgages" width={1514} height={468} loading="lazy" />
+            <p>Mortgage advice for residents, overseas buyers and investors across the UAE. Compare the whole offer, not just the rate.</p>
+            <ul className="hm-footer__contact mt-6 grid gap-3">
+              <li><MapPin />{fullAddress}</li>
+              <li><Mail /><a href={`mailto:${SITE.email}`} className="ulink">{SITE.email}</a></li>
+              {SITE.phone && <li><Phone /><a href={SITE.phoneHref} className="ulink">{SITE.phone}</a></li>}
+            </ul>
+            {SITE.licence && <p className="!mt-4 !text-xs !text-white/45">{SITE.licence}</p>}
+          </div>
+          <div className="hm-footer__cols">
+            {FOOT.map((g) => (
+              <div key={g.title}>
+                <h3>{g.title}</h3>
+                <ul>{g.links.map(([l, h]) => <li key={h}><Link href={h}>{l}</Link></li>)}</ul>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="relative z-[1] bg-obsidian">
-        <div className="wrap bw-footer__base">
+        <div className="hm-footer__legal">
           <p>{DISCLOSURE_FULL}</p>
           <p>Betterway Mortgages is a mortgage adviser, not a bank. Lending decisions, rates and final offers are made by the lender. Concept residence and advisor images are AI-generated.</p>
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <p>© 2026 {SITE.legalName}. All rights reserved.</p>
-            <nav aria-label="Legal"><Link href="/privacy-and-cbuae-disclosure" className="ulink">Privacy & CBUAE disclosure</Link><Link href="/sitemap" className="ulink">Sitemap</Link><Link href="/ar" lang="ar" className="ulink">العربية</Link></nav>
+          <div className="hm-footer__base">
+            <p>© 2026 {SITE.legalName}. {SITE.hours}</p>
+            <nav aria-label="Legal"><Link href="/privacy-and-cbuae-disclosure">Privacy Policy</Link><Link href="/sitemap">Sitemap</Link><Link href="/ar" lang="ar">العربية</Link></nav>
           </div>
         </div>
       </div>
