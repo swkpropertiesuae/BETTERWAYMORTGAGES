@@ -2,12 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import Link from 'next/link';
 import '../globals.css';
 import '../brand.css';
-import '../homy.css';
-import { ArrowRight } from 'lucide-react';
-import MotionKit from '@/components/MotionKit';
-import { ArFooter } from '@/components/ar';
-import AnnouncementBar from '@/components/fx/AnnouncementBar';
-import LeadPopup from '@/components/fx/LeadPopup';
 import { JsonLd, orgSchema } from '@/components/ui';
 import { SITE, waLink } from '@/data/site';
 import { AR_UI } from '@/data/ar';
@@ -24,16 +18,17 @@ export const metadata: Metadata = {
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
-      { url: '/favicon-64x64.png', sizes: '64x64', type: 'image/png' },
       { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon-128x128.png', sizes: '128x128', type: 'image/png' },
+      { url: '/favicon-256x256.png', sizes: '256x256', type: 'image/png' },
     ],
-    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#179373' }],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#179373' }],
   },
   manifest: '/site.webmanifest',
   openGraph: { locale: 'ar_AE', images: [{ url: '/og.png', width: 1200, height: 630 }] },
 };
-export const viewport: Viewport = { themeColor: '#ffffff' };
+export const viewport: Viewport = { themeColor: '#070E1A' };
 
 const NAV: [string, string][] = [[AR_UI.mortgages, '/ar#mortgages'], [AR_UI.calculators, '/ar#calculators'], [AR_UI.rates, '/ar#rates'], [AR_UI.areas, '/ar#areas']];
 
@@ -41,33 +36,39 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl">
       <body>
-        <AnnouncementBar closeLabel="إغلاق الإعلان" items={[
-          { text: 'قارن 24 بنكاً في الإمارات وفق الشروط نفسها.', cta: 'دليل البنوك', href: '/ar#rates' },
-          { text: 'يمكن للوافدين تمويل حتى 80% من قيمة المسكن الأول.', cta: 'تحقق من الأهلية', href: '/ar/mortgages/uae-residents' },
-          { text: 'احسب الدفعة الشهرية ورسوم الشراء في دقيقة.', cta: 'حاسبة التمويل', href: '/ar/calculators/mortgage-calculator' },
-        ]} />
-        <header className="bw-header hm-header">
+        <header className="bw-header" data-scrolled="true">
           <div className="wrap bw-header__bar">
-            <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0"><img src="/brand/bw/betterway-logo-horizontal-light-bg.svg" alt="Betterway Mortgages" width={1514} height={468} /></Link>
-            <nav className="hidden gap-1 lg:flex" aria-label="الرئيسية">{NAV.map(([l, h]) => <Link key={h} href={h} className="whitespace-nowrap rounded-full px-3.5 py-2 text-[15px] font-medium text-navy transition hover:bg-navy/5 hover:text-teal">{l}</Link>)}</nav>
+            <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0">
+              <img src="/brand/logo-light.svg" alt="Betterway Mortgages" width={1450} height={468} />
+            </Link>
+            <nav className="hidden gap-4 lg:flex" aria-label="الرئيسية">
+              {NAV.map(([l, h]) => (
+                <Link key={h} href={h} className="whitespace-nowrap px-2 py-2 text-[14px] font-medium text-[#36454e] transition hover:text-[#080b0f]">
+                  {l}
+                </Link>
+              ))}
+            </nav>
             <div className="flex items-center gap-2.5">
-              <Link href="/" lang="en" className="inline-flex h-10 items-center justify-center rounded-xl border border-line bg-white px-4 text-xs font-semibold tracking-wider text-navy transition hover:border-navy">{AR_UI.english}</Link>
-              <span className="max-sm:hidden"><a href={waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.')} rel="noopener" className="hm-btn hm-btn--sm">{AR_UI.cta}<span className="hm-btn__tile" aria-hidden="true"><ArrowRight size={15} /></span></a></span>
+              <Link href="/" lang="en" className="inline-flex h-[42px] items-center justify-center rounded-[12px] border border-[#080b0f]/20 px-4 text-xs font-semibold tracking-wider text-[#080b0f] transition hover:border-[#080b0f]">
+                {AR_UI.english}
+              </Link>
+              <a href={waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.')} rel="noopener" className="homy-btn max-sm:hidden">
+                <span>{AR_UI.cta}</span>
+              </a>
             </div>
           </div>
         </header>
-        <main id="main">{children}</main>
-        <ArFooter />
-        <LeadPopup copy={{
-          label: 'فحص تمويل مجاني',
-          title: 'اعرف ميزانيتك في دبي بمكالمة واحدة',
-          body: 'تحدث مع مستشار حول ما قد تقدمه البنوك في الإمارات قبل الالتزام بأي عقار.',
-          points: ['مقارنة 24 بنكاً في الإمارات', 'التحقق من عبء الدين ونسبة التمويل وفق ضوابط المصرف المركزي', 'دون فحص ائتماني ودون تقديم طلب'],
-          cta: AR_UI.cta, ctaHref: waLink('مرحباً بيترواي، أرغب في فحص تمويل مجاني.'),
-          secondary: 'احسب أولاً', secondaryHref: '/ar/calculators/mortgage-calculator',
-          close: 'إغلاق', note: 'إرشادات تقديرية فقط. القرار النهائي للبنك.',
-        }} />
-        <MotionKit />
+        <main id="main" className="bw-page-spacer">{children}</main>
+        <div className="homy-footer-shell">
+          <footer className="homy-footer-card px-6 py-12 text-sm">
+            <div className="wrap space-y-4">
+              <img src="/brand/logo-white-full.svg" alt="Betterway Mortgages" width={1450} height={468} className="h-auto w-[264px] max-w-full" />
+              <p className="text-white/75">{AR_UI.address}</p>
+              <p className="text-xs text-white/55">{AR_UI.disclosure}</p>
+              <p className="text-xs text-white/55">© 2026 Betterway Mortgages LLC · <Link href="/privacy-and-cbuae-disclosure" className="ulink text-white/80">الإفصاح والخصوصية</Link></p>
+            </div>
+          </footer>
+        </div>
         <JsonLd data={orgSchema()} />
       </body>
     </html>

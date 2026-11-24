@@ -1,30 +1,27 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { ArrowLeft, ArrowRight, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { JsonLd } from './ui';
-import TextReveal from './fx/TextReveal';
 import { SITE, waLink } from '@/data/site';
 import { AR_UI } from '@/data/ar';
 
 export function ArHero({ crumbs, eyebrow, title, capsule, en, children }: { crumbs: [string, string][]; eyebrow?: string; title: string; capsule: string; en?: string; children?: ReactNode }) {
   const all: [string, string][] = [[AR_UI.home, '/ar'], ...crumbs];
   return (
-    <section className="bw-pagehero hm-pagehero">
-      <div className="hm-hero__clouds" aria-hidden="true" />
-      <div className="wrap relative pb-14 pt-6 lg:pb-20 lg:pt-10">
+    <section className="border-b border-line bg-mist">
+      <div className="wrap py-10 lg:py-14">
         <nav aria-label="مسار التنقل" className="text-sm text-slate">
           <ol className="flex flex-wrap gap-1.5">{all.map(([n, h], i) => <li key={h} className="flex gap-1.5">{i > 0 && <span className="text-line">/</span>}{i < all.length - 1 ? <Link href={h} className="hover:text-teal">{n}</Link> : <span aria-current="page" className="text-navy">{n}</span>}</li>)}</ol>
         </nav>
         <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: all.map(([n, h], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE.url + h })) }} />
-        {eyebrow && <p className="hm-label mt-8">{eyebrow}</p>}
-        <h1 className="mt-5 max-w-4xl">{title}</h1>
-        <div className="hm-capsule mt-7 max-w-3xl" data-capsule>
+        <h1 className="mt-6 max-w-4xl text-[2rem] font-bold leading-snug sm:text-[2.6rem]">{title}</h1>
+        <div className="mt-6 max-w-3xl border-s-4 border-teal bg-white p-5 shadow-sm" data-capsule>
           <p className="text-[16px] leading-loose text-ink">{capsule}</p>
           <p className="mt-3 text-xs text-slate">{AR_UI.updated}</p>
         </div>
-        <div className="mt-8 flex flex-wrap gap-2.5">
-          <a href={waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.')} rel="noopener" className="hm-btn"><MessageCircle size={16} />{AR_UI.cta}<span className="hm-btn__tile" aria-hidden="true"><ArrowRight size={16} /></span></a>
-          {en && <Link href={en} lang="en" className="hm-btn hm-btn--ghost">English version</Link>}
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a href={waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.')} rel="noopener" className="btn btn-primary"><MessageCircle size={16} /> {AR_UI.cta}</a>
+          {en && <Link href={en} lang="en" className="btn btn-ghost">English version</Link>}
           {children}
         </div>
       </div>
@@ -32,24 +29,18 @@ export function ArHero({ crumbs, eyebrow, title, capsule, en, children }: { crum
   );
 }
 
-export function ArSection({ title, children, tone = 'white', id, label, sub }: { title: string; children: ReactNode; tone?: 'white' | 'mist'; id?: string; label?: string; sub?: string }) {
+export function ArSection({ title, children, tone = 'white', id }: { title: string; children: ReactNode; tone?: 'white' | 'mist'; id?: string }) {
   return (
-    <section id={id} className={`bg-white ${tone === 'mist' ? 'hm-sec--mist' : ''} py-16 lg:py-24`}>
-      <div className="wrap">
-        <div className="hm-head">
-          <div>{label && <span className="hm-label">{label}</span>}<h2 className="hm-h2 !max-w-[24ch]"><TextReveal text={title} /></h2></div>
-          {sub && <p className="hm-sub">{sub}</p>}
-        </div>
-        {children}
-      </div>
+    <section id={id} className={`${tone === 'mist' ? 'bg-mist' : 'bg-white'} py-14`}>
+      <div className="wrap"><h2 className="mb-8 text-[1.75rem] font-bold sm:text-3xl">{title}</h2>{children}</div>
     </section>
   );
 }
 
 export function ArFacts({ facts }: { facts: [string, string][] }) {
   return (
-    <dl className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-      {facts.map(([k, v]) => <div key={k} className="rounded-[14px] bg-mist p-5 max-sm:odd:last:col-span-2 sm:[&:nth-child(3n+1):last-child]:col-span-3"><dt className="text-sm text-slate">{k}</dt><dd className="num mt-1.5 text-lg font-semibold text-navy" dir="ltr" style={{ textAlign: 'right' }}>{v}</dd></div>)}
+    <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-3">
+      {facts.map(([k, v]) => <div key={k} className="bg-white p-5 max-sm:odd:last:col-span-2 sm:[&:nth-child(3n+1):last-child]:col-span-3"><dt className="text-sm text-slate">{k}</dt><dd className="num mt-1.5 text-lg font-semibold text-navy" dir="ltr" style={{ textAlign: 'right' }}>{v}</dd></div>)}
     </dl>
   );
 }
@@ -57,54 +48,7 @@ export function ArFacts({ facts }: { facts: [string, string][] }) {
 export function ArLinks({ links }: { links: { title: string; body?: string; href: string }[] }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {links.map((l) => <Link key={l.href} href={l.href} className="card group flex flex-col"><span className="text-[17px] font-semibold text-navy">{l.title}</span>{l.body && <span className="mt-1.5 block text-sm leading-relaxed text-slate">{l.body}</span>}<span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-teal">عرض <ArrowLeft size={14} /></span></Link>)}
+      {links.map((l) => <Link key={l.href} href={l.href} className="card"><span className="font-semibold text-navy">{l.title}</span>{l.body && <span className="mt-1 block text-sm text-slate">{l.body}</span>}</Link>)}
     </div>
-  );
-}
-
-export function ArFooter() {
-  const cols: [string, [string, string][]][] = [
-    [AR_UI.mortgages, [[AR_UI.mortgages, '/ar#mortgages'], [AR_UI.calculators, '/ar#calculators']]],
-    [AR_UI.rates, [[AR_UI.rates, '/ar#rates'], [AR_UI.areas, '/ar#areas']]],
-    ['الشركة', [['English', '/'], ['الإفصاح والخصوصية', '/privacy-and-cbuae-disclosure']]],
-  ];
-  return (
-    <footer className="hm-footer">
-      <div className="hm-footer__card">
-        <div className="hm-footer__cta">
-          <span className="hm-label">تمويلك العقاري القادم</span>
-          <h2>اعثر على التمويل العقاري المناسب لحياتك في دبي</h2>
-          <p>قارن البنوك في الإمارات، واعرف قدرتك على الاقتراض، وخطط لكل درهم قبل التوقيع. مستشار واحد من أول سؤال حتى يوم نقل الملكية.</p>
-          <div className="hm-hero__ctas">
-            <a href={waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.')} rel="noopener" className="hm-btn">{AR_UI.cta}<span className="hm-btn__tile" aria-hidden="true"><ArrowRight size={16} /></span></a>
-            <Link href="/ar/calculators/mortgage-calculator" className="hm-btn hm-btn--ghost">احسب الدفعات</Link>
-          </div>
-          <div className="hm-footer__scene">
-            <img src="/images/dubai-waterfront-1536.webp" srcSet="/images/dubai-waterfront-768.webp 768w, /images/dubai-waterfront-1536.webp 1536w, /images/dubai-waterfront-3072.webp 3072w" sizes="100vw" alt="" width={1536} height={864} loading="lazy" />
-            <span className="hm-footer__word" aria-hidden="true" dir="ltr">betterway</span>
-          </div>
-        </div>
-        <div className="hm-footer__main">
-          <div className="hm-footer__brand">
-            <img src="/brand/bw/betterway-logo-horizontal-dark-bg.svg" alt="Betterway Mortgages" width={1514} height={468} loading="lazy" />
-            <p>{AR_UI.fee}</p>
-            <ul className="hm-footer__contact mt-6 grid gap-3">
-              <li><MapPin />{AR_UI.address}</li>
-              <li><Mail /><a href={`mailto:${SITE.email}`} className="ulink" dir="ltr">{SITE.email}</a></li>
-            </ul>
-          </div>
-          <div className="hm-footer__cols">
-            {cols.map(([t, ls]) => <div key={t}><h3>{t}</h3><ul>{ls.map(([l, h]) => <li key={h}><Link href={h} lang={h === '/' ? 'en' : undefined}>{l}</Link></li>)}</ul></div>)}
-          </div>
-        </div>
-        <div className="hm-footer__legal">
-          <p>{AR_UI.disclosure}</p>
-          <div className="hm-footer__base">
-            <p>© 2026 Betterway Mortgages</p>
-            <nav aria-label="روابط قانونية"><Link href="/privacy-and-cbuae-disclosure">الإفصاح والخصوصية</Link><Link href="/" lang="en">English</Link></nav>
-          </div>
-        </div>
-      </div>
-    </footer>
   );
 }

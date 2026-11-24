@@ -1,264 +1,541 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, Building2, CalendarClock, Home as HomeIcon, Percent, Scale } from 'lucide-react';
+import { Building2, Clock, Home as HomeIcon, ShieldCheck } from 'lucide-react';
+import HomeHero from '@/components/home/HomeHero';
 import DisclosureToast from '@/components/home/DisclosureToast';
+import RevertBriefing from '@/components/home/RevertBriefing';
+import StatCounter from '@/components/home/StatCounter';
+import Manifesto from '@/components/home/Manifesto';
+import { HomyAdvisorsCarousel, HomyFaqAccordion, HomyServicesAccordion } from '@/components/home/HomySections';
+import { ScrollScaleFrame, SpotlightCard, VideoBriefingShowcase } from '@/components/ui/MotionPrimitives';
+import { LiveBenchmark } from '@/components/StartupExperience';
 import LogoMarquee from '@/components/LogoMarquee';
 import Calculator from '@/components/calc/Calculator';
-import { HmButton, JsonLd, aed } from '@/components/ui';
+import { Cta, JsonLd, SectionTag, aed } from '@/components/ui';
 import { BANKS } from '@/data/banks';
 import { COMMUNITIES } from '@/data/communities';
 import { COUNTRIES } from '@/data/countries';
-import { TEAM_SPECIALISTS } from '@/data/team';
+import { DEVELOPERS, PROJECTS } from '@/data/handover';
 import { LTV_RULES } from '@/data/site';
-import { borrowingPower, buyoutSavings, cashToClose } from '@/lib/math';
-import TextReveal from '@/components/fx/TextReveal';
-import VideoDialog from '@/components/fx/VideoDialog';
-import PhotoCarousel from '@/components/fx/PhotoCarousel';
+import { cashToClose } from '@/lib/math';
 
 export const metadata: Metadata = {
-  title: 'Mortgage Broker in Dubai & UAE | Betterway Mortgages',
-  description: 'Dubai mortgage advice for residents, non-residents and investors. Compare UAE mortgage rates, estimate payments and plan your upfront costs with Betterway.',
+  title: 'Dubai Home Mortgages & UAE Advisory | Betterway Mortgages',
+  description:
+    'Independent Dubai & UAE mortgage advisory across 24 lenders. Compare EIBOR rates, CBUAE statutory caps, and upfront Dubai Land Department closing costs with Betterway.',
   alternates: { canonical: '/' },
 };
 
-/* Every figure below is derived from the site's own data files or the CBUAE rules in /data/site. */
 const ltv = (match: string) => LTV_RULES.find((r) => r.profile.startsWith(match))?.ltv ?? '—';
 
-const PATHS = [
-  { chip: `Up to ${ltv('Expat resident — first home up to')} LTV`, name: 'Your First Dubai Home', where: 'Expat residents · salaried & self-employed', href: '/mortgages/uae-residents', img: '/images/dubai-interior-3072.webp', alt: 'Concept image: a bright Dubai apartment interior with a waterfront view' },
-  { chip: 'Non-resident finance', name: 'Buying From Overseas', where: `Non-resident guidance for ${COUNTRIES.length} countries`, href: '/mortgages/non-resident-dubai', img: '/images/marina-evening-3072.webp', alt: 'Concept image: Dubai Marina at dusk seen from a terrace' },
-  { chip: 'Handover finance', name: 'Off-Plan Handover', where: 'Final developer payment, planned early', href: '/handover/dubai-off-plan-handover-mortgage-guide', img: '/images/offplan-dusk-3072.webp', alt: 'Concept image: a residential tower nearing completion at blue hour' },
-];
+/* Full-bleed Homy "Top Solutions" Showcase Slides */
+const TOP_SOLUTIONS = [
+  {
+    pill: `Up to ${ltv('Expat resident — first home up to')} LTV`,
+    title: 'Expat Resident Mortgages',
+    subtitle: 'First-Home Dubai Financing · 50% CBUAE DBR · Up to 25-Year Tenure',
+    href: '/mortgages/uae-residents',
+    img: '/images/dubai-interior-2560.webp',
+    alt: 'Concept image: sunlit luxury Dubai waterfront apartment living room overlooking the skyline',
+  },
+  {
+    pill: `${COUNTRIES.length} Country Guides`,
+    title: 'Non-Resident Dubai Mortgages',
+    subtitle: 'Overseas Salaried & Business Income · International Buyers in Dubai',
+    href: '/mortgages/non-resident-dubai',
+    img: '/images/marina-evening-2752.webp',
+    alt: 'Concept image: panoramic Dubai Marina waterfront skyline at blue hour from a private terrace',
+  },
+  {
+    pill: `${PROJECTS.length} Handover Projects`,
+    title: 'Off-Plan & Handover Finance',
+    subtitle: `Completion Funding Across ${DEVELOPERS.length} Major UAE Developers & Valuation Readiness`,
+    href: '/handover/dubai-off-plan-handover-mortgage-guide',
+    img: '/images/offplan-dusk-2752.webp',
+    alt: 'Concept image: luxury Dubai residential tower approaching completion at dusk',
+  },
+] as const;
 
-const SERVICES = [
-  { tag: 'Buy a Home', title: 'Finance Your Dubai Home', body: 'Budget, deposit and purchase fees mapped against the 50% debt cap, then the lenders that fit your profile.', href: '/mortgages', img: '/images/villa-courtyard-960.webp' },
-  { tag: 'Switch & Save', title: 'Refinance With Confidence', body: 'Compare buyout savings after exit fees, valuation and switching costs, before your fixed period ends.', href: '/mortgages/mortgage-buyout-refinance', img: '/images/keys-handover-3072.webp' },
-  { tag: 'Compare Rates', title: 'See Every Bank Side by Side', body: `Fixed periods, revert margins and fees from ${BANKS.length} UAE lenders, compared on the same terms.`, href: '/rates/uae-mortgage-rates-eibor-revert-bible', img: '/images/guide-dbr-planning-3072.webp' },
-];
+/* Exact Homy 3-Card Interactive Expanding Services Accordion */
+const HOMY_SERVICES = [
+  {
+    index: '.01',
+    kicker: 'Buy a Home',
+    title: 'Resident & Villa Mortgages',
+    body: 'Compare fixed-rate periods, post-fixed EIBOR revert margins, minimum floors, and DLD fees across 24 UAE lenders before selecting an offer.',
+    href: '/mortgages/uae-residents',
+    img: '/images/dubai-waterfront-3344.webp',
+    alt: 'Concept image: waterfront travertine Dubai villa with palm garden and Burj Khalifa skyline',
+  },
+  {
+    index: '.02',
+    kicker: 'Switch & Save',
+    title: 'Buyout & Refinance Advisory',
+    body: 'Audit your current revert rate against switching costs, valuation fees, and the statutory CBUAE 1% / AED 10,000 early settlement cap.',
+    href: '/mortgages/mortgage-buyout-refinance',
+    img: '/images/keys-handover-2752.webp',
+    alt: 'Concept image: house keys laid on a travertine table during a Dubai mortgage closing',
+  },
+  {
+    index: '.03',
+    kicker: 'Plan Ahead',
+    title: 'Calculators & EIBOR Tools',
+    body: 'Model monthly instalments, stressed 50% DBR limits, Form F valuation clauses, and itemised transfer-day cheques with zero sign-up.',
+    href: '/calculators/mortgage-calculator',
+    img: '/images/guide-valuation-2752.webp',
+    alt: 'Concept image: architectural drawings and brass scale inside a bright Dubai villa',
+  },
+] as const;
 
-const AREA_IMG: Record<string, [string, string]> = {
-  'dubai-marina': ['/images/marina-evening-1536.webp', 'Concept image: Dubai Marina towers and waterway at night'],
-  'downtown-dubai': ['/images/guide-dbr-planning-1536.webp', 'Concept image: the Downtown Dubai skyline seen from a desk'],
-  'palm-jumeirah': ['/images/dubai-waterfront-1536.webp', 'Concept image: a waterfront villa with the Dubai skyline behind'],
-  'dubai-hills-estate': ['/images/villa-courtyard-960.webp', 'Concept image: a villa courtyard with palms and a reflecting pool'],
-};
-const AREAS = COMMUNITIES.filter((c) => c.slug in AREA_IMG);
-
-const bo = buyoutSavings({ balance: 1_500_000, currentRate: 6.0, newRate: 4.25, yearsLeft: 20 });
-const purchase = cashToClose({ price: 2_000_000, downPct: 20 });
-const cards = borrowingPower({ salary: 38_000, existingEmis: 0, cardLimits: 120_000, years: 25 });
-const noCards = borrowingPower({ salary: 38_000, existingEmis: 0, cardLimits: 0, years: 25 });
-const SCENARIOS = [
-  { who: 'First-time buyer', tag: 'AED 2.0M purchase', body: `At the 80% first-home LTV cap, the 20% deposit plus 4% DLD fee, registration, trustee, valuation and agency brings estimated cash to close to ${aed(purchase.total)}.` },
-  { who: 'Homeowner switching banks', tag: 'AED 1.5M balance', body: `Moving from an assumed 6.00% to 4.25% over 20 years lowers repayments by about ${aed(bo.monthly)} a month, against ${aed(bo.switchCost)} in exit and registration costs.` },
-  { who: 'Salaried professional', tag: 'AED 38,000 / month', body: `AED 120,000 of unused card limits, assessed at 5%, cuts modelled borrowing from ${aed(noCards.maxLoan)} to ${aed(cards.maxLoan)} under the 50% DBR rule.` },
-  { who: 'Overseas investor', tag: 'Non-resident', body: `Non-resident buyers can typically borrow up to ${ltv('Non-resident')} of value. Currency, income country and credit history decide the final offer.` },
-];
-const ADVISOR = TEAM_SPECIALISTS[0];
+/* Exact Homy 2x2 Listings Card Grid tailored to Dubai Mortgage Programs */
+const MORTGAGE_PROGRAMS = [
+  {
+    badge: 'First Home',
+    title: 'UAE National & Expat First Home',
+    figure: `Up to ${ltv('UAE National — first home up to')} / ${ltv('Expat resident — first home up to')} LTV`,
+    specs: ['50% Max DBR', '25 Yrs Max', '4% DLD Fee'],
+    href: '/mortgages/uae-nationals',
+    img: '/images/dubai-waterfront-3344.webp',
+    alt: 'Concept image: modern Dubai waterfront villa overlooking the skyline',
+  },
+  {
+    badge: 'Islamic Finance',
+    title: 'Sharia-Compliant Home Finance',
+    figure: `${BANKS.length} UAE Banks`,
+    specs: ['Ijara & Murabaha', 'CBUAE Regulated', 'Fixed & Variable'],
+    href: '/mortgages/islamic-home-finance',
+    img: '/images/villa-courtyard-1792.webp',
+    alt: 'Concept image: tranquil Arabian courtyard villa with reflecting pool and palm trees',
+  },
+  {
+    badge: 'Refinance',
+    title: 'Mortgage Buyout & Equity Release',
+    figure: '1% / AED 10k Cap',
+    specs: ['Early Exit Cap', 'Revert Check', 'Break-Even Tool'],
+    href: '/mortgages/equity-release',
+    img: '/images/guide-transfer-day-2752.webp',
+    alt: 'Concept image: modern Dubai boardroom overlooking Palm Jumeirah on transfer day',
+  },
+  {
+    badge: 'Golden Visa',
+    title: 'AED 2M+ Property Mortgage Path',
+    figure: 'AED 2,000,000+',
+    specs: ['10-Yr Residency Path', 'Freehold Dubai', 'Valuation Guide'],
+    href: '/mortgages/golden-visa-mortgage',
+    img: '/images/guide-dbr-planning-2752.webp',
+    alt: 'Concept image: bright modern Dubai residence overlooking Downtown towers',
+  },
+] as const;
 
 const FAQS = [
-  { q: 'How does a mortgage broker in Dubai help?', a: 'A broker helps you compare suitable lenders, prepare documents and understand the application process. The bank makes the lending decision and issues your final offer.' },
-  { q: 'How much cash do I need for an AED 2M home?', a: `With a 20% deposit, this calculator estimates ${aed(purchase.total)} including the deposit and typical Dubai purchase fees. Bank processing fees, insurance and property-specific charges may add to this.` },
-  { q: 'Can non-residents get a mortgage in Dubai?', a: 'Some UAE lenders consider non-resident applicants. Your income country, currency, credit history and property affect the available loan and deposit. A lender must review your documents before confirming eligibility.' },
-  { q: 'What should I compare besides the mortgage rate?', a: 'Compare the fixed period, variable-rate formula, minimum floor, processing fees, insurance and early repayment terms. A lower introductory rate does not always mean a lower total cost.' },
-  { q: 'How long does mortgage pre-approval take?', a: 'Timing depends on the lender and the completeness of your documents. Pre-approval is an initial assessment; it is not a final loan offer or a property valuation.' },
-  { q: 'What is the maximum mortgage tenure in the UAE?', a: 'CBUAE rules cap residential mortgage tenure at 25 years. Lenders may set a shorter term depending on your age at maturity.' },
-  { q: 'What fees should I ask about?', a: 'Request a written breakdown of bank fees, broker fees if applicable, valuation, insurance, property registration and transfer charges before proceeding.' },
+  {
+    q: 'How does a mortgage broker in Dubai help?',
+    a: 'A broker helps you compare suitable UAE lenders, prepare your documents cleanly, and understand fixed, variable, and revert terms before you apply. The licensed bank makes the lending decision and issues your final written offer.',
+  },
+  {
+    q: 'How much upfront cash do I need for an AED 2M Dubai home?',
+    a: `With a 20% deposit, our calculator estimates ${aed(cashToClose({ price: 2_000_000, downPct: 20 }).total)} including the down payment and typical Dubai Land Department purchase charges. Bank processing fees, valuation, and insurance may add to this total.`,
+  },
+  {
+    q: 'Can non-residents get a mortgage in Dubai?',
+    a: 'Yes — selected UAE banks finance non-resident buyers earning salaried or business income abroad. Your country of residence, income currency, credit profile, and property type govern lender LTV caps and documentation.',
+  },
+  {
+    q: 'What should I compare besides the introductory mortgage rate?',
+    a: 'Always compare the post-fixed EIBOR revert margin, minimum rate floor, bank processing fees, mandatory life and property insurance terms, and partial settlement allowances alongside the headline fixed rate.',
+  },
+  {
+    q: 'What are the official CBUAE borrowing limits?',
+    a: 'Central Bank of the UAE regulations cap total Debt Burden Ratio (DBR) at 50% of gross monthly income, limit maximum mortgage tenure to 25 years, cap early settlement fees at 1% or AED 10,000 (whichever is lower), and require the deposit from own funds.',
+  },
+  {
+    q: 'Do I need an account to use the calculators or compare lenders?',
+    a: 'No. Every calculator, live CBUAE EIBOR tracker, community guide, and lender comparison profile on Betterway Mortgages is open and free to use without submitting personal details.',
+  },
 ];
-
-const GALLERY = [
-  { n: 'dubai-waterfront', title: 'Waterfront villas', text: 'Villa and townhouse finance across Dubai’s freehold communities.' },
-  { n: 'marina-evening', title: 'Dubai Marina living', text: 'Apartment mortgages for residents and overseas buyers.' },
-  { n: 'dubai-interior', title: 'Your first home', text: 'Up to 80% LTV for expat first-home buyers under CBUAE rules.' },
-  { n: 'offplan-dusk', title: 'Off-plan handover', text: 'Plan the final developer payment before handover day.' },
-  { n: 'guide-transfer-day', title: 'Transfer day', text: 'Valuation, final offer and registration at the trustee office.' },
-];
-const slides = (alt: (t: string) => string) => GALLERY.map((g) => ({ src: `/images/${g.n}-1536.webp`, srcSet: `/images/${g.n}-768.webp 768w, /images/${g.n}-1536.webp 1536w, /images/${g.n}-3072.webp 3072w`, alt: alt(g.title), title: g.title, text: g.text }));
-
-function Head({ label, title, sub, action }: { label: string; title: string; sub: string; action?: [string, string] }) {
-  return (
-    <div className="hm-head">
-      <div><span className="hm-label">{label}</span><h2 className="hm-h2"><TextReveal text={title} /></h2></div>
-      <div className="grid gap-5" data-reveal="rise"><p className="hm-sub">{sub}</p>{action && <div><HmButton href={action[1]} size="sm">{action[0]}</HmButton></div>}</div>
-    </div>
-  );
-}
 
 export default function Home() {
   return (
-    <div className="hm">
-      {/* Hero */}
-      <section className="hm-hero">
-        <div className="hm-hero__clouds" aria-hidden="true" />
-        <div className="hm-wrap">
-          <span className="hm-hero__badge"><img src="/brand/bw/betterway-icon-fullcolor-tight.svg" alt="" width={26} height={26} /><span><b>{BANKS.length} UAE lenders</b> compared</span></span>
-          <h1>Your Dubai Mortgage, <em>Done Right</em></h1>
-          <p className="hm-hero__lead"><TextReveal text="Independent mortgage advice for residents, overseas buyers and investors. Compare banks, know your budget and move from pre-approval to transfer day with confidence." stagger={0.025} delay={0.2} /></p>
-          <div className="hm-hero__ctas">
-            <HmButton href="/calculators/mortgage-calculator">Check What I Can Borrow</HmButton>
-            <HmButton href="/contact" tone="ghost">Book a Consultation</HmButton>
-          </div>
-        </div>
-        <div className="hm-hero__stage">
-          <img src="/images/dubai-waterfront-1536.webp" srcSet="/images/dubai-waterfront-768.webp 768w, /images/dubai-waterfront-1536.webp 1536w, /images/dubai-waterfront-3072.webp 3072w" sizes="100vw" alt="Concept image: a contemporary Dubai villa by the water with the city skyline behind" width={1536} height={864} fetchPriority="high" />
-          <div className="hm-hero__chips" aria-label="CBUAE mortgage rules">
-            <span className="hm-chip"><i />Expat first home <b>{ltv('Expat resident — first home up to')}</b> LTV</span>
-            <span className="hm-chip"><i />Debt burden cap <b>50%</b></span>
-            <span className="hm-chip"><i />Max tenure <b>25 yrs</b></span>
-          </div>
-        </div>
-      </section>
+    <>
+      {/* 1. EXACT HOMY STICKY SKY HERO (DUBAI HOME MORTGAGES) */}
+      <HomeHero />
       <DisclosureToast />
 
-      {/* Our impact */}
-      <section className="hm-section !pt-6">
-        <div className="hm-wrap">
-          <Head label="Our impact" title="Real clarity behind every mortgage decision" sub="Built to make Dubai home finance simple, transparent and more confident for every buyer." />
-          <div className="hm-impact">
-            <div className="hm-impact__img" data-reveal="rise"><img src="/images/abudhabi-corniche-960.webp" alt="Concept image: beachfront villas along the UAE coast" width={960} height={1280} loading="lazy" /></div>
-            <div className="hm-impact__stats">
-              {[[`${BANKS.length}`, 'UAE lenders compared'], [`${COMMUNITIES.length}`, 'Freehold communities'], [`${COUNTRIES.length}`, 'Countries we guide']].map(([v, l], i) => (
-                <div key={l} className="hm-stat" data-reveal="rise" style={{ ['--i' as string]: i }}><strong>{v}+</strong><span>{l}</span></div>
-              ))}
+      {/* Scrolling crisp white curtain gliding cleanly over the sticky sky Hero */}
+      <div className="homy-curtain">
+        {/* 2. OUR IMPACT (Exact 3-Col Row: Photo | 3 #eeeff0 Stat Cards | Photo + Bank Marquee) */}
+        <section className="homy-section" aria-labelledby="impact-title">
+          <div className="wrap">
+            <div className="homy-head">
+              <div className="homy-head__left">
+                <SectionTag>Our Impact</SectionTag>
+                <h2 id="impact-title" className="homy-h2" data-reveal="rise">
+                  Real clarity behind every mortgage decision
+                </h2>
+              </div>
+              <div className="homy-head__right">
+                <p className="homy-sub">
+                  Built to make Dubai &amp; UAE mortgage structuring transparent, CBUAE-aligned, and straightforward for
+                  every buyer.
+                </p>
+              </div>
             </div>
-            <div className="hm-impact__img" data-reveal="rise"><img src="/images/villa-courtyard-960.webp" alt="Concept image: a calm villa courtyard with a reflecting pool" width={960} height={1280} loading="lazy" /></div>
+
+            <div className="homy-impact-grid">
+              <div className="homy-impact-photo" data-reveal="rise">
+                <img
+                  src="/images/dubai-waterfront-1672.webp"
+                  srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w"
+                  sizes="(min-width: 960px) 26vw, 100vw"
+                  alt="Concept image: luxury Dubai waterfront residence with Burj Khalifa horizon"
+                  width={1672}
+                  height={941}
+                  loading="lazy"
+                />
+              </div>
+
+              <div className="homy-impact-stats" data-reveal="rise" style={{ ['--i' as string]: 1 }}>
+                <SpotlightCard className="homy-stat-card">
+                  <span className="homy-stat-card__num">
+                    <StatCounter value={BANKS.length} />
+                  </span>
+                  <span className="homy-stat-card__label">UAE Lenders</span>
+                </SpotlightCard>
+                <SpotlightCard className="homy-stat-card">
+                  <span className="homy-stat-card__num">
+                    <StatCounter value={COMMUNITIES.length} suffix="+" />
+                  </span>
+                  <span className="homy-stat-card__label">Freehold Areas</span>
+                </SpotlightCard>
+                <SpotlightCard className="homy-stat-card">
+                  <span className="homy-stat-card__num">
+                    <StatCounter value={50} suffix="%" />
+                  </span>
+                  <span className="homy-stat-card__label">CBUAE Max DBR</span>
+                </SpotlightCard>
+              </div>
+
+              <div className="homy-impact-photo" data-reveal="rise" style={{ ['--i' as string]: 2 }}>
+                <img
+                  src="/images/villa-courtyard-1792.webp"
+                  alt="Concept image: calm Arabian courtyard villa with reflecting pool"
+                  width={1792}
+                  height={2389}
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* 24 UAE Banks Directory Strip */}
+            <div className="mt-14 border-t border-[#efefef] pt-10">
+              <p className="mb-4 text-center text-xs font-medium uppercase tracking-[0.14em] text-[#606060]">
+                Comparing mortgage structures across {BANKS.length} UAE lenders in one directory
+              </p>
+              <LogoMarquee
+                label="UAE banks in the lender directory"
+                items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))}
+              />
+              <p className="mt-3 text-center text-[11.5px] text-[#606060]">
+                Directory listing is for informational comparison and is not a live bank offer. Confirm current terms in writing.
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="hm-lenders" aria-label="UAE lenders in the directory">
-        <div className="hm-wrap">
-          <p>Comparing terms across <b className="text-navy">{BANKS.length} UAE lenders</b> in one directory. Listing is not a partnership or a live offer.</p>
-          <LogoMarquee label="UAE banks in the lender directory" items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))} />
-        </div>
-      </section>
+        {/* 3. ABOUT / SCROLL-REVEAL MANIFESTO STATEMENT */}
+        <section className="homy-manifesto-band" aria-label="Our approach">
+          <div className="wrap">
+            <Manifesto text="Focused on *clarity,* built for real choices. We structure Dubai *mortgages* across 24 UAE lenders so buyers compare real costs, understand CBUAE rules, and move forward with confidence." />
+          </div>
+        </section>
 
-      {/* Top paths: stacked full-bleed panels */}
-      <section className="hm-section !pb-12">
-        <div className="hm-wrap"><Head label="Top mortgage paths" title="Explore the routes Dubai buyers take most" sub="Each path opens a full guide with lender criteria, costs and the documents you will need." /></div>
-      </section>
-      <div className="hm-stack">
-        {PATHS.map((p) => (
-          <article key={p.name} className="hm-panel">
-            <img src={p.img} alt={p.alt} width={3072} height={1728} loading="lazy" />
-            <div className="hm-panel__glass">
-              <span className="hm-panel__price">{p.chip}</span>
-              <h3>{p.name}</h3>
-              <p>{p.where}</p>
-              <HmButton href={p.href} tone="light" size="sm">Explore</HmButton>
+        {/* 4. TOP MORTGAGE SOLUTIONS (Full-Bleed Stacked Slides with Centered Frosted Glass Card) */}
+        <section className="bg-white pt-16 lg:pt-20" aria-labelledby="top-solutions-title">
+          <div className="wrap">
+            <div className="homy-head">
+              <div className="homy-head__left">
+                <SectionTag>Top Solutions</SectionTag>
+                <h2 id="top-solutions-title" className="homy-h2" data-reveal="rise">
+                  Explore our flagship pathways for Dubai buyers
+                </h2>
+              </div>
+              <div className="homy-head__right">
+                <p className="homy-sub">
+                  Dedicated mortgage structuring for UAE residents, international investors, and off-plan handover
+                  buyers.
+                </p>
+              </div>
             </div>
-          </article>
-        ))}
-      </div>
+          </div>
 
-      {/* Services */}
-      <section className="hm-section">
-        <div className="hm-wrap">
-          <Head label="Our services" title="Everything you need for your home loan" sub="Built to simplify your mortgage with clear numbers, better options and confident decisions." />
-          <div className="hm-services">
-            {SERVICES.map((s, i) => (
-              <article key={s.tag} className="hm-svc">
-                <span className="hm-svc__num" aria-hidden="true">.0{i + 1}</span>
-                <div className="hm-svc__img" aria-hidden="true"><img src={s.img} alt="" loading="lazy" /></div>
-                <div className="hm-svc__body">
-                  <small>{s.tag}</small><h3>{s.title}</h3>
-                  <p className="mt-3">{s.body}</p>
-                  <Link href={s.href} className="hm-svc__link">Learn more <ArrowUpRight size={14} /></Link>
+          <div className="homy-showcase-stack">
+            {TOP_SOLUTIONS.map((slide) => (
+              <article key={slide.title} className="homy-showcase-slide">
+                <img src={slide.img} alt={slide.alt} loading="lazy" decoding="async" />
+                <div className="homy-glass-card" data-reveal="frost">
+                  <span className="homy-glass-card__pill">{slide.pill}</span>
+                  <h3>{slide.title}</h3>
+                  <p>{slide.subtitle}</p>
+                  <div className="mt-2">
+                    <Cta href={slide.href} tone="light">
+                      Explore
+                    </Cta>
+                  </div>
                 </div>
               </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Listings: communities */}
-      <section className="hm-section !pt-0">
-        <div className="hm-wrap">
-          <Head label="Where we advise" title="Finance homes in Dubai’s top communities" sub="Each community has its own developers, stock and lender appetite. Start with the area behind your shortlist." action={['Explore All Areas', '/areas']} />
-          <div className="hm-listings">
-            {AREAS.map((c) => (
-              <Link key={c.slug} href={`/areas/${c.emirate}/${c.slug}`} className="hm-listing" data-reveal="rise">
-                <img src={AREA_IMG[c.slug][0]} alt={AREA_IMG[c.slug][1]} loading="lazy" />
-                <span className="hm-listing__tag"><HomeIcon size={13} />{c.stock}</span>
-                <span className="hm-listing__name">{c.name}</span>
-                <strong className="hm-listing__price">Up to {ltv('Expat resident — first home up to')} LTV</strong>
-                <span className="hm-listing__meta">
-                  <span><Building2 size={14} />{c.devs.split(',').length} developer{c.devs.includes(',') ? 's' : ''}</span>
-                  <span><Percent size={14} />4% DLD fee</span>
-                  <span><CalendarClock size={14} />25 yrs</span>
-                </span>
-              </Link>
-            ))}
+        {/* 5. OUR SERVICES — Exact Homy 3-Card Interactive Expanding Horizontal Accordion */}
+        <section className="homy-section" aria-labelledby="services-title">
+          <div className="wrap">
+            <div className="homy-head">
+              <div className="homy-head__left">
+                <SectionTag>Our Services</SectionTag>
+                <h2 id="services-title" className="homy-h2" data-reveal="rise">
+                  Everything you need for your mortgage
+                </h2>
+              </div>
+              <div className="homy-head__right">
+                <p className="homy-sub">
+                  Whether you are purchasing your first Dubai residence, refinancing to a lower margin, or modelling
+                  upfront DLD fees.
+                </p>
+              </div>
+            </div>
+
+            <HomyServicesAccordion items={HOMY_SERVICES} />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Film + gallery carousel */}
-      <section className="hm-section !pt-0">
-        <div className="hm-wrap">
-          <Head label="Dubai in motion" title="See the homes our clients finance" sub="A short film and gallery of the property types we arrange finance for across Dubai." />
-          <VideoDialog src="/media/betterway-dubai-film.mp4" poster="/media/betterway-dubai-film-poster.webp" alt="Concept film still: a waterfront villa in Dubai" label="Play the Betterway Dubai film" caption="Watch · 17 sec" />
-          <div className="mt-3"><PhotoCarousel label="Dubai property gallery" slides={slides((t) => `Concept image: ${t}`)} /></div>
-        </div>
-      </section>
+        {/* 6. MORTGAGE PROGRAMS — Exact Homy 2x2 Photo Cards Grid */}
+        <section className="homy-section pt-4" aria-labelledby="programs-title">
+          <div className="wrap">
+            <div className="homy-head">
+              <div className="homy-head__left">
+                <SectionTag>Mortgage Programs</SectionTag>
+                <h2 id="programs-title" className="homy-h2" data-reveal="rise">
+                  Discover financing that fits your lifestyle
+                </h2>
+              </div>
+              <div className="homy-head__right">
+                <p className="homy-sub">
+                  Explore CBUAE-aligned lending frameworks designed for residents, investors, and long-term UAE
+                  homeowners.
+                </p>
+                <Cta href="/mortgages" size="sm">
+                  Explore All
+                </Cta>
+              </div>
+            </div>
 
-      {/* Highlight marquee + calculator */}
-      <section className="hm-section !pb-0">
-        <div className="hm-wrap"><Head label="Mortgage calculator" title="Run the numbers before the bank does" sub="Monthly payment, deposit and purchase fees in one view. No sign-up, nothing submitted." /></div>
-        <div className="hm-marquee" aria-hidden="true">
-          <div className="hm-marquee__track">{Array.from({ length: 4 }).flatMap((_, k) => ['Compare Banks', 'Know Your Budget', 'Get Pre-Approved'].map((t) => <span key={`${k}${t}`}>{t}</span>))}</div>
-          <div className="hm-marquee__pic"><img src="/images/keys-handover-1536.webp" alt="" loading="lazy" /></div>
-        </div>
-      </section>
-      <section id="calculator" className="hm-section !pt-10">
-        <div className="hm-wrap">
-          <div className="hm-calc" data-reveal="rise"><Calculator slug="mortgage-calculator" /></div>
-          <p className="hm-impact__note">Planning estimates only. Rates and fees depend on the lender, property and your circumstances.</p>
-        </div>
-      </section>
-
-      {/* Scenarios (in place of testimonials: worked examples, no invented reviews) */}
-      <section className="hm-section !pt-0">
-        <div className="hm-wrap">
-          <Head label="Real scenarios" title="What the numbers look like in practice" sub="Illustrative cases calculated with the same CBUAE rules our calculators use." action={['See All Scenarios', '/reviews']} />
-          <div className="hm-reviews">
-            <div className="hm-reviews__rail">
-              {SCENARIOS.map((s) => (
-                <article key={s.who} className="hm-quote">
-                  <div><span className="hm-quote__mark" aria-hidden="true">“</span><p>{s.body}</p></div>
-                  <div className="hm-quote__who"><span className="grid h-11 w-11 place-items-center rounded-[10px] bg-[#070e1a] text-[#d7b158]"><Scale size={18} /></span><div><b>{s.who}</b><small>{s.tag}</small></div></div>
-                </article>
+            <div className="homy-listings-grid">
+              {MORTGAGE_PROGRAMS.map((item, i) => (
+                <SpotlightCard key={item.title} dark className="rounded-[18px]">
+                  <Link
+                    href={item.href}
+                    className="homy-listing-card group"
+                    data-reveal="rise"
+                    style={{ ['--i' as string]: i % 2 }}
+                  >
+                    <img src={item.img} alt={item.alt} decoding="async" />
+                    <span className="homy-listing-card__badge">
+                      <HomeIcon size={13} strokeWidth={2.2} />
+                      {item.badge}
+                    </span>
+                    <div className="homy-listing-card__overlay">
+                      <span className="homy-listing-card__name">{item.title}</span>
+                      <strong className="homy-listing-card__figure">{item.figure}</strong>
+                      <div className="homy-listing-card__specs">
+                        <span>
+                          <ShieldCheck size={14} /> {item.specs[0]}
+                        </span>
+                        <span className="homy-listing-card__sep" aria-hidden="true">
+                          |
+                        </span>
+                        <span>
+                          <Clock size={14} /> {item.specs[1]}
+                        </span>
+                        <span className="homy-listing-card__sep" aria-hidden="true">
+                          |
+                        </span>
+                        <span>
+                          <Building2 size={14} /> {item.specs[2]}
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </SpotlightCard>
               ))}
             </div>
-            <Link href="/our-underwriters" className="hm-portrait">
-              <img src={ADVISOR.portrait1080} alt={`${ADVISOR.name}, ${ADVISOR.designation}`} loading="lazy" />
-              <div><b>{ADVISOR.name}</b><span>{ADVISOR.designation}</span></div>
-            </Link>
+            <p className="mt-5 text-xs text-[#606060]">
+              LTV figures reflect statutory CBUAE caps for typical profiles. Individual lender policies may vary. Concept
+              architecture images are AI-generated.
+            </p>
           </div>
-          <p className="hm-rev-note">Illustrative examples, not client testimonials or offers. Assumed rates for comparison only.</p>
-        </div>
-      </section>
+        </section>
 
-      {/* FAQ */}
-      <section className="hm-section !pt-0">
-        <div className="hm-wrap hm-faq">
-          <div>
-            <span className="hm-label">FAQ</span>
-            <h2 className="hm-h2"><TextReveal text="Things You Should Know" /></h2>
-            <p className="hm-sub mt-5">We’ve answered the most common questions to help you start with clarity.</p>
-            <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-teal">Ask an advisor <ArrowRight size={15} /></Link>
+        {/* 7. INTERACTIVE DUBAI MORTGAGE CALCULATOR & LIVE CBUAE EIBOR BENCHMARK */}
+        <section id="calculator" className="homy-section" aria-labelledby="calc-title">
+          <div className="wrap">
+            <div className="homy-head">
+              <div className="homy-head__left">
+                <SectionTag>Mortgage Calculator &amp; EIBOR</SectionTag>
+                <h2 id="calc-title" className="homy-h2" data-reveal="rise">
+                  Run the numbers before the bank does
+                </h2>
+              </div>
+              <div className="homy-head__right">
+                <p className="homy-sub">
+                  Monthly instalments, upfront DLD fees, and live published CBUAE EIBOR fixings in one transparent view.
+                </p>
+                <Cta href="/rates/eibor-live-tracker" size="sm" tone="ghost">
+                  Live EIBOR Tracker
+                </Cta>
+              </div>
+            </div>
+
+            <div className="bw-calc-shell" data-reveal="rise">
+              <Calculator slug="mortgage-calculator" />
+            </div>
+
+            <div className="bw-bench mt-8">
+              <div className="bw-bench__panel" data-reveal="frost">
+                <LiveBenchmark />
+                <dl className="bw-bench__rules" aria-label="How EIBOR applies to UAE mortgages">
+                  <div className="bw-bench__rule">
+                    <dt>Publication cadence</dt>
+                    <dd>Every UAE business day</dd>
+                  </div>
+                  <div className="bw-bench__rule">
+                    <dt>Variable-rate formula</dt>
+                    <dd className="num">3M EIBOR + bank margin</dd>
+                  </div>
+                  <div className="bw-bench__rule">
+                    <dt>Minimum rate floor</dt>
+                    <dd>Stated in written offer letter</dd>
+                  </div>
+                </dl>
+              </div>
+              <div className="bw-bench__panel" data-reveal="frost" style={{ ['--i' as string]: 1 }}>
+                <RevertBriefing />
+              </div>
+            </div>
           </div>
-          <div className="hm-faq__list">
-            {FAQS.map((f, i) => (
-              <details key={f.q} open={i === 0}>
-                <summary>{f.q}<i aria-hidden="true">+</i></summary>
-                <p>{f.a}</p>
-              </details>
-            ))}
+        </section>
+
+        {/* 7B. 24-SECOND FULL-HD CORPORATE VIDEO BRIEFING SHOWCASE */}
+        <section className="homy-section pt-0" aria-label="24-second corporate briefing film">
+          <div className="wrap">
+            <VideoBriefingShowcase />
           </div>
-          <JsonLd data={{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }} />
-        </div>
-      </section>
-    </div>
+        </section>
+
+        {/* 8. HIGHLIGHTED ADVISORY — Exact Homy Infinite Text Marquee behind Scroll-Scaled 4K Architecture */}
+        <section className="homy-section" aria-labelledby="highlight-title">
+          <div className="wrap">
+            <div className="homy-head">
+              <div className="homy-head__left">
+                <SectionTag>Highlighted Advisory</SectionTag>
+                <h2 id="highlight-title" className="homy-h2" data-reveal="rise">
+                  Modern financing, designed to live better
+                </h2>
+              </div>
+              <div className="homy-head__right">
+                <p className="homy-sub">
+                  Explore how structured pre-approval across {COMMUNITIES.length} UAE freehold communities keeps transfer
+                  day calm and predictable.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="homy-highlight-stage">
+            <div className="homy-marquee-bg" aria-hidden="true">
+              <div className="homy-marquee-track">
+                {[0, 1].map((dup) => (
+                  <span key={dup}>
+                    Compare 24 UAE Banks · Live CBUAE EIBOR · Upfront DLD Clarity · Seamless Transfer Day ·{' '}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <ScrollScaleFrame>
+              <Link href="/areas" className="homy-highlight-frame block" aria-label="Explore UAE freehold communities">
+                <img
+                  src="/images/abudhabi-corniche-2752.webp"
+                  srcSet="/images/abudhabi-corniche.webp 1376w, /images/abudhabi-corniche-1792.webp 1792w, /images/abudhabi-corniche-2752.webp 2752w"
+                  sizes="(min-width: 960px) 920px, 95vw"
+                  alt="Concept image: coastal UAE waterfront villas along turquoise water and skyline"
+                  width={2752}
+                  height={1536}
+                  loading="lazy"
+                />
+              </Link>
+            </ScrollScaleFrame>
+          </div>
+        </section>
+
+        {/* 9. OUR DUBAI ADVISORS & INSIGHTS — Exact Homy Infinite Alternating Carousel */}
+        <section className="homy-section" aria-labelledby="advisors-title">
+          <div className="wrap">
+            <div className="homy-head">
+              <div className="homy-head__left">
+                <SectionTag>Our Dubai Specialists</SectionTag>
+                <h2 id="advisors-title" className="homy-h2" data-reveal="rise">
+                  The advisors behind every mortgage file
+                </h2>
+              </div>
+              <div className="homy-head__right">
+                <p className="homy-sub">
+                  Led by Founder &amp; Managing Director Shabib Siraj in Oud Metha, Dubai — guiding every case from DBR
+                  check to DLD transfer.
+                </p>
+                <Cta href="/our-underwriters" size="sm">
+                  Meet Full Team
+                </Cta>
+              </div>
+            </div>
+          </div>
+
+          <HomyAdvisorsCarousel />
+        </section>
+
+        {/* 10. FAQ — Exact Homy Sticky 2-Column Single-Open #f6f6f6 Accordion */}
+        <section className="homy-section" aria-labelledby="faq-title">
+          <div className="wrap homy-faq-grid">
+            <div className="homy-faq-left">
+              <SectionTag>FAQ</SectionTag>
+              <h2 id="faq-title" className="homy-h2 mt-4" data-reveal="rise">
+                Things You Should Know
+              </h2>
+              <p className="homy-sub mt-4 max-w-sm">
+                We have answered the most common Dubai mortgage questions so you can move ahead with complete clarity.
+              </p>
+              <div className="mt-7">
+                <Cta href="/contact" tone="ghost" size="sm">
+                  Ask an Advisor
+                </Cta>
+              </div>
+            </div>
+
+            <HomyFaqAccordion faqs={FAQS} />
+
+            <JsonLd
+              data={{
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: FAQS.map((f) => ({
+                  '@type': 'Question',
+                  name: f.q,
+                  acceptedAnswer: { '@type': 'Answer', text: f.a },
+                })),
+              }}
+            />
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

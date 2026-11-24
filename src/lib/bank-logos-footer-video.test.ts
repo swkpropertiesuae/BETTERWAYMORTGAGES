@@ -24,21 +24,23 @@ test('every bank in BANKS has a distinct, non-empty logo asset on disk under pub
   }
 });
 
-test('Footer uses the brand-pack dark-background logo and no legacy bw-footer__mark wordmark', () => {
+test('Footer removes the oversized bw-footer__mark Betterway wordmark while keeping logo-white-full.svg', () => {
   const ui = readFileSync(repoFile('src/components/ui.tsx'), 'utf8');
   const brand = readFileSync(repoFile('src/app/brand.css'), 'utf8');
 
-  assert.match(ui, /\/brand\/bw\/betterway-logo-horizontal-dark-bg\.svg/);
+  assert.match(ui, /\/brand\/logo-white-full\.svg/);
   assert.doesNotMatch(ui, /bw-footer__mark/);
   assert.doesNotMatch(ui, /data-reveal="mark"/);
   assert.doesNotMatch(brand, /\.bw-footer__mark\b/);
 });
 
-test('explainer.html uses Midnight Banking Navy (#021125) and Sovereign Gold (#d7b04e) with zero legacy emerald/mint colors', () => {
+test('explainer.html uses Homy Obsidian (#0b1117), Betterway Emerald (#179373), and Champagne Gold (#d7b158) with new brand logos', () => {
   const html = readFileSync(repoFile('scripts/video/explainer.html'), 'utf8');
 
   assert.doesNotMatch(html, /#007d78|#081d37|#6fe3c9|rgba\(\s*0\s*,\s*125\s*,\s*120/i);
-  assert.match(html, /#021125/i);
-  assert.match(html, /#d7b04e/i);
-  assert.match(html, /public\/brand\/bw\/betterway-logo-horizontal-dark-bg\.svg/);
+  assert.match(html, /#0b1117/i);
+  assert.match(html, /#179373/i);
+  assert.match(html, /#d7b158/i);
+  assert.match(html, /public\/brand\/logo-white\.svg/);
+  assert.match(html, /public\/brand\/icon-fullcolor\.svg/);
 });

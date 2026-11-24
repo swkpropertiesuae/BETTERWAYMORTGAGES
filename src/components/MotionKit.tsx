@@ -1,8 +1,4 @@
 'use client';
-// Corporate 8B motion kit: content remains visible without JS or under prefers-reduced-motion.
-// When motion is permitted, <html> receives .bw-motion, [data-reveal] elements animate as they enter the
-// viewport (rise = editorial copy, horizon = aperture clip-path windows, frost = cards, mark = footer wordmark),
-// and --scroll-progress drives the Sovereign Gold reading rail on the sticky header.
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { computeScrollProgress } from '@/lib/hero-showcase';
@@ -13,11 +9,12 @@ export default function MotionKit() {
     const root = document.documentElement;
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     const header = document.querySelector('.bw-header');
+    const isHome = path === '/';
 
     let raf = 0;
     const syncScroll = () => {
       raf = 0;
-      header?.setAttribute('data-scrolled', String(window.scrollY > 8));
+      header?.setAttribute('data-scrolled', String(!isHome || window.scrollY > 24));
       const progress = computeScrollProgress(window.scrollY, root.scrollHeight, window.innerHeight);
       root.style.setProperty('--scroll-progress', progress.toFixed(4));
     };
@@ -51,7 +48,6 @@ export default function MotionKit() {
 
     const scan = () =>
       document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => {
-        // Above-the-fold elements appear immediately without flashing invisible on first paint.
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight * 0.94 && r.bottom > 0) el.classList.add('is-in');
         else io.observe(el);

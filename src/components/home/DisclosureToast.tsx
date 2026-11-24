@@ -1,34 +1,76 @@
 'use client';
-// Regulatory toast in the manner of Monara's "not a bank" notice. Dismissal lasts for the browser session.
 import { useEffect, useState } from 'react';
-import { Info, X } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { X } from 'lucide-react';
+import { SPRING_SNAPPY } from '@/components/ui/MotionPrimitives';
 
 export default function DisclosureToast() {
   const [show, setShow] = useState(false);
+  const reduce = useReducedMotion();
+
   useEffect(() => {
     let dismissed = false;
-    try { dismissed = sessionStorage.getItem('bw-toast') === '0'; } catch {}
+    try {
+      dismissed = sessionStorage.getItem('bw-toast') === '0';
+    } catch {}
     if (dismissed) return;
     let timer: ReturnType<typeof setTimeout> | undefined;
-    // Appears once the visitor starts reading, then steps aside so it never sits over photos or charts.
     const onScroll = () => {
-      if (window.scrollY > 480) {
+      if (window.scrollY > 520) {
         setShow(true);
         window.removeEventListener('scroll', onScroll);
-        timer = setTimeout(() => { setShow(false); try { sessionStorage.setItem('bw-toast', '0'); } catch {} }, 6500);
+        timer = setTimeout(() => {
+          setShow(false);
+          try {
+            sessionStorage.setItem('bw-toast', '0');
+          } catch {}
+        }, 7000);
       }
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => { window.removeEventListener('scroll', onScroll); if (timer) clearTimeout(timer); };
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (timer) clearTimeout(timer);
+    };
   }, []);
-  if (!show) return null;
-  const dismiss = () => { setShow(false); try { sessionStorage.setItem('bw-toast', '0'); } catch {} };
+
+  const dismiss = () => {
+    setShow(false);
+    try {
+      sessionStorage.setItem('bw-toast', '0');
+    } catch {}
+  };
+
   return (
-    <div className="bw-toast" role="note" aria-label="Regulatory notice">
-      <Info size={16} className="mt-0.5 shrink-0 text-brass" />
-      <p>Betterway Mortgages is a mortgage adviser, not a bank. Lending decisions, rates and final offers are made by the lender.</p>
-      <button type="button" onClick={dismiss} aria-label="Dismiss notice"><X size={16} /></button>
-    </div>
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          key="bw-disclosure-toast"
+          initial={reduce ? false : { opacity: 0, y: 24, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={reduce ? undefined : { opacity: 0, y: 18, scale: 0.96 }}
+          transition={reduce ? { duration: 0 } : SPRING_SNAPPY}
+          className="bw-toast"
+          role="note"
+          aria-label="Regulatory notice"
+        >
+          <img
+            src="/brand/icon-fullcolor.svg"
+            alt=""
+            width={24}
+            height={24}
+            className="mt-0.5 h-6 w-6 shrink-0"
+          />
+          <p>
+            Betterway Mortgages is a mortgage adviser, not a bank. Lending decisions, rates and final offers are made by
+            the lender.
+          </p>
+          <button type="button" onClick={dismiss} aria-label="Dismiss notice" className="rounded-full p-1 transition hover:bg-white/10">
+            <X size={15} />
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
