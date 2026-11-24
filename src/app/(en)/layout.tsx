@@ -4,6 +4,7 @@ import '../startup.css';
 import '../brand.css';
 import Header from '@/components/Header';
 import CoPilot from '@/components/CoPilot';
+import ResumeJourneyToast from '@/components/ecosystem/ResumeJourneyToast';
 import MotionKit from '@/components/MotionKit';
 import { Footer, JsonLd, orgSchema } from '@/components/ui';
 import { SITE } from '@/data/site';
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <ResumeJourneyToast />
         <CoPilot />
         <MotionKit />
         <JsonLd data={orgSchema()} />

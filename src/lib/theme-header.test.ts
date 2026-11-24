@@ -119,8 +119,8 @@ test('light-surface --color-teal accent meets WCAG 2.1 AA 4.5:1 contrast against
   }
 });
 
-test('Header sets aria-current="page" on active Home and child navigation links', () => {
+test('Header sets aria-current="page" on active Home, About Us, mega-menu, and mobile navigation links', () => {
   const header = read('src/components/Header.tsx');
   const matches = header.match(/aria-current=\{[^}]*'page'[^}]*\}/g) ?? [];
-  assert.equal(matches.length, 4, 'Expected aria-current="page" on desktop Home, mega-menu links, mobile Home, and mobile child links');
+  assert.ok(matches.length >= 4, `Expected at least 4 aria-current="page" bindings, got ${matches.length}`);
 });

@@ -46,7 +46,7 @@
 
 @layer base {
   html { -webkit-text-size-adjust: 100%; scroll-padding-top: 96px; scroll-behavior: smooth; }
-  body { @apply bg-white font-sans text-ink antialiased; font-feature-settings: 'cv11', 'ss01'; font-optical-sizing: auto; }
+  body { @apply bg-[#f5f6f7] font-sans text-ink antialiased; font-feature-settings: 'cv11', 'ss01'; font-optical-sizing: auto; }
   html[lang='ar'] body { font-family: var(--font-arabic); }
   h1, h2, h3, h4 { @apply font-display text-navy; letter-spacing: -0.025em; text-wrap: balance; }
   html[lang='ar'] :is(h1, h2, h3, h4) { font-family: var(--font-arabic); letter-spacing: 0; }
