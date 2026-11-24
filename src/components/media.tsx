@@ -1,16 +1,16 @@
 import type { ReactNode } from 'react';
 
 /** Responsive photo: AVIF → WebP → JPEG, 1x/2x sources. Files live in /public/img/<name>-<w>.<ext>. */
-export function Photo({ name, alt, w = 1376, h = 768, sizes = '(min-width: 1024px) 50vw, 100vw', className = '', priority = false }: {
+export function Photo({ name, alt, w = 1536, h = 864, sizes = '(min-width: 1024px) 50vw, 100vw', className = '', priority = false }: {
   name: string; alt: string; w?: number; h?: number; sizes?: string; className?: string; priority?: boolean;
 }) {
-  const set = (ext: string) => `/img/${name}-1376.${ext} 1376w, /img/${name}-2752.${ext} 2752w`;
+  const set = (ext: string) => `/img/${name}-768.${ext} 768w, /img/${name}-1536.${ext} 1536w, /img/${name}-3072.${ext} 3072w`;
   return (
     <div className={`group overflow-hidden rounded-card ${className}`}>
       <picture>
         <source type="image/avif" srcSet={set('avif')} sizes={sizes} />
         <source type="image/webp" srcSet={set('webp')} sizes={sizes} />
-        <img src={`/img/${name}-1376.jpg`} srcSet={set('jpg')} sizes={sizes} alt={alt} width={w} height={h}
+        <img src={`/img/${name}-1536.jpg`} srcSet={set('jpg')} sizes={sizes} alt={alt} width={w} height={h}
           loading={priority ? 'eager' : 'lazy'} decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
       </picture>
     </div>

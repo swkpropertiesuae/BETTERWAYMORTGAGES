@@ -7,7 +7,10 @@ import Header from '@/components/Header';
 import CoPilot from '@/components/CoPilot';
 import MotionKit from '@/components/MotionKit';
 import { Footer, JsonLd, orgSchema } from '@/components/ui';
-import { SITE } from '@/data/site';
+import { SITE, waLink } from '@/data/site';
+import { BANKS } from '@/data/banks';
+import AnnouncementBar from '@/components/fx/AnnouncementBar';
+import LeadPopup from '@/components/fx/LeadPopup';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -39,10 +42,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" dir="ltr">
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[60] focus:rounded-btn focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
+        <AnnouncementBar items={[
+          { text: `Compare ${BANKS.length} UAE lenders side by side, on the same terms.`, cta: 'Compare rates', href: '/rates/uae-mortgage-rates-eibor-revert-bible' },
+          { text: 'Expat first-home buyers can borrow up to 80% of value.', cta: 'Check eligibility', href: '/mortgages/uae-residents' },
+          { text: 'CBUAE EIBOR fixings are published every business day.', cta: 'EIBOR tracker', href: '/rates/eibor-live-tracker' },
+        ]} />
         <Header />
         <main id="main">{children}</main>
         <Footer />
         <CoPilot />
+        <LeadPopup copy={{
+          label: 'Free mortgage pre-check',
+          title: 'Know your Dubai budget in one call',
+          body: 'Speak to an advisor about what UAE lenders could offer you, before you commit to a property.',
+          points: [`${BANKS.length} UAE lenders compared`, 'Debt-burden and LTV checked against CBUAE rules', 'No credit check, nothing submitted'],
+          cta: 'Chat with an advisor', ctaHref: waLink('Hello Betterway, I would like a free mortgage pre-check.'),
+          secondary: 'Calculate first', secondaryHref: '/calculators/mortgage-calculator',
+          close: 'Close', note: 'Indicative guidance only. The lender makes the final decision.',
+        }} />
         <MotionKit />
         <JsonLd data={orgSchema()} />
       </body>

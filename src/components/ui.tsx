@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { ArrowRight, Info, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { SITE, BENCH, DISCLOSURE_SHORT, DISCLOSURE_FULL, fullAddress, waLink } from '@/data/site';
 import MotionReveal from '@/components/MotionReveal';
+import TextReveal from '@/components/fx/TextReveal';
 import type { Faq as FaqT } from '@/data/products';
 
 export const aed = (n: number) => `AED ${Math.round(n).toLocaleString('en-US')}`;
@@ -79,7 +80,7 @@ export function MiniPhone() {
     <div className="float relative mx-auto hidden w-[250px] rounded-[2.6rem] bg-[#0b1220] p-[9px] shadow-[0_40px_80px_-30px_rgb(2_34_72/0.5),inset_0_0_0_2px_#2a3446] lg:block" aria-hidden="true">
       <div className="relative overflow-hidden rounded-[2.1rem] bg-white px-5 pb-6 pt-11">
         <span className="absolute start-1/2 top-2.5 h-[22px] w-[80px] -translate-x-1/2 rounded-full bg-[#0b1220] rtl:translate-x-1/2" />
-        <div className="flex items-center gap-2"><img src="/brand/icon-gold.svg" alt="" width={22} height={22} className="h-[22px] w-[22px]" /><span className="text-[13px] font-semibold text-navy">Betterway</span></div>
+        <div className="flex items-center gap-2"><img src="/brand/bw/betterway-icon-fullcolor-tight.svg" alt="" width={22} height={22} className="h-[22px] w-[22px]" /><span className="text-[13px] font-semibold text-navy">Betterway</span></div>
         <div className="mt-4 rounded-2xl bg-navy p-4 text-white">
           <p className="text-[11px] text-white/60">CBUAE max DBR</p>
           <p className="num text-[26px] font-semibold">{BENCH.maxDbrPct}%</p>
@@ -139,7 +140,7 @@ export function Section({ id, title, eyebrow, intro, children, tone = 'white', a
         <div className="mb-10 grid gap-6 lg:mb-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
           <div>
             {eyebrow && <p className={`hm-label mb-1 ${dark ? 'hm-label--light' : ''}`}>{eyebrow}</p>}
-            <h2 className={`hm-h2 !max-w-[22ch] ${dark ? '!text-white' : ''} [&_em]:not-italic`}><Rich text={title} /></h2>
+            <h2 className={`hm-h2 !max-w-[22ch] ${dark ? '!text-white' : ''}`}><TextReveal text={plain(title)} /></h2>
           </div>
           {(intro || action) && (
             <div className="grid justify-items-start gap-6 lg:justify-self-end lg:max-w-[460px]">
@@ -250,7 +251,7 @@ export function Footer() {
           <p>Compare UAE lenders, check what you can borrow and plan every dirham before you sign. One advisor, from first question to transfer day.</p>
           <div className="hm-hero__ctas"><HmButton href="/contact">Get in touch</HmButton><HmButton href="/calculators/mortgage-calculator" tone="ghost">Calculate payments</HmButton></div>
           <div className="hm-footer__scene">
-            <img src="/images/dubai-waterfront-1672.webp" srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w" sizes="100vw" alt="" width={1672} height={941} loading="lazy" />
+            <img src="/images/dubai-waterfront-1536.webp" srcSet="/images/dubai-waterfront-768.webp 768w, /images/dubai-waterfront-1536.webp 1536w, /images/dubai-waterfront-3072.webp 3072w" sizes="100vw" alt="" width={1536} height={864} loading="lazy" />
             <span className="hm-footer__word" aria-hidden="true">betterway</span>
           </div>
         </div>
@@ -294,7 +295,7 @@ export function orgSchema() {
     '@id': `${SITE.url}/#org`,
     name: SITE.name,
     url: SITE.url,
-    logo: `${SITE.url}/brand/logo-primary.svg`,
+    logo: `${SITE.url}/brand/bw/betterway-logo-horizontal-light-bg.svg`,
     image: `${SITE.url}/og.png`,
     ...(SITE.phone ? { telephone: SITE.phone } : {}),
     email: SITE.email,

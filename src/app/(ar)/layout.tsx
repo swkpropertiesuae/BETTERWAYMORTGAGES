@@ -6,6 +6,8 @@ import '../homy.css';
 import { ArrowRight } from 'lucide-react';
 import MotionKit from '@/components/MotionKit';
 import { ArFooter } from '@/components/ar';
+import AnnouncementBar from '@/components/fx/AnnouncementBar';
+import LeadPopup from '@/components/fx/LeadPopup';
 import { JsonLd, orgSchema } from '@/components/ui';
 import { SITE, waLink } from '@/data/site';
 import { AR_UI } from '@/data/ar';
@@ -39,6 +41,11 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl">
       <body>
+        <AnnouncementBar closeLabel="إغلاق الإعلان" items={[
+          { text: 'قارن 24 بنكاً في الإمارات وفق الشروط نفسها.', cta: 'دليل البنوك', href: '/ar#rates' },
+          { text: 'يمكن للوافدين تمويل حتى 80% من قيمة المسكن الأول.', cta: 'تحقق من الأهلية', href: '/ar/mortgages/uae-residents' },
+          { text: 'احسب الدفعة الشهرية ورسوم الشراء في دقيقة.', cta: 'حاسبة التمويل', href: '/ar/calculators/mortgage-calculator' },
+        ]} />
         <header className="bw-header hm-header">
           <div className="wrap bw-header__bar">
             <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0"><img src="/brand/bw/betterway-logo-horizontal-light-bg.svg" alt="Betterway Mortgages" width={1514} height={468} /></Link>
@@ -51,6 +58,15 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
         </header>
         <main id="main">{children}</main>
         <ArFooter />
+        <LeadPopup copy={{
+          label: 'فحص تمويل مجاني',
+          title: 'اعرف ميزانيتك في دبي بمكالمة واحدة',
+          body: 'تحدث مع مستشار حول ما قد تقدمه البنوك في الإمارات قبل الالتزام بأي عقار.',
+          points: ['مقارنة 24 بنكاً في الإمارات', 'التحقق من عبء الدين ونسبة التمويل وفق ضوابط المصرف المركزي', 'دون فحص ائتماني ودون تقديم طلب'],
+          cta: AR_UI.cta, ctaHref: waLink('مرحباً بيترواي، أرغب في فحص تمويل مجاني.'),
+          secondary: 'احسب أولاً', secondaryHref: '/ar/calculators/mortgage-calculator',
+          close: 'إغلاق', note: 'إرشادات تقديرية فقط. القرار النهائي للبنك.',
+        }} />
         <MotionKit />
         <JsonLd data={orgSchema()} />
       </body>

@@ -11,6 +11,9 @@ import { BANKS } from '@/data/banks';
 import { COMMUNITIES, AR_COMMUNITIES } from '@/data/communities';
 import { COUNTRIES } from '@/data/countries';
 import { waLink } from '@/data/site';
+import TextReveal from '@/components/fx/TextReveal';
+import VideoDialog from '@/components/fx/VideoDialog';
+import PhotoCarousel from '@/components/fx/PhotoCarousel';
 
 export const metadata: Metadata = {
   title: 'وسيط تمويل عقاري في دبي والإمارات',
@@ -20,24 +23,32 @@ export const metadata: Metadata = {
 const WA = waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.');
 
 const PATHS = [
-  { chip: 'حتى 80% من قيمة العقار', name: 'منزلك الأول في دبي', where: 'للمقيمين الوافدين · موظفون وأصحاب أعمال', href: '/ar/mortgages/uae-residents', img: '/images/dubai-interior-2560.webp' },
-  { chip: 'تمويل لغير المقيمين', name: 'الشراء من خارج الدولة', where: `إرشادات لغير المقيمين من ${COUNTRIES.length} دولة`, href: '/ar/mortgages/non-resident-dubai', img: '/images/marina-evening-2752.webp' },
-  { chip: 'تمويل التسليم', name: 'عقارات على الخارطة', where: 'خطط للدفعة النهائية للمطور مبكراً', href: '/ar/mortgages/under-construction-off-plan', img: '/images/offplan-dusk-2752.webp' },
+  { chip: 'حتى 80% من قيمة العقار', name: 'منزلك الأول في دبي', where: 'للمقيمين الوافدين · موظفون وأصحاب أعمال', href: '/ar/mortgages/uae-residents', img: '/images/dubai-interior-3072.webp' },
+  { chip: 'تمويل لغير المقيمين', name: 'الشراء من خارج الدولة', where: `إرشادات لغير المقيمين من ${COUNTRIES.length} دولة`, href: '/ar/mortgages/non-resident-dubai', img: '/images/marina-evening-3072.webp' },
+  { chip: 'تمويل التسليم', name: 'عقارات على الخارطة', where: 'خطط للدفعة النهائية للمطور مبكراً', href: '/ar/mortgages/under-construction-off-plan', img: '/images/offplan-dusk-3072.webp' },
 ].filter((p) => p.href.split('/').pop()! in AR_PRODUCTS);
 
 const SERVICES = [
-  { tag: 'شراء منزل', title: 'موّل منزلك في دبي', body: 'الميزانية والدفعة الأولى ورسوم الشراء مقارنة بسقف عبء الدين 50%، ثم البنوك التي تناسب ملفك.', href: '/ar#mortgages', img: '/images/villa-courtyard-1792.webp' },
-  { tag: 'انتقل ووفّر', title: 'إعادة التمويل بثقة', body: 'قارن وفورات نقل القرض بعد رسوم السداد المبكر والتقييم وتكاليف النقل قبل انتهاء الفترة الثابتة.', href: '/ar/calculators/buyout-refinance-savings', img: '/images/keys-handover-2752.webp' },
-  { tag: 'قارن الأسعار', title: 'كل البنوك جنباً إلى جنب', body: `الفترات الثابتة وهوامش الفائدة المتغيرة والرسوم من ${BANKS.length} بنكاً في الإمارات.`, href: '/ar#rates', img: '/images/guide-dbr-planning-2752.webp' },
+  { tag: 'شراء منزل', title: 'موّل منزلك في دبي', body: 'الميزانية والدفعة الأولى ورسوم الشراء مقارنة بسقف عبء الدين 50%، ثم البنوك التي تناسب ملفك.', href: '/ar#mortgages', img: '/images/villa-courtyard-960.webp' },
+  { tag: 'انتقل ووفّر', title: 'إعادة التمويل بثقة', body: 'قارن وفورات نقل القرض بعد رسوم السداد المبكر والتقييم وتكاليف النقل قبل انتهاء الفترة الثابتة.', href: '/ar/calculators/buyout-refinance-savings', img: '/images/keys-handover-3072.webp' },
+  { tag: 'قارن الأسعار', title: 'كل البنوك جنباً إلى جنب', body: `الفترات الثابتة وهوامش الفائدة المتغيرة والرسوم من ${BANKS.length} بنكاً في الإمارات.`, href: '/ar#rates', img: '/images/guide-dbr-planning-3072.webp' },
 ];
 
 const AREA_IMG: Record<string, string> = {
-  'dubai-marina': '/images/marina-evening.webp',
-  'downtown-dubai': '/images/guide-dbr-planning.webp',
-  'palm-jumeirah': '/images/dubai-waterfront-1672.webp',
-  'dubai-hills-estate': '/images/villa-courtyard.webp',
+  'dubai-marina': '/images/marina-evening-1536.webp',
+  'downtown-dubai': '/images/guide-dbr-planning-1536.webp',
+  'palm-jumeirah': '/images/dubai-waterfront-1536.webp',
+  'dubai-hills-estate': '/images/villa-courtyard-960.webp',
 };
 const AREAS = COMMUNITIES.filter((c) => c.slug in AREA_IMG && AR_COMMUNITIES.includes(c.slug));
+
+const GALLERY = [
+  { n: 'dubai-waterfront', title: 'فلل على الواجهة المائية', text: 'تمويل الفلل والتاون هاوس في مجتمعات التملك الحر في دبي.' },
+  { n: 'marina-evening', title: 'الحياة في دبي مارينا', text: 'تمويل الشقق للمقيمين والمشترين من الخارج.' },
+  { n: 'dubai-interior', title: 'منزلك الأول', text: 'حتى 80% من القيمة للوافدين في المسكن الأول وفق ضوابط المصرف المركزي.' },
+  { n: 'offplan-dusk', title: 'تسليم العقارات على الخارطة', text: 'خطط للدفعة النهائية للمطور قبل موعد التسليم.' },
+  { n: 'guide-transfer-day', title: 'يوم نقل الملكية', text: 'التقييم والعرض النهائي والتسجيل لدى أمين التسجيل.' },
+];
 
 function Btn({ href, children, ghost, light }: { href: string; children: string; ghost?: boolean; light?: boolean }) {
   const cls = `hm-btn ${ghost ? 'hm-btn--ghost' : ''} ${light ? 'hm-btn--light hm-btn--sm' : ''}`;
@@ -53,14 +64,14 @@ export default function Page() {
         <div className="hm-wrap">
           <span className="hm-hero__badge"><img src="/brand/bw/betterway-icon-fullcolor-tight.svg" alt="" width={26} height={26} /><span>مقارنة <b>{BANKS.length} بنكاً</b> في الإمارات</span></span>
           <h1>تمويلك العقاري في دبي، <em>بالطريقة الصحيحة</em></h1>
-          <p className="hm-hero__lead">استشارات تمويل عقاري مستقلة للمقيمين والمشترين من الخارج والمستثمرين. قارن البنوك، واعرف ميزانيتك، وانتقل من الموافقة المبدئية حتى نقل الملكية بثقة.</p>
+          <p className="hm-hero__lead"><TextReveal text="استشارات تمويل عقاري مستقلة للمقيمين والمشترين من الخارج والمستثمرين. قارن البنوك، واعرف ميزانيتك، وانتقل من الموافقة المبدئية حتى نقل الملكية بثقة." stagger={0.025} delay={0.2} /></p>
           <div className="hm-hero__ctas">
             <Btn href="/ar/calculators/dbr-borrowing-power">كم يمكنني أن أقترض؟</Btn>
             <Btn href={WA} ghost>تواصل مع مستشار</Btn>
           </div>
         </div>
         <div className="hm-hero__stage">
-          <img src="/images/dubai-waterfront-1672.webp" srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w, /images/dubai-waterfront-3344.webp 3344w" sizes="100vw" alt="صورة توضيحية: فيلا عصرية على الماء في دبي مع أفق المدينة" width={1672} height={941} fetchPriority="high" />
+          <img src="/images/dubai-waterfront-1536.webp" srcSet="/images/dubai-waterfront-768.webp 768w, /images/dubai-waterfront-1536.webp 1536w, /images/dubai-waterfront-3072.webp 3072w" sizes="100vw" alt="صورة توضيحية: فيلا عصرية على الماء في دبي مع أفق المدينة" width={1536} height={864} fetchPriority="high" />
           <div className="hm-hero__chips" aria-label="ضوابط مصرف الإمارات المركزي">
             <span className="hm-chip"><i />المسكن الأول للوافدين <b>80%</b></span>
             <span className="hm-chip"><i />سقف عبء الدين <b>50%</b></span>
@@ -72,17 +83,17 @@ export default function Page() {
       <section className="hm-section !pt-6">
         <div className="hm-wrap">
           <div className="hm-head">
-            <div><span className="hm-label">أثرنا</span><h2 className="hm-h2">وضوح حقيقي وراء كل قرار تمويل</h2></div>
+            <div><span className="hm-label">أثرنا</span><h2 className="hm-h2"><TextReveal text="وضوح حقيقي وراء كل قرار تمويل" /></h2></div>
             <p className="hm-sub">صُممت لتجعل تمويل المنازل في دبي أبسط وأكثر شفافية وثقة لكل مشترٍ.</p>
           </div>
           <div className="hm-impact">
-            <div className="hm-impact__img"><img src="/images/abudhabi-corniche.webp" alt="صورة توضيحية: فلل على شاطئ الإمارات" width={896} height={1200} loading="lazy" /></div>
+            <div className="hm-impact__img"><img src="/images/abudhabi-corniche-960.webp" alt="صورة توضيحية: فلل على شاطئ الإمارات" width={960} height={1280} loading="lazy" /></div>
             <div className="hm-impact__stats">
               {[[BANKS.length, 'بنكاً للمقارنة'], [COMMUNITIES.length, 'مجتمعاً للتملك الحر'], [COUNTRIES.length, 'دولة نرشد منها']].map(([v, l]) => (
                 <div key={l} className="hm-stat"><strong dir="ltr">{v}+</strong><span>{l}</span></div>
               ))}
             </div>
-            <div className="hm-impact__img"><img src="/images/villa-courtyard.webp" alt="صورة توضيحية: فناء فيلا مع بركة عاكسة" width={896} height={1200} loading="lazy" /></div>
+            <div className="hm-impact__img"><img src="/images/villa-courtyard-960.webp" alt="صورة توضيحية: فناء فيلا مع بركة عاكسة" width={960} height={1280} loading="lazy" /></div>
           </div>
         </div>
       </section>
@@ -96,12 +107,12 @@ export default function Page() {
       {PATHS.length > 0 && (
         <>
           <section className="hm-section !pb-12">
-            <div className="hm-wrap"><div className="hm-head"><div><span className="hm-label">أبرز المسارات</span><h2 className="hm-h2">المسارات الأكثر شيوعاً لمشتري دبي</h2></div><p className="hm-sub">كل مسار يفتح دليلاً كاملاً بشروط البنوك والتكاليف والمستندات المطلوبة.</p></div></div>
+            <div className="hm-wrap"><div className="hm-head"><div><span className="hm-label">أبرز المسارات</span><h2 className="hm-h2"><TextReveal text="المسارات الأكثر شيوعاً لمشتري دبي" /></h2></div><p className="hm-sub">كل مسار يفتح دليلاً كاملاً بشروط البنوك والتكاليف والمستندات المطلوبة.</p></div></div>
           </section>
           <div className="hm-stack">
             {PATHS.map((p) => (
               <article key={p.name} className="hm-panel">
-                <img src={p.img} alt="" width={2752} height={1536} loading="lazy" />
+                <img src={p.img} alt="" width={3072} height={1728} loading="lazy" />
                 <div className="hm-panel__glass">
                   <span className="hm-panel__price">{p.chip}</span>
                   <h3>{p.name}</h3>
@@ -116,7 +127,7 @@ export default function Page() {
 
       <section className="hm-section">
         <div className="hm-wrap">
-          <div className="hm-head"><div><span className="hm-label">خدماتنا</span><h2 className="hm-h2">كل ما تحتاجه لتمويل منزلك</h2></div><p className="hm-sub">أرقام واضحة وخيارات أفضل وقرارات واثقة.</p></div>
+          <div className="hm-head"><div><span className="hm-label">خدماتنا</span><h2 className="hm-h2"><TextReveal text="كل ما تحتاجه لتمويل منزلك" /></h2></div><p className="hm-sub">أرقام واضحة وخيارات أفضل وقرارات واثقة.</p></div>
           <div className="hm-services">
             {SERVICES.map((s, i) => (
               <article key={s.tag} className="hm-svc">
@@ -136,7 +147,7 @@ export default function Page() {
       {AREAS.length > 0 && (
         <section className="hm-section !pt-0">
           <div className="hm-wrap">
-            <div className="hm-head"><div><span className="hm-label">أين نقدم المشورة</span><h2 className="hm-h2">موّل منزلك في أبرز مجتمعات دبي</h2></div><p className="hm-sub">لكل مجتمع مطوروه ونوع وحداته وشهية البنوك تجاهه.</p></div>
+            <div className="hm-head"><div><span className="hm-label">أين نقدم المشورة</span><h2 className="hm-h2"><TextReveal text="موّل منزلك في أبرز مجتمعات دبي" /></h2></div><p className="hm-sub">لكل مجتمع مطوروه ونوع وحداته وشهية البنوك تجاهه.</p></div>
             <div className="hm-listings">
               {AREAS.map((c) => (
                 <Link key={c.slug} href={`/ar/areas/${c.emirate}/${c.slug}`} className="hm-listing">
@@ -156,9 +167,17 @@ export default function Page() {
         </section>
       )}
 
+      <section className="hm-section !pt-0">
+        <div className="hm-wrap">
+          <div className="hm-head"><div><span className="hm-label">دبي في حركة</span><h2 className="hm-h2"><TextReveal text="شاهد المنازل التي نموّلها لعملائنا" /></h2></div><p className="hm-sub">فيلم قصير ومعرض لأنواع العقارات التي نرتب تمويلها في دبي.</p></div>
+          <VideoDialog src="/media/betterway-dubai-film.mp4" poster="/media/betterway-dubai-film-poster.webp" alt="لقطة توضيحية: فيلا على الواجهة المائية في دبي" label="تشغيل فيلم بيترواي عن دبي" closeLabel="إغلاق الفيديو" caption="شاهد · 17 ثانية" />
+          <div className="mt-3"><PhotoCarousel rtl label="معرض عقارات دبي" prev="الشريحة السابقة" next="الشريحة التالية" slides={GALLERY.map((g) => ({ src: `/images/${g.n}-1536.webp`, srcSet: `/images/${g.n}-768.webp 768w, /images/${g.n}-1536.webp 1536w, /images/${g.n}-3072.webp 3072w`, alt: `صورة توضيحية: ${g.title}`, title: g.title, text: g.text }))} /></div>
+        </div>
+      </section>
+
       <section id="calculators" className="hm-section !pt-0">
         <div className="hm-wrap">
-          <div className="hm-head"><div><span className="hm-label">حاسبة التمويل</span><h2 className="hm-h2">احسب أرقامك قبل البنك</h2></div><p className="hm-sub">الدفعة الشهرية والدفعة الأولى ورسوم الشراء في عرض واحد، دون تسجيل.</p></div>
+          <div className="hm-head"><div><span className="hm-label">حاسبة التمويل</span><h2 className="hm-h2"><TextReveal text="احسب أرقامك قبل البنك" /></h2></div><p className="hm-sub">الدفعة الشهرية والدفعة الأولى ورسوم الشراء في عرض واحد، دون تسجيل.</p></div>
           <div className="hm-calc"><Calculator slug="mortgage-calculator" lang="ar" /></div>
           <div className="mt-8"><ArLinks links={AR_CALCS.map((s) => ({ title: TOOLS.find((t) => t.slug === s)!.ar, href: `/ar/calculators/${s}` }))} /></div>
         </div>
