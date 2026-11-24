@@ -11,6 +11,9 @@ import { COUNTRIES } from '@/data/countries';
 import { TEAM_SPECIALISTS } from '@/data/team';
 import { LTV_RULES } from '@/data/site';
 import { borrowingPower, buyoutSavings, cashToClose } from '@/lib/math';
+import TextReveal from '@/components/fx/TextReveal';
+import VideoDialog from '@/components/fx/VideoDialog';
+import PhotoCarousel from '@/components/fx/PhotoCarousel';
 
 export const metadata: Metadata = {
   title: 'Mortgage Broker in Dubai & UAE | Betterway Mortgages',
@@ -63,10 +66,19 @@ const FAQS = [
   { q: 'What fees should I ask about?', a: 'Request a written breakdown of bank fees, broker fees if applicable, valuation, insurance, property registration and transfer charges before proceeding.' },
 ];
 
+const GALLERY = [
+  { n: 'dubai-waterfront', title: 'Waterfront villas', text: 'Villa and townhouse finance across Dubai’s freehold communities.' },
+  { n: 'marina-evening', title: 'Dubai Marina living', text: 'Apartment mortgages for residents and overseas buyers.' },
+  { n: 'dubai-interior', title: 'Your first home', text: 'Up to 80% LTV for expat first-home buyers under CBUAE rules.' },
+  { n: 'offplan-dusk', title: 'Off-plan handover', text: 'Plan the final developer payment before handover day.' },
+  { n: 'guide-transfer-day', title: 'Transfer day', text: 'Valuation, final offer and registration at the trustee office.' },
+];
+const slides = (alt: (t: string) => string) => GALLERY.map((g) => ({ src: `/images/${g.n}-1536.webp`, srcSet: `/images/${g.n}-768.webp 768w, /images/${g.n}-1536.webp 1536w, /images/${g.n}-3072.webp 3072w`, alt: alt(g.title), title: g.title, text: g.text }));
+
 function Head({ label, title, sub, action }: { label: string; title: string; sub: string; action?: [string, string] }) {
   return (
     <div className="hm-head">
-      <div><span className="hm-label">{label}</span><h2 className="hm-h2" data-reveal="rise">{title}</h2></div>
+      <div><span className="hm-label">{label}</span><h2 className="hm-h2"><TextReveal text={title} /></h2></div>
       <div className="grid gap-5" data-reveal="rise"><p className="hm-sub">{sub}</p>{action && <div><HmButton href={action[1]} size="sm">{action[0]}</HmButton></div>}</div>
     </div>
   );
@@ -81,7 +93,7 @@ export default function Home() {
         <div className="hm-wrap">
           <span className="hm-hero__badge"><img src="/brand/bw/betterway-icon-fullcolor-tight.svg" alt="" width={26} height={26} /><span><b>{BANKS.length} UAE lenders</b> compared</span></span>
           <h1>Your Dubai Mortgage, <em>Done Right</em></h1>
-          <p className="hm-hero__lead">Independent mortgage advice for residents, overseas buyers and investors. Compare banks, know your budget and move from pre-approval to transfer day with confidence.</p>
+          <p className="hm-hero__lead"><TextReveal text="Independent mortgage advice for residents, overseas buyers and investors. Compare banks, know your budget and move from pre-approval to transfer day with confidence." stagger={0.025} delay={0.2} /></p>
           <div className="hm-hero__ctas">
             <HmButton href="/calculators/mortgage-calculator">Check What I Can Borrow</HmButton>
             <HmButton href="/contact" tone="ghost">Book a Consultation</HmButton>
@@ -181,6 +193,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Film + gallery carousel */}
+      <section className="hm-section !pt-0">
+        <div className="hm-wrap">
+          <Head label="Dubai in motion" title="See the homes our clients finance" sub="A short film and gallery of the property types we arrange finance for across Dubai." />
+          <VideoDialog src="/media/betterway-dubai-film.mp4" poster="/media/betterway-dubai-film-poster.webp" alt="Concept film still: a waterfront villa in Dubai" label="Play the Betterway Dubai film" caption="Watch · 17 sec" />
+          <div className="mt-3"><PhotoCarousel label="Dubai property gallery" slides={slides((t) => `Concept image: ${t}`)} /></div>
+        </div>
+      </section>
+
       {/* Highlight marquee + calculator */}
       <section className="hm-section !pb-0">
         <div className="hm-wrap"><Head label="Mortgage calculator" title="Run the numbers before the bank does" sub="Monthly payment, deposit and purchase fees in one view. No sign-up, nothing submitted." /></div>
@@ -223,7 +244,7 @@ export default function Home() {
         <div className="hm-wrap hm-faq">
           <div>
             <span className="hm-label">FAQ</span>
-            <h2 className="hm-h2" data-reveal="rise">Things You Should Know</h2>
+            <h2 className="hm-h2"><TextReveal text="Things You Should Know" /></h2>
             <p className="hm-sub mt-5">We’ve answered the most common questions to help you start with clarity.</p>
             <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-teal">Ask an advisor <ArrowRight size={15} /></Link>
           </div>

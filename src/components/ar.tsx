@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { ArrowLeft, ArrowRight, Mail, MapPin, MessageCircle } from 'lucide-react';
 import { JsonLd } from './ui';
+import TextReveal from './fx/TextReveal';
 import { SITE, waLink } from '@/data/site';
 import { AR_UI } from '@/data/ar';
 
@@ -36,7 +37,7 @@ export function ArSection({ title, children, tone = 'white', id, label, sub }: {
     <section id={id} className={`bg-white ${tone === 'mist' ? 'hm-sec--mist' : ''} py-16 lg:py-24`}>
       <div className="wrap">
         <div className="hm-head">
-          <div>{label && <span className="hm-label">{label}</span>}<h2 className="hm-h2 !max-w-[24ch]">{title}</h2></div>
+          <div>{label && <span className="hm-label">{label}</span>}<h2 className="hm-h2 !max-w-[24ch]"><TextReveal text={title} /></h2></div>
           {sub && <p className="hm-sub">{sub}</p>}
         </div>
         {children}

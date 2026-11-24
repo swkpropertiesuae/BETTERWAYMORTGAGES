@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { ArrowRight, Info, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { SITE, BENCH, DISCLOSURE_SHORT, DISCLOSURE_FULL, fullAddress, waLink } from '@/data/site';
 import MotionReveal from '@/components/MotionReveal';
+import TextReveal from '@/components/fx/TextReveal';
 import type { Faq as FaqT } from '@/data/products';
 
 export const aed = (n: number) => `AED ${Math.round(n).toLocaleString('en-US')}`;
@@ -139,7 +140,7 @@ export function Section({ id, title, eyebrow, intro, children, tone = 'white', a
         <div className="mb-10 grid gap-6 lg:mb-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
           <div>
             {eyebrow && <p className={`hm-label mb-1 ${dark ? 'hm-label--light' : ''}`}>{eyebrow}</p>}
-            <h2 className={`hm-h2 !max-w-[22ch] ${dark ? '!text-white' : ''} [&_em]:not-italic`}><Rich text={title} /></h2>
+            <h2 className={`hm-h2 !max-w-[22ch] ${dark ? '!text-white' : ''}`}><TextReveal text={plain(title)} /></h2>
           </div>
           {(intro || action) && (
             <div className="grid justify-items-start gap-6 lg:justify-self-end lg:max-w-[460px]">

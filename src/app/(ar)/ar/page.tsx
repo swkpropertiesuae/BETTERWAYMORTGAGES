@@ -11,6 +11,9 @@ import { BANKS } from '@/data/banks';
 import { COMMUNITIES, AR_COMMUNITIES } from '@/data/communities';
 import { COUNTRIES } from '@/data/countries';
 import { waLink } from '@/data/site';
+import TextReveal from '@/components/fx/TextReveal';
+import VideoDialog from '@/components/fx/VideoDialog';
+import PhotoCarousel from '@/components/fx/PhotoCarousel';
 
 export const metadata: Metadata = {
   title: 'وسيط تمويل عقاري في دبي والإمارات',
@@ -39,6 +42,14 @@ const AREA_IMG: Record<string, string> = {
 };
 const AREAS = COMMUNITIES.filter((c) => c.slug in AREA_IMG && AR_COMMUNITIES.includes(c.slug));
 
+const GALLERY = [
+  { n: 'dubai-waterfront', title: 'فلل على الواجهة المائية', text: 'تمويل الفلل والتاون هاوس في مجتمعات التملك الحر في دبي.' },
+  { n: 'marina-evening', title: 'الحياة في دبي مارينا', text: 'تمويل الشقق للمقيمين والمشترين من الخارج.' },
+  { n: 'dubai-interior', title: 'منزلك الأول', text: 'حتى 80% من القيمة للوافدين في المسكن الأول وفق ضوابط المصرف المركزي.' },
+  { n: 'offplan-dusk', title: 'تسليم العقارات على الخارطة', text: 'خطط للدفعة النهائية للمطور قبل موعد التسليم.' },
+  { n: 'guide-transfer-day', title: 'يوم نقل الملكية', text: 'التقييم والعرض النهائي والتسجيل لدى أمين التسجيل.' },
+];
+
 function Btn({ href, children, ghost, light }: { href: string; children: string; ghost?: boolean; light?: boolean }) {
   const cls = `hm-btn ${ghost ? 'hm-btn--ghost' : ''} ${light ? 'hm-btn--light hm-btn--sm' : ''}`;
   const inner = <>{children}{!ghost && <span className="hm-btn__tile" aria-hidden="true"><ArrowRight size={16} /></span>}</>;
@@ -53,7 +64,7 @@ export default function Page() {
         <div className="hm-wrap">
           <span className="hm-hero__badge"><img src="/brand/bw/betterway-icon-fullcolor-tight.svg" alt="" width={26} height={26} /><span>مقارنة <b>{BANKS.length} بنكاً</b> في الإمارات</span></span>
           <h1>تمويلك العقاري في دبي، <em>بالطريقة الصحيحة</em></h1>
-          <p className="hm-hero__lead">استشارات تمويل عقاري مستقلة للمقيمين والمشترين من الخارج والمستثمرين. قارن البنوك، واعرف ميزانيتك، وانتقل من الموافقة المبدئية حتى نقل الملكية بثقة.</p>
+          <p className="hm-hero__lead"><TextReveal text="استشارات تمويل عقاري مستقلة للمقيمين والمشترين من الخارج والمستثمرين. قارن البنوك، واعرف ميزانيتك، وانتقل من الموافقة المبدئية حتى نقل الملكية بثقة." stagger={0.025} delay={0.2} /></p>
           <div className="hm-hero__ctas">
             <Btn href="/ar/calculators/dbr-borrowing-power">كم يمكنني أن أقترض؟</Btn>
             <Btn href={WA} ghost>تواصل مع مستشار</Btn>
@@ -72,7 +83,7 @@ export default function Page() {
       <section className="hm-section !pt-6">
         <div className="hm-wrap">
           <div className="hm-head">
-            <div><span className="hm-label">أثرنا</span><h2 className="hm-h2">وضوح حقيقي وراء كل قرار تمويل</h2></div>
+            <div><span className="hm-label">أثرنا</span><h2 className="hm-h2"><TextReveal text="وضوح حقيقي وراء كل قرار تمويل" /></h2></div>
             <p className="hm-sub">صُممت لتجعل تمويل المنازل في دبي أبسط وأكثر شفافية وثقة لكل مشترٍ.</p>
           </div>
           <div className="hm-impact">
@@ -96,7 +107,7 @@ export default function Page() {
       {PATHS.length > 0 && (
         <>
           <section className="hm-section !pb-12">
-            <div className="hm-wrap"><div className="hm-head"><div><span className="hm-label">أبرز المسارات</span><h2 className="hm-h2">المسارات الأكثر شيوعاً لمشتري دبي</h2></div><p className="hm-sub">كل مسار يفتح دليلاً كاملاً بشروط البنوك والتكاليف والمستندات المطلوبة.</p></div></div>
+            <div className="hm-wrap"><div className="hm-head"><div><span className="hm-label">أبرز المسارات</span><h2 className="hm-h2"><TextReveal text="المسارات الأكثر شيوعاً لمشتري دبي" /></h2></div><p className="hm-sub">كل مسار يفتح دليلاً كاملاً بشروط البنوك والتكاليف والمستندات المطلوبة.</p></div></div>
           </section>
           <div className="hm-stack">
             {PATHS.map((p) => (
@@ -116,7 +127,7 @@ export default function Page() {
 
       <section className="hm-section">
         <div className="hm-wrap">
-          <div className="hm-head"><div><span className="hm-label">خدماتنا</span><h2 className="hm-h2">كل ما تحتاجه لتمويل منزلك</h2></div><p className="hm-sub">أرقام واضحة وخيارات أفضل وقرارات واثقة.</p></div>
+          <div className="hm-head"><div><span className="hm-label">خدماتنا</span><h2 className="hm-h2"><TextReveal text="كل ما تحتاجه لتمويل منزلك" /></h2></div><p className="hm-sub">أرقام واضحة وخيارات أفضل وقرارات واثقة.</p></div>
           <div className="hm-services">
             {SERVICES.map((s, i) => (
               <article key={s.tag} className="hm-svc">
@@ -136,7 +147,7 @@ export default function Page() {
       {AREAS.length > 0 && (
         <section className="hm-section !pt-0">
           <div className="hm-wrap">
-            <div className="hm-head"><div><span className="hm-label">أين نقدم المشورة</span><h2 className="hm-h2">موّل منزلك في أبرز مجتمعات دبي</h2></div><p className="hm-sub">لكل مجتمع مطوروه ونوع وحداته وشهية البنوك تجاهه.</p></div>
+            <div className="hm-head"><div><span className="hm-label">أين نقدم المشورة</span><h2 className="hm-h2"><TextReveal text="موّل منزلك في أبرز مجتمعات دبي" /></h2></div><p className="hm-sub">لكل مجتمع مطوروه ونوع وحداته وشهية البنوك تجاهه.</p></div>
             <div className="hm-listings">
               {AREAS.map((c) => (
                 <Link key={c.slug} href={`/ar/areas/${c.emirate}/${c.slug}`} className="hm-listing">
@@ -156,9 +167,17 @@ export default function Page() {
         </section>
       )}
 
+      <section className="hm-section !pt-0">
+        <div className="hm-wrap">
+          <div className="hm-head"><div><span className="hm-label">دبي في حركة</span><h2 className="hm-h2"><TextReveal text="شاهد المنازل التي نموّلها لعملائنا" /></h2></div><p className="hm-sub">فيلم قصير ومعرض لأنواع العقارات التي نرتب تمويلها في دبي.</p></div>
+          <VideoDialog src="/media/betterway-dubai-film.mp4" poster="/media/betterway-dubai-film-poster.webp" alt="لقطة توضيحية: فيلا على الواجهة المائية في دبي" label="تشغيل فيلم بيترواي عن دبي" closeLabel="إغلاق الفيديو" caption="شاهد · 17 ثانية" />
+          <div className="mt-3"><PhotoCarousel rtl label="معرض عقارات دبي" prev="الشريحة السابقة" next="الشريحة التالية" slides={GALLERY.map((g) => ({ src: `/images/${g.n}-1536.webp`, srcSet: `/images/${g.n}-768.webp 768w, /images/${g.n}-1536.webp 1536w, /images/${g.n}-3072.webp 3072w`, alt: `صورة توضيحية: ${g.title}`, title: g.title, text: g.text }))} /></div>
+        </div>
+      </section>
+
       <section id="calculators" className="hm-section !pt-0">
         <div className="hm-wrap">
-          <div className="hm-head"><div><span className="hm-label">حاسبة التمويل</span><h2 className="hm-h2">احسب أرقامك قبل البنك</h2></div><p className="hm-sub">الدفعة الشهرية والدفعة الأولى ورسوم الشراء في عرض واحد، دون تسجيل.</p></div>
+          <div className="hm-head"><div><span className="hm-label">حاسبة التمويل</span><h2 className="hm-h2"><TextReveal text="احسب أرقامك قبل البنك" /></h2></div><p className="hm-sub">الدفعة الشهرية والدفعة الأولى ورسوم الشراء في عرض واحد، دون تسجيل.</p></div>
           <div className="hm-calc"><Calculator slug="mortgage-calculator" lang="ar" /></div>
           <div className="mt-8"><ArLinks links={AR_CALCS.map((s) => ({ title: TOOLS.find((t) => t.slug === s)!.ar, href: `/ar/calculators/${s}` }))} /></div>
         </div>
