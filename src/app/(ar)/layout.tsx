@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from 'next';
 import Link from 'next/link';
 import '../globals.css';
 import '../brand.css';
+import '../homy.css';
+import { ArrowRight } from 'lucide-react';
+import MotionKit from '@/components/MotionKit';
+import { ArFooter } from '@/components/ar';
 import { JsonLd, orgSchema } from '@/components/ui';
 import { SITE, waLink } from '@/data/site';
 import { AR_UI } from '@/data/ar';
@@ -19,13 +23,15 @@ export const metadata: Metadata = {
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
       { url: '/favicon-64x64.png', sizes: '64x64', type: 'image/png' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
     ],
+    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#179373' }],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   manifest: '/site.webmanifest',
   openGraph: { locale: 'ar_AE', images: [{ url: '/og.png', width: 1200, height: 630 }] },
 };
-export const viewport: Viewport = { themeColor: '#021125' };
+export const viewport: Viewport = { themeColor: '#ffffff' };
 
 const NAV: [string, string][] = [[AR_UI.mortgages, '/ar#mortgages'], [AR_UI.calculators, '/ar#calculators'], [AR_UI.rates, '/ar#rates'], [AR_UI.areas, '/ar#areas']];
 
@@ -33,31 +39,19 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl">
       <body>
-        <div className="bw-announce">
-          <div className="wrap !justify-between gap-4 whitespace-nowrap">
-            <p className="hidden truncate md:block">{AR_UI.fee} · {AR_UI.address}</p>
-            <p className="ms-auto">أسعار وأرقام إرشادية · الشروط يحددها البنك</p>
-          </div>
-        </div>
-        <header className="bw-header" data-scrolled="true">
+        <header className="bw-header hm-header">
           <div className="wrap bw-header__bar">
-            <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0"><img src="/brand/logo-white.svg" alt="Betterway Mortgages" width={1618} height={276} /></Link>
-            <nav className="hidden gap-1 lg:flex" aria-label="الرئيسية">{NAV.map(([l, h]) => <Link key={h} href={h} className="whitespace-nowrap rounded-full px-3.5 py-2 text-[15px] font-medium text-white/85 transition hover:bg-white/5 hover:text-brass">{l}</Link>)}</nav>
+            <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0"><img src="/brand/bw/betterway-logo-horizontal-light-bg.svg" alt="Betterway Mortgages" width={1514} height={468} /></Link>
+            <nav className="hidden gap-1 lg:flex" aria-label="الرئيسية">{NAV.map(([l, h]) => <Link key={h} href={h} className="whitespace-nowrap rounded-full px-3.5 py-2 text-[15px] font-medium text-navy transition hover:bg-navy/5 hover:text-teal">{l}</Link>)}</nav>
             <div className="flex items-center gap-2.5">
-              <Link href="/" lang="en" className="inline-flex h-[42px] items-center justify-center rounded-full border border-white/20 bg-white/5 px-4 text-xs font-semibold tracking-wider text-white transition hover:border-brass/60 hover:text-brass">{AR_UI.english}</Link>
-              <a href={waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.')} rel="noopener" className="bw-cta-pill !text-[14px] !normal-case !tracking-normal max-sm:hidden">{AR_UI.cta}</a>
+              <Link href="/" lang="en" className="inline-flex h-10 items-center justify-center rounded-xl border border-line bg-white px-4 text-xs font-semibold tracking-wider text-navy transition hover:border-navy">{AR_UI.english}</Link>
+              <span className="max-sm:hidden"><a href={waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.')} rel="noopener" className="hm-btn hm-btn--sm">{AR_UI.cta}<span className="hm-btn__tile" aria-hidden="true"><ArrowRight size={15} /></span></a></span>
             </div>
           </div>
         </header>
         <main id="main">{children}</main>
-        <footer className="bw-footer py-14 text-sm">
-          <div className="wrap space-y-4">
-            <img src="/brand/logo-white-full.svg" alt="Betterway Mortgages" width={1618} height={276} className="h-auto w-[268px] max-w-full" />
-            <p>{AR_UI.address}</p>
-            <p className="text-xs text-white/50">{AR_UI.disclosure}</p>
-            <p className="text-xs text-white/50">© 2026 Betterway Mortgages · <Link href="/privacy-and-cbuae-disclosure" className="ulink">الإفصاح والخصوصية</Link></p>
-          </div>
-        </footer>
+        <ArFooter />
+        <MotionKit />
         <JsonLd data={orgSchema()} />
       </body>
     </html>

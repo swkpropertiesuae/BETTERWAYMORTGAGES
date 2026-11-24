@@ -185,10 +185,10 @@ export function TeamPortfolio({
                 />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#021125]/92 via-[#021125]/40 to-transparent"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#070e1a]/92 via-[#070e1a]/40 to-transparent"
                 />
                 <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2">
-                  <span className="rounded-full border border-white/20 bg-[#021125]/70 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brass backdrop-blur-md">
+                  <span className="rounded-full border border-white/20 bg-[#070e1a]/70 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-brass backdrop-blur-md">
                     {member.category}
                   </span>
                   <button
@@ -198,7 +198,7 @@ export function TeamPortfolio({
                       setView8k(false);
                     }}
                     aria-label={`Inspect ${member.name} full profile and 8K portrait`}
-                    className="grid h-8 w-8 place-items-center rounded-full border border-white/25 bg-[#021125]/65 text-white backdrop-blur-md transition hover:border-brass hover:text-brass cursor-pointer"
+                    className="grid h-8 w-8 place-items-center rounded-full border border-white/25 bg-[#070e1a]/65 text-white backdrop-blur-md transition hover:border-brass hover:text-brass cursor-pointer"
                   >
                     <Expand size={14} />
                   </button>
@@ -298,7 +298,7 @@ export function TeamPortfolio({
                   <button
                     type="button"
                     onClick={() => setView8k((v) => !v)}
-                    className="rounded-full border border-brass/50 bg-[#021125]/85 px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-brass backdrop-blur-md transition hover:bg-[#072244] cursor-pointer"
+                    className="rounded-full border border-brass/50 bg-[#070e1a]/85 px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-brass backdrop-blur-md transition hover:bg-[#072244] cursor-pointer"
                   >
                     {view8k ? '8K UHD Master Loaded' : 'Load 8K UHD Master'}
                   </button>
@@ -306,7 +306,7 @@ export function TeamPortfolio({
                     href={selected.portrait8k}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full border border-white/25 bg-[#021125]/75 px-3 py-1.5 font-mono text-[10.5px] font-semibold text-white backdrop-blur-md hover:border-brass hover:text-brass"
+                    className="rounded-full border border-white/25 bg-[#070e1a]/75 px-3 py-1.5 font-mono text-[10.5px] font-semibold text-white backdrop-blur-md hover:border-brass hover:text-brass"
                   >
                     Open 8K ↗
                   </a>

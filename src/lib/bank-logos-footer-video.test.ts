@@ -24,11 +24,11 @@ test('every bank in BANKS has a distinct, non-empty logo asset on disk under pub
   }
 });
 
-test('Footer removes the oversized bw-footer__mark Betterway wordmark while keeping logo-white-full.svg', () => {
+test('Footer uses the brand-pack dark-background logo and no legacy bw-footer__mark wordmark', () => {
   const ui = readFileSync(repoFile('src/components/ui.tsx'), 'utf8');
   const brand = readFileSync(repoFile('src/app/brand.css'), 'utf8');
 
-  assert.match(ui, /\/brand\/logo-white-full\.svg/);
+  assert.match(ui, /\/brand\/bw\/betterway-logo-horizontal-dark-bg\.svg/);
   assert.doesNotMatch(ui, /bw-footer__mark/);
   assert.doesNotMatch(ui, /data-reveal="mark"/);
   assert.doesNotMatch(brand, /\.bw-footer__mark\b/);

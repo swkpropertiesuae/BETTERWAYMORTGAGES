@@ -20,7 +20,7 @@ export default function AppShell({ title, nav, active, children }: { title: stri
         </div>
       </div>
       <div className="wrap grid gap-8 py-10 lg:grid-cols-[220px_1fr]">
-        <aside>
+        <aside className="min-w-0">
           <p className="eyebrow mb-4">{title}</p>
           <nav className="flex gap-1 overflow-x-auto lg:flex-col" aria-label={title}>
             {nav.map(([l, h]) => (
