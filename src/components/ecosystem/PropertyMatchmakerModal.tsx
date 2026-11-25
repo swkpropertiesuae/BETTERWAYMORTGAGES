@@ -112,7 +112,7 @@ export default function PropertyMatchmakerModal({
           >
             <div className="flex items-start justify-between gap-4 border-b border-[#eef0f3] pb-4">
               <div className="flex items-center gap-3">
-                <img src="/brand/icon-fullcolor.svg" alt="" width={36} height={36} className="h-9 w-9" />
+                <img src="/brand/icon.png" alt="" width={36} height={36} className="h-9 w-9 object-contain" />
                 <div>
                   <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#0e6954]">
                     Betterway Concierge &amp; Budget Matchmaker

@@ -335,6 +335,13 @@ export default function HotOffersPopup() {
               <div className="flex flex-col justify-between p-6 sm:p-8 lg:overflow-y-auto">
                 <div>
                   <div className="flex flex-wrap items-center gap-2 pr-10">
+                    <img
+                      src="/brand/icon.png"
+                      alt=""
+                      width={24}
+                      height={24}
+                      className="h-6 w-6 shrink-0 object-contain"
+                    />
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-[#070e1a] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#f1d57e]">
                       <Flame size={12} /> Hot UAE Offers · 2026–2027
                     </span>

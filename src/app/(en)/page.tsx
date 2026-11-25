@@ -161,7 +161,7 @@ export default function Home() {
                 <div className="holo-visual-stage" data-reveal="frost">
                   <div className="flex items-center justify-between gap-2">
                     <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
-                      <img src="/brand/icon-fullcolor.svg" alt="" width={18} height={18} className="h-[18px] w-[18px]" />
+                      <img src="/brand/icon.png" alt="" width={18} height={18} className="h-[18px] w-[18px] object-contain" />
                       24-Bank Comparison Engine
                     </span>
                     <span className="rounded-full bg-[#179373]/25 px-3 py-1 text-[11px] font-bold text-[#34dfac]">
@@ -345,7 +345,7 @@ export default function Home() {
                   </div>
                   <div className="mx-auto my-5 w-full max-w-[320px] rounded-[22px] border border-white/20 bg-[#080b0f]/85 p-5 shadow-2xl backdrop-blur-md">
                     <div className="flex items-center gap-2.5 border-b border-white/10 pb-3">
-                      <img src="/brand/icon-fullcolor.svg" alt="" width={24} height={24} className="h-6 w-6" />
+                      <img src="/brand/icon.png" alt="" width={24} height={24} className="h-6 w-6 object-contain" />
                       <div>
                         <p className="text-xs font-bold text-white">Buyer Readiness Verified</p>
                         <p className="text-[10.5px] text-white/60">CBUAE 50% DBR · 24-Bank Panel</p>

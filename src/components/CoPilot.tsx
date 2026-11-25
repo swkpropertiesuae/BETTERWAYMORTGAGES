@@ -98,11 +98,11 @@ export default function CoPilot() {
             <div className="flex items-center justify-between bg-[#0b1117] px-5 py-4 text-white">
               <div className="flex items-center gap-2.5">
                 <img
-                  src="/brand/icon-fullcolor.svg"
+                  src="/brand/icon.png"
                   alt=""
                   width={28}
                   height={28}
-                  className="h-7 w-7 shrink-0"
+                  className="h-7 w-7 shrink-0 object-contain"
                 />
                 <div>
                   <p className="font-display text-sm font-semibold leading-tight text-white">

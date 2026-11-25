@@ -132,10 +132,10 @@ export function VideoBriefingModal({
             <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4 sm:px-7">
               <div className="flex items-center gap-3.5">
                 <img
-                  src="/brand/logo-white.svg"
+                  src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
-                  width={1514}
-                  height={468}
+                  width={1400}
+                  height={403}
                   className="h-8 w-auto sm:h-9"
                 />
                 <span className="hidden rounded-full border border-[#179373]/40 bg-[#179373]/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#34dfac] sm:inline-flex">
@@ -257,7 +257,7 @@ export function VideoBriefingShowcase() {
             </div>
             <div className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#080b0f]/75 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-md">
-                <img src="/brand/icon-fullcolor.svg" alt="" width={18} height={18} className="h-[18px] w-[18px]" />
+                <img src="/brand/icon.png" alt="" width={18} height={18} className="h-[18px] w-[18px] object-contain" />
                 Betterway Mortgages · UAE Advisory Film
               </span>
               <span className="num rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#080b0f]">

@@ -45,7 +45,7 @@ export default function PhoneHero() {
       <div className="iphone iphone-back" aria-hidden="true">
         <div className="iphone-screen">
           <div className="island" />
-          <div className="phone-brand"><img src="/brand/icon-fullcolor.svg" alt="" width={26} height={26} /> Betterway</div>
+          <div className="phone-brand"><img src="/brand/icon.png" alt="" width={26} height={26} className="object-contain" /> Betterway</div>
           <p className="phone-kicker">YOUR NEXT STEPS</p>
           <p className="text-xl font-semibold leading-tight text-navy">From plans<br />to your keys.</p>
           <div className="mt-5 space-y-4">
@@ -60,7 +60,7 @@ export default function PhoneHero() {
         <div className="iphone-screen">
           <div className="phone-status" aria-hidden="true"><span>9:41</span><span className="flex gap-1"><Signal size={10} /><Wifi size={10} /><BatteryFull size={13} /></span></div>
           <div className="island" />
-          <div className="phone-brand"><img src="/brand/icon-fullcolor.svg" alt="" width={26} height={26} /> Betterway <ArrowUpRight size={13} className="ms-auto text-teal" /></div>
+          <div className="phone-brand"><img src="/brand/icon.png" alt="" width={26} height={26} className="object-contain" /> Betterway <ArrowUpRight size={13} className="ms-auto text-teal" /></div>
           <p className="phone-kicker">YOUR HOME. YOUR NUMBERS.</p>
           <div className="phone-tabs" role="group" aria-label="Mortgage planning view">
             <button type="button" aria-pressed={view === 'payment'} onClick={() => setView('payment')}>Monthly</button>

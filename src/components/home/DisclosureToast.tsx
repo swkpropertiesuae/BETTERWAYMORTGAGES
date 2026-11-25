@@ -56,11 +56,11 @@ export default function DisclosureToast() {
           aria-label="Regulatory notice"
         >
           <img
-            src="/brand/icon-fullcolor.svg"
+            src="/brand/icon.png"
             alt=""
             width={24}
             height={24}
-            className="mt-0.5 h-6 w-6 shrink-0"
+            className="mt-0.5 h-6 w-6 shrink-0 object-contain"
           />
           <p>
             Betterway Mortgages is a mortgage adviser, not a bank. Lending decisions, rates and final offers are made by

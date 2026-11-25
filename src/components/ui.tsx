@@ -150,7 +150,7 @@ export function MiniPhone() {
       aria-hidden="true"
     >
       <div className="flex items-center gap-2.5">
-        <img src="/brand/icon-fullcolor.svg" alt="" width={34} height={34} className="h-[34px] w-[34px]" />
+        <img src="/brand/icon.png" alt="" width={34} height={34} className="h-[34px] w-[34px] object-contain" />
         <span className="font-display text-sm font-semibold text-[#080b0f]">Betterway CBUAE Caps</span>
       </div>
       <div className="mt-4 rounded-[16px] bg-[#080b0f] p-4 text-white">
@@ -461,10 +461,10 @@ export function Footer() {
             <div className="space-y-5">
               <Link href="/" aria-label="Betterway Mortgages home" className="inline-block">
                 <img
-                  src="/brand/logo-white-full.svg"
+                  src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
-                  width={1450}
-                  height={468}
+                  width={1400}
+                  height={403}
                   className="h-14 w-auto sm:h-16"
                 />
               </Link>
@@ -567,7 +567,7 @@ export function orgSchema() {
     '@id': `${SITE.url}/#org`,
     name: SITE.name,
     url: SITE.url,
-    logo: `${SITE.url}/brand/logo-primary.svg`,
+    logo: `${SITE.url}/brand/logo-light-4k.png`,
     image: `${SITE.url}/og.png`,
     ...(SITE.phone ? { telephone: SITE.phone } : {}),
     email: SITE.email,

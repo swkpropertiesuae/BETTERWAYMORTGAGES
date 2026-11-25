@@ -20,10 +20,13 @@ export const metadata: Metadata = {
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-64x64.png', sizes: '64x64', type: 'image/png' },
       { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
       { url: '/favicon-128x128.png', sizes: '128x128', type: 'image/png' },
       { url: '/favicon-256x256.png', sizes: '256x256', type: 'image/png' },
+      { url: '/favicon-512.png', sizes: '512x512', type: 'image/png' },
     ],
+    shortcut: [{ url: '/favicon.ico' }],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
     other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#179373' }],
   },
@@ -41,7 +44,7 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
         <header className="bw-header" data-scrolled="true">
           <div className="wrap bw-header__bar">
             <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0">
-              <img src="/brand/logo-light.svg" alt="Betterway Mortgages" width={1514} height={468} fetchPriority="high" />
+              <img src="/brand/logo-horizontal-light.png" alt="Betterway Mortgages" width={1400} height={403} fetchPriority="high" />
             </Link>
             <nav className="hidden gap-4 lg:flex" aria-label="الرئيسية">
               {NAV.map(([l, h]) => (
@@ -64,7 +67,7 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
         <div className="homy-footer-shell">
           <footer className="homy-footer-card px-6 py-12 text-sm">
             <div className="wrap space-y-4">
-              <img src="/brand/logo-white-full.svg" alt="Betterway Mortgages" width={1450} height={468} className="h-auto w-[264px] max-w-full" />
+              <img src="/brand/logo-horizontal-dark.png" alt="Betterway Mortgages" width={1400} height={403} className="h-auto w-[264px] max-w-full" />
               <p className="text-white/75">{AR_UI.address}</p>
               <p className="text-xs text-white/55">{AR_UI.disclosure}</p>
               <p className="text-xs text-white/55">© 2026 Betterway Mortgages LLC · <Link href="/privacy-and-cbuae-disclosure" className="ulink text-white/80">الإفصاح والخصوصية</Link></p>
