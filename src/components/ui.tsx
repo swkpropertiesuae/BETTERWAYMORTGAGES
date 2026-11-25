@@ -393,7 +393,7 @@ const FOOT: { title: string; links: [string, string][] }[] = [
       ['UAE National Mortgages', '/mortgages/uae-nationals'],
       ['Non-Resident Buyers', '/mortgages/non-resident-dubai'],
       ['Islamic Home Finance', '/mortgages/islamic-home-finance'],
-      ['Property Closing Desk', '/concierge'],
+      ['BetterClose · Closing Desk', '/concierge'],
     ],
   },
   {
@@ -408,12 +408,12 @@ const FOOT: { title: string; links: [string, string][] }[] = [
     ],
   },
   {
-    title: 'Partners & OS',
+    title: 'Betterway Suite',
     links: [
-      ['Betterway Partner Desk (Agents)', '/hub'],
-      ['Betterway Brokerage Platform', '/edge'],
-      ['Become a RERA Partner', '/partners'],
-      ['Client & Staff Portal Login', '/portal/login'],
+      ['BetterHub · RERA Agencies', '/hub'],
+      ['BetterCore · Brokerage OS', '/edge'],
+      ['Join BetterHub', '/partners'],
+      ['BetterVault · Portal Login', '/portal/login'],
       ['About Betterway', '/about-us'],
       ['Our Dubai Specialists', '/our-underwriters'],
     ],
@@ -466,7 +466,7 @@ export function Footer() {
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={421}
+                  height={431}
                   className="h-14 w-auto sm:h-16"
                 />
               </Link>
@@ -531,9 +531,9 @@ export function Footer() {
             </p>
             <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-white/75">
               <p>© 2026 {SITE.legalName}. All rights reserved.</p>
-              <nav aria-label="Legal and SEO links" className="flex flex-wrap items-center gap-5">
+              <nav aria-label="Legal and SEO links" className="flex flex-wrap items-center gap-4">
                 <Link href="/hot-offers" className="ulink">
-                  Hot Offers
+                  BetterDesk
                 </Link>
                 <Link href="/insights" className="ulink">
                   36 UAE Insights
@@ -550,9 +550,13 @@ export function Footer() {
                 <Link href="/sitemap" className="ulink">
                   Sitemap
                 </Link>
-                <Link href="/ar" lang="ar" className="ulink">
-                  العربية
-                </Link>
+                <span className="inline-flex items-center gap-2.5 border-s border-white/15 ps-3">
+                  <Link href="/ar" lang="ar" className="ulink">العربية</Link>
+                  <Link href="/ru" lang="ru" className="ulink">RU</Link>
+                  <Link href="/zh" lang="zh" className="ulink">中文</Link>
+                  <Link href="/fr" lang="fr" className="ulink">FR</Link>
+                  <Link href="/es" lang="es" className="ulink">ES</Link>
+                </span>
               </nav>
             </div>
           </div>

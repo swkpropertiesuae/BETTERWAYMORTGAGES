@@ -66,7 +66,7 @@ export function AnimatedAnnouncementBar({
         className="inline-flex items-center gap-1.5 font-semibold text-[#0a4a3e] transition-colors hover:text-[#080b0f] cursor-pointer"
       >
         <Play size={11} fill="currentColor" />
-        <span>Watch 24s Briefing</span>
+        <span>Watch Briefing</span>
       </button>
     </div>
   );
@@ -123,7 +123,7 @@ export function VideoBriefingModal({
           className="fixed inset-0 z-[120] flex items-center justify-center bg-[#080b0f]/82 p-4 backdrop-blur-xl sm:p-6"
           role="dialog"
           aria-modal="true"
-          aria-label="Betterway Mortgages 24-second corporate briefing video"
+          aria-label="Betterway Mortgages corporate advisory briefing"
         >
           <div
             onClick={(e) => e.stopPropagation()}
@@ -135,11 +135,11 @@ export function VideoBriefingModal({
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={403}
-                  className="h-8 w-auto sm:h-9"
+                  height={431}
+                  className="h-9 w-auto sm:h-10"
                 />
                 <span className="hidden rounded-full border border-[#179373]/40 bg-[#179373]/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#34dfac] sm:inline-flex">
-                  Full HD 1080p Briefing
+                  Advisory Briefing
                 </span>
               </div>
               <button
@@ -206,7 +206,7 @@ export function VideoBriefingShowcase() {
           <div className="space-y-5 text-white">
             <span className="homy-tag homy-tag--light">
               <span className="homy-tag__ring" aria-hidden="true" />
-              <span>24-Second Briefing</span>
+              <span>Advisory Briefing</span>
             </span>
             <h2 className="font-display text-[clamp(28px,3.2vw,42px)] font-semibold leading-[1.12] tracking-[-0.025em] text-white">
               How Betterway compares 24 UAE banks in one clear dossier
@@ -222,14 +222,14 @@ export function VideoBriefingShowcase() {
                 className="homy-btn homy-btn--white"
               >
                 <Play size={14} fill="currentColor" />
-                <span>Play 1080p Briefing</span>
+                <span>Watch Briefing</span>
                 <span className="homy-btn__disc" aria-hidden="true">
                   <ArrowRight size={14} strokeWidth={2.2} />
                 </span>
               </button>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-medium text-white/80">
                 <Sparkles size={13} className="text-[#d7b158]" />
-                0:24 · Zero sign-up required
+                Betterway Briefing · Zero sign-up required
               </span>
             </div>
           </div>
@@ -237,12 +237,12 @@ export function VideoBriefingShowcase() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            aria-label="Play Betterway Mortgages 24-second HD briefing video"
-            className="relative aspect-video w-full overflow-hidden rounded-[20px] border border-white/15 bg-[#080b0f] text-left shadow-[0_32px_70px_-24px_rgba(0,0,0,0.75)] cursor-pointer"
+            aria-label="Play Betterway Mortgages advisory briefing"
+            className="group relative aspect-video w-full overflow-hidden rounded-[20px] border border-white/15 bg-[#080b0f] text-left shadow-[0_32px_70px_-24px_rgba(0,0,0,0.75)] cursor-pointer"
           >
             <img
               src="/video/betterway-explainer.jpg"
-              alt="Preview of the Betterway Mortgages 24-second UAE lender comparison briefing"
+              alt="Preview of the Betterway Mortgages UAE lender comparison briefing"
               width={1920}
               height={1080}
               loading="lazy"
@@ -258,10 +258,10 @@ export function VideoBriefingShowcase() {
             <div className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#080b0f]/75 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-md">
                 <img src="/brand/icon.png" alt="" width={18} height={18} className="h-[18px] w-[18px] object-contain" />
-                Betterway Mortgages · UAE Advisory Film
+                Betterway Mortgages · Advisory Briefing
               </span>
-              <span className="num rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#080b0f]">
-                0:24 HD
+              <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#080b0f]">
+                Watch Briefing
               </span>
             </div>
           </button>

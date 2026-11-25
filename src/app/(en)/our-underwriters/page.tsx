@@ -52,6 +52,8 @@ export default function Page() {
       name: e.name,
       jobTitle: e.role,
       email: e.email,
+      image: `${SITE.url}${e.portrait}`,
+      description: e.bio,
       worksFor: { '@id': `${SITE.url}/#org` },
     })),
     ...TEAM_SPECIALISTS.map((s) => ({

@@ -44,7 +44,7 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
         <header className="bw-header" data-scrolled="true">
           <div className="wrap bw-header__bar">
             <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0">
-              <img src="/brand/logo-horizontal-light.png" alt="Betterway Mortgages" width={1400} height={421} fetchPriority="high" />
+              <img src="/brand/logo-horizontal-light.png" alt="Betterway Mortgages" width={1400} height={431} fetchPriority="high" />
             </Link>
             <nav className="hidden gap-4 lg:flex" aria-label="الرئيسية">
               {NAV.map(([l, h]) => (
@@ -53,8 +53,15 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
                 </Link>
               ))}
             </nav>
-            <div className="flex items-center gap-2.5">
-              <Link href="/" lang="en" className="inline-flex h-[42px] items-center justify-center rounded-[12px] border border-[#080b0f]/20 px-4 text-xs font-semibold tracking-wider text-[#080b0f] transition hover:border-[#080b0f]">
+            <div className="flex items-center gap-2">
+              <div className="hidden items-center gap-1 rounded-full border border-[#080b0f]/15 bg-[#f4f6f8] px-2.5 py-1 text-[11px] font-semibold text-[#080b0f] sm:inline-flex">
+                <Link href="/" lang="en" className="px-1.5 py-0.5 hover:text-[#0e6954]">EN</Link>
+                <Link href="/ru" lang="ru" className="px-1.5 py-0.5 hover:text-[#0e6954]">RU</Link>
+                <Link href="/zh" lang="zh" className="px-1.5 py-0.5 hover:text-[#0e6954]">中文</Link>
+                <Link href="/fr" lang="fr" className="px-1.5 py-0.5 hover:text-[#0e6954]">FR</Link>
+                <Link href="/es" lang="es" className="px-1.5 py-0.5 hover:text-[#0e6954]">ES</Link>
+              </div>
+              <Link href="/" lang="en" className="inline-flex h-[42px] items-center justify-center rounded-[12px] border border-[#080b0f]/20 px-4 text-xs font-semibold tracking-wider text-[#080b0f] transition hover:border-[#080b0f] sm:hidden">
                 {AR_UI.english}
               </Link>
               <a href={waLink('مرحباً بيترواي، أرغب في الحصول على عرض تمويل عقاري.')} rel="noopener" className="homy-btn max-sm:hidden">

@@ -6,9 +6,9 @@ import { SpotlightCard } from '@/components/ui/MotionPrimitives';
 import { COMMUNITIES } from '@/data/communities';
 
 export const metadata: Metadata = {
-  title: 'Betterway Property Closing Desk — Budget, Form F & Transfer Advisory Dubai',
+  title: 'BetterClose — Property Budget, Form F & Transfer Advisory Dubai | Betterway',
   description:
-    'Align your Dubai property purchase with verified bank pre-approval, Form F valuation protection clauses, independent valuation coordination, and DLD trustee conveyancing.',
+    'BetterClose aligns your Dubai property purchase with verified bank pre-approval, Form F valuation protection clauses, independent valuation coordination, and DLD trustee conveyancing.',
   alternates: { canonical: '/concierge' },
 };
 
@@ -44,7 +44,7 @@ export default function ConciergePage() {
       <section className="holo-section">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
-            <SectionTag>Betterway Property Closing Desk</SectionTag>
+            <SectionTag>BetterClose · Buying &amp; Transfer Desk</SectionTag>
             <h1 className="holo-display-h2">
               Confirm your financing before you sign Form F.
             </h1>

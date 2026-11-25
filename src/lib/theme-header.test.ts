@@ -95,16 +95,18 @@ test('isNavActive highlights Home only on / and maps nested routes to their mega
   assert.equal(isNavActive('/about-us', 'Resources'), true);
 });
 
-test('English and Arabic Homy headers render 4K transparent PNG logo-horizontal-light.png and transparent hero logo-horizontal-dark.png with 1200px breakpoint and Contact us pill', () => {
+test('English and Arabic corporate headers render 4K transparent PNG logo-horizontal-light.png and logo-horizontal-dark.png with 6-language & currency switcher', () => {
   const header = read('src/components/Header.tsx');
   const arLayout = read('src/app/(ar)/layout.tsx');
   const brand = read('src/app/brand.css');
 
   assert.match(header, /\/brand\/logo-horizontal-light\.png/);
   assert.match(header, /\/brand\/logo-horizontal-dark\.png/);
-  assert.match(header, />\s*Home\s*</i);
+  assert.match(header, /t\.nav\.home/);
   assert.match(header, /Contact us/i);
   assert.match(header, /min-\[1200px\]/);
+  assert.match(header, /LOCALES/);
+  assert.match(header, /CURRENCIES/);
 
   assert.match(arLayout, /<header[\s\S]*\/brand\/logo-horizontal-light\.png[\s\S]*<\/header>/);
   assert.match(brand, /\.bw-header\[data-over-hero='true'\]\[data-scrolled='false'\]\s*\{[^}]*background:\s*transparent/);

@@ -329,7 +329,7 @@
   opacity: 0.94;
 }
 .bw-header__logo img {
-  height: clamp(50px, 3.85vw, 58px);
+  height: clamp(54px, 4.1vw, 62px);
   width: auto;
   display: block;
   object-fit: contain;
@@ -349,14 +349,17 @@
 }
 .bw-header[data-over-hero='true'][data-scrolled='false'] .bw-logo-over-hero {
   display: block !important;
-  filter: drop-shadow(0 1px 3px rgba(7, 14, 26, 0.72)) drop-shadow(0 4px 16px rgba(7, 14, 26, 0.44));
+  filter: drop-shadow(0 1px 2px rgba(5, 11, 22, 0.88)) drop-shadow(0 4px 18px rgba(5, 11, 22, 0.62));
 }
 .bw-header[data-over-hero='true'][data-scrolled='false'] .bw-logo-on-light {
   display: none !important;
 }
 @media (max-width: 639px) {
-  .bw-header__bar { height: 82px; }
-  .bw-header__logo img { height: clamp(38px, 9.5vw, 44px); }
+  :root { --bw-rail-pad: 14px; }
+  .bw-header__bar { height: 76px; gap: 8px; }
+  .bw-header[data-over-hero='true'][data-scrolled='false'] .bw-header__bar { height: 74px; }
+  .bw-header__logo img { height: clamp(34px, 9.2vw, 40px); }
+  .holo-icon-btn { height: 40px; min-width: 40px; padding-inline: 10px; gap: 5px; font-size: 12px; }
 }
 
 .bw-nav {
@@ -1793,21 +1796,21 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   filter: brightness(1.06) saturate(1.06) contrast(1.02);
   image-rendering: auto;
 }
-/* Feather-light sunlit morning daylight scrim: keeps Dubai morning sky & architecture vividly visible from edge to edge */
+/* Feather-light sunlit morning daylight scrim: keeps Dubai morning sky & architecture vividly visible while locking 100% logo readability top-left */
 .holo-hero__scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse 30% 24% at 15% 7%, rgba(9, 19, 36, 0.34) 0%, rgba(9, 19, 36, 0) 100%),
+    radial-gradient(ellipse 34% 26% at 15% 7%, rgba(7, 15, 29, 0.56) 0%, rgba(7, 15, 29, 0.18) 58%, rgba(7, 15, 29, 0) 100%),
     radial-gradient(ellipse 68% 82% at 18% 60%, rgba(9, 19, 36, 0.56) 0%, rgba(9, 19, 36, 0.28) 46%, rgba(9, 19, 36, 0) 78%),
-    linear-gradient(180deg, rgba(9, 19, 36, 0.32) 0%, rgba(9, 19, 36, 0.08) 16%, rgba(9, 19, 36, 0) 30%, rgba(9, 19, 36, 0) 74%, rgba(9, 19, 36, 0.48) 100%);
+    linear-gradient(180deg, rgba(7, 15, 29, 0.44) 0%, rgba(9, 19, 36, 0.12) 17%, rgba(9, 19, 36, 0) 32%, rgba(9, 19, 36, 0) 74%, rgba(9, 19, 36, 0.48) 100%);
 }
 .holo-hero__scrim--rtl {
   background:
-    radial-gradient(ellipse 30% 24% at 85% 7%, rgba(9, 19, 36, 0.34) 0%, rgba(9, 19, 36, 0) 100%),
+    radial-gradient(ellipse 34% 26% at 85% 7%, rgba(7, 15, 29, 0.56) 0%, rgba(7, 15, 29, 0.18) 58%, rgba(7, 15, 29, 0) 100%),
     radial-gradient(ellipse 68% 82% at 82% 60%, rgba(9, 19, 36, 0.56) 0%, rgba(9, 19, 36, 0.28) 46%, rgba(9, 19, 36, 0) 78%),
-    linear-gradient(180deg, rgba(9, 19, 36, 0.32) 0%, rgba(9, 19, 36, 0.08) 16%, rgba(9, 19, 36, 0) 30%, rgba(9, 19, 36, 0) 74%, rgba(9, 19, 36, 0.48) 100%);
+    linear-gradient(180deg, rgba(7, 15, 29, 0.44) 0%, rgba(9, 19, 36, 0.12) 17%, rgba(9, 19, 36, 0) 32%, rgba(9, 19, 36, 0) 74%, rgba(9, 19, 36, 0.48) 100%);
 }
 .bw-hero-chip {
   display: inline-flex;
@@ -2192,4 +2195,107 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
 }
 .bw-hot-trigger-btn:hover {
   border-color: #34dfac;
+}
+
+/* ==========================================================================
+   ENDLESS SLOW HORIZONTAL INFINITE 24-BANK MARQUEE & 21st.dev INTERACTIVE CARDS
+   ========================================================================== */
+@keyframes bw-bank-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.bw-bank-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  direction: ltr;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+}
+.bw-bank-marquee__track {
+  display: flex;
+  width: max-content;
+  gap: 14px;
+  padding-block: 6px;
+  will-change: transform;
+  animation: bw-bank-scroll 64s linear infinite;
+}
+.bw-bank-marquee:hover .bw-bank-marquee__track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bw-bank-marquee__track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.bw-21-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 20px 54px -30px rgba(10, 20, 36, 0.22);
+  transition: border-color 0.3s ease, box-shadow 0.35s var(--ease-expo), transform 0.35s var(--ease-expo);
+}
+.bw-21-card::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #13765e 0%, #34dfac 50%, #d7b158 100%);
+  opacity: 0.72;
+  transition: opacity 0.3s ease;
+}
+.bw-21-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.32s ease;
+  background: radial-gradient(
+    420px circle at var(--spot-x, 50%) var(--spot-y, 24%),
+    rgba(23, 147, 115, 0.1),
+    rgba(215, 177, 88, 0.08) 45%,
+    transparent 70%
+  );
+}
+.bw-21-card:hover {
+  border-color: rgba(19, 118, 94, 0.45);
+  box-shadow: 0 32px 72px -30px rgba(10, 20, 36, 0.34);
+  transform: translateY(-3px);
+}
+.bw-21-card:hover::before,
+.bw-21-card:hover::after {
+  opacity: 1;
+}
+
+/* Crisp WCAG AAA Live Currency Switcher Pills inside Calculator */
+.bw-cur-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  color: #0a1424;
+  padding: 6px 13px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+.bw-cur-pill:hover {
+  border-color: #179373;
+  color: #0e6954;
+}
+.bw-cur-pill[aria-pressed='true'] {
+  background-color: #0a1424;
+  border-color: #0a1424;
+  color: #ffffff;
 }

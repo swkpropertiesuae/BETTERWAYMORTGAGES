@@ -24,15 +24,14 @@ export default function Page() {
               Independent mortgage advice, grounded in written bank terms
             </h1>
             <p className="homy-sub max-w-lg">
-              Founded in Dubai by Managing Director Shabib Siraj and operated from Al Nasr Plaza in Oud Metha,
-              Betterway Mortgages LLC was built to solve a straightforward problem: UAE property buyers are routinely
-              shown one lender’s introductory fixed rate while post-fixed EIBOR revert margins, DLD transfer outlays,
-              and credit-card DBR deductions are left until the final week before closing.
+              Founded in Dubai by Managing Director Warda Kapadia with Executive Director Shabib Siraj — bringing 15+
+              years of world-class in-house banking experience and 8+ years advising High-Net-Worth UAE real estate
+              investors — Betterway Mortgages LLC operates from Al Nasr Plaza, Oud Metha with one clear promise: show
+              every borrower the whole written offer before they sign.
             </p>
             <p className="max-w-lg text-sm leading-relaxed text-[#464c5c]">
-              Our advisors review 24 licensed conventional and Islamic lenders side by side, model every dirham of
-              upfront cash under Central Bank of the UAE (CBUAE) rules, and stay on the file through bank valuation,
-              Final Offer Letter review, and Dubai Land Department trustee day.
+              We educate clients one-on-one across 24 licensed conventional and Islamic lenders, clarify CBUAE 50% DBR
+              caps and 4% DLD transfer fees upfront, and manage every milestone calmly through valuation and keys.
             </p>
             <div className="mt-2 overflow-hidden rounded-[20px]">
               <img
@@ -95,9 +94,9 @@ export default function Page() {
 
       <Section
         tone="mist"
-        eyebrow="Leadership & Specialists"
+        eyebrow="Leadership & Team · Oud Metha, Dubai"
         title="The people behind Betterway"
-        intro="Led by Founder & Managing Director Shabib Siraj from our Oud Metha, Dubai office, our advisory, conveyancing, and operations specialists guide every file from initial check to DLD transfer."
+        intro="Led by Founder & Managing Director Warda Kapadia and Executive Director Shabib Siraj, our eight-person Dubai team guides every client 1-on-1 from initial discovery to DLD keys."
         action={{ label: 'Full team portfolio', href: '/our-underwriters' }}
       >
         <TeamPortfolio showLeadership />

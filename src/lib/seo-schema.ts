@@ -109,12 +109,31 @@ export function enhancedOrgSchema() {
         },
       ],
     },
+    founder: {
+      '@type': 'Person',
+      name: 'Warda Kapadia',
+      jobTitle: 'Founder & Managing Director',
+    },
+    employee: [
+      {
+        '@type': 'Person',
+        name: 'Warda Kapadia',
+        jobTitle: 'Founder & Managing Director',
+      },
+      {
+        '@type': 'Person',
+        name: 'Shabib Siraj',
+        jobTitle: 'Executive Director',
+        description:
+          '15+ years of banking in-house experience across world-class banks and 8+ years as a Personal Investment Advisor handling HNWI for UAE Real Estate.',
+      },
+    ],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer support',
       email: SITE.email,
       areaServed: 'AE',
-      availableLanguage: ['English', 'Arabic'],
+      availableLanguage: ['English', 'Arabic', 'Russian', 'Chinese', 'French', 'Spanish'],
     },
     additionalProperty: {
       '@type': 'PropertyValue',
@@ -133,7 +152,7 @@ export function websiteSchema() {
     url: SITE.url,
     name: SITE.name,
     alternateName: ['Betterway Mortgages Dubai', 'بيترواي للتمويل العقاري'],
-    inLanguage: ['en-AE', 'ar-AE'],
+    inLanguage: ['en-AE', 'ar-AE', 'ru', 'zh-Hans', 'fr', 'es'],
     publisher: { '@id': `${SITE.url}/#org` },
     potentialAction: {
       '@type': 'SearchAction',

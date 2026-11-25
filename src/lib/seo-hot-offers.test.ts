@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { PDF_RESOURCES, SEO_TOPICS } from '../data/seo-topics.ts';
+import { CURRENCIES, I18N, LOCALES, convertFromAed, formatMoneyFromAed } from '../data/i18n.ts';
 import { enhancedOrgSchema, websiteSchema, speakablePageSchema, pdfCatalogSchema } from './seo-schema.ts';
 
 const repo = (rel: string) => path.resolve(process.cwd(), rel);
@@ -36,16 +37,31 @@ test('21st.dev HotOffersPopup features official female advisors, border-beam fra
   assert.match(src, /Betterway-UAE-Mortgage-Buyer-Guide-2026\.pdf/);
 });
 
-test('cards, carousels, and bank marquee have infinite/exiting animations cleanly removed', () => {
+test('24-bank marquee runs endless slow horizontal CSS animation and zero 24s/1080p strings exist in UI', () => {
   const marquee = readFileSync(repo('src/components/LogoMarquee.tsx'), 'utf8');
-  const sections = readFileSync(repo('src/components/home/HomySections.tsx'), 'utf8');
-  const reveal = readFileSync(repo('src/components/MotionReveal.tsx'), 'utf8');
   const brand = readFileSync(repo('src/app/brand.css'), 'utf8');
+  const motionPrim = readFileSync(repo('src/components/ui/MotionPrimitives.tsx'), 'utf8');
+  const hero = readFileSync(repo('src/components/home/HomeHero.tsx'), 'utf8');
+  const homeExp = readFileSync(repo('src/components/home/HomeExperience.tsx'), 'utf8');
 
-  assert.doesNotMatch(marquee, /requestAnimationFrame/);
-  assert.doesNotMatch(sections, /homy-reviews-track/);
-  assert.doesNotMatch(reveal, /whileInView/);
-  assert.doesNotMatch(brand, /animation:\s*homy-marquee/);
+  assert.match(marquee, /bw-bank-marquee/);
+  assert.match(brand, /@keyframes\s+bw-bank-scroll/);
+  for (const src of [motionPrim, hero, homeExp]) {
+    assert.doesNotMatch(src, /\b24s\b|0:24|24-second|1080p|Full HD/i);
+  }
+});
+
+test('6 full languages (EN, AR, RU, ZH, FR, ES) and live multi-currency FX conversion work deterministically', () => {
+  assert.equal(LOCALES.length, 6);
+  assert.equal(CURRENCIES.length, 8);
+  for (const loc of LOCALES) {
+    assert.ok(I18N[loc.code]?.hero.title.length > 12, `Missing hero title for ${loc.code}`);
+    assert.ok(I18N[loc.code]?.faq.items.length >= 4, `Missing FAQs for ${loc.code}`);
+  }
+  const usd = convertFromAed(3_672_500, 'USD');
+  assert.ok(Math.abs(usd - 1_000_000) < 100, `Expected ~1,000,000 USD, got ${usd}`);
+  assert.match(formatMoneyFromAed(2_000_000, 'GBP'), /^£/);
+  assert.match(formatMoneyFromAed(2_000_000, 'AED'), /^AED /);
 });
 
 test('SEO, AEO, AIO, GEO JSON-LD schemas emit valid Organization, WebSite, Speakable & DigitalDocument structures', () => {

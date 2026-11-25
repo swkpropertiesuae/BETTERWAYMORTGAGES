@@ -5,9 +5,9 @@ import { SpotlightCard } from '@/components/ui/MotionPrimitives';
 import { SITE } from '@/data/site';
 
 export const metadata: Metadata = {
-  title: 'Betterway Brokerage Platform — UAE Mortgage Operating Infrastructure',
+  title: 'BetterCore — UAE Mortgage Operating Infrastructure | Betterway Mortgages',
   description:
-    'Operate your UAE mortgage practice on the Betterway Brokerage Platform: Betterway OS CRM, 24-bank policy matrices, CBUAE KFS & DBR tools, and bilingual EN/AR client portals.',
+    'Operate your UAE mortgage practice on BetterCore: 24-bank policy matrices, CBUAE KFS & DBR workflows, BetterVault client rooms, and 6-language digital tools.',
   alternates: { canonical: '/edge' },
 };
 
@@ -42,9 +42,9 @@ export default function EdgePage() {
       <section className="holo-section holo-section--dark">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
-            <SectionTag light>Betterway Brokerage Platform · Betterway OS</SectionTag>
+            <SectionTag light>BetterCore · Proprietary Operating Core</SectionTag>
             <h1 className="font-display text-[clamp(36px,4.8vw,68px)] font-extrabold leading-[1.03] tracking-[-0.03em] text-white">
-              Run your UAE mortgage practice on Betterway OS.
+              Run your UAE mortgage practice on BetterCore.
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-white/75">
               Our 24-bank comparison schedules, daily CBUAE EIBOR calculators, and structured transfer-day workflows —
@@ -52,10 +52,10 @@ export default function EdgePage() {
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Cta href="/contact" tone="light">
-                Request Platform Demo
+                Request BetterCore Demo
               </Cta>
               <Cta href={SITE.osLoginUrl} tone="ghost" external className="!border-white/30 !text-white hover:!bg-white/10">
-                Sign in to Betterway OS
+                Sign in to BetterVault
               </Cta>
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function EdgePage() {
 
       <section className="holo-section">
         <div className="mb-10 max-w-2xl space-y-3">
-          <SectionTag>Two Ways To Run On Edge</SectionTag>
+          <SectionTag>Two Ways To Run On BetterCore</SectionTag>
           <h2 className="holo-display-h3">Choose the structure that fits your practice</h2>
         </div>
         <div className="grid gap-6 md:grid-cols-2">

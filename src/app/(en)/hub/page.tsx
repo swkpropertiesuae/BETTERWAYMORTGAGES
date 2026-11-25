@@ -6,9 +6,9 @@ import { SpotlightCard } from '@/components/ui/MotionPrimitives';
 import { SITE } from '@/data/site';
 
 export const metadata: Metadata = {
-  title: 'Betterway Partner Desk — RERA Real Estate Agency Mortgage Portal',
+  title: 'BetterHub — RERA Real Estate Agency Mortgage Portal | Betterway Mortgages',
   description:
-    'The Betterway Partner Desk for Dubai & UAE real estate brokerages: co-branded mortgage calculators, verified buyer DBR readiness, live milestone tracking, and RERA partner onboarding.',
+    'BetterHub for Dubai & UAE real estate brokerages: co-branded mortgage calculators, verified buyer DBR readiness, live milestone tracking, and RERA partner onboarding.',
   alternates: { canonical: '/hub' },
 };
 
@@ -41,18 +41,18 @@ export default function HubPage() {
       <section className="holo-section holo-section--mint">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
-            <SectionTag>Betterway Partner Desk · For RERA Agencies</SectionTag>
+            <SectionTag>BetterHub · For RERA Agencies</SectionTag>
             <h1 className="holo-display-h2">
               Bring financing-ready buyers to every viewing and transfer.
             </h1>
             <p className="holo-lead max-w-xl">
-              The Betterway Partner Desk connects Dubai and UAE real estate brokerages directly to our 24-bank
-              underwriting specialists, co-branded DBR calculators, and Betterway OS milestone tracking.
+              BetterHub connects Dubai and UAE real estate brokerages directly to our 24-bank underwriting specialists,
+              co-branded DBR calculators, and BetterCore milestone tracking.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
-              <Cta href="/partners/register">Register Your Brokerage</Cta>
+              <Cta href="/partners/register">Join BetterHub</Cta>
               <Cta href={SITE.osPartnerHubUrl} tone="ghost" external>
-                Open Betterway OS Partner Portal
+                Open BetterHub Portal
               </Cta>
             </div>
           </div>
@@ -60,7 +60,7 @@ export default function HubPage() {
           <div className="holo-visual-stage">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold">
-                <Smartphone size={14} className="text-[#34dfac]" /> Betterway Partner Desk · Agent OS
+                <Smartphone size={14} className="text-[#34dfac]" /> BetterHub · Agent Workspace
               </span>
               <span className="num text-xs text-[#f1d57e]">24 UAE Banks</span>
             </div>

@@ -17,8 +17,25 @@ export const GET = () => {
       address: fullAddress,
       email: SITE.email,
       hours: SITE.hours,
+      leadership: [
+        { name: 'Warda Kapadia', role: 'Founder & Managing Director' },
+        {
+          name: 'Shabib Siraj',
+          role: 'Executive Director',
+          credentials: '15+ years of banking in-house experience across world-class banks & 8+ years as Personal Investment Advisor handling HNWI for UAE Real Estate',
+        },
+      ],
+      platforms: {
+        betterHub: `${SITE.url}/hub`,
+        betterCore: `${SITE.url}/edge`,
+        betterClose: `${SITE.url}/concierge`,
+        betterVault: `${SITE.url}/portal/login`,
+        betterDesk: `${SITE.url}/hot-offers`,
+      },
       partnerEcosystem: ['https://swkpropertiesuae.com', SITE.osUrl],
-      languages: ['en-AE', 'ar-AE'],
+      languages: ['en-AE', 'ar-AE', 'ru', 'zh-Hans', 'fr', 'es'],
+      currencies: ['AED', 'USD', 'GBP', 'EUR', 'SAR', 'RUB', 'CNY', 'INR'],
+      liveFxEndpoint: `${SITE.url}/api/market/fx`,
     },
     statutoryBenchmarks: {
       cbuae: BENCH,

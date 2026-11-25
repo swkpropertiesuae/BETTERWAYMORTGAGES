@@ -264,13 +264,13 @@ export default function HotOffersPopup() {
 
               {/* LEFT: Creative Editorial Female Advisor Portrait Showcase */}
               <div className="relative flex min-h-[300px] flex-col justify-between overflow-hidden bg-[#070e1a] p-6 text-white lg:min-h-[560px]">
-                {/* Full-bleed crisp portrait of Betterway's female specialist */}
+                {/* Full-bleed crisp eye-level aligned portrait of Betterway's female specialist */}
                 <img
                   src={advisor.portrait}
                   alt={`${advisor.name} — ${advisor.designation} at Betterway Mortgages Dubai`}
-                  width={1200}
-                  height={1600}
-                  className="absolute inset-0 h-full w-full object-cover object-top"
+                  width={900}
+                  height={1200}
+                  className="absolute inset-0 h-full w-full object-cover object-center"
                 />
                 {/* Crisp directional dark luxury vignette */}
                 <div
