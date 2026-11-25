@@ -1,10 +1,23 @@
 const hasPrefix = (pathname: string, prefix: string) =>
   pathname === prefix || pathname.startsWith(`${prefix}/`);
 
-const RESOURCE_PREFIXES = [
-  '/guides',
+const BUYER_PREFIXES = [
+  '/mortgages',
+  '/get-started',
+  '/concierge',
+  '/calculators',
+  '/tools',
+  '/handover',
   '/advisory',
-  '/about-us',
+];
+
+const AGENT_PREFIXES = ['/hub', '/edge', '/partners'];
+
+const RESOURCE_PREFIXES = [
+  '/rates',
+  '/guides',
+  '/areas',
+  '/affordability',
   '/why-betterway-vs-direct-bank',
   '/our-underwriters',
   '/reviews',
@@ -15,6 +28,12 @@ export function isNavActive(pathname: string, label: string): boolean {
   switch (label) {
     case 'Home':
       return clean === '/';
+    case 'About Us':
+      return hasPrefix(clean, '/about-us');
+    case 'For Buyers':
+      return BUYER_PREFIXES.some((p) => hasPrefix(clean, p));
+    case 'For Agents':
+      return AGENT_PREFIXES.some((p) => hasPrefix(clean, p));
     case 'Mortgages':
       return hasPrefix(clean, '/mortgages');
     case 'Rates':
@@ -26,7 +45,11 @@ export function isNavActive(pathname: string, label: string): boolean {
     case 'Areas':
       return hasPrefix(clean, '/areas') || hasPrefix(clean, '/affordability');
     case 'Resources':
-      return RESOURCE_PREFIXES.some((p) => hasPrefix(clean, p));
+      return (
+        RESOURCE_PREFIXES.some((p) => hasPrefix(clean, p)) ||
+        hasPrefix(clean, '/about-us') ||
+        hasPrefix(clean, '/advisory')
+      );
     default:
       return false;
   }

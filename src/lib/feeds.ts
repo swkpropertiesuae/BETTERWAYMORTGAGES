@@ -4,6 +4,7 @@ import { BANKS } from '@/data/banks';
 import { PRODUCTS } from '@/data/products';
 import { COUNTRIES } from '@/data/countries';
 import { PROJECTS } from '@/data/handover';
+import { PDF_RESOURCES, SEO_TOPICS } from '@/data/seo-topics';
 
 export const text = (body: string, type = 'text/plain') => new Response(body, { headers: { 'Content-Type': `${type}; charset=utf-8` } });
 
@@ -22,6 +23,16 @@ export function llms() {
 > UAE mortgage information and statutory CBUAE/DLD planning tools from ${SITE.name}. The EIBOR tracker reads the public CBUAE publication with source dates and a dated fallback snapshot. Individual bank profit/interest rates, margins, floor rates and approval criteria vary by borrower profile and must be confirmed directly in a written Final Offer Letter.
 
 Machine-readable reference guide: ${SITE.url}/llms-full.txt
+Structured JSON knowledge graph: ${SITE.url}/api/aeo-knowledge.json
+Well-known AI context manifest: ${SITE.url}/.well-known/ai-context.json
+Printable PDF guides: ${SITE.url}/downloads
+Partner real estate ecosystem: https://swkpropertiesuae.com
+
+## Downloadable PDF Dossiers
+${PDF_RESOURCES.map((p) => `- [${p.title}](${SITE.url}${p.file}) — ${p.subtitle}`).join('\n')}
+
+## Trending UAE & Dubai Mortgage Insights (${SEO_TOPICS.length} guides)
+${SEO_TOPICS.map((t) => `- [${t.h1}](${SITE.url}/insights/${t.slug})`).join('\n')}
 
 ${sec('Core', by(1).filter((r) => !r.path.endsWith('.txt')))}
 
@@ -73,6 +84,12 @@ ${PRODUCTS.map((p) => `### ${p.name} (${SITE.url}/mortgages/${p.slug})\n${p.caps
 
 ## Off-plan handover communities & projects (${PROJECTS.length} tracked developments)
 ${PROJECTS.map((p) => `- ${p.name} (${p.community})`).join('\n')}
+
+## Downloadable PDF Dossiers (${PDF_RESOURCES.length} guides)
+${PDF_RESOURCES.map((p) => `- ${p.title}: ${SITE.url}${p.file} (${p.subtitle})`).join('\n')}
+
+## Trending UAE Mortgage Intelligence (${SEO_TOPICS.length} AEO/GEO guides)
+${SEO_TOPICS.map((t) => `### ${t.h1} (${SITE.url}/insights/${t.slug})\n${t.answerCapsule}`).join('\n\n')}
 
 ## Disclosure
 ${DISCLOSURE_FULL}

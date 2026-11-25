@@ -1,135 +1,127 @@
 import { BANKS } from './banks';
-import { DEVELOPERS } from './handover';
 
 export type NavLink = { label: string; href: string; desc?: string };
 export type NavCol = { title: string; links: NavLink[] };
-export type NavItem = { label: string; href: string; cols?: NavCol[]; feature?: { title: string; body: string; href: string; cta: string } };
+export type NavItem = {
+  label: string;
+  href: string;
+  cols?: NavCol[];
+  feature?: { title: string; body: string; href: string; cta: string };
+};
 
 export const NAV: NavItem[] = [
   {
-    label: 'Mortgages', href: '/mortgages',
+    label: 'For Buyers',
+    href: '/mortgages',
     cols: [
-      { title: 'Buy a home', links: [
-        { label: 'Expat residents', href: '/mortgages/uae-residents', desc: 'Up to 80% LTV' },
-        { label: 'UAE Nationals', href: '/mortgages/uae-nationals', desc: 'Up to 85% LTV' },
-        { label: 'GCC Nationals', href: '/mortgages/gcc-nationals' },
-        { label: 'Self-employed', href: '/mortgages/self-employed' },
-        { label: 'Islamic home finance', href: '/mortgages/islamic-home-finance' },
-      ] },
-      { title: 'Invest & grow', links: [
-        { label: 'Non-resident buyers', href: '/mortgages/non-resident-dubai', desc: '25 country guides' },
-        { label: 'Golden Visa mortgages', href: '/mortgages/golden-visa-mortgage' },
-        { label: 'Second home & investment', href: '/mortgages/second-home-investment' },
-        { label: 'HNW mega loans', href: '/mortgages/mega-loans-luxury-villas' },
-        { label: 'Portfolio consolidation', href: '/mortgages/portfolio-consolidation' },
-      ] },
-      { title: 'Switch, release, build', links: [
-        { label: 'Switch bank (buyout)', href: '/mortgages/mortgage-buyout-refinance' },
-        { label: 'Equity release', href: '/mortgages/equity-release' },
-        { label: 'Off-plan & handover', href: '/mortgages/under-construction-off-plan' },
-        { label: 'Plot & construction', href: '/mortgages/land-plot-construction' },
-      ] },
+      {
+        title: 'Mortgages & Financing',
+        links: [
+          { label: 'Hot UAE Mortgage Offers', href: '/hot-offers', desc: 'Priority bank desk' },
+          { label: 'Start Pre-Approval Wizard', href: '/get-started', desc: '60s DBR & DLD dossier' },
+          { label: 'UAE Resident Mortgages', href: '/mortgages/uae-residents', desc: 'Up to 80% LTV' },
+          { label: 'UAE National Mortgages', href: '/mortgages/uae-nationals', desc: 'Up to 85% LTV' },
+          { label: 'Non-Resident & Global Expats', href: '/mortgages/non-resident-dubai', desc: '25 countries' },
+          { label: 'Islamic Home Finance', href: '/mortgages/islamic-home-finance', desc: 'Ijara & Murabaha' },
+          { label: 'Switch Bank & Equity Release', href: '/mortgages/mortgage-buyout-refinance', desc: '1% / 10k cap' },
+        ],
+      },
+      {
+        title: 'Property & Closing Desk',
+        links: [
+          { label: 'Betterway Buyer Concierge', href: '/concierge', desc: 'Budget-to-area matcher' },
+          { label: 'Off-Plan & Handover Finance', href: '/handover/dubai-off-plan-handover-mortgage-guide', desc: '80+ projects' },
+          { label: 'Commercial Property Finance', href: '/advisory/commercial-property-finance' },
+          { label: 'RERA Conveyancing Services', href: '/advisory/rera-conveyancing-services' },
+          { label: 'Golden Visa Mortgages', href: '/mortgages/golden-visa-mortgage', desc: 'AED 2M+ path' },
+        ],
+      },
+      {
+        title: 'Interactive Calculators',
+        links: [
+          { label: 'Mortgage & DLD Cost Calculator', href: '/calculators/mortgage-calculator', desc: 'Full upfront fees' },
+          { label: 'Borrowing Power (50% DBR)', href: '/calculators/dbr-borrowing-power', desc: 'Card limit check' },
+          { label: 'Rent vs Buy Calculator', href: '/calculators/rent-vs-buy-dubai', desc: '15-yr equity model' },
+          { label: 'Refinance Savings Calculator', href: '/calculators/buyout-refinance-savings', desc: 'Break-even' },
+          { label: 'Form F & Cheque Tools', href: '/tools/form-f-clause-generator', desc: 'Legal clauses' },
+        ],
+      },
     ],
-    feature: { title: 'Prepare for pre-approval', body: 'Understand your budget and the documents your lender needs.', href: '/contact', cta: 'Start pre-approval' },
+    feature: {
+      title: 'Instant Pre-Approval Readiness',
+      body: 'Check your 50% CBUAE DBR headroom, itemised 4% DLD closing costs, and eligible UAE banks in under 60 seconds.',
+      href: '/get-started',
+      cta: 'Check eligibility now',
+    },
   },
   {
-    label: 'Rates', href: '/rates',
+    label: 'For Agents',
+    href: '/hub',
     cols: [
-      { title: 'Benchmarks', links: [
-        { label: 'UAE mortgage rate comparison', href: '/rates/uae-mortgage-rates-eibor-revert-bible' },
-        { label: 'EIBOR tracker', href: '/rates/eibor-live-tracker' },
-        { label: 'All bank comparisons', href: '/rates#compare' },
-      ] },
-      { title: 'Popular banks', links: BANKS.filter((b) => ['emirates-nbd', 'hsbc', 'fab', 'dib', 'adcb', 'mashreq'].includes(b.key)).map((b) => ({ label: b.name, href: `/rates/${b.slug}` })) },
-      { title: 'Head-to-head', links: [
-        { label: 'Emirates NBD vs HSBC', href: '/rates/compare/emirates-nbd-vs-hsbc-mortgage' },
-        { label: 'DIB vs ADIB', href: '/rates/compare/dubai-islamic-bank-vs-adib-home-finance' },
-        { label: '2Y vs 3Y vs 5Y fixed', href: '/rates/compare/2-year-fixed-vs-3-year-fixed-vs-5-year-fixed-uae' },
-        { label: 'Conventional vs Islamic', href: '/rates/compare/conventional-vs-islamic-mortgage-uae-math' },
-      ] },
+      {
+        title: 'Real Estate Agencies & Brokers',
+        links: [
+          { label: 'Hub by Betterway', href: '/hub', desc: 'Agent referral & buyer portal' },
+          { label: 'Become a Partner', href: '/partners', desc: 'RERA agency onboarding' },
+          { label: 'Co-Branded Calculators', href: '/partners/co-branded-tools', desc: 'Share with buyers' },
+          { label: 'Partner Dashboard', href: '/partners/dashboard', desc: 'Live case milestones' },
+        ],
+      },
+      {
+        title: 'Mortgage Brokerage OS',
+        links: [
+          { label: 'Edge by Betterway', href: '/edge', desc: 'Brokerage infrastructure' },
+          { label: 'Betterway OS Login', href: '/portal/login', desc: 'Client & staff access' },
+          { label: 'Conveyancing Desk', href: '/advisory/rera-conveyancing-services', desc: 'Trustee execution' },
+        ],
+      },
     ],
-    feature: { title: 'More than a fixed rate', body: 'Compare the revert margin, floor rate and fees as well.', href: '/rates/uae-mortgage-rates-eibor-revert-bible', cta: 'See all 24 banks' },
+    feature: {
+      title: 'Close deals faster with verified buyers',
+      body: 'Give your buyers verified DBR readiness and track mortgage milestones from Form F to DLD trustee day.',
+      href: '/hub',
+      cta: 'Explore Betterway Hub',
+    },
   },
   {
-    label: 'Calculators', href: '/calculators',
+    label: 'Resources',
+    href: '/guides',
     cols: [
-      { title: 'Buy', links: [
-        { label: 'Mortgage & upfront costs', href: '/calculators/mortgage-calculator' },
-        { label: 'DBR & borrowing power', href: '/calculators/dbr-borrowing-power' },
-        { label: 'Rent vs buy', href: '/calculators/rent-vs-buy-dubai' },
-        { label: 'Golden Visa estimator', href: '/calculators/golden-visa-mortgage-calculator' },
-      ] },
-      { title: 'Own & optimise', links: [
-        { label: 'Fixed vs revert analyser', href: '/calculators/fixed-to-revert-analyzer' },
-        { label: 'Buyout net savings', href: '/calculators/buyout-refinance-savings' },
-        { label: 'Overpayment', href: '/calculators/overpayment-early-settlement' },
-        { label: 'Handover & cash-out', href: '/calculators/handover-equity-release' },
-        { label: 'Non-resident rental coverage', href: '/calculators/non-resident-rental-coverage' },
-      ] },
-      { title: 'Legal micro-tools', links: [
-        { label: 'Form F clause generator', href: '/tools/form-f-clause-generator' },
-        { label: 'Life insurance auditor', href: '/tools/life-insurance-assignment-audit' },
-        { label: 'Transfer-day cheque splitter', href: '/tools/transfer-day-cheque-calculator' },
-      ] },
+      {
+        title: 'Rates & Lender Intelligence',
+        links: [
+          { label: 'Live CBUAE EIBOR Tracker', href: '/rates/eibor-live-tracker', desc: 'Daily official fixings' },
+          { label: '24 UAE Banks & Revert Guide', href: '/rates/uae-mortgage-rates-eibor-revert-bible', desc: `${BANKS.length} lenders` },
+          { label: 'Head-to-Head Bank Comparisons', href: '/rates#compare', desc: 'ENBD, FAB, DIB, HSBC' },
+          { label: 'Betterway vs Going Direct', href: '/why-betterway-vs-direct-bank' },
+        ],
+      },
+      {
+        title: 'Market Guides & Areas',
+        links: [
+          { label: '36 Trending UAE Insights', href: '/insights', desc: '2026–2027 rules & areas' },
+          { label: 'Free Printable PDF Guides', href: '/downloads', desc: 'Buyer, DLD & Visa PDFs' },
+          { label: 'All UAE Buying Guides', href: '/guides', desc: 'DLD, Form F & DBR' },
+          { label: '60 UAE Freehold Communities', href: '/areas', desc: 'Dubai, Abu Dhabi & North' },
+          { label: 'Salary Affordability Guides', href: '/affordability', desc: 'AED 15k to 100k+' },
+          { label: 'Frequently Asked Questions', href: '/#faq' },
+        ],
+      },
+      {
+        title: 'Company & Governance',
+        links: [
+          { label: 'About Betterway', href: '/about-us' },
+          { label: 'Our Dubai Specialists', href: '/our-underwriters', desc: 'Oud Metha team' },
+          { label: 'Worked Mortgage Examples', href: '/reviews' },
+          { label: 'Contact & Visit Us', href: '/contact' },
+        ],
+      },
     ],
-  },
-  {
-    label: 'Off-plan', href: '/handover/dubai-off-plan-handover-mortgage-guide',
-    cols: [
-      { title: 'Handover', links: [
-        { label: 'Off-plan handover guide', href: '/handover/dubai-off-plan-handover-mortgage-guide' },
-        { label: 'Handover & cash-out calculator', href: '/calculators/handover-equity-release' },
-        { label: 'Explore handover projects', href: '/handover' },
-      ] },
-      { title: 'Developer guides', links: DEVELOPERS.filter((d) => d.hub).slice(0, 7).map((d) => ({ label: d.name, href: `/handover/${d.slug}` })) },
-      { title: ' ', links: DEVELOPERS.filter((d) => d.hub).slice(7).map((d) => ({ label: d.name, href: `/handover/${d.slug}` })) },
-    ],
-  },
-  {
-    label: 'Areas', href: '/areas',
-    cols: [
-      { title: 'Dubai', links: [
-        { label: 'Dubai Marina', href: '/areas/dubai/dubai-marina' },
-        { label: 'Downtown Dubai', href: '/areas/dubai/downtown-dubai' },
-        { label: 'Dubai Hills Estate', href: '/areas/dubai/dubai-hills-estate' },
-        { label: 'Palm Jumeirah', href: '/areas/dubai/palm-jumeirah' },
-        { label: 'All 45 Dubai areas', href: '/areas/dubai' },
-      ] },
-      { title: 'Abu Dhabi & North', links: [
-        { label: 'Yas Island', href: '/areas/abu-dhabi/yas-island' },
-        { label: 'Saadiyat Island', href: '/areas/abu-dhabi/saadiyat-island' },
-        { label: 'All Abu Dhabi areas', href: '/areas/abu-dhabi' },
-        { label: 'RAK & Sharjah', href: '/areas/northern' },
-      ] },
-      { title: 'By budget', links: [
-        { label: 'AED 20,000 salary', href: '/affordability/20000-aed-salary-mortgage-dubai' },
-        { label: 'AED 30,000 salary', href: '/affordability/30000-aed-salary-mortgage-dubai' },
-        { label: 'AED 2M Golden Visa home', href: '/affordability/2-million-aed-golden-visa-property-mortgage' },
-        { label: 'All budgets', href: '/affordability' },
-      ] },
-    ],
-  },
-  {
-    label: 'Resources', href: '/guides',
-    cols: [
-      { title: 'Buying guides', links: [
-        { label: 'Form F protection clauses', href: '/guides/dubai-form-f-mortgage-valuation-protection-clause' },
-        { label: 'Credit cards & DBR', href: '/guides/how-credit-card-limits-reduce-uae-mortgage-dbr' },
-        { label: 'Transfer-day checklist', href: '/guides/complete-dld-trustee-transfer-day-checklist' },
-        { label: 'All guides', href: '/guides' },
-      ] },
-      { title: 'Property advisory', links: [
-        { label: 'Commercial property finance', href: '/advisory/commercial-property-finance' },
-        { label: 'DIFC wills', href: '/advisory/difc-wills-and-estate-planning' },
-        { label: 'External life insurance', href: '/advisory/external-mortgage-life-insurance' },
-        { label: 'All advisory services', href: '/advisory' },
-      ] },
-      { title: 'Company', links: [
-        { label: 'About Betterway', href: '/about-us' },
-        { label: 'Betterway vs going direct', href: '/why-betterway-vs-direct-bank' },
-        { label: 'Our underwriters', href: '/our-underwriters' },
-        { label: 'Client reviews', href: '/reviews' },
-      ] },
-    ],
+    feature: {
+      title: 'Compare the whole mortgage offer',
+      body: 'Never get caught by post-fixed EIBOR revert jumps or hidden DLD fees. Inspect every clause before signing.',
+      href: '/rates/eibor-live-tracker',
+      cta: 'View live EIBOR',
+    },
   },
 ];

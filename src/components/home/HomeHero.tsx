@@ -1,274 +1,102 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+
+import { useState } from 'react';
 import Link from 'next/link';
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
-import { ArrowUpRight, Pause, Play, ShieldCheck, X } from 'lucide-react';
+import { ArrowRight, Calculator, Play } from 'lucide-react';
 import { useBenchmark } from '@/components/StartupExperience';
-import { Cta } from '@/components/ui';
+import { VideoBriefingModal } from '@/components/ui/MotionPrimitives';
+import PropertyMatchmakerModal from '@/components/ecosystem/PropertyMatchmakerModal';
+import MorningHeroCarousel from '@/components/home/MorningHeroCarousel';
+import { HotOffersTrigger } from '@/components/HotOffersPopup';
 import { BANKS } from '@/data/banks';
-import { buildHeroDossier, HERO_SCENES, nextSceneIndex } from '@/lib/hero-showcase';
-
-const fmtDate = (v: string) =>
-  new Date(v + 'T12:00:00Z').toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'Asia/Dubai',
-  });
-
-const CORP_EASE = [0.22, 1, 0.36, 1] as const;
-const CYCLE_MS = 6500;
+import { COMMUNITIES } from '@/data/communities';
+import { buildHeroDossier } from '@/lib/hero-showcase';
 
 export default function HomeHero() {
   const { data } = useBenchmark();
-  const reduce = useReducedMotion();
-  const heroRef = useRef<HTMLElement>(null);
-  const film = useRef<HTMLVideoElement>(null);
-  const dialog = useRef<HTMLDialogElement>(null);
-
-  const [sceneIdx, setSceneIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ['0%', '6%']);
-
-  const autoRun = !reduce && !paused && !hovered;
-
-  useEffect(() => {
-    if (!autoRun) return;
-    const id = window.setInterval(() => {
-      setSceneIdx((curr) => nextSceneIndex(curr, HERO_SCENES.length, 1));
-    }, CYCLE_MS);
-    return () => window.clearInterval(id);
-  }, [autoRun]);
-
-  const openFilm = () => {
-    dialog.current?.showModal();
-    film.current?.play().catch(() => {});
-  };
-  const closeFilm = () => {
-    film.current?.pause();
-    dialog.current?.close();
-  };
-
-  const scene = HERO_SCENES[sceneIdx] ?? HERO_SCENES[0];
   const dossier = buildHeroDossier(data.latest.threeMonth);
+  const [videoOpen, setVideoOpen] = useState(false);
+  const [matchmakerOpen, setMatchmakerOpen] = useState(false);
 
   return (
-    <section
-      ref={heroRef}
-      className="bw-hero bw-hero--8b"
-      data-8b-section="hero"
-      aria-labelledby="hero-title"
-    >
-      <div className="bw-hero__rails" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="bw-hero__aurora" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
+    <>
+      <section className="holo-hero" aria-labelledby="hero-title">
+        {/* Ultra-Sharp 8K UHD Morning Daylight Dubai 2026-2027 Transition Layer */}
+        <MorningHeroCarousel lang="en" />
 
-      <div className="wrap bw-hero__inner">
-        <div className="bw-hero__copy">
-          <p className="bw-hero__eyebrow">
-            <span className="bw-hero__dot" aria-hidden="true" />
-            <span>CBUAE-aligned mortgage advisory · Dubai &amp; UAE</span>
-          </p>
+        <div className="relative z-[2] max-w-[820px]">
+          {/* Live CBUAE EIBOR + 24s Film Pill */}
+          <div className="mb-5 flex flex-wrap items-center gap-2.5">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/28 bg-[#080b0f]/58 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
+              <span className="h-2 w-2 rounded-full bg-[#34dfac]" />
+              <span>{BANKS.length} UAE Banks · Live CBUAE 3M EIBOR</span>
+              <strong className="num text-[#f1d57e]">{dossier.eiborFormatted}</strong>
+            </span>
+            <button
+              type="button"
+              onClick={() => setVideoOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/28 bg-[#080b0f]/58 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition-colors hover:border-[#34dfac] hover:bg-[#080b0f]/80 cursor-pointer"
+            >
+              <Play size={11} fill="currentColor" className="text-[#34dfac]" />
+              <span>Watch 24s Briefing</span>
+            </button>
+            <HotOffersTrigger label="Hot Offers" variant="hero" />
+          </div>
 
-          <h1 id="hero-title" className="bw-hero__headline">
-            <span className="bw-8b-mask">
-              <span>Private-grade clarity</span>
-            </span>
-            <span className="bw-8b-mask">
-              <span>
-                for your UAE <em>mortgage.</em>
-              </span>
-            </span>
+          <h1 id="hero-title" className="holo-hero__title">
+            Everything you need to finance &amp; buy property in the UAE.
           </h1>
 
-          <p className="bw-hero__lead">
-            Independent mortgage structuring across {BANKS.length} UAE lenders. Review statutory CBUAE rules, published EIBOR fixings, and itemised DLD closing costs before a single application is filed.
+          <p className="holo-hero__sub">
+            24 UAE lenders compared, upfront 4% DLD fee clarity, CBUAE-aligned advisors, and modern mortgage technology
+            — all in one place.
           </p>
 
-          <div className="bw-hero__actions">
-            <Cta href="#calculator" tone="gold">
-              Build my mortgage plan
-            </Cta>
-            <button type="button" className="bw-hero__film-btn" onClick={openFilm}>
-              <span className="bw-hero__play" aria-hidden="true">
-                <Play size={13} fill="currentColor" />
+          {/* Iconic Dual White Split-Card Hero CTAs */}
+          <div className="holo-hero__cards">
+            <Link href="/get-started" className="holo-cta-card">
+              <div>
+                <span className="holo-cta-card__title">I’m looking for a mortgage</span>
+                <span className="holo-cta-card__meta">60s DBR check &amp; 24-bank dossier</span>
+              </div>
+              <span className="holo-cta-card__arrow" aria-hidden="true">
+                <ArrowRight size={20} strokeWidth={2.2} />
               </span>
-              <span>Watch 32s briefing</span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setMatchmakerOpen(true)}
+              className="holo-cta-card"
+            >
+              <div>
+                <span className="holo-cta-card__title">Help me find &amp; budget a home</span>
+                <span className="holo-cta-card__meta">Match AED budget to {COMMUNITIES.length} UAE areas</span>
+              </div>
+              <span className="holo-cta-card__arrow" aria-hidden="true">
+                <ArrowRight size={20} strokeWidth={2.2} />
+              </span>
             </button>
           </div>
 
-          <dl className="bw-hero__metrics" aria-label="Advisory coverage">
-            <div>
-              <dt>Lender directory</dt>
-              <dd className="num">{BANKS.length} UAE banks</dd>
-            </div>
-            <div>
-              <dt>CBUAE DBR cap</dt>
-              <dd className="num">50% max</dd>
-            </div>
-            <div>
-              <dt>Advisory desks</dt>
-              <dd>EN &amp; العربية</dd>
-            </div>
-          </dl>
-        </div>
-
-        <div
-          className="bw-hero__visual"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          <div className="bw-hero__stage-frame">
-            <div className="bw-hero__scene-bar">
-              <div className="bw-hero__scene-tabs" role="group" aria-label="Advisory mandates">
-                {HERO_SCENES.map((item, idx) => {
-                  const active = idx === sceneIdx;
-                  return (
-                    <button
-                      key={item.index}
-                      type="button"
-                      aria-pressed={active}
-                      onClick={() => setSceneIdx(idx)}
-                      className={`bw-hero__scene-tab ${active ? 'is-active' : ''}`}
-                    >
-                      {active && (
-                        <motion.span
-                          layoutId="hero-scene-pill"
-                          className="bw-hero__scene-pill"
-                          transition={reduce ? { duration: 0 } : { duration: 0.28, ease: CORP_EASE }}
-                        />
-                      )}
-                      <span className="relative z-[1] num text-[10.5px] opacity-75">{item.index}</span>
-                      <span className="relative z-[1]">{item.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <button
-                type="button"
-                className="bw-hero__pause"
-                aria-pressed={paused}
-                aria-label={paused ? 'Resume showcase rotation' : 'Pause showcase rotation'}
-                onClick={() => setPaused((p) => !p)}
-              >
-                {paused ? <Play size={12} /> : <Pause size={12} />}
-              </button>
-            </div>
-
-            <div className="bw-hero__viewport">
-              <motion.div
-                className="bw-hero__parallax"
-                style={reduce ? undefined : { y: parallaxY }}
-              >
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.img
-                    key={scene.src}
-                    src={scene.src}
-                    srcSet={scene.srcSet}
-                    sizes="(min-width: 1024px) 48vw, 100vw"
-                    width={scene.width}
-                    height={scene.height}
-                    alt={scene.alt}
-                    fetchPriority={sceneIdx === 0 ? 'high' : 'auto'}
-                    decoding="sync"
-                    initial={reduce ? false : { opacity: 0.25, scale: 1.025 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={reduce ? undefined : { opacity: 0.25 }}
-                    transition={{ duration: reduce ? 0 : 0.55, ease: CORP_EASE }}
-                  />
-                </AnimatePresence>
-              </motion.div>
-
-              <div className="bw-hero__caption">
-                <span className="num text-brass">{scene.index}</span>
-                <span>{scene.location}</span>
-                <span className="ms-auto text-[10.5px] text-white/65">Concept architecture</span>
-              </div>
-
-              {autoRun && (
-                <div className="bw-hero__cycle" aria-hidden="true">
-                  <motion.span
-                    key={`${sceneIdx}-${paused}`}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: CYCLE_MS / 1000, ease: 'linear' }}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="bw-hero__dossier">
-            <div className="bw-hero__dossier-head">
-              <span className="inline-flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.16em] text-brass">
-                <ShieldCheck size={13} /> Official CBUAE benchmark &amp; statutory caps
-              </span>
-              <span className="text-[11px] text-white/65">Published {fmtDate(data.latest.date)}</span>
-            </div>
-
-            <div className="bw-hero__dossier-grid">
-              <Link href="/rates/eibor-live-tracker" className="bw-hero__dossier-cell">
-                <span className="bw-hero__dossier-label">Published 3M EIBOR</span>
-                <strong className="num">{dossier.eiborFormatted}</strong>
-                <span className="bw-hero__dossier-sub">
-                  CBUAE daily fixing <ArrowUpRight size={12} />
-                </span>
-              </Link>
-
-              <Link href="#calculator" className="bw-hero__dossier-cell">
-                <span className="bw-hero__dossier-label">CBUAE First-Home LTV</span>
-                <strong className="num">
-                  Up to {dossier.residentMaxLtv} / {dossier.nationalMaxLtv}
-                </strong>
-                <span className="bw-hero__dossier-sub num">
-                  Max DBR: {dossier.maxDbr} · 25-yr max tenure
-                </span>
-              </Link>
-            </div>
-
-            <div className="bw-hero__dossier-foot">
-              <Link href={scene.href} className="bw-hero__mandate-link">
-                <span className="num text-brass">{scene.index}</span>
-                <span>{scene.mandate}</span>
-                <ArrowUpRight size={14} className="ms-auto shrink-0 text-brass" />
-              </Link>
-              <p>Official CBUAE benchmark &amp; statutory limits · Individual bank offers confirmed in writing.</p>
-            </div>
+          {/* Instant Transparent Jump Actions */}
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-semibold text-white">
+            <a href="#calculator" className="inline-flex items-center gap-1.5 drop-shadow-[0_1px_6px_rgba(8,11,15,0.65)] transition hover:text-[#f1d57e]">
+              <Calculator size={14} className="text-[#34dfac]" />
+              <span>Run instant Mortgage + 4% DLD Calculator ↓</span>
+            </a>
+            <Link href="/rates/eibor-live-tracker" className="drop-shadow-[0_1px_6px_rgba(8,11,15,0.65)] transition hover:text-[#f1d57e]">
+              Live CBUAE EIBOR Tracker →
+            </Link>
+            <Link href="/hub" className="drop-shadow-[0_1px_6px_rgba(8,11,15,0.65)] transition hover:text-[#f1d57e]">
+              For RERA Agents (Betterway Hub) →
+            </Link>
           </div>
         </div>
-      </div>
+      </section>
 
-      <dialog
-        ref={dialog}
-        className="bw-dialog"
-        aria-label="Betterway explainer film"
-        onCancel={() => film.current?.pause()}
-        onClick={(e) => {
-          if (e.target === dialog.current) closeFilm();
-        }}
-      >
-        <button type="button" className="bw-dialog__close" aria-label="Close film" onClick={closeFilm}>
-          <X size={18} />
-        </button>
-        <video ref={film} controls playsInline preload="none" poster="/video/betterway-explainer.jpg">
-          <source src="/video/betterway-explainer.mp4" type="video/mp4" />
-        </video>
-        <p>How Betterway structures UAE mortgages · 32-second briefing</p>
-      </dialog>
-    </section>
+      <VideoBriefingModal open={videoOpen} onClose={() => setVideoOpen(false)} />
+      <PropertyMatchmakerModal open={matchmakerOpen} onClose={() => setMatchmakerOpen(false)} />
+    </>
   );
 }

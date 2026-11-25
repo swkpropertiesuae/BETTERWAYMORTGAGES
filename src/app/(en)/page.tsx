@@ -1,351 +1,713 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowUpRight, BadgeCheck, Check, FileCheck2, Languages, Layers3, Plus, ReceiptText, Scale } from 'lucide-react';
+import {
+  ArrowRight,
+  Building2,
+  Check,
+  CheckCircle2,
+  Clock,
+  Cpu,
+  FileDown,
+  Layers,
+  MapPin,
+  ShieldCheck,
+  Smartphone,
+  X,
+} from 'lucide-react';
 import HomeHero from '@/components/home/HomeHero';
 import DisclosureToast from '@/components/home/DisclosureToast';
 import RevertBriefing from '@/components/home/RevertBriefing';
 import StatCounter from '@/components/home/StatCounter';
-import Manifesto from '@/components/home/Manifesto';
-import ServicesIndex from '@/components/home/ServicesIndex';
-import JourneyPhone from '@/components/home/JourneyPhone';
-import Qualifier from '@/components/Qualifier';
-import { TeamPortfolio } from '@/components/TeamPortfolio';
+import { HomyAdvisorsCarousel, HomyFaqAccordion } from '@/components/home/HomySections';
+import HoloMortgageCalc from '@/components/ecosystem/HoloMortgageCalc';
 import { LiveBenchmark } from '@/components/StartupExperience';
 import LogoMarquee from '@/components/LogoMarquee';
-import Calculator from '@/components/calc/Calculator';
-import { Cta, JsonLd, Rich, aed } from '@/components/ui';
+import { ScrollScaleFrame, SpotlightCard, VideoBriefingShowcase } from '@/components/ui/MotionPrimitives';
+import { Cta, JsonLd, SectionTag, aed } from '@/components/ui';
 import { BANKS } from '@/data/banks';
-import { COMMUNITIES, EMIRATES, type Emirate } from '@/data/communities';
-import { COUNTRIES } from '@/data/countries';
-import { GUIDES } from '@/data/content';
-import { DEVELOPERS, PROJECTS } from '@/data/handover';
-import { TOOLS } from '@/data/tools';
-import { LTV_RULES, SITE } from '@/data/site';
+import { COMMUNITIES } from '@/data/communities';
+import { PROJECTS } from '@/data/handover';
+import { PDF_RESOURCES } from '@/data/seo-topics';
+import { TRENDING_UAE_KEYWORDS, pdfCatalogSchema, speakablePageSchema } from '@/lib/seo-schema';
 import { cashToClose } from '@/lib/math';
 
 export const metadata: Metadata = {
-  title: 'Mortgage Broker in Dubai & UAE | Betterway Mortgages',
-  description: 'Dubai mortgage advice for residents, non-residents and investors. Compare UAE mortgage rates, estimate payments and plan your upfront costs with Betterway.',
+  title: 'Dubai & UAE Property & Mortgage Ecosystem — 24 Banks Compared | Betterway',
+  description:
+    'Everything you need to finance and buy property in Dubai & the UAE. Compare 24 licensed lenders, check 50% CBUAE DBR, itemise 4% DLD closing costs, download free 2026 PDF guides, and track pre-approval.',
+  keywords: TRENDING_UAE_KEYWORDS,
   alternates: { canonical: '/' },
 };
 
-/* ---------- Content (every figure is derived from the site's own data files) ---------- */
-
-const PILLARS = [
-  ['Many lenders, one conversation', 'We compare suitable UAE banks for your profile instead of starting and ending with one.'],
-  ['The real cost, not the teaser', 'Fixed period, revert margin, floor, fees and insurance, side by side before you choose.'],
-  ['Ready before the bank asks', 'Know which documents and checks come next, so pre-approval moves without surprises.'],
-  ['English and Arabic', 'Plain-language guidance and calculators in both languages, from first question to transfer day.'],
+const COMPARE_ROWS = [
+  ['Compare across 24 licensed UAE conventional & Islamic banks', true, false],
+  ['Full post-fixed EIBOR revert margin & minimum floor audit', true, false],
+  ['Itemised 4% DLD, trustee & mortgage registration fee sheet upfront', true, false],
+  ['50% CBUAE DBR & credit card 5% limit stress-testing before applying', true, false],
+  ['Form F valuation protection clauses & DLD transfer cheque splitter', true, false],
+  ['Bilingual EN / العربية client portal & Betterway OS milestone tracking', true, false],
 ] as const;
 
-const ltv = (match: string) => LTV_RULES.find((r) => r.profile.startsWith(match))?.ltv ?? '—';
-
-const STAYS = [
-  { tag: 'Residents', name: 'Expat resident mortgages', body: 'Buying your first UAE home on a local salary. Start with your budget, deposit and purchase fees.', href: '/mortgages/uae-residents', img: '/images/dubai-interior-2560.webp', srcSet: '/images/dubai-interior-1280.webp 1280w, /images/dubai-interior-2560.webp 2560w', w: 2560, h: 1440, alt: 'Concept image: a bright Dubai apartment interior with a waterfront view',
-    facts: [['Max LTV', ltv('Expat resident — first home up to')], ['DBR cap', '50%'], ['Tenure', '25 yrs']], more: ['UAE Nationals', '/mortgages/uae-nationals'] },
-  { tag: 'Overseas buyers', name: 'Non-resident mortgages', body: 'Financing a Dubai property on overseas salary or business income, with currency and document checks explained.', href: '/mortgages/non-resident-dubai', img: '/images/marina-evening-2752.webp', srcSet: '/images/marina-evening.webp 1376w, /images/marina-evening-2752.webp 2752w', w: 2752, h: 1536, alt: 'Concept image: a Dubai marina at dusk seen from a terrace',
-    facts: [['Max LTV', ltv('Non-resident')], ['Countries', String(COUNTRIES.length)], ['Income', 'Overseas']], more: ['Golden Visa mortgages', '/mortgages/golden-visa-mortgage'] },
-  { tag: 'Handover', name: 'Off-plan & handover finance', body: 'Plan the final developer payment before your handover date, with project eligibility and valuation in view.', href: '/handover/dubai-off-plan-handover-mortgage-guide', img: '/images/offplan-dusk-2752.webp', srcSet: '/images/offplan-dusk.webp 1376w, /images/offplan-dusk-2752.webp 2752w', w: 2752, h: 1536, alt: 'Concept image: a residential tower nearing completion at blue hour',
-    facts: [['Under construction', ltv('Off-plan')], ['Developers', String(DEVELOPERS.length)], ['Projects', String(PROJECTS.length)]], more: ['Off-plan mortgages', '/mortgages/under-construction-off-plan'] },
-  { tag: 'Homeowners', name: 'Switch bank (buyout)', body: 'Compare refinance savings after exit fees, valuation and switching costs, before your fixed period ends.', href: '/mortgages/mortgage-buyout-refinance', img: '/images/keys-handover-2752.webp', srcSet: '/images/keys-handover.webp 1376w, /images/keys-handover-2752.webp 2752w', w: 2752, h: 1536, alt: 'Concept image: brass house keys passed across a travertine table',
-    facts: [['Exit fee cap', '1% / 10k'], ['Compare', 'Revert'], ['Tool', 'Savings']], more: ['Equity release', '/mortgages/equity-release'] },
-] as const;
-
-const MARKETS = [
-  ...(['dubai', 'abu-dhabi', 'northern'] as Emirate[]).map((e) => {
-    const count = COMMUNITIES.filter((c) => c.emirate === e).length;
-    return { name: EMIRATES[e].name, chip: e === 'dubai' ? 'DLD' : e === 'abu-dhabi' ? 'ADREC' : 'RAK · SRERD', body: EMIRATES[e].regulator, href: `/areas/${e}`, k1: 'Communities', v1: String(count), k2: 'Expat 1st-home LTV', v2: 'Up to 80%' };
-  }),
-  { name: 'Overseas', chip: 'Non-resident', body: 'Guidance for buyers earning outside the UAE.', href: '/mortgages/non-resident-dubai', k1: 'Countries', v1: String(COUNTRIES.length), k2: 'Max LTV', v2: ltv('Non-resident') },
-];
-
-const JOURNAL_IMG = [
-  { src: '/images/guide-valuation-2752.webp', srcSet: '/images/guide-valuation.webp 1376w, /images/guide-valuation-2752.webp 2752w', alt: 'Concept image: architectural drawings and a brass scale ruler in a waterfront Dubai villa' },
-  { src: '/images/guide-dbr-planning-2752.webp', srcSet: '/images/guide-dbr-planning.webp 1376w, /images/guide-dbr-planning-2752.webp 2752w', alt: 'Concept image: sunlit travertine desk overlooking the Dubai skyline' },
-  { src: '/images/guide-transfer-day-2752.webp', srcSet: '/images/guide-transfer-day.webp 1376w, /images/guide-transfer-day-2752.webp 2752w', alt: 'Concept image: modern Dubai boardroom with house keys and leather portfolio overlooking Palm Jumeirah' },
-] as const;
-
-const JOURNEY = [
-  { title: 'Set your budget', body: 'Check income, deposit and purchase costs against the 50% debt cap.', screen: { head: 'Budget', rows: [['Debt burden cap', '50%'], ['Max tenure', '25 yrs'], ['Purchase costs', 'Itemised']] } },
-  { title: 'Compare your options', body: 'Review rates, revert margins, fees and lender requirements.', screen: { head: 'Compare', rows: [['Fixed period', 'Listed'], ['Revert margin', 'Listed'], ['Floor and fees', 'Listed']] } },
-  { title: 'Apply for pre-approval', body: 'Submit documents for the bank’s assessment.', screen: { head: 'Pre-approval', rows: [['Identity', 'Documents'], ['Income', 'Documents'], ['Liabilities', 'Documents']] } },
-  { title: 'Value, finalise, transfer', body: 'Complete valuation, final offer and registration at the trustee.', screen: { head: 'Transfer day', rows: [['Valuation', 'Bank'], ['Final offer', 'Written'], ['Registration', 'Trustee']] } },
+const EDITORIAL_GUIDES = [
+  {
+    tag: 'Valuation & Legal',
+    readTime: '6 min read',
+    title: 'Dubai Form F Mortgage Valuation Protection Clause Guide',
+    excerpt: 'How to protect your 10% security cheque if an independent bank valuation lands below the MOU price.',
+    href: '/guides/dubai-form-f-mortgage-valuation-protection-clause',
+    img: '/images/guide-valuation.webp',
+    img2x: '/images/guide-valuation-2752.webp',
+  },
+  {
+    tag: 'CBUAE Rules',
+    readTime: '5 min read',
+    title: 'How Credit Card Limits Quietly Shrink Your UAE Mortgage Power',
+    excerpt: 'Why unused credit card limits are assessed at 5% monthly under CBUAE DBR rules — and how to fix it before applying.',
+    href: '/guides/how-credit-card-limits-reduce-uae-mortgage-dbr',
+    img: '/images/guide-dbr-planning.webp',
+    img2x: '/images/guide-dbr-planning-2752.webp',
+  },
+  {
+    tag: 'Closing Day',
+    readTime: '7 min read',
+    title: 'Complete Dubai Land Department Trustee Transfer Day Checklist',
+    excerpt: 'Manager’s cheques, developer NOC, seller liability letters, and exact timing at the DLD trustee office.',
+    href: '/guides/complete-dld-trustee-transfer-day-checklist',
+    img: '/images/guide-transfer-day.webp',
+    img2x: '/images/guide-transfer-day-2752.webp',
+  },
+  {
+    tag: 'Off-Plan',
+    readTime: '8 min read',
+    title: 'Dubai Off-Plan Handover Mortgage & Equity Uplift Guide',
+    excerpt: 'Preparing bank valuation and completion finance 90–120 days ahead of Emaar, Sobha, Meraas, or DAMAC handover.',
+    href: '/handover/dubai-off-plan-handover-mortgage-guide',
+    img: '/images/offplan-dusk.webp',
+    img2x: '/images/offplan-dusk-2752.webp',
+  },
+  {
+    tag: 'Refinancing',
+    readTime: '5 min read',
+    title: 'UAE Mortgage Buyout & 1% / AED 10,000 Early Settlement Cap',
+    excerpt: 'Calculating your exact break-even timeline when switching off a high post-fixed EIBOR revert rate.',
+    href: '/mortgages/mortgage-buyout-refinance',
+    img: '/images/keys-handover.webp',
+    img2x: '/images/keys-handover-2752.webp',
+  },
 ] as const;
 
 const FAQS = [
-  { q: 'How does a mortgage broker in Dubai help?', a: 'A broker helps you compare suitable lenders, prepare documents and understand the application process. The bank makes the lending decision and issues your final offer.' },
-  { q: 'How much cash do I need for an AED 2M home?', a: `With a 20% deposit, this calculator estimates ${aed(cashToClose({ price: 2_000_000, downPct: 20 }).total)} including the deposit and typical Dubai purchase fees. Bank processing fees, insurance and property-specific charges may add to this. Adjust the assumptions in the mortgage calculator.` },
-  { q: 'Can non-residents get a mortgage in Dubai?', a: 'Some UAE lenders consider non-resident applicants. Your income country, currency, credit history and property affect the available loan and deposit. A lender must review your documents before confirming eligibility.' },
-  { q: 'What should I compare besides the mortgage rate?', a: 'Compare the fixed period, variable-rate formula, minimum floor, processing fees, insurance and early repayment terms. A lower introductory rate does not always mean a lower total cost.' },
-  { q: 'How long does mortgage pre-approval take?', a: 'Timing depends on the lender and the completeness of your documents. Pre-approval is an initial assessment; it is not a final loan offer or a property valuation.' },
-  { q: 'What fees should I ask about?', a: 'Request a written breakdown of bank fees, broker fees if applicable, valuation, insurance, property registration and transfer charges before proceeding.' },
+  {
+    q: 'How is Betterway Mortgages different from applying directly to a single UAE bank?',
+    a: 'Going direct shows you one lender’s credit policy and one rate sheet. Betterway structures your file across 24 licensed UAE conventional and Islamic lenders — comparing fixed periods, post-fixed EIBOR revert margins, minimum floors, bank fees, and insurance side by side before you submit a single application.',
+  },
+  {
+    q: 'How much upfront cash do I need for an AED 2,000,000 Dubai home?',
+    a: `At a 20% resident down payment, our calculator estimates ${aed(cashToClose({ price: 2_000_000, downPct: 20 }).total)} total cash to close — including the down payment, 4% DLD transfer fee, title deed, 0.25% mortgage registration, AED 4,200 trustee fee, valuation allowance, and agency commission.`,
+  },
+  {
+    q: 'Does checking my eligibility on Betterway affect my AECB credit score?',
+    a: 'No. Using our 60-second Pre-Approval Readiness Wizard, DBR calculator, or DLD fee sheet has zero impact on your Al Etihad Credit Bureau (AECB) credit report. Credit checks only happen when you formally authorise a bank application.',
+  },
+  {
+    q: 'Can non-residents and overseas investors get a mortgage in Dubai?',
+    a: 'Yes. Selected UAE lenders finance international buyers earning salaried or business income abroad. Lender LTV policies, eligible countries, and minimum income thresholds vary by bank — we map 25 country profiles and compare eligible lenders upfront.',
+  },
+  {
+    q: 'What are the official Central Bank of the UAE (CBUAE) borrowing rules?',
+    a: 'CBUAE Mortgage Regulations cap total Debt Burden Ratio (DBR) at 50% of gross monthly income, cap first-home LTV at 80% for expats and 85% for UAE Nationals (up to AED 5M), cap maximum tenure at 25 years, and cap early settlement exit fees at 1% or AED 10,000 (+5% VAT), whichever is lower.',
+  },
+  {
+    q: 'How do RERA real estate agents and brokerages partner with Betterway?',
+    a: 'Through Hub by Betterway, RERA agents share co-branded calculators, verify buyer DBR readiness before viewings, and track referred files live from Form F to DLD trustee day inside Betterway OS.',
+  },
 ];
 
-/* ---------- Small building blocks ---------- */
-
-function Head({ n, label, title, lead, action, dark = false }: { n: string; label: string; title: string; lead?: string; action?: { label: string; href: string }; dark?: boolean }) {
-  return (
-    <div className="bw-head">
-      <div>
-        <div className="bw-head__meta"><span className="bw-index">({n})</span><span className={`bw-label ${dark ? 'bw-label--light' : ''}`}><i />{label}</span></div>
-        <h2 className="bw-h2" data-reveal="rise"><Rich text={title} /></h2>
-      </div>
-      {(lead || action) && (
-        <div className="bw-head__side" data-reveal="rise" style={{ ['--i' as string]: 1 }}>
-          {lead && <p className="bw-lead">{lead}</p>}
-          {action && <Cta href={action.href} tone={dark ? 'light' : 'ghost'} size="sm">{action.label}</Cta>}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function Home() {
+  const featuredBanks = BANKS.slice(0, 4);
+  const featuredCommunities = COMMUNITIES.slice(0, 6);
+
   return (
     <>
-      <HomeHero />
-      <DisclosureToast />
+      <link
+        rel="preload"
+        as="image"
+        type="image/avif"
+        imageSrcSet="/images/hero-morning-01-1280.avif 1280w, /images/hero-morning-01-2048.avif 2048w, /images/hero-morning-01-3840.avif 3840w, /images/hero-morning-01-max.avif 4140w"
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
+      <div className="holo-canvas">
+        {/* 1. EXACT USEHOLO ROUNDED DUBAI SKYLINE HERO + DUAL WHITE SPLIT-CARD CTAs */}
+        <HomeHero />
 
-      {/* Trust strip (Monara) */}
-      <section id="lenders" className="bw-trust bg-white" aria-label="UAE lenders in the directory">
-        <div className="wrap">
-          <p>Comparing terms across <b>{BANKS.length} UAE lenders</b> in one directory</p>
-          <LogoMarquee label="UAE banks in the lender directory" items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))} />
-          <p className="!mt-4 !mb-0 !text-[11.5px]">Directory listing is not a partnership or a live offer. Request a current written quote.</p>
-        </div>
-      </section>
-
-      {/* Statement + pillars (Caldren) */}
-      <section className="bw-section bg-white">
-        <div className="wrap">
-          <div className="bw-head__meta"><span className="bw-index">(01)</span><span className="bw-label"><i />Why Betterway</span></div>
-          <Manifesto text="A home loan is more than a rate. We read mortgage offers the way lenders write them, so the number you sign is the number you expected." />
-          <ol className="bw-pillars">
-            {PILLARS.map(([t, b], i) => (
-              <li key={t} className="bw-pillar" data-reveal="rise" style={{ ['--i' as string]: i }}>
-                <span className="bw-index">0{i + 1}</span>
-                <h3>{t}</h3>
-                <p>{b}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Products as stays (glamping) */}
-      <section className="bw-section bg-mist">
-        <div className="wrap">
-          <Head n="02" label="Mortgages" title="A mortgage for every *next move.*" lead="Four common starting points. Each one opens a full guide with lender criteria, costs and the documents you will need." action={{ label: 'All mortgage options', href: '/mortgages' }} />
-          <ServicesIndex items={[...STAYS] as never} />
-          <p className="mt-10 text-xs text-slate">LTV figures are CBUAE caps for typical profiles. Lenders may offer less. Concept images are AI-generated.</p>
-        </div>
-      </section>
-
-      {/* Calculator on an obsidian ground (Monara) */}
-      <section id="calculator" className="bw-section bw-dark">
-        <div className="bw-glow bw-glow--emerald" style={{ left: '-300px', top: '-200px' }} aria-hidden="true" />
-        <div className="bw-glow bw-glow--brass" style={{ right: '-420px', top: '42%' }} aria-hidden="true" />
-        <div className="bw-dots" aria-hidden="true" />
-        <div className="wrap">
-          <Head dark n="03" label="Mortgage calculator" title="Run the numbers *before* the bank does." lead="Monthly payment, deposit and purchase fees in one view. No sign-up, nothing submitted." />
-          <div className="bw-calc-shell" data-reveal="rise"><Calculator slug="mortgage-calculator" /></div>
-          <p className="bw-note">Planning estimates only. Rates and fees depend on the lender, property and your circumstances. Bank processing fees and insurance may be additional.</p>
-        </div>
-
-        {/* Reasons bento (Monara "Why choose us"), on the same obsidian ground so the glows never meet an edge */}
-        <div className="wrap" style={{ marginTop: 'var(--bw-section)' }}>
-          <Head dark n="04" label="What changes with us" title="Less friction. *More clarity.*" />
-          <div className="bw-bento">
-            <article className="bw-tile bw-tile--photo" data-reveal="rise">
-              <img src="/img/advisor-consultation-2752.webp" srcSet="/img/advisor-consultation-1376.webp 1376w, /img/advisor-consultation-2752.webp 2752w" sizes="(min-width: 1100px) 720px, 100vw" alt="Concept image: an advisor reviewing a mortgage offer with a client" width={2752} height={1536} />
-              <div><h3>An advisor who reads the small print with you.</h3><p className="mt-2">Fixed period, revert margin, floor rate and fees, line by line.</p></div>
-            </article>
-            <article className="bw-tile bw-tile--figure" data-reveal="rise" style={{ ['--i' as string]: 1 }}><span className="bw-label bw-label--light"><i />CBUAE debt cap</span><strong>50<small>%</small></strong><p>Maximum debt burden ratio. Our affordability maths applies it, including card limits.</p></article>
-            <article className="bw-tile" data-reveal="rise"><span className="bw-tile__icon"><Layers3 size={20} /></span><h3>{BANKS.length} lenders, one directory</h3><p>Rates, revert formulas and criteria from UAE banks, compared on the same terms.</p></article>
-            <article className="bw-tile" data-reveal="rise" style={{ ['--i' as string]: 1 }}><span className="bw-tile__icon"><ReceiptText size={20} /></span><h3>Every dirham, itemised</h3><p>Deposit, DLD fee, trustee, valuation and registration, shown before you commit.</p></article>
-            <article className="bw-tile" data-reveal="rise" style={{ ['--i' as string]: 2 }}><span className="bw-tile__icon"><Languages size={20} /></span><h3>English & العربية</h3><p>Guides and calculators in both languages, with a right-to-left Arabic site.</p></article>
-            <article className="bw-tile bw-tile--wide" data-reveal="rise"><span className="bw-tile__icon"><FileCheck2 size={20} /></span><h3>Documents ready before the bank asks</h3><p>Identity, income, liabilities and property papers in one checklist, so pre-approval is not a guessing game.</p></article>
-            <article className="bw-tile bw-tile--wide" data-reveal="rise" style={{ ['--i' as string]: 1 }}><span className="bw-tile__icon"><Scale size={20} /></span><h3>Teaser rate vs real cost</h3><p>See how two offers diverge once the fixed period ends and the variable rate takes over.</p><Link href="/rates/uae-mortgage-rates-eibor-revert-bible" className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-brass">Compare UAE rates <ArrowUpRight size={14} /></Link></article>
-          </div>
-        </div>
-      </section>
-
-      {/* Benchmarks */}
-      <section className="bw-section bg-white">
-        <div className="wrap">
-          <Head n="05" label="Benchmarks" title="Published rates, *in the open.*" lead="Follow the latest public EIBOR fixing from the Central Bank, then see what a revert margin does to your payment." action={{ label: 'Open the EIBOR tracker', href: '/rates/eibor-live-tracker' }} />
-          <div className="bw-bench">
-            <div className="bw-bench__panel border border-line" data-reveal="frost">
-              <LiveBenchmark />
-              <dl className="bw-bench__rules" aria-label="How EIBOR applies to UAE mortgages">
-                <div className="bw-bench__rule">
-                  <dt>Publication cadence</dt>
-                  <dd>Every UAE business day</dd>
-                </div>
-                <div className="bw-bench__rule">
-                  <dt>Variable-rate formula</dt>
-                  <dd className="num">3M EIBOR + bank margin</dd>
-                </div>
-                <div className="bw-bench__rule">
-                  <dt>Minimum rate floor</dt>
-                  <dd>Stated in written offer letter</dd>
-                </div>
-              </dl>
+        {/* 2. "FIND IT. FINANCE IT." — EXACT HOLO 2-ROW PRODUCT ECOSYSTEM SECTION */}
+        <section className="holo-section" aria-labelledby="ecosystem-title">
+          <div className="mx-auto max-w-[1220px]">
+            <div className="max-w-3xl space-y-4">
+              <SectionTag>The Betterway Ecosystem</SectionTag>
+              <h2 id="ecosystem-title" className="holo-display-h2">
+                Find it. Finance it.
+              </h2>
+              <p className="holo-lead max-w-2xl" data-aeo-answer="true">
+                From checking real 50% CBUAE borrowing power and comparing 24 UAE banks to budgeting upfront 4% DLD fees
+                across {COMMUNITIES.length} freehold areas — Betterway brings it all together.
+              </p>
             </div>
-            <div className="bw-bench__panel border border-line" data-reveal="frost" style={{ ['--i' as string]: 1 }}>
-              <RevertBriefing />
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Stats (Caldren "Quietly, at scale") — counts of what the site actually covers */}
-      <section className="bw-section--tight bg-white">
-        <div className="wrap">
-          <div className="bw-head__meta"><span className="bw-index">(06)</span><span className="bw-label"><i />Coverage</span></div>
-          <h2 className="bw-h2 mb-12" data-reveal="rise">Quietly, <em>thorough.</em></h2>
-          <div className="bw-stats">
-            {[[BANKS.length, '', 'UAE lenders in our comparison directory'], [TOOLS.length, '', 'Free calculators and planning tools'], [COMMUNITIES.length, '', 'Freehold communities covered across the UAE'], [COUNTRIES.length, '', 'Countries with non-resident guidance']].map(([v, s, l], i) => (
-              <div key={l as string} className="bw-stat" data-reveal="rise" style={{ ['--i' as string]: i }}>
-                <strong><StatCounter value={v as number} suffix={s as string} /></strong>
-                <p>{l}</p>
+            <div className="mt-14 space-y-14 lg:space-y-20">
+              {/* Row 1: Deep Gradient Live Bank Comparison UI Card + Financing Copy */}
+              <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+                <div className="holo-visual-stage" data-reveal="frost">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
+                      <img src="/brand/icon-fullcolor.svg" alt="" width={18} height={18} className="h-[18px] w-[18px]" />
+                      24-Bank Comparison Engine
+                    </span>
+                    <span className="rounded-full bg-[#179373]/25 px-3 py-1 text-[11px] font-bold text-[#34dfac]">
+                      Conventional &amp; Islamic
+                    </span>
+                  </div>
+
+                  <div className="my-6 space-y-2.5">
+                    {featuredBanks.map((bank, idx) => (
+                      <Link
+                        key={bank.key}
+                        href={`/rates/${bank.slug}`}
+                        className={`flex items-center justify-between gap-3 rounded-[16px] border px-4 py-3.5 transition ${
+                          idx === 0
+                            ? 'border-[#d7b158]/55 bg-white text-[#121217] shadow-lg'
+                            : 'border-white/12 bg-white/[0.06] text-white hover:bg-white/[0.12]'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <span className="grid h-10 w-16 shrink-0 place-items-center rounded-[10px] bg-white p-1.5">
+                            <img src={bank.logo} alt={bank.name} className="max-h-6 max-w-full object-contain" loading="lazy" />
+                          </span>
+                          <div className="min-w-0">
+                            <p className={`truncate font-display text-sm font-bold ${idx === 0 ? 'text-[#121217]' : 'text-white'}`}>
+                              {bank.name}
+                            </p>
+                            <p className={`text-xs ${idx === 0 ? 'text-[#6c6c89]' : 'text-white/65'}`}>
+                              {bank.type} · Written FOL &amp; EIBOR revert audit
+                            </p>
+                          </div>
+                        </div>
+                        <ArrowRight size={15} className={`shrink-0 ${idx === 0 ? 'text-[#0e6954]' : 'text-white/60'}`} />
+                      </Link>
+                    ))}
+                  </div>
+
+                  <p className="text-[11.5px] text-white/60">
+                    Bank-neutral directory comparison · Written lender terms confirmed prior to application.
+                  </p>
+                </div>
+
+                <div className="space-y-6 lg:pl-6">
+                  <h3 className="holo-display-h3">The right mortgage for you in the UAE</h3>
+                  <p className="holo-lead">
+                    Compare 24 licensed UAE lenders side by side, inspect post-fixed EIBOR revert margins and floor
+                    clauses in plain English, and get specialist guidance from DBR check through to DLD transfer.
+                  </p>
+                  <div className="flex flex-wrap gap-3 pt-1">
+                    <Cta href="/get-started">Get a mortgage</Cta>
+                    <Cta href="/rates" tone="ghost">
+                      Compare all 24 banks
+                    </Cta>
+                  </div>
+                </div>
               </div>
-            ))}
+
+              {/* Row 2: Deep Gradient Property & DLD Budget Visual Card + Concierge Copy */}
+              <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+                <div className="holo-visual-stage" data-reveal="frost">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
+                      <Building2 size={14} className="text-[#f1d57e]" />
+                      Dubai &amp; UAE Property Finance Map
+                    </span>
+                    <span className="num rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-white/85">
+                      {COMMUNITIES.length} Freehold Areas
+                    </span>
+                  </div>
+
+                  <div className="my-5 overflow-hidden rounded-[16px] border border-white/15">
+                    <img
+                      src="/images/dubai-waterfront-1672.webp"
+                      srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w"
+                      sizes="(min-width: 1024px) 42vw, 92vw"
+                      alt="Dubai waterfront residential architecture overlooking the marina skyline"
+                      width={1672}
+                      height={941}
+                      loading="lazy"
+                      decoding="async"
+                      className="aspect-[16/9] w-full object-cover"
+                    />
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {featuredCommunities.map((area) => (
+                      <Link
+                        key={area.slug}
+                        href={`/areas/${area.emirate}/${area.slug}`}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md transition hover:border-[#34dfac] hover:bg-white/20"
+                      >
+                        <MapPin size={11} className="text-[#34dfac]" />
+                        {area.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-6 lg:pl-6">
+                  <h3 className="holo-display-h3">Budget &amp; buy with Form F protection</h3>
+                  <p className="holo-lead">
+                    Don’t sign a Dubai MOU blind. Lock in your verified borrowing power, generate mortgage-contingent
+                    Form F valuation protection clauses, and itemise every trustee cheque before transfer day.
+                  </p>
+                  <div className="flex flex-wrap gap-3 pt-1">
+                    <Cta href="/concierge">Explore Buyer Concierge</Cta>
+                    <Cta href="/tools/form-f-clause-generator" tone="ghost">
+                      Form F Clause Tool
+                    </Cta>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Journey on a navy ground */}
-      <section className="bw-section bw-journey bw-sheet">
-        <div className="wrap">
-          <div className="bw-head__meta"><span className="bw-index">(07)</span><span className="bw-label bw-label--light"><i />Your journey</span></div>
-          <h2 className="bw-h2 bw-h2--light" data-reveal="rise">Know what <em>comes next.</em></h2>
-          <JourneyPhone steps={JOURNEY as never} />
-          <div className="mt-10"><Cta href="/guides/complete-dld-trustee-transfer-day-checklist" tone="brass">Transfer-day checklist</Cta></div>
-        </div>
-      </section>
+        {/* 3. INTERACTIVE HOLO-STYLE SPLIT MORTGAGE + 4% DLD CALCULATOR + 24 UAE BANKS + LIVE EIBOR */}
+        <section id="calculator" className="holo-section" aria-label="Mortgage calculator and live CBUAE EIBOR">
+          <div className="mx-auto max-w-[1220px]">
+            <HoloMortgageCalc />
 
-      {/* Markets (Caldren "Four cities, one standard") */}
-      <section className="bw-section bg-white">
-        <div className="wrap">
-          <Head n="08" label="Where we advise" title="Four markets, *one standard.*" lead="Each emirate has its own land registry, fees and lender appetite. Start with the market behind your shortlist." action={{ label: 'Explore areas', href: '/areas' }} />
-          <div className="bw-markets">
-            {MARKETS.map((m, i) => (
-              <Link key={m.name} href={m.href} className="bw-market" data-reveal="rise" style={{ ['--i' as string]: i }}>
-                <span className="bw-market__top"><span className="bw-market__chip">{m.chip}</span><span className="bw-market__arrow"><ArrowUpRight size={18} /></span></span>
-                <h3>{m.name}</h3>
-                <p>{m.body}</p>
-                <dl><div><dt>{m.k1}</dt><dd>{m.v1}</dd></div><div><dt>{m.k2}</dt><dd>{m.v2}</dd></div></dl>
+            {/* 24 Authentic UAE Bank Logos Marquee */}
+            <div className="mt-16 border-t border-[#eef0f3] pt-10">
+              <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#6c6c89]">
+                Comparing mortgage structures across {BANKS.length} licensed UAE lenders
+              </p>
+              <LogoMarquee
+                label="UAE banks in the lender directory"
+                items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))}
+              />
+            </div>
+
+            {/* Live CBUAE EIBOR Fixing & Revert Margin Transparency */}
+            <div className="bw-bench mt-12">
+              <div className="bw-bench__panel" data-reveal="frost">
+                <LiveBenchmark />
+                <dl className="bw-bench__rules" aria-label="How EIBOR applies to UAE mortgages">
+                  <div className="bw-bench__rule">
+                    <dt>Publication cadence</dt>
+                    <dd>Every UAE business day</dd>
+                  </div>
+                  <div className="bw-bench__rule">
+                    <dt>Variable-rate formula</dt>
+                    <dd className="num">3M EIBOR + bank margin</dd>
+                  </div>
+                  <div className="bw-bench__rule">
+                    <dt>Early settlement cap</dt>
+                    <dd>1% or AED 10,000 (+5% VAT)</dd>
+                  </div>
+                </dl>
+              </div>
+              <div className="bw-bench__panel" data-reveal="frost" style={{ ['--i' as string]: 1 }}>
+                <RevertBriefing />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. B2B ECOSYSTEM — "GROW YOUR BUSINESS WITH BETTERWAY" (SOFT EMERALD-MINT CARD — PARALLEL TO HOLO'S LAVENDER CARD) */}
+        <section className="holo-section holo-section--mint" aria-labelledby="b2b-title">
+          <div className="mx-auto max-w-[1220px]">
+            <div className="max-w-3xl space-y-4">
+              <SectionTag>For Agents &amp; Brokerages</SectionTag>
+              <h2 id="b2b-title" className="holo-display-h2">
+                Grow your business with Betterway
+              </h2>
+              <p className="holo-lead max-w-2xl">
+                Technology, 24-bank underwriting rails, and Betterway OS infrastructure that help UAE real estate
+                agents and mortgage teams close faster with zero surprises.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 lg:grid-cols-2">
+              {/* Card 1: Hub by Betterway (For Real Estate Agents) */}
+              <SpotlightCard className="flex flex-col overflow-hidden rounded-[26px] border border-[#dce7e2] bg-white shadow-sm">
+                <div className="holo-visual-stage !min-h-[300px] !rounded-none">
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-[#121217]">
+                      <Smartphone size={14} className="text-[#0e6954]" /> HUB by Betterway
+                    </span>
+                    <span className="text-xs font-semibold text-[#34dfac]">RERA Agent Portal</span>
+                  </div>
+                  <div className="mx-auto my-5 w-full max-w-[320px] rounded-[22px] border border-white/20 bg-[#080b0f]/85 p-5 shadow-2xl backdrop-blur-md">
+                    <div className="flex items-center gap-2.5 border-b border-white/10 pb-3">
+                      <img src="/brand/icon-fullcolor.svg" alt="" width={24} height={24} className="h-6 w-6" />
+                      <div>
+                        <p className="text-xs font-bold text-white">Buyer Readiness Verified</p>
+                        <p className="text-[10.5px] text-white/60">CBUAE 50% DBR · 24-Bank Panel</p>
+                      </div>
+                    </div>
+                    <div className="mt-3.5 space-y-2 text-xs">
+                      <div className="flex justify-between text-white/80">
+                        <span>Co-branded calculators</span>
+                        <span className="font-semibold text-[#34dfac]">Active</span>
+                      </div>
+                      <div className="flex justify-between text-white/80">
+                        <span>Milestone tracking</span>
+                        <span className="font-semibold text-[#f1d57e]">Form F → DLD</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span className="text-[11px] text-white/55">Built for Dubai &amp; UAE RERA brokerages</span>
+                </div>
+                <div className="flex flex-1 flex-col justify-between p-7 sm:p-8">
+                  <div>
+                    <h3 className="font-display text-2xl font-bold text-[#121217] sm:text-3xl">
+                      Close more deals with verified buyers
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-[#6c6c89]">
+                      Give your buyers co-branded DBR &amp; DLD calculators, confirm financing capacity before viewings,
+                      and track every referred mortgage live through Betterway OS.
+                    </p>
+                  </div>
+                  <div className="mt-6">
+                    <Cta href="/hub">Explore Hub by Betterway</Cta>
+                  </div>
+                </div>
+              </SpotlightCard>
+
+              {/* Card 2: Edge by Betterway (Mortgage Brokerage OS) */}
+              <SpotlightCard className="flex flex-col overflow-hidden rounded-[26px] border border-[#dce7e2] bg-white shadow-sm">
+                <div className="holo-visual-stage !min-h-[300px] !rounded-none">
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-[#121217]">
+                      <Cpu size={14} className="text-[#0e6954]" /> EDGE by Betterway
+                    </span>
+                    <span className="text-xs font-semibold text-[#f1d57e]">Betterway OS</span>
+                  </div>
+                  <div className="my-5 grid grid-cols-2 gap-3">
+                    {[
+                      [Layers, '24-Lender Matrix', 'Conventional & Islamic'],
+                      [ShieldCheck, 'CBUAE KFS Flow', 'Audit-ready files'],
+                      [Building2, '60 UAE Areas', 'Freehold & handover'],
+                      [CheckCircle2, 'EN & العربية', 'Bilingual client vault'],
+                    ].map(([Icon, t, s]) => {
+                      const Comp = Icon as typeof Layers;
+                      return (
+                        <div key={t as string} className="rounded-[14px] border border-white/12 bg-white/[0.06] p-3.5">
+                          <Comp size={16} className="text-[#34dfac]" />
+                          <p className="mt-2 font-display text-xs font-bold text-white">{t as string}</p>
+                          <p className="text-[10.5px] text-white/60">{s as string}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <span className="text-[11px] text-white/55">Solo advisor &amp; enterprise brokerage tiers</span>
+                </div>
+                <div className="flex flex-1 flex-col justify-between p-7 sm:p-8">
+                  <div>
+                    <h3 className="font-display text-2xl font-bold text-[#121217] sm:text-3xl">
+                      Build your mortgage business
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-[#6c6c89]">
+                      Launch or scale your UAE mortgage advisory practice with Betterway OS technology, CBUAE-compliant
+                      workflows, and our 24-bank panel architecture.
+                    </p>
+                  </div>
+                  <div className="mt-6">
+                    <Cta href="/edge">Discover Edge by Betterway</Cta>
+                  </div>
+                </div>
+              </SpotlightCard>
+            </div>
+          </div>
+        </section>
+
+        {/* 5. BETTERWAY VS GOING DIRECT + 24-SECOND FULL-HD BRIEFING FILM */}
+        <section className="holo-section" aria-labelledby="compare-title">
+          <div className="mx-auto max-w-[1220px] space-y-14">
+            <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+              <div className="space-y-5">
+                <SectionTag>The Betterway Difference</SectionTag>
+                <h2 id="compare-title" className="holo-display-h3">
+                  Why compare through Betterway instead of going direct?
+                </h2>
+                <p className="holo-lead">
+                  Most buyers only see one bank’s headline fixed rate and discover post-fixed revert margins, DLD fees,
+                  and credit-card DBR reductions far too late.
+                </p>
+                <Cta href="/why-betterway-vs-direct-bank" tone="ghost" size="sm">
+                  Read Full Comparison
+                </Cta>
+              </div>
+
+              <div className="overflow-hidden rounded-[22px] border border-[#e5e7eb] bg-[#f8f9fa]">
+                <div className="grid grid-cols-[1fr_100px_100px] border-b border-[#e5e7eb] bg-white px-5 py-4 text-xs font-bold uppercase tracking-wider text-[#6c6c89]">
+                  <span>Feature</span>
+                  <span className="text-center text-[#0e6954]">Betterway</span>
+                  <span className="text-center">1 Bank</span>
+                </div>
+                <div className="divide-y divide-[#eceef2]">
+                  {COMPARE_ROWS.map(([feat, bw, direct]) => (
+                    <div
+                      key={feat}
+                      className="grid grid-cols-[1fr_100px_100px] items-center px-5 py-4 text-sm text-[#121217]"
+                    >
+                      <span className="font-medium pr-3">{feat}</span>
+                      <span className="grid place-items-center">
+                        {bw && (
+                          <span className="grid h-7 w-7 place-items-center rounded-full bg-[#179373] text-white">
+                            <Check size={15} strokeWidth={2.8} />
+                          </span>
+                        )}
+                      </span>
+                      <span className="grid place-items-center">
+                        {!direct && (
+                          <span className="grid h-7 w-7 place-items-center rounded-full bg-[#e5e7eb] text-[#6c6c89]">
+                            <X size={14} strokeWidth={2.5} />
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* 24-Second Full-HD Corporate Briefing Film */}
+            <VideoBriefingShowcase />
+          </div>
+        </section>
+
+        {/* 6. AUTHENTIC DUBAI SPECIALISTS CAROUSEL (Click to Inspect Portaled 8K Modal) */}
+        <section className="holo-section" aria-labelledby="advisors-title">
+          <div className="mx-auto max-w-[1220px]">
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+              <div className="max-w-2xl space-y-3">
+                <SectionTag>Our Oud Metha, Dubai Desk</SectionTag>
+                <h2 id="advisors-title" className="holo-display-h3">
+                  Real UAE mortgage specialists behind every file
+                </h2>
+                <p className="holo-lead">
+                  Led by Founder &amp; Managing Director Shabib Siraj in Oud Metha, Dubai — click any specialist below
+                  to inspect their full profile and focus areas.
+                </p>
+              </div>
+              <Cta href="/our-underwriters" size="sm">
+                Meet Full Team
+              </Cta>
+            </div>
+          </div>
+
+          <HomyAdvisorsCarousel />
+        </section>
+
+        {/* 7. EXACT HOLO ANIMATED PITCH-BLACK STATS BANNER (100% Factual Audited Betterway Figures) */}
+        <section className="holo-section holo-section--dark" aria-label="Betterway ecosystem coverage">
+          <div className="mx-auto max-w-[1220px] grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <p className="font-display text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
+                <StatCounter value={BANKS.length} />
+              </p>
+              <p className="mt-2 text-sm font-medium text-white/70">Licensed UAE lenders compared</p>
+            </div>
+            <div>
+              <p className="font-display text-5xl font-extrabold tracking-tight text-[#34dfac] sm:text-6xl">
+                <StatCounter value={COMMUNITIES.length} suffix="+" />
+              </p>
+              <p className="mt-2 text-sm font-medium text-white/70">UAE freehold areas mapped</p>
+            </div>
+            <div>
+              <p className="font-display text-5xl font-extrabold tracking-tight text-[#f1d57e] sm:text-6xl">
+                <StatCounter value={PROJECTS.length} suffix="+" />
+              </p>
+              <p className="mt-2 text-sm font-medium text-white/70">Off-plan handover projects</p>
+            </div>
+            <div>
+              <p className="font-display text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
+                <StatCounter value={50} suffix="%" />
+              </p>
+              <p className="mt-2 text-sm font-medium text-white/70">CBUAE statutory DBR enforced</p>
+            </div>
+          </div>
+        </section>
+
+        {/* 8. HIGHLIGHTED ADVISORY MARQUEE + SCROLL-SCALED 4K COASTAL ARCHITECTURE */}
+        <section className="holo-section overflow-hidden" aria-labelledby="highlight-title">
+          <div className="mx-auto max-w-[1220px] mb-6 flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-2xl space-y-3">
+              <SectionTag>Across Dubai, Abu Dhabi &amp; Northern Emirates</SectionTag>
+              <h2 id="highlight-title" className="holo-display-h3">
+                Structured pre-approval built for calm transfer days
+              </h2>
+            </div>
+            <Cta href="/areas" size="sm" tone="ghost">
+              Browse 60 Communities
+            </Cta>
+          </div>
+          <div className="homy-highlight-stage">
+            <div className="homy-marquee-bg" aria-hidden="true">
+              <div className="homy-marquee-track">
+                <span>24 UAE Banks Compared · Live CBUAE EIBOR · Upfront 4% DLD Clarity</span>
+              </div>
+            </div>
+            <ScrollScaleFrame>
+              <Link href="/areas" className="homy-highlight-frame block" aria-label="Explore UAE freehold communities">
+                <img
+                  src="/images/abudhabi-corniche-1792.webp"
+                  srcSet="/images/abudhabi-corniche.webp 1376w, /images/abudhabi-corniche-1792.webp 1792w, /images/abudhabi-corniche-2752.webp 2752w"
+                  sizes="(min-width: 960px) 920px, 95vw"
+                  alt="Aerial daylight view of the Abu Dhabi Corniche beachfront, turquoise Gulf water, and UAE skyline"
+                  width={2752}
+                  height={1548}
+                  loading="lazy"
+                  decoding="async"
+                />
               </Link>
-            ))}
+            </ScrollScaleFrame>
           </div>
-          <p className="mt-6 text-xs text-slate">Land-registry rules and lender property appetite vary by emirate and community.</p>
-        </div>
-      </section>
+        </section>
 
-      {/* Rules built in (Monara "Secure by design") */}
-      <section className="bw-section bg-mist">
-        <div className="wrap bw-rules">
-          <div>
-            <div className="bw-head__meta"><span className="bw-index">(09)</span><span className="bw-label"><i />Rules built in</span></div>
-            <h2 className="bw-h2" data-reveal="rise">Central Bank rules, <em>by design.</em></h2>
-            <p className="bw-lead mt-6">Every calculator on this site applies the CBUAE mortgage regulations, so the figures you plan with are figures a lender can actually approve.</p>
-            <ul className="bw-rule-list">
-              {[['50% debt burden ratio', 'All monthly debt repayments, including card limits, against gross income.'], ['25-year maximum tenure', 'Shorter terms may apply depending on your age at maturity.'], ['Early settlement capped', '1% of the outstanding balance or AED 10,000, whichever is lower.'], ['Deposit from your own funds', 'A UAE personal loan cannot fund the down payment.']].map(([t, b], i) => (
-                <li key={t} data-reveal="rise" style={{ ['--i' as string]: i }}><BadgeCheck size={20} /><div><b>{t}</b><span>{b}</span></div></li>
+        {/* 9. EXACT HOLO HORIZONTAL SCROLLABLE "LATEST GUIDES & MARKET RULES" CAROUSEL */}
+        <section className="holo-section" aria-labelledby="guides-title">
+          <div className="mx-auto max-w-[1220px]">
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+              <div className="space-y-3">
+                <SectionTag>Resources &amp; Intelligence</SectionTag>
+                <h2 id="guides-title" className="holo-display-h2">
+                  Latest guides &amp; UAE rules
+                </h2>
+              </div>
+              <Cta href="/guides" tone="ghost" size="sm">
+                Explore all guides
+              </Cta>
+            </div>
+
+            <div className="holo-news-track">
+              {EDITORIAL_GUIDES.map((g) => (
+                <Link key={g.href} href={g.href} className="holo-news-card group">
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#eef0f3]">
+                    <img
+                      src={g.img}
+                      srcSet={`${g.img} 1376w, ${g.img2x} 2752w`}
+                      sizes="(max-width: 640px) 82vw, 360px"
+                      alt={g.title}
+                      width={1376}
+                      height={774}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="flex items-center gap-2 text-xs font-semibold text-[#6c6c89]">
+                      <span className="rounded-full bg-[#eef7f4] px-2.5 py-0.5 text-[#0e6954]">{g.tag}</span>
+                      <span>·</span>
+                      <span className="inline-flex items-center gap-1">
+                        <Clock size={12} /> {g.readTime}
+                      </span>
+                    </div>
+                    <h3 className="mt-3 font-display text-lg font-bold leading-snug text-[#121217] group-hover:text-[#0e6954]">
+                      {g.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[#6c6c89]">{g.excerpt}</p>
+                    <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-bold text-[#121217] group-hover:text-[#0e6954]">
+                      Read guide <ArrowRight size={13} />
+                    </span>
+                  </div>
+                </Link>
               ))}
-            </ul>
-          </div>
-          <div data-reveal="rise">
-            <div className="bw-ltv" role="table" aria-label="CBUAE loan-to-value caps">
-              <div className="bw-ltv__row" role="row"><span role="columnheader">Profile</span><span role="columnheader">Max LTV</span><span role="columnheader">Deposit</span></div>
-              {LTV_RULES.map((r) => <div key={r.profile} className="bw-ltv__row" role="row"><span role="cell">{r.profile}</span><b role="cell">{r.ltv}</b><span role="cell">{r.down}</span></div>)}
             </div>
-            <p className="mt-4 text-xs text-slate">Source: CBUAE mortgage loan regulations. Lender policies can be stricter.</p>
-          </div>
-        </div>
-      </section>
 
-      {/* Qualifier */}
-      <section className="bw-section bg-white">
-        <div className="wrap grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
-          <div>
-            <div className="bw-head__meta"><span className="bw-index">(10)</span><span className="bw-label"><i />Your starting point</span></div>
-            <h2 className="bw-h2" data-reveal="rise">A few questions. <em>A clearer direction.</em></h2>
-            <p className="bw-lead mt-6 max-w-md">Tell us what you want to do. Explore indicative options, then discuss your documents with an advisor.</p>
-            <ul className="mt-7 grid gap-3 text-sm text-slate">{['No credit check', 'No application submitted', 'Takes about a minute'].map((t) => <li key={t} className="flex items-center gap-2"><Check size={16} className="text-teal" />{t}</li>)}</ul>
-            <Link className="bw-link mt-9" href="/guides"><Plus size={14} /> New to UAE mortgages? Start here</Link>
-          </div>
-          <div data-reveal="rise"><Qualifier /></div>
-        </div>
-      </section>
-
-      {/* Team Portfolio — Authentic 8K-mastered Betterway Dubai specialists */}
-      <section className="bw-section bg-white">
-        <div className="wrap">
-          <Head
-            n="11"
-            label="Our people"
-            title="Real advisors behind *every file.*"
-            lead="Led by Founder & Managing Director Shabib Siraj in Dubai. Inspect our advisory, conveyancing, and client-support specialists before you speak with a lender."
-            action={{ label: 'Meet the full team', href: '/our-underwriters' }}
-          />
-          <TeamPortfolio compact showLeadership={false} />
-        </div>
-      </section>
-
-      {/* Journal (Caldren "Notes on living well") */}
-      <section className="bw-section bg-mist">
-        <div className="wrap">
-          <Head n="12" label="Guides" title="Notes on *buying well.*" lead="Plain-English guides to valuations, deposits, transfer day and the clauses that matter in a Form F." action={{ label: 'Read the guides', href: '/guides' }} />
-          <div className="bw-journal">
-            {GUIDES.slice(0, 3).map((g, i) => (
-              <Link key={g.slug} href={`/guides/${g.slug}`} className="bw-post" data-reveal="rise" style={{ ['--i' as string]: i }}>
-                <div className="bw-window"><img src={JOURNAL_IMG[i].src} srcSet={JOURNAL_IMG[i].srcSet} sizes="(min-width: 900px) 52vw, 100vw" alt={JOURNAL_IMG[i].alt} width={2752} height={1536} /></div>
-                <div className="bw-post__meta"><b>Guide</b><span>· {g.steps.length} steps</span></div>
-                <h3>{g.title}</h3>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ (Monara) */}
-      <section className="bw-section bg-white">
-        <div className="wrap bw-faq">
-          <div className="bw-faq__intro">
-            <div className="bw-head__meta"><span className="bw-index">(13)</span><span className="bw-label"><i />FAQs</span></div>
-            <h2 className="bw-h2" data-reveal="rise">Your questions, <em>answered.</em></h2>
-            <p className="bw-lead mt-6">Don’t see what you’re looking for?</p>
-            <div className="mt-6"><Cta href="/contact" tone="ghost" size="sm">Ask an advisor</Cta></div>
-          </div>
-          <div className="bw-faq__list">
-            {FAQS.map((f, i) => (
-              <details key={f.q} open={i === 0}>
-                <summary>{f.q}<i aria-hidden="true">+</i></summary>
-                <p>{f.a}</p>
-              </details>
-            ))}
-          </div>
-          <JsonLd data={{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }} />
-        </div>
-      </section>
-
-      {/* Closing invitation (Caldren + glamping dawn ground) */}
-      <section className="bw-section bw-invite">
-        <div className="wrap bw-invite__grid">
-          <div>
-            <div className="bw-head__meta"><span className="bw-index">(14)</span><span className="bw-label"><i />Talk to an advisor</span></div>
-            <h2 className="bw-display bw-invite__title" data-reveal="rise">Let’s find your <em>better way</em> home.</h2>
-            <p className="bw-lead mt-7 max-w-xl">Tell us how you want to buy. We will come back with a short, considered set of options and the documents to prepare.</p>
-            <div className="bw-invite__actions">
-              <Cta href="/contact">Book a consultation</Cta>
-              <Cta href="/calculators/mortgage-calculator" tone="light">Plan my budget</Cta>
+            {/* Free Printable 2026 UAE Mortgage PDF Dossiers + 36 Trending Insights Strip */}
+            <div className="mt-8 grid gap-4 border-t border-[#e5e7eb] pt-8 md:grid-cols-3">
+              {PDF_RESOURCES.map((pdf) => (
+                <a
+                  key={pdf.id}
+                  href={pdf.file}
+                  download
+                  className="flex flex-col justify-between rounded-[18px] border border-[#e5e7eb] bg-[#f8f9fa] p-5 transition-colors hover:border-[#179373] hover:bg-white"
+                >
+                  <div>
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef7f4] px-2.5 py-1 text-[11px] font-bold text-[#0e6954]">
+                      <FileDown size={12} /> Free PDF · {pdf.pages} {pdf.pages === 1 ? 'Page' : 'Pages'}
+                    </span>
+                    <h3 className="mt-2.5 font-display text-base font-bold text-[#070e1a]">{pdf.title}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-[#464c5c]">{pdf.subtitle}</p>
+                  </div>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#0e6954]">
+                    Download PDF <ArrowRight size={12} />
+                  </span>
+                </a>
+              ))}
+            </div>
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-[#464c5c]">
+              <span>Explore 36 trending 2026–2027 UAE mortgage guides, community rules, and non-resident playbooks:</span>
+              <div className="flex flex-wrap gap-4">
+                <Link href="/insights" className="text-[#0e6954] hover:underline">
+                  All 36 UAE Insights →
+                </Link>
+                <Link href="/downloads" className="text-[#070e1a] hover:underline">
+                  PDF Library →
+                </Link>
+              </div>
             </div>
           </div>
-          <div className="bw-window" data-reveal="horizon"><img src="/images/villa-courtyard-1792.webp" srcSet="/images/villa-courtyard.webp 896w, /images/villa-courtyard-1792.webp 1792w" sizes="(min-width: 1000px) 460px, 100vw" alt="Concept image: a calm villa courtyard with a reflecting pool at golden hour" width={1792} height={2400} decoding="sync" /></div>
-        </div>
-      </section>
+        </section>
+
+        <JsonLd
+          data={speakablePageSchema(
+            '/',
+            'Dubai & UAE Property & Mortgage Ecosystem | Betterway Mortgages',
+            'Compare 24 UAE banks, check 50% CBUAE DBR, itemise 4% DLD closing fees, and download free 2026 mortgage PDF guides.',
+          )}
+        />
+        <JsonLd data={pdfCatalogSchema()} />
+
+        {/* 10. STICKY FAQ ACCORDION */}
+        <section id="faq" className="holo-section" aria-labelledby="faq-title">
+          <div className="mx-auto max-w-[1220px] homy-faq-grid">
+            <div className="homy-faq-left">
+              <SectionTag>FAQ</SectionTag>
+              <h2 id="faq-title" className="holo-display-h3 mt-4">
+                Things you should know
+              </h2>
+              <p className="holo-lead mt-4 max-w-sm">
+                Clear answers to the most important Dubai &amp; UAE mortgage questions, grounded in official CBUAE and
+                DLD rules.
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Cta href="/get-started" size="sm">
+                  Start 60s Check
+                </Cta>
+                <Cta href="/contact" tone="ghost" size="sm">
+                  Ask an Advisor
+                </Cta>
+              </div>
+            </div>
+
+            <HomyFaqAccordion faqs={FAQS} />
+
+            <JsonLd
+              data={{
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: FAQS.map((f) => ({
+                  '@type': 'Question',
+                  name: f.q,
+                  acceptedAnswer: { '@type': 'Answer', text: f.a },
+                })),
+              }}
+            />
+          </div>
+        </section>
+      </div>
+
+      <DisclosureToast />
     </>
   );
 }

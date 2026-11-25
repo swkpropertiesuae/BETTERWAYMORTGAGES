@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1055.83 275.44" width="1056" height="275" fill="none">
+  <title>Betterway Mortgages — Wordmark (dark_bg)</title>
+  <defs>
+    <linearGradient id="wm-gold" x1="0%" y1="0%" x2="100%" y2="15%">
+      <stop offset="0%"   stop-color="#C89E44"/>
+      <stop offset="28%"  stop-color="#EED380"/>
+      <stop offset="54%"  stop-color="#D7AF55"/>
+      <stop offset="82%"  stop-color="#F3DA8A"/>
+      <stop offset="100%" stop-color="#C89C41"/>
+    </linearGradient>
+    <linearGradient id="wm-gold-lightbg" x1="0%" y1="0%" x2="100%" y2="15%">
+      <stop offset="0%"   stop-color="#9B7222"/>
+      <stop offset="30%"  stop-color="#C99E41"/>
+      <stop offset="56%"  stop-color="#AF832C"/>
+      <stop offset="84%"  stop-color="#D2A748"/>
+      <stop offset="100%" stop-color="#966E20"/>
+    </linearGradient>
+  </defs>
+  <g id="Wordmark-Editable" transform="translate(24.00, 5.43)">
+    <text x="0" y="160" font-family="'Montserrat', 'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="196" letter-spacing="-2.4" fill="#FFFFFF">betterway</text>
+    <text x="2.5" y="249" font-family="'Montserrat', 'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="84" letter-spacing="31.13" fill="url(#wm-gold)">MORTGAGES</text>
+  </g>
+</svg>
