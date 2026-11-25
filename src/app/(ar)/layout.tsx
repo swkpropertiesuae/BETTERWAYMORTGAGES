@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import Link from 'next/link';
 import '../globals.css';
 import '../brand.css';
-import { JsonLd, orgSchema } from '@/components/ui';
+import { JsonLd } from '@/components/ui';
+import Analytics from '@/components/Analytics';
+import { enhancedOrgSchema, websiteSchema } from '@/lib/seo-schema';
 import { SITE, waLink } from '@/data/site';
 import { AR_UI } from '@/data/ar';
 
@@ -69,7 +71,9 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
             </div>
           </footer>
         </div>
-        <JsonLd data={orgSchema()} />
+        <Analytics />
+        <JsonLd data={enhancedOrgSchema()} />
+        <JsonLd data={websiteSchema()} />
       </body>
     </html>
   );

@@ -525,11 +525,23 @@ export function Footer() {
           <div className="homy-footer-bottom">
             <p className="leading-relaxed">{DISCLOSURE_FULL}</p>
             <p>
-              Betterway Mortgages is a mortgage adviser, not a bank. Lending decisions, rates and final offers are made by the lender. Concept residence images are AI-generated.
+              Betterway Mortgages LLC is a mortgage adviser, not a bank. Lending decisions, rates and final offers are made solely in writing by the licensed UAE lender.
             </p>
             <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-white/75">
               <p>© 2026 {SITE.legalName}. All rights reserved.</p>
-              <nav aria-label="Legal" className="flex flex-wrap items-center gap-5">
+              <nav aria-label="Legal and SEO links" className="flex flex-wrap items-center gap-5">
+                <Link href="/hot-offers" className="ulink">
+                  Hot Offers
+                </Link>
+                <Link href="/insights" className="ulink">
+                  36 UAE Insights
+                </Link>
+                <Link href="/downloads" className="ulink">
+                  PDF Guides
+                </Link>
+                <a href="https://swkpropertiesuae.com" target="_blank" rel="noopener noreferrer" className="ulink">
+                  SWK Properties UAE ↗
+                </a>
                 <Link href="/privacy-and-cbuae-disclosure" className="ulink">
                   Privacy &amp; CBUAE Disclosure
                 </Link>

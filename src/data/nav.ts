@@ -17,6 +17,7 @@ export const NAV: NavItem[] = [
       {
         title: 'Mortgages & Financing',
         links: [
+          { label: 'Hot UAE Mortgage Offers', href: '/hot-offers', desc: 'Priority bank desk' },
           { label: 'Start Pre-Approval Wizard', href: '/get-started', desc: '60s DBR & DLD dossier' },
           { label: 'UAE Resident Mortgages', href: '/mortgages/uae-residents', desc: 'Up to 80% LTV' },
           { label: 'UAE National Mortgages', href: '/mortgages/uae-nationals', desc: 'Up to 85% LTV' },
@@ -98,6 +99,8 @@ export const NAV: NavItem[] = [
       {
         title: 'Market Guides & Areas',
         links: [
+          { label: '36 Trending UAE Insights', href: '/insights', desc: '2026–2027 rules & areas' },
+          { label: 'Free Printable PDF Guides', href: '/downloads', desc: 'Buyer, DLD & Visa PDFs' },
           { label: 'All UAE Buying Guides', href: '/guides', desc: 'DLD, Form F & DBR' },
           { label: '60 UAE Freehold Communities', href: '/areas', desc: 'Dubai, Abu Dhabi & North' },
           { label: 'Salary Affordability Guides', href: '/affordability', desc: 'AED 15k to 100k+' },

@@ -3,11 +3,15 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { computeScrollProgress } from '@/lib/hero-showcase';
 
+/**
+ * Lightweight scroll state tracker for the transparent-to-white sticky header & progress rail.
+ * Zero scroll-reveal hiding or card animations — every section stays immediately visible at opacity 1.
+ */
 export default function MotionKit() {
   const path = usePathname();
   useEffect(() => {
     const root = document.documentElement;
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    root.classList.remove('bw-motion');
     const header = document.querySelector('.bw-header');
     const isHome = path === '/';
 
@@ -25,49 +29,8 @@ export default function MotionKit() {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
 
-    if (media.matches || !('IntersectionObserver' in window)) {
-      root.classList.remove('bw-motion');
-      return () => {
-        if (raf) window.cancelAnimationFrame(raf);
-        window.removeEventListener('scroll', onScroll);
-        window.removeEventListener('resize', onScroll);
-      };
-    }
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-in');
-            io.unobserve(e.target);
-          }
-        }
-      },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
-    );
-
-    const scan = () =>
-      document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.94 && r.bottom > 0) el.classList.add('is-in');
-        else io.observe(el);
-      });
-
-    scan();
-    root.classList.add('bw-motion');
-
-    const onChange = () => {
-      if (media.matches) {
-        root.classList.remove('bw-motion');
-        io.disconnect();
-      }
-    };
-    media.addEventListener('change', onChange);
-
     return () => {
       if (raf) window.cancelAnimationFrame(raf);
-      io.disconnect();
-      media.removeEventListener('change', onChange);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };

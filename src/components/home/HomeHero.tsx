@@ -7,6 +7,7 @@ import { useBenchmark } from '@/components/StartupExperience';
 import { VideoBriefingModal } from '@/components/ui/MotionPrimitives';
 import PropertyMatchmakerModal from '@/components/ecosystem/PropertyMatchmakerModal';
 import MorningHeroCarousel from '@/components/home/MorningHeroCarousel';
+import { HotOffersTrigger } from '@/components/HotOffersPopup';
 import { BANKS } from '@/data/banks';
 import { COMMUNITIES } from '@/data/communities';
 import { buildHeroDossier } from '@/lib/hero-showcase';
@@ -34,11 +35,12 @@ export default function HomeHero() {
             <button
               type="button"
               onClick={() => setVideoOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/28 bg-[#080b0f]/58 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition hover:border-[#34dfac] hover:bg-[#080b0f]/80 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/28 bg-[#080b0f]/58 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition-colors hover:border-[#34dfac] hover:bg-[#080b0f]/80 cursor-pointer"
             >
               <Play size={11} fill="currentColor" className="text-[#34dfac]" />
               <span>Watch 24s Briefing</span>
             </button>
+            <HotOffersTrigger label="Hot Offers" variant="hero" />
           </div>
 
           <h1 id="hero-title" className="holo-hero__title">

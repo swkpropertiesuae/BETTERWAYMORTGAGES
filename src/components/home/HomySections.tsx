@@ -2,10 +2,8 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, ArrowUpRight, CheckCircle2, Expand, Mail, X } from 'lucide-react';
 import { TEAM_SPECIALISTS, type TeamSpecialist } from '@/data/team';
-import { EASE_HOMY, SPRING_SNAPPY } from '@/components/ui/MotionPrimitives';
 
 export type HomyServiceItem = {
   index: string;
@@ -17,10 +15,9 @@ export type HomyServiceItem = {
   alt: string;
 };
 
-/** 21st.dev Spring-Animated Homy 3-Card Interactive Horizontal Expanding Services Accordion */
+/** Clean static 3-Card Services Selector (zero sliding/exiting card animations). */
 export function HomyServicesAccordion({ items }: { items: readonly HomyServiceItem[] }) {
   const [activeIdx, setActiveIdx] = useState(0);
-  const reduce = useReducedMotion();
 
   return (
     <div className="homy-services-row" role="list">
@@ -33,7 +30,6 @@ export function HomyServicesAccordion({ items }: { items: readonly HomyServiceIt
             tabIndex={0}
             aria-expanded={active}
             onClick={() => setActiveIdx(idx)}
-            onMouseEnter={() => setActiveIdx(idx)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -47,11 +43,8 @@ export function HomyServicesAccordion({ items }: { items: readonly HomyServiceIt
             </div>
             <div className="homy-service-card__scrim" aria-hidden="true" />
 
-            {/* Top Emerald-Gold active progress bar */}
             {active && (
-              <motion.span
-                layoutId="homy-svc-indicator"
-                transition={reduce ? { duration: 0 } : SPRING_SNAPPY}
+              <span
                 className="absolute inset-x-0 top-0 z-[2] h-1 bg-gradient-to-r from-[#179373] via-[#34dfac] to-[#d7b158]"
                 aria-hidden="true"
               />
@@ -64,34 +57,23 @@ export function HomyServicesAccordion({ items }: { items: readonly HomyServiceIt
             <div className="relative z-[1]">
               <p className="homy-service-card__kicker">{item.kicker}</p>
               <h3 className="homy-service-card__title">{item.title}</h3>
-              <AnimatePresence initial={false}>
-                {active && (
-                  <motion.div
-                    key={`svc-body-${item.index}`}
-                    initial={reduce ? false : { opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={reduce ? undefined : { opacity: 0, y: 8 }}
-                    transition={{ duration: reduce ? 0 : 0.32, ease: EASE_HOMY }}
-                  >
-                    <p className="homy-service-card__desc">{item.body}</p>
-                    <div className="mt-5">
-                      <Link
-                        href={item.href}
-                        onClick={(e) => e.stopPropagation()}
-                        className="homy-btn homy-btn--white !h-10 !text-[13.5px]"
-                      >
-                        <span>Explore</span>
-                        <span className="homy-btn__disc !h-6 !w-6" aria-hidden="true">
-                          <span className="homy-btn__arrow-track">
-                            <ArrowRight size={13} strokeWidth={2.2} />
-                            <ArrowRight size={13} strokeWidth={2.2} />
-                          </span>
-                        </span>
-                      </Link>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {active && (
+                <div>
+                  <p className="homy-service-card__desc">{item.body}</p>
+                  <div className="mt-5">
+                    <Link
+                      href={item.href}
+                      onClick={(e) => e.stopPropagation()}
+                      className="homy-btn homy-btn--white !h-10 !text-[13.5px]"
+                    >
+                      <span>Explore</span>
+                      <span className="homy-btn__disc !h-6 !w-6" aria-hidden="true">
+                        <ArrowRight size={13} strokeWidth={2.2} />
+                      </span>
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         );
@@ -100,10 +82,9 @@ export function HomyServicesAccordion({ items }: { items: readonly HomyServiceIt
   );
 }
 
-/** 21st.dev Spring-Animated Homy Sticky 2-Column Single-Open FAQ Accordion */
+/** Crisp instant Sticky 2-Column FAQ Accordion (zero collapse/exit animation jitter). */
 export function HomyFaqAccordion({ faqs }: { faqs: readonly { q: string; a: string }[] }) {
   const [openIdx, setOpenIdx] = useState<number>(0);
-  const reduce = useReducedMotion();
 
   return (
     <div className="homy-faq-list">
@@ -118,31 +99,16 @@ export function HomyFaqAccordion({ faqs }: { faqs: readonly { q: string; a: stri
               onClick={() => setOpenIdx(isOpen ? -1 : idx)}
             >
               <span>{f.q}</span>
-              <motion.span
-                animate={reduce ? undefined : { rotate: isOpen ? 45 : 0 }}
-                transition={SPRING_SNAPPY}
-                className={`homy-faq-icon rounded-full transition-colors ${
+              <span
+                className={`homy-faq-icon rounded-full ${
                   isOpen ? 'bg-[#080b0f] !text-white' : 'bg-white text-[#080b0f]'
                 }`}
                 aria-hidden="true"
               >
-                +
-              </motion.span>
+                {isOpen ? '−' : '+'}
+              </span>
             </button>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  key={`faq-panel-${idx}`}
-                  initial={reduce ? false : { height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={reduce ? undefined : { height: 0, opacity: 0 }}
-                  transition={{ duration: reduce ? 0 : 0.28, ease: EASE_HOMY }}
-                  className="overflow-hidden"
-                >
-                  <p className="homy-faq-panel">{f.a}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {isOpen && <p className="homy-faq-panel">{f.a}</p>}
           </div>
         );
       })}
@@ -150,7 +116,6 @@ export function HomyFaqAccordion({ faqs }: { faqs: readonly { q: string; a: stri
   );
 }
 
-/** Exact Homy Infinite Specialist Carousel with 21st.dev Click-to-Inspect 8K Profile Modal Popup */
 const ADVISORY_NOTES = [
   {
     quote:
@@ -174,11 +139,14 @@ const ADVISORY_NOTES = [
   },
 ] as const;
 
+/**
+ * Clean, static, zero-animation Advisor Portrait & Insight Grid (replaces infinite scrolling carousel).
+ * Clicking any specialist card opens their high-resolution 8K studio profile modal.
+ */
 export function HomyAdvisorsCarousel() {
   const [selected, setSelected] = useState<TeamSpecialist | null>(null);
   const [view8k, setView8k] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const reduce = useReducedMotion();
 
   useEffect(() => {
     setMounted(true);
@@ -201,20 +169,6 @@ export function HomyAdvisorsCarousel() {
     };
   }, [selected]);
 
-  const cards: Array<
-    | { kind: 'quote'; id: string; quote: string; member: TeamSpecialist }
-    | { kind: 'portrait'; id: string; member: TeamSpecialist }
-  > = [];
-
-  ADVISORY_NOTES.forEach((note, i) => {
-    const sp = TEAM_SPECIALISTS[note.advisorIdx];
-    const portraitMember = TEAM_SPECIALISTS[(i + 1) % TEAM_SPECIALISTS.length];
-    if (sp) cards.push({ kind: 'quote', id: `q-${i}`, quote: note.quote, member: sp });
-    if (portraitMember) cards.push({ kind: 'portrait', id: `p-${i}`, member: portraitMember });
-  });
-
-  const loopCards = [...cards, ...cards];
-
   const openProfile = (member: TeamSpecialist) => {
     setSelected(member);
     setView8k(false);
@@ -222,91 +176,88 @@ export function HomyAdvisorsCarousel() {
 
   return (
     <>
-      <div className="homy-reviews-wrap">
-        <div className="homy-reviews-track">
-          {loopCards.map((card, i) =>
-            card.kind === 'quote' ? (
+      <div className="space-y-6">
+        {/* Clean Static 6-Specialist Studio Portrait Grid */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {TEAM_SPECIALISTS.map((member) => (
+            <button
+              key={member.slug}
+              type="button"
+              onClick={() => openProfile(member)}
+              aria-label={`Inspect ${member.name} profile`}
+              className="homy-portrait-card !w-full text-left cursor-pointer border border-[#e5e7eb]"
+            >
+              <img
+                src={member.portrait1080}
+                alt={`${member.name} — ${member.designation}`}
+                loading="lazy"
+                decoding="async"
+              />
+              <span className="absolute right-4 top-4 z-[2] grid h-9 w-9 place-items-center rounded-full border border-white/25 bg-[#080b0f]/60 text-white backdrop-blur-md">
+                <Expand size={14} />
+              </span>
+              <div className="homy-portrait-card__meta">
+                <h4>{member.name}</h4>
+                <p>{member.designation}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        {/* Clean Static 4-Column Advisory Principles Strip */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {ADVISORY_NOTES.map((note, i) => {
+            const member = TEAM_SPECIALISTS[note.advisorIdx];
+            if (!member) return null;
+            return (
               <article
-                key={`${card.id}-${i}`}
-                className="homy-review-card group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
-                onClick={() => openProfile(card.member)}
-                aria-hidden={i >= cards.length || undefined}
+                key={`note-${i}`}
+                onClick={() => openProfile(member)}
+                className="flex cursor-pointer flex-col justify-between rounded-[20px] border border-[#e5e7eb] bg-[#f6f6f6] p-6 transition-colors hover:border-[#179373]"
               >
                 <div>
                   <span className="homy-review-card__mark" aria-hidden="true">
                     “
                   </span>
-                  <p className="homy-review-card__quote">{card.quote}</p>
+                  <p className="text-[14.5px] leading-relaxed text-[#1f2429]">{note.quote}</p>
                 </div>
-                <div className="homy-review-card__author">
+                <div className="mt-5 flex items-center gap-3 border-t border-[#e5e7eb] pt-4">
                   <img
-                    src={card.member.avatarWebp}
-                    alt={i < cards.length ? card.member.name : ''}
-                    width={44}
-                    height={44}
+                    src={member.avatarWebp}
+                    alt={member.name}
+                    width={42}
+                    height={42}
                     loading="lazy"
+                    decoding="async"
+                    className="h-10 w-10 rounded-[10px] object-cover object-top"
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-display text-sm font-semibold text-[#0c0c0c] group-hover:text-[#0e6954]">
-                      {card.member.name}
-                    </p>
-                    <p className="truncate text-xs text-[#606060]">{card.member.designation}</p>
+                    <p className="truncate font-display text-sm font-semibold text-[#0c0c0c]">{member.name}</p>
+                    <p className="truncate text-xs text-[#606060]">{member.designation}</p>
                   </div>
-                  <ArrowUpRight size={15} className="shrink-0 text-[#4b5b63] opacity-60 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+                  <ArrowUpRight size={15} className="shrink-0 text-[#4b5b63]" />
                 </div>
               </article>
-            ) : (
-              <button
-                key={`${card.id}-${i}`}
-                type="button"
-                onClick={() => openProfile(card.member)}
-                tabIndex={i >= cards.length ? -1 : undefined}
-                aria-hidden={i >= cards.length || undefined}
-                aria-label={`Inspect ${card.member.name} profile`}
-                className="homy-portrait-card group text-left cursor-pointer"
-              >
-                <img
-                  src={card.member.portrait1080}
-                  alt={i < cards.length ? `${card.member.name} — ${card.member.designation}` : ''}
-                  loading="lazy"
-                />
-                <span className="absolute right-4 top-4 z-[2] grid h-9 w-9 place-items-center rounded-full border border-white/25 bg-[#080b0f]/55 text-white opacity-0 backdrop-blur-md transition duration-300 group-hover:opacity-100">
-                  <Expand size={14} />
-                </span>
-                <div className="homy-portrait-card__meta">
-                  <h4>{card.member.name}</h4>
-                  <p>{card.member.designation}</p>
-                </div>
-              </button>
-            ),
-          )}
+            );
+          })}
         </div>
       </div>
 
-      {/* 21st.dev Animated 8K Specialist Quick-Inspect Popup Modal (Portaled to document.body above sticky header) */}
+      {/* Crisp Portaled Specialist Quick-Inspect Modal */}
       {mounted &&
+        selected &&
         createPortal(
-          <AnimatePresence>
-            {selected && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: reduce ? 0 : 0.2 }}
-                onClick={() => {
-                  setSelected(null);
-                  setView8k(false);
-                }}
-                className="fixed inset-0 z-[120] flex items-center justify-center bg-[#080b0f]/82 p-4 backdrop-blur-md"
+          <div
+            onClick={() => {
+              setSelected(null);
+              setView8k(false);
+            }}
+            className="fixed inset-0 z-[120] flex items-center justify-center bg-[#080b0f]/82 p-4 backdrop-blur-md"
             role="dialog"
             aria-modal="true"
             aria-label={`${selected.name} specialist profile`}
           >
-            <motion.div
-              initial={reduce ? false : { opacity: 0, scale: 0.94, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={reduce ? undefined : { opacity: 0, scale: 0.96, y: 10 }}
-              transition={reduce ? { duration: 0 } : SPRING_SNAPPY}
+            <div
               onClick={(e) => e.stopPropagation()}
               className="relative grid max-h-[90dvh] w-full max-w-4xl overflow-hidden rounded-[26px] border border-[#e5e7eb] bg-white shadow-2xl md:grid-cols-[0.95fr_1.05fr]"
             >
@@ -317,7 +268,7 @@ export function HomyAdvisorsCarousel() {
                   setView8k(false);
                 }}
                 aria-label="Close specialist profile"
-                className="absolute end-4 top-4 z-20 grid h-10 w-10 place-items-center rounded-full border border-[#e5e7eb] bg-white/95 text-[#080b0f] shadow-md transition hover:border-[#080b0f] cursor-pointer"
+                className="absolute end-4 top-4 z-20 grid h-10 w-10 place-items-center rounded-full border border-[#e5e7eb] bg-white/95 text-[#080b0f] shadow-md transition-colors hover:border-[#080b0f] cursor-pointer"
               >
                 <X size={18} />
               </button>
@@ -332,7 +283,7 @@ export function HomyAdvisorsCarousel() {
                   <button
                     type="button"
                     onClick={() => setView8k((v) => !v)}
-                    className="rounded-full border border-[#d7b158]/50 bg-[#080b0f]/85 px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-[#f1d57e] backdrop-blur-md transition hover:bg-[#141b24] cursor-pointer"
+                    className="rounded-full border border-[#d7b158]/50 bg-[#080b0f]/85 px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-[#f1d57e] backdrop-blur-md cursor-pointer"
                   >
                     {view8k ? '8K UHD Master Loaded' : 'Load 8K UHD Master'}
                   </button>
@@ -371,10 +322,7 @@ export function HomyAdvisorsCarousel() {
                   >
                     <span>Book with {selected.name.split(' ')[0]}</span>
                     <span className="homy-btn__disc" aria-hidden="true">
-                      <span className="homy-btn__arrow-track">
-                        <ArrowRight size={14} strokeWidth={2.2} />
-                        <ArrowRight size={14} strokeWidth={2.2} />
-                      </span>
+                      <ArrowRight size={14} strokeWidth={2.2} />
                     </span>
                   </Link>
                   <a href={`mailto:${selected.email}`} className="homy-btn homy-btn--outline">
@@ -382,10 +330,8 @@ export function HomyAdvisorsCarousel() {
                   </a>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-            )}
-          </AnimatePresence>,
+            </div>
+          </div>,
           document.body,
         )}
     </>

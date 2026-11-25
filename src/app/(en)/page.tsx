@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   Clock,
   Cpu,
+  FileDown,
   Layers,
   MapPin,
   ShieldCheck,
@@ -26,12 +27,15 @@ import { Cta, JsonLd, SectionTag, aed } from '@/components/ui';
 import { BANKS } from '@/data/banks';
 import { COMMUNITIES } from '@/data/communities';
 import { PROJECTS } from '@/data/handover';
+import { PDF_RESOURCES } from '@/data/seo-topics';
+import { TRENDING_UAE_KEYWORDS, pdfCatalogSchema, speakablePageSchema } from '@/lib/seo-schema';
 import { cashToClose } from '@/lib/math';
 
 export const metadata: Metadata = {
-  title: 'Dubai & UAE Property & Mortgage Ecosystem | Betterway Mortgages',
+  title: 'Dubai & UAE Property & Mortgage Ecosystem — 24 Banks Compared | Betterway',
   description:
-    'Everything you need to finance and buy property in Dubai & the UAE. Compare 24 lenders, check 50% CBUAE DBR, itemise 4% DLD closing costs, and track pre-approval with Betterway.',
+    'Everything you need to finance and buy property in Dubai & the UAE. Compare 24 licensed lenders, check 50% CBUAE DBR, itemise 4% DLD closing costs, download free 2026 PDF guides, and track pre-approval.',
+  keywords: TRENDING_UAE_KEYWORDS,
   alternates: { canonical: '/' },
 };
 
@@ -145,7 +149,7 @@ export default function Home() {
               <h2 id="ecosystem-title" className="holo-display-h2">
                 Find it. Finance it.
               </h2>
-              <p className="holo-lead max-w-2xl">
+              <p className="holo-lead max-w-2xl" data-aeo-answer="true">
                 From checking real 50% CBUAE borrowing power and comparing 24 UAE banks to budgeting upfront 4% DLD fees
                 across {COMMUNITIES.length} freehold areas — Betterway brings it all together.
               </p>
@@ -548,11 +552,7 @@ export default function Home() {
           <div className="homy-highlight-stage">
             <div className="homy-marquee-bg" aria-hidden="true">
               <div className="homy-marquee-track">
-                {[0, 1].map((dup) => (
-                  <span key={dup}>
-                    24 UAE Banks Compared · Live CBUAE EIBOR · Upfront 4% DLD Clarity · Seamless DLD Transfer ·{' '}
-                  </span>
-                ))}
+                <span>24 UAE Banks Compared · Live CBUAE EIBOR · Upfront 4% DLD Clarity</span>
               </div>
             </div>
             <ScrollScaleFrame>
@@ -590,7 +590,7 @@ export default function Home() {
             <div className="holo-news-track">
               {EDITORIAL_GUIDES.map((g) => (
                 <Link key={g.href} href={g.href} className="holo-news-card group">
-                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#0b1117]">
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#eef0f3]">
                     <img
                       src={g.img}
                       srcSet={`${g.img} 1376w, ${g.img2x} 2752w`}
@@ -600,7 +600,7 @@ export default function Home() {
                       height={774}
                       loading="lazy"
                       decoding="async"
-                      className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                      className="h-full w-full object-cover"
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-5">
@@ -616,14 +616,57 @@ export default function Home() {
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-[#6c6c89]">{g.excerpt}</p>
                     <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-bold text-[#121217] group-hover:text-[#0e6954]">
-                      Read guide <ArrowRight size={13} className="transition group-hover:translate-x-0.5" />
+                      Read guide <ArrowRight size={13} />
                     </span>
                   </div>
                 </Link>
               ))}
             </div>
+
+            {/* Free Printable 2026 UAE Mortgage PDF Dossiers + 36 Trending Insights Strip */}
+            <div className="mt-8 grid gap-4 border-t border-[#e5e7eb] pt-8 md:grid-cols-3">
+              {PDF_RESOURCES.map((pdf) => (
+                <a
+                  key={pdf.id}
+                  href={pdf.file}
+                  download
+                  className="flex flex-col justify-between rounded-[18px] border border-[#e5e7eb] bg-[#f8f9fa] p-5 transition-colors hover:border-[#179373] hover:bg-white"
+                >
+                  <div>
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef7f4] px-2.5 py-1 text-[11px] font-bold text-[#0e6954]">
+                      <FileDown size={12} /> Free PDF · {pdf.pages} {pdf.pages === 1 ? 'Page' : 'Pages'}
+                    </span>
+                    <h3 className="mt-2.5 font-display text-base font-bold text-[#070e1a]">{pdf.title}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-[#464c5c]">{pdf.subtitle}</p>
+                  </div>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#0e6954]">
+                    Download PDF <ArrowRight size={12} />
+                  </span>
+                </a>
+              ))}
+            </div>
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-[#464c5c]">
+              <span>Explore 36 trending 2026–2027 UAE mortgage guides, community rules, and non-resident playbooks:</span>
+              <div className="flex flex-wrap gap-4">
+                <Link href="/insights" className="text-[#0e6954] hover:underline">
+                  All 36 UAE Insights →
+                </Link>
+                <Link href="/downloads" className="text-[#070e1a] hover:underline">
+                  PDF Library →
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
+
+        <JsonLd
+          data={speakablePageSchema(
+            '/',
+            'Dubai & UAE Property & Mortgage Ecosystem | Betterway Mortgages',
+            'Compare 24 UAE banks, check 50% CBUAE DBR, itemise 4% DLD closing fees, and download free 2026 mortgage PDF guides.',
+          )}
+        />
+        <JsonLd data={pdfCatalogSchema()} />
 
         {/* 10. STICKY FAQ ACCORDION */}
         <section id="faq" className="holo-section" aria-labelledby="faq-title">

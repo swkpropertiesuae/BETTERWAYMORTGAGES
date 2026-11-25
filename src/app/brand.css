@@ -676,9 +676,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.7s var(--ease-expo);
 }
-.homy-impact-photo:hover img { transform: scale(1.035); }
 
 .homy-impact-stats {
   display: flex;
@@ -776,9 +774,7 @@
   height: 100%;
   object-fit: cover;
   z-index: -2;
-  transition: transform 1.2s var(--ease-expo);
 }
-.homy-showcase-slide:hover > img { transform: scale(1.03); }
 .homy-showcase-slide::after {
   content: '';
   position: absolute;
@@ -967,9 +963,7 @@
   height: 100%;
   object-fit: cover;
   z-index: -2;
-  transition: transform 0.75s var(--ease-expo);
 }
-.homy-listing-card:hover > img { transform: scale(1.04); }
 .homy-listing-card__badge {
   position: absolute;
   top: 18px;
@@ -1049,21 +1043,17 @@
 }
 .homy-marquee-track {
   display: flex;
-  width: max-content;
+  justify-content: center;
+  width: 100%;
   gap: 36px;
-  animation: homy-marquee 26s linear infinite;
 }
 .homy-marquee-track span {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4.4vw, 58px);
+  font-size: clamp(28px, 3.6vw, 48px);
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: #4b5b63;
+  color: rgba(75, 91, 99, 0.22);
   white-space: nowrap;
-}
-@keyframes homy-marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
 }
 .homy-highlight-frame {
   position: relative;
@@ -1109,12 +1099,15 @@
 .homy-reviews-track {
   display: flex;
   gap: 18px;
-  width: max-content;
+  width: 100%;
   padding-block: 8px;
-  animation: homy-marquee 42s linear infinite;
 }
-.homy-reviews-wrap:hover .homy-reviews-track {
-  animation-play-state: paused;
+.homy-portrait-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
 }
 .homy-review-card {
   width: 340px;
@@ -1156,9 +1149,8 @@
 }
 .homy-portrait-card {
   position: relative;
-  width: 310px;
+  width: 100%;
   height: 410px;
-  flex: none;
   border-radius: 20px;
   overflow: hidden;
   isolation: isolate;
@@ -1170,9 +1162,7 @@
   object-fit: cover;
   object-position: top center;
   display: block;
-  transition: transform 0.65s var(--ease-expo);
 }
-.homy-portrait-card:hover img { transform: scale(1.04); }
 .homy-portrait-card::after {
   content: '';
   position: absolute;
@@ -1313,14 +1303,22 @@
   margin-top: clamp(20px, 3vw, 40px);
   width: 100%;
 }
+.homy-footer-villa::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 44%, rgba(11, 17, 23, 0.72) 78%, #0b1117 100%);
+}
 .homy-footer-villa img {
   display: block;
   width: 100%;
-  height: clamp(300px, 44vw, 600px);
+  height: clamp(320px, 44vw, 600px);
   object-fit: cover;
-  object-position: center 62%;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000000 18%, #000000 78%, transparent 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000000 18%, #000000 78%, transparent 100%);
+  object-position: center 55%;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000000 22%, #000000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000000 22%, #000000 100%);
 }
 .homy-footer-watermark {
   position: absolute;
@@ -1862,6 +1860,7 @@ html[dir='rtl'] .holo-scene-tab__fill {
     gap: 16px;
   }
 }
+/* Static clean CTA cards (zero hover lift/scale bounce) */
 .holo-cta-card {
   position: relative;
   display: flex;
@@ -1874,13 +1873,14 @@ html[dir='rtl'] .holo-scene-tab__fill {
   background: #ffffff;
   color: #121217;
   text-align: left;
+  border: 1px solid rgba(18, 18, 23, 0.06);
   box-shadow: 0 22px 48px -20px rgba(0, 0, 0, 0.45);
-  transition: transform 0.28s var(--ease-expo), box-shadow 0.28s var(--ease-expo);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
 .holo-cta-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 28px 60px -20px rgba(0, 0, 0, 0.55);
+  border-color: #179373;
+  box-shadow: 0 24px 52px -20px rgba(0, 0, 0, 0.52);
 }
 .holo-cta-card__title {
   display: block;
@@ -2095,10 +2095,58 @@ html[dir='rtl'] .holo-scene-tab__fill {
   background: #f8f9fa;
   border: 1px solid #eceef2;
   overflow: hidden;
-  transition: transform 0.3s var(--ease-expo), box-shadow 0.3s var(--ease-expo), border-color 0.25s ease;
+  transition: border-color 0.2s ease;
 }
 .holo-news-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(23, 147, 115, 0.45);
-  box-shadow: 0 24px 48px -24px rgba(18, 18, 23, 0.22);
+  border-color: #179373;
+}
+
+/* ==========================================================================
+   21st.dev CONIC BORDER-BEAM HOT OFFERS POPUP & TRIGGER PILL
+   ========================================================================== */
+@keyframes bw-hot-beam-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.bw-hot-beam-shell {
+  position: relative;
+  background: #0e1624;
+  isolation: isolate;
+}
+.bw-hot-beam-shell::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    #179373 55deg,
+    #34dfac 110deg,
+    #f1d57e 175deg,
+    transparent 240deg,
+    #179373 305deg,
+    transparent 360deg
+  );
+  animation: bw-hot-beam-spin 7s linear infinite;
+}
+.bw-hot-trigger-pill {
+  position: relative;
+  background: linear-gradient(120deg, rgba(14, 105, 84, 0.92), rgba(7, 14, 26, 0.88));
+  border: 1px solid rgba(241, 213, 126, 0.55);
+  box-shadow: 0 10px 26px -10px rgba(7, 14, 26, 0.65);
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.bw-hot-trigger-pill:hover {
+  border-color: #34dfac;
+  background: linear-gradient(120deg, #179373, #070e1a);
+}
+.bw-hot-trigger-btn {
+  background: linear-gradient(120deg, #070e1a, #0e6954);
+  border: 1px solid rgba(241, 213, 126, 0.45);
+  transition: border-color 0.2s ease;
+}
+.bw-hot-trigger-btn:hover {
+  border-color: #34dfac;
 }

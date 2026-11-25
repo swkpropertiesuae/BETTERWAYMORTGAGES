@@ -5,14 +5,43 @@ import '../brand.css';
 import Header from '@/components/Header';
 import CoPilot from '@/components/CoPilot';
 import ResumeJourneyToast from '@/components/ecosystem/ResumeJourneyToast';
+import HotOffersPopup from '@/components/HotOffersPopup';
+import Analytics from '@/components/Analytics';
 import MotionKit from '@/components/MotionKit';
-import { Footer, JsonLd, orgSchema } from '@/components/ui';
+import { Footer, JsonLd } from '@/components/ui';
 import { SITE } from '@/data/site';
+import { TRENDING_UAE_KEYWORDS, enhancedOrgSchema, websiteSchema } from '@/lib/seo-schema';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: { default: 'Betterway Mortgages — Dubai Home Mortgages & UAE Advisory', template: '%s | Betterway Mortgages' },
-  description: 'Independent Dubai & UAE mortgage advisory across 24 lenders. Compare EIBOR rates, CBUAE statutory LTV & DBR rules, and upfront DLD closing costs with Betterway.',
+  applicationName: SITE.name,
+  title: {
+    default: 'Betterway Mortgages — Dubai Home Mortgages, 24 UAE Banks & DLD Calculator',
+    template: '%s | Betterway Mortgages UAE',
+  },
+  description:
+    'Independent Dubai & UAE mortgage advisory comparing 24 licensed conventional & Islamic banks. Live CBUAE EIBOR rates, 50% DBR check, 4% DLD closing calculator, free PDF guides, and priority pre-approval.',
+  keywords: TRENDING_UAE_KEYWORDS,
+  authors: [{ name: SITE.legalName, url: SITE.url }],
+  creator: SITE.legalName,
+  publisher: SITE.legalName,
+  category: 'Finance',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  appleWebApp: {
+    capable: true,
+    title: SITE.name,
+    statusBarStyle: 'black-translucent',
+  },
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -28,9 +57,31 @@ export const metadata: Metadata = {
     other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#179373' }],
   },
   manifest: '/site.webmanifest',
-  openGraph: { type: 'website', siteName: SITE.name, images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Betterway Mortgages — Dubai Home Mortgages & UAE Advisory' }], locale: 'en_AE' },
-  twitter: { card: 'summary_large_image', images: ['/og.png'] },
-  alternates: { languages: { 'en-AE': '/', 'ar-AE': '/ar' } },
+  openGraph: {
+    type: 'website',
+    siteName: SITE.name,
+    url: SITE.url,
+    title: 'Betterway Mortgages — Dubai Home Mortgages & 24 UAE Banks Compared',
+    description:
+      'Compare 24 licensed UAE conventional & Islamic lenders, live CBUAE EIBOR fixings, 50% DBR headroom, and 4% DLD upfront fees in one clear platform.',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Betterway Mortgages — Dubai Home Mortgages & UAE Advisory' }],
+    locale: 'en_AE',
+    alternateLocale: ['ar_AE'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Betterway Mortgages — Dubai & UAE Home Mortgage Ecosystem',
+    description: 'Compare 24 UAE banks, live CBUAE EIBOR, 4% DLD fees, and free printable 2026 mortgage PDF guides.',
+    images: ['/og.png'],
+  },
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-AE': '/',
+      'ar-AE': '/ar',
+      'x-default': '/',
+    },
+  },
 };
 
 export const viewport: Viewport = { themeColor: '#070E1A', width: 'device-width', initialScale: 1 };
@@ -39,14 +90,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" dir="ltr">
       <body>
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[60] focus:rounded-btn focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[60] focus:rounded-btn focus:bg-white focus:px-4 focus:py-2">
+          Skip to content
+        </a>
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <HotOffersPopup />
         <ResumeJourneyToast />
         <CoPilot />
         <MotionKit />
-        <JsonLd data={orgSchema()} />
+        <Analytics />
+        <JsonLd data={enhancedOrgSchema()} />
+        <JsonLd data={websiteSchema()} />
       </body>
     </html>
   );
