@@ -39,7 +39,7 @@ export default function ConciergePage() {
   const featuredAreas = COMMUNITIES.slice(0, 8);
 
   return (
-    <div className="holo-canvas pt-[106px] max-sm:pt-[88px]">
+    <div className="holo-canvas pt-[112px] max-sm:pt-[94px]">
       {/* Rounded Concierge Hero */}
       <section className="holo-section">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">

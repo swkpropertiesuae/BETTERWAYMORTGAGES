@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { ArSection, ArLinks } from '@/components/ar';
+import MorningHeroCarousel from '@/components/home/MorningHeroCarousel';
 import Calculator from '@/components/calc/Calculator';
 import { AR_PRODUCTS, AR_UI, AR_TYPE, AR_STOCK } from '@/data/ar';
 import { PRODUCTS } from '@/data/products';
@@ -17,21 +18,12 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="bg-[#f5f6f7] pb-8">
-      {/* Holo-style Rounded Arabic Dubai Skyline Hero Card */}
+      {/* Holo-style Rounded Arabic 8K Morning Dubai 2026-2027 Transition Hero */}
       <div className="px-3 pt-4 sm:px-6">
-        <section className="holo-hero !min-h-[540px]" dir="rtl">
-          <div className="holo-hero__bg" aria-hidden="true">
-            <img
-              src="/images/marina-evening-2752.webp"
-              alt=""
-              width={2752}
-              height={1536}
-              fetchPriority="high"
-            />
-          </div>
-          <div className="holo-hero__scrim" aria-hidden="true" />
+        <section className="holo-hero !min-h-[580px]" dir="rtl">
+          <MorningHeroCarousel lang="ar" />
           <div className="relative z-[2] max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/12 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/28 bg-[#080b0f]/58 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
               <span className="h-2 w-2 rounded-full bg-[#34dfac]" />
               24 بنكاً مرخصاً في الإمارات · ضوابط مصرف الإمارات المركزي
             </span>

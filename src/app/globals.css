@@ -5,7 +5,9 @@
 @import '@fontsource/instrument-serif/400.css';
 @import '@fontsource/instrument-serif/400-italic.css';
 @import '@fontsource/ibm-plex-sans-arabic/400.css';
+@import '@fontsource/ibm-plex-sans-arabic/500.css';
 @import '@fontsource/ibm-plex-sans-arabic/600.css';
+@import '@fontsource/ibm-plex-sans-arabic/700.css';
 
 /*
   Betterway Mortgages — Homy Editorial Design System
@@ -45,14 +47,38 @@
 }
 
 @layer base {
-  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 96px; scroll-behavior: smooth; }
-  body { @apply bg-[#f5f6f7] font-sans text-ink antialiased; font-feature-settings: 'cv11', 'ss01'; font-optical-sizing: auto; }
+  html {
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+    scroll-padding-top: 104px;
+    scroll-behavior: smooth;
+    accent-color: var(--color-navy);
+    caret-color: var(--color-navy);
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+  }
+  body {
+    @apply bg-[#f5f6f7] font-sans text-ink antialiased;
+    overflow-x: clip;
+    font-feature-settings: 'cv11', 'ss01';
+    font-optical-sizing: auto;
+    font-synthesis: none;
+    text-rendering: geometricPrecision;
+  }
   html[lang='ar'] body { font-family: var(--font-arabic); }
-  h1, h2, h3, h4 { @apply font-display text-navy; letter-spacing: -0.025em; text-wrap: balance; }
+  h1, h2, h3, h4 {
+    @apply font-display text-navy;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+    text-rendering: geometricPrecision;
+    font-optical-sizing: auto;
+  }
   html[lang='ar'] :is(h1, h2, h3, h4) { font-family: var(--font-arabic); letter-spacing: 0; }
   p { text-wrap: pretty; }
+  img { image-rendering: -webkit-optimize-contrast; }
   ::selection { background: #080b0f; color: #ffffff; }
-  html { accent-color: var(--color-navy); caret-color: var(--color-navy); text-rendering: optimizeLegibility; }
   a { text-underline-offset: 0.2em; }
   :focus-visible { outline: 2px solid var(--color-navy); outline-offset: 3px; border-radius: 8px; }
 }

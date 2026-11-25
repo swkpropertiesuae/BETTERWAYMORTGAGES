@@ -301,7 +301,7 @@
 }
 .bw-header__bar {
   display: flex;
-  height: 92px;
+  height: 98px;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -309,31 +309,43 @@
 .bw-header__logo {
   display: inline-flex;
   align-items: center;
-  transition: transform 0.25s var(--ease-expo), background 0.25s ease, box-shadow 0.25s ease;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.25s var(--ease-expo), filter 0.25s ease;
 }
 .bw-header__logo:hover {
   transform: scale(1.02);
 }
 .bw-header__logo img {
-  height: clamp(44px, 3.4vw, 52px);
+  height: clamp(54px, 4.1vw, 64px);
   width: auto;
   display: block;
+  image-rendering: -webkit-optimize-contrast;
 }
-.holo-logo-badge {
-  padding: 6px 14px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 12px 30px -12px rgba(8, 11, 15, 0.35);
-}
-.bw-header[data-scrolled='true'] .holo-logo-badge {
+.bw-header__logo--blend {
   background: transparent;
-  padding: 4px 0;
+  padding: 0;
+  border-radius: 0;
   box-shadow: none;
 }
+.bw-logo-over-hero {
+  display: none !important;
+}
+.bw-logo-on-light {
+  display: block !important;
+}
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-logo-over-hero {
+  display: block !important;
+  filter: drop-shadow(0 2px 12px rgba(7, 14, 26, 0.45));
+}
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-logo-on-light {
+  display: none !important;
+}
 @media (max-width: 639px) {
-  .bw-header__bar { height: 76px; }
-  .bw-header__logo img { height: clamp(34px, 8.8vw, 42px); }
-  .holo-logo-badge { padding: 5px 10px; border-radius: 14px; }
+  .bw-header__bar { height: 82px; }
+  .bw-header__logo img { height: clamp(40px, 10vw, 46px); }
 }
 
 .bw-nav {
@@ -494,12 +506,12 @@
   opacity: 1;
 }
 
-/* Push non-home pages cleanly below the fixed 92px header */
+/* Push non-home pages cleanly below the fixed 98px header */
 .bw-page-spacer {
-  padding-top: 92px;
+  padding-top: 98px;
 }
 @media (max-width: 639px) {
-  .bw-page-spacer { padding-top: 76px; }
+  .bw-page-spacer { padding-top: 82px; }
 }
 
 /* ==========================================================================
@@ -1403,9 +1415,9 @@
   overflow: clip;
   background: #ffffff;
   border-bottom: 1px solid var(--homy-border);
-  padding-top: 92px;
+  padding-top: 98px;
 }
-@media (max-width: 639px) { .bw-pagehero { padding-top: 76px; } }
+@media (max-width: 639px) { .bw-pagehero { padding-top: 82px; } }
 .bw-pagehero h1 {
   font-family: var(--font-display);
   font-size: clamp(32px, 4.4vw, 56px);
@@ -1680,11 +1692,12 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow-x: clip;
 }
 
 .holo-hero {
   position: relative;
-  min-height: clamp(600px, 84svh, 740px);
+  min-height: clamp(640px, 88svh, 800px);
   border-radius: 28px;
   overflow: hidden;
   isolation: isolate;
@@ -1692,7 +1705,7 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(118px, 14vh, 156px) clamp(22px, 5vw, 76px) clamp(38px, 5vw, 64px);
+  padding: clamp(120px, 13.5vh, 152px) clamp(22px, 5vw, 76px) clamp(28px, 3.8vw, 44px);
   box-shadow: 0 32px 80px -36px rgba(11, 17, 23, 0.55);
 }
 .holo-hero__bg {
@@ -1701,36 +1714,143 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   z-index: -2;
   overflow: hidden;
 }
-.holo-hero__bg img {
+.holo-hero__bg img,
+.holo-hero__8k-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 45%;
+  object-position: center 46%;
+  image-rendering: -webkit-optimize-contrast;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
+/* Crisp directional editorial morning scrim: anchors white copy & top-left transparent logo while keeping Dubai's radiant morning skyline crystal-clear */
 .holo-hero__scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(108deg, rgba(8, 11, 15, 0.86) 0%, rgba(11, 17, 23, 0.64) 48%, rgba(11, 17, 23, 0.34) 100%),
-    linear-gradient(180deg, rgba(8, 11, 15, 0.34) 0%, transparent 32%, rgba(8, 11, 15, 0.52) 100%);
+    linear-gradient(98deg, rgba(7, 14, 26, 0.74) 0%, rgba(7, 14, 26, 0.48) 38%, rgba(7, 14, 26, 0.14) 62%, rgba(7, 14, 26, 0) 82%),
+    linear-gradient(180deg, rgba(7, 14, 26, 0.54) 0%, rgba(7, 14, 26, 0.22) 13%, rgba(7, 14, 26, 0) 27%, rgba(7, 14, 26, 0) 74%, rgba(7, 14, 26, 0.46) 100%);
+}
+.holo-hero__scrim--rtl {
+  background:
+    linear-gradient(262deg, rgba(7, 14, 26, 0.74) 0%, rgba(7, 14, 26, 0.48) 38%, rgba(7, 14, 26, 0.14) 62%, rgba(7, 14, 26, 0) 82%),
+    linear-gradient(180deg, rgba(7, 14, 26, 0.54) 0%, rgba(7, 14, 26, 0.22) 13%, rgba(7, 14, 26, 0) 27%, rgba(7, 14, 26, 0) 74%, rgba(7, 14, 26, 0.46) 100%);
 }
 .holo-hero__title {
   font-family: var(--font-display);
-  font-size: clamp(38px, 5.4vw, 76px);
+  font-size: clamp(38px, 5.1vw, 74px);
   font-weight: 800;
   line-height: 1.01;
   letter-spacing: -0.032em;
   color: #ffffff;
-  max-width: 820px;
+  max-width: 760px;
+  text-shadow: 0 2px 24px rgba(7, 14, 26, 0.44), 0 1px 3px rgba(7, 14, 26, 0.55);
 }
 .holo-hero__sub {
   margin-top: 20px;
-  font-size: clamp(16px, 1.55vw, 22px);
-  font-weight: 450;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(16px, 1.5vw, 21px);
+  font-weight: 500;
+  line-height: 1.48;
+  color: rgba(255, 255, 255, 0.96);
+  max-width: 640px;
+  text-shadow: 0 1px 16px rgba(7, 14, 26, 0.55);
+}
+
+/* Interactive 8K Morning Architecture Scene Switcher Rail (Always flush with 660px CTA grid — zero overlap at any viewport, EN & AR) */
+.holo-scene-switcher {
+  position: relative;
+  z-index: 4;
+  order: 3;
+  margin-top: 22px;
+  width: 100%;
   max-width: 660px;
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+.holo-scene-switcher__tabs {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+@media (min-width: 640px) {
+  .holo-scene-switcher__tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.holo-scene-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  min-width: 0;
+  padding: 9px 11px 8px;
+  border-radius: 13px;
+  background: rgba(7, 14, 26, 0.62);
+  backdrop-filter: blur(16px) saturate(1.25);
+  -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  text-align: start;
+  cursor: pointer;
+  transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s var(--ease-expo);
+}
+.holo-scene-tab:hover {
+  background: rgba(7, 14, 26, 0.78);
+  border-color: rgba(255, 255, 255, 0.42);
+}
+.holo-scene-tab.is-active {
+  background: rgba(7, 14, 26, 0.84);
+  border-color: rgba(52, 223, 172, 0.72);
+  box-shadow: 0 12px 28px -12px rgba(7, 14, 26, 0.65);
+}
+.holo-scene-tab__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.holo-scene-tab__bar {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  margin-top: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+.holo-scene-tab__fill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #34dfac, #f1d57e);
+  transform-origin: left center;
+}
+html[dir='rtl'] .holo-scene-tab__fill {
+  transform-origin: right center;
+}
+.holo-scene-pause {
+  flex: none;
+  width: 36px;
+  min-height: 36px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: rgba(7, 14, 26, 0.64);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.holo-scene-pause:hover {
+  background: rgba(7, 14, 26, 0.88);
+  border-color: #34dfac;
 }
 .holo-hero__cards {
   margin-top: clamp(26px, 3.2vw, 40px);
@@ -1829,8 +1949,9 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
 }
 .holo-lead {
   font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 450;
   line-height: 1.55;
-  color: #6c6c89;
+  color: #464c5c;
 }
 
 /* Deep Emerald-Obsidian UI Visual Stage (Betterway counterpart to Holo's indigo mockup cards) */

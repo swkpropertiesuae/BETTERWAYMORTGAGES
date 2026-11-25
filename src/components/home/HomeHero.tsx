@@ -6,6 +6,7 @@ import { ArrowRight, Calculator, Play } from 'lucide-react';
 import { useBenchmark } from '@/components/StartupExperience';
 import { VideoBriefingModal } from '@/components/ui/MotionPrimitives';
 import PropertyMatchmakerModal from '@/components/ecosystem/PropertyMatchmakerModal';
+import MorningHeroCarousel from '@/components/home/MorningHeroCarousel';
 import { BANKS } from '@/data/banks';
 import { COMMUNITIES } from '@/data/communities';
 import { buildHeroDossier } from '@/lib/hero-showcase';
@@ -19,25 +20,13 @@ export default function HomeHero() {
   return (
     <>
       <section className="holo-hero" aria-labelledby="hero-title">
-        {/* 4K Dubai Marina Twilight Skyline — crisp instant LCP */}
-        <div className="holo-hero__bg" aria-hidden="true">
-          <img
-            src="/images/marina-evening-2752.webp"
-            srcSet="/images/marina-evening.webp 1376w, /images/marina-evening-2752.webp 2752w"
-            sizes="100vw"
-            alt=""
-            width={2752}
-            height={1536}
-            fetchPriority="high"
-            decoding="sync"
-          />
-        </div>
-        <div className="holo-hero__scrim" aria-hidden="true" />
+        {/* Ultra-Sharp 8K UHD Morning Daylight Dubai 2026-2027 Transition Layer */}
+        <MorningHeroCarousel lang="en" />
 
-        <div className="relative z-[2] max-w-[920px]">
-          {/* Live CBUAE EIBOR + 24s Film Shimmer Strip */}
-          <div className="mb-6 flex flex-wrap items-center gap-2.5">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/12 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
+        <div className="relative z-[2] max-w-[820px]">
+          {/* Live CBUAE EIBOR + 24s Film Pill */}
+          <div className="mb-5 flex flex-wrap items-center gap-2.5">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/28 bg-[#080b0f]/58 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
               <span className="h-2 w-2 rounded-full bg-[#34dfac]" />
               <span>{BANKS.length} UAE Banks · Live CBUAE 3M EIBOR</span>
               <strong className="num text-[#f1d57e]">{dossier.eiborFormatted}</strong>
@@ -45,7 +34,7 @@ export default function HomeHero() {
             <button
               type="button"
               onClick={() => setVideoOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition hover:border-[#34dfac] hover:bg-black/55 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/28 bg-[#080b0f]/58 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition hover:border-[#34dfac] hover:bg-[#080b0f]/80 cursor-pointer"
             >
               <Play size={11} fill="currentColor" className="text-[#34dfac]" />
               <span>Watch 24s Briefing</span>
@@ -61,7 +50,7 @@ export default function HomeHero() {
             — all in one place.
           </p>
 
-          {/* Exact UseHolo Iconic Dual White Split-Card Hero CTAs (Upgraded with Smart Actions) */}
+          {/* Iconic Dual White Split-Card Hero CTAs */}
           <div className="holo-hero__cards">
             <Link href="/get-started" className="holo-cta-card">
               <div>
@@ -89,15 +78,15 @@ export default function HomeHero() {
           </div>
 
           {/* Instant Transparent Jump Actions */}
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-white/80">
-            <a href="#calculator" className="inline-flex items-center gap-1.5 transition hover:text-white">
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-semibold text-white">
+            <a href="#calculator" className="inline-flex items-center gap-1.5 drop-shadow-[0_1px_6px_rgba(8,11,15,0.65)] transition hover:text-[#f1d57e]">
               <Calculator size={14} className="text-[#34dfac]" />
               <span>Run instant Mortgage + 4% DLD Calculator ↓</span>
             </a>
-            <Link href="/rates/eibor-live-tracker" className="transition hover:text-white">
+            <Link href="/rates/eibor-live-tracker" className="drop-shadow-[0_1px_6px_rgba(8,11,15,0.65)] transition hover:text-[#f1d57e]">
               Live CBUAE EIBOR Tracker →
             </Link>
-            <Link href="/hub" className="transition hover:text-white">
+            <Link href="/hub" className="drop-shadow-[0_1px_6px_rgba(8,11,15,0.65)] transition hover:text-[#f1d57e]">
               For RERA Agents (Betterway Hub) →
             </Link>
           </div>

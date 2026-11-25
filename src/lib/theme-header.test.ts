@@ -77,12 +77,13 @@ test('isNavActive highlights Home only on / and maps nested routes to their mega
   assert.equal(isNavActive('/about-us', 'Resources'), true);
 });
 
-test('English and Arabic Homy headers render uploaded logo-light.svg with 1200px breakpoint and Contact us pill', () => {
+test('English and Arabic Homy headers render uploaded logo-light.svg and transparent hero logo-white.svg with 1200px breakpoint and Contact us pill', () => {
   const header = read('src/components/Header.tsx');
   const arLayout = read('src/app/(ar)/layout.tsx');
   const brand = read('src/app/brand.css');
 
   assert.match(header, /\/brand\/logo-light\.svg/);
+  assert.match(header, /\/brand\/logo-white\.svg/);
   assert.match(header, />\s*Home\s*</i);
   assert.match(header, /Contact us/i);
   assert.match(header, /min-\[1200px\]/);
@@ -94,7 +95,7 @@ test('English and Arabic Homy headers render uploaded logo-light.svg with 1200px
 test('desktop header container and fluid nav sizing prevent horizontal overflow at 1200px+', () => {
   const brand = read('src/app/brand.css');
   assert.match(brand, /\.bw-header\s+\.wrap\s*\{[^}]*max-width:\s*1320px/);
-  assert.match(brand, /\.bw-header__bar\s*\{[^}]*height:\s*92px/);
+  assert.match(brand, /\.bw-header__bar\s*\{[^}]*height:\s*98px/);
   assert.match(brand, /\.bw-nav\s+a,[\s\S]*?white-space:\s*nowrap/);
 });
 

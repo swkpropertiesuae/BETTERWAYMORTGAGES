@@ -46,7 +46,7 @@ export default function Header() {
       <header ref={ref} className="bw-header bw-header--minimal" data-over-hero="false" data-scrolled="true">
         <div className="wrap bw-header__bar">
           <Link href="/" aria-label="Betterway Mortgages home" className="bw-header__logo shrink-0">
-            <img src="/brand/logo-light.svg" alt="Betterway Mortgages" width={1450} height={468} fetchPriority="high" />
+            <img src="/brand/logo-light.svg" alt="Betterway Mortgages" width={1514} height={468} fetchPriority="high" />
           </Link>
           <div className="flex items-center gap-2.5">
             <Link
@@ -77,19 +77,28 @@ export default function Header() {
       data-scrolled={isHome ? 'false' : 'true'}
     >
       <div className="wrap bw-header__bar">
-        {/* Left: Enlarged Betterway Brand Logo Badge (Holo square/pill presence) */}
+        {/* Left: Large Transparent Seamless Betterway Vector Logo (Zero Box, Dual Light/Dark Swap) */}
         <Link
           href="/"
           aria-label="Betterway Mortgages home"
           aria-current={isNavActive(path, 'Home') ? 'page' : undefined}
-          className="bw-header__logo holo-logo-badge shrink-0"
+          className="bw-header__logo bw-header__logo--blend shrink-0"
         >
+          <img
+            src="/brand/logo-white.svg"
+            alt="Betterway Mortgages"
+            width={1514}
+            height={468}
+            fetchPriority="high"
+            className="bw-logo-over-hero"
+          />
           <img
             src="/brand/logo-light.svg"
             alt="Betterway Mortgages"
-            width={1450}
+            width={1514}
             height={468}
             fetchPriority="high"
+            className="bw-logo-on-light"
           />
         </Link>
 

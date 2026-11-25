@@ -39,7 +39,7 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
         <header className="bw-header" data-scrolled="true">
           <div className="wrap bw-header__bar">
             <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0">
-              <img src="/brand/logo-light.svg" alt="Betterway Mortgages" width={1450} height={468} />
+              <img src="/brand/logo-light.svg" alt="Betterway Mortgages" width={1514} height={468} fetchPriority="high" />
             </Link>
             <nav className="hidden gap-4 lg:flex" aria-label="الرئيسية">
               {NAV.map(([l, h]) => (
