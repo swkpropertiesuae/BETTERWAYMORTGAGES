@@ -51,7 +51,8 @@ const EDITORIAL_GUIDES = [
     title: 'Dubai Form F Mortgage Valuation Protection Clause Guide',
     excerpt: 'How to protect your 10% security cheque if an independent bank valuation lands below the MOU price.',
     href: '/guides/dubai-form-f-mortgage-valuation-protection-clause',
-    img: '/images/guide-valuation-2752.webp',
+    img: '/images/guide-valuation.webp',
+    img2x: '/images/guide-valuation-2752.webp',
   },
   {
     tag: 'CBUAE Rules',
@@ -59,7 +60,8 @@ const EDITORIAL_GUIDES = [
     title: 'How Credit Card Limits Quietly Shrink Your UAE Mortgage Power',
     excerpt: 'Why unused credit card limits are assessed at 5% monthly under CBUAE DBR rules — and how to fix it before applying.',
     href: '/guides/how-credit-card-limits-reduce-uae-mortgage-dbr',
-    img: '/images/guide-dbr-planning-2752.webp',
+    img: '/images/guide-dbr-planning.webp',
+    img2x: '/images/guide-dbr-planning-2752.webp',
   },
   {
     tag: 'Closing Day',
@@ -67,7 +69,8 @@ const EDITORIAL_GUIDES = [
     title: 'Complete Dubai Land Department Trustee Transfer Day Checklist',
     excerpt: 'Manager’s cheques, developer NOC, seller liability letters, and exact timing at the DLD trustee office.',
     href: '/guides/complete-dld-trustee-transfer-day-checklist',
-    img: '/images/guide-transfer-day-2752.webp',
+    img: '/images/guide-transfer-day.webp',
+    img2x: '/images/guide-transfer-day-2752.webp',
   },
   {
     tag: 'Off-Plan',
@@ -75,7 +78,8 @@ const EDITORIAL_GUIDES = [
     title: 'Dubai Off-Plan Handover Mortgage & Equity Uplift Guide',
     excerpt: 'Preparing bank valuation and completion finance 90–120 days ahead of Emaar, Sobha, Meraas, or DAMAC handover.',
     href: '/handover/dubai-off-plan-handover-mortgage-guide',
-    img: '/images/offplan-dusk-2752.webp',
+    img: '/images/offplan-dusk.webp',
+    img2x: '/images/offplan-dusk-2752.webp',
   },
   {
     tag: 'Refinancing',
@@ -83,7 +87,8 @@ const EDITORIAL_GUIDES = [
     title: 'UAE Mortgage Buyout & 1% / AED 10,000 Early Settlement Cap',
     excerpt: 'Calculating your exact break-even timeline when switching off a high post-fixed EIBOR revert rate.',
     href: '/mortgages/mortgage-buyout-refinance',
-    img: '/images/keys-handover-2752.webp',
+    img: '/images/keys-handover.webp',
+    img2x: '/images/keys-handover-2752.webp',
   },
 ] as const;
 
@@ -120,6 +125,14 @@ export default function Home() {
 
   return (
     <>
+      <link
+        rel="preload"
+        as="image"
+        type="image/avif"
+        imageSrcSet="/images/hero-morning-01-1280.avif 1280w, /images/hero-morning-01-2048.avif 2048w, /images/hero-morning-01-3840.avif 3840w, /images/hero-morning-01-max.avif 4140w"
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
       <div className="holo-canvas">
         {/* 1. EXACT USEHOLO ROUNDED DUBAI SKYLINE HERO + DUAL WHITE SPLIT-CARD CTAs */}
         <HomeHero />
@@ -219,10 +232,11 @@ export default function Home() {
                       src="/images/dubai-waterfront-1672.webp"
                       srcSet="/images/dubai-waterfront-1280.webp 1280w, /images/dubai-waterfront-1672.webp 1672w"
                       sizes="(min-width: 1024px) 42vw, 92vw"
-                      alt="Concept image: contemporary Dubai waterfront villa overlooking the skyline"
+                      alt="Dubai waterfront residential architecture overlooking the marina skyline"
                       width={1672}
                       height={941}
                       loading="lazy"
+                      decoding="async"
                       className="aspect-[16/9] w-full object-cover"
                     />
                   </div>
@@ -544,13 +558,14 @@ export default function Home() {
             <ScrollScaleFrame>
               <Link href="/areas" className="homy-highlight-frame block" aria-label="Explore UAE freehold communities">
                 <img
-                  src="/images/abudhabi-corniche-2752.webp"
+                  src="/images/abudhabi-corniche-1792.webp"
                   srcSet="/images/abudhabi-corniche.webp 1376w, /images/abudhabi-corniche-1792.webp 1792w, /images/abudhabi-corniche-2752.webp 2752w"
                   sizes="(min-width: 960px) 920px, 95vw"
-                  alt="Concept image: coastal UAE waterfront villas along turquoise water and skyline"
+                  alt="Aerial daylight view of the Abu Dhabi Corniche beachfront, turquoise Gulf water, and UAE skyline"
                   width={2752}
-                  height={1536}
+                  height={1548}
                   loading="lazy"
+                  decoding="async"
                 />
               </Link>
             </ScrollScaleFrame>
@@ -578,10 +593,13 @@ export default function Home() {
                   <div className="aspect-[16/10] w-full overflow-hidden bg-[#0b1117]">
                     <img
                       src={g.img}
+                      srcSet={`${g.img} 1376w, ${g.img2x} 2752w`}
+                      sizes="(max-width: 640px) 82vw, 360px"
                       alt={g.title}
-                      width={2752}
-                      height={1536}
+                      width={1376}
+                      height={774}
                       loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                     />
                   </div>

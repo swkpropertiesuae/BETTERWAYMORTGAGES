@@ -9,117 +9,134 @@ export type MorningScene = {
   code: string;
   label: string;
   labelAr: string;
-  district: string;
-  districtAr: string;
-  src2k: string;
-  src4k: string;
-  src8k: string;
+  maxW: number;
+  maxH: number;
+  base: string;
   alt: string;
 };
 
-export const MORNING_8K_SCENES: readonly MorningScene[] = [
+export const MORNING_SCENES: readonly MorningScene[] = [
   {
-    id: 'downtown-canal',
+    id: 'downtown-dubai',
     code: '01',
-    label: 'Downtown Canal',
-    labelAr: 'قناة دبي',
-    district: 'Dubai 2026–2027 Waterfront',
-    districtAr: 'واجهة دبي المائية 2026–2027',
-    src2k: '/images/hero-8k-morning-01-2k.webp',
-    src4k: '/images/hero-8k-morning-01-4k.webp',
-    src8k: '/images/hero-8k-morning-01-8k.webp',
-    alt: 'Ultra-sharp 8K morning daylight view of 2026-2027 Dubai Water Canal waterfront residences and Downtown Burj Khalifa skyline',
+    label: 'Downtown Dubai',
+    labelAr: 'وسط مدينة دبي',
+    maxW: 4140,
+    maxH: 2329,
+    base: '/images/hero-morning-01',
+    alt: 'High-resolution bright morning daylight aerial view of Downtown Dubai, Burj Khalifa, and turquoise Burj Lake under clear blue skies',
   },
   {
-    id: 'lagoon-villas',
+    id: 'luxury-villas',
     code: '02',
-    label: 'Crystal Lagoon',
-    labelAr: 'فلل البحيرات',
-    district: 'The Oasis & Palm Jebel Ali',
-    districtAr: 'ذا أواسيس ونخلة جبل علي',
-    src2k: '/images/hero-8k-morning-02-2k.webp',
-    src4k: '/images/hero-8k-morning-02-4k.webp',
-    src8k: '/images/hero-8k-morning-02-8k.webp',
-    alt: 'Ultra-sharp 8K morning daylight view of 2026-2027 Dubai limestone luxury villas lining a turquoise swimmable crystal lagoon',
+    label: 'Luxury Pool Villas',
+    labelAr: 'فلل المسابح الفاخرة',
+    maxW: 5120,
+    maxH: 2880,
+    base: '/images/hero-morning-02',
+    alt: 'High-resolution bright daylight architectural photography of a modern white Dubai luxury villa with glass balconies, palms, and turquoise lap pool',
   },
   {
-    id: 'creek-towers',
+    id: 'dubai-marina',
     code: '03',
-    label: 'Dubai Creek',
-    labelAr: 'خور دبي',
-    district: 'Creek Harbour & Marina',
-    districtAr: 'خور دبي والمارينا',
-    src2k: '/images/hero-8k-morning-03-2k.webp',
-    src4k: '/images/hero-8k-morning-03-4k.webp',
-    src8k: '/images/hero-8k-morning-03-8k.webp',
-    alt: 'Ultra-sharp 8K morning daylight view of 2026-2027 sculptural Dubai Creek waterfront residential towers and superyacht marina',
+    label: 'Dubai Marina',
+    labelAr: 'مرسى دبي',
+    maxW: 5120,
+    maxH: 2880,
+    base: '/images/hero-morning-03',
+    alt: 'High-resolution bright morning photography of Dubai Marina waterfront residences, luxury yachts, wooden promenade, and high-rise skyline',
   },
   {
-    id: 'dubai-harbour',
+    id: 'palm-jumeirah',
     code: '04',
-    label: 'Dubai Harbour',
-    labelAr: 'دبي هاربور',
-    district: 'Beachfront & Palm Horizon',
-    districtAr: 'الواجهة البحرية ونخلة جميرا',
-    src2k: '/images/hero-8k-morning-04-2k.webp',
-    src4k: '/images/hero-8k-morning-04-4k.webp',
-    src8k: '/images/hero-8k-morning-04-8k.webp',
-    alt: 'Ultra-sharp 8K morning daylight view of 2026-2027 curved beachfront residences at Dubai Harbour overlooking Palm Jumeirah',
+    label: 'Palm Jumeirah',
+    labelAr: 'نخلة جميرا',
+    maxW: 4500,
+    maxH: 2531,
+    base: '/images/hero-morning-04',
+    alt: 'High-resolution bright morning view from Palm Jumeirah beachfront across turquoise Arabian Gulf waters toward the Dubai Harbour and Marina skyline',
   },
 ] as const;
 
 const SLIDE_MS = 6200;
 
+function buildSrcSet(scene: MorningScene, ext: 'avif' | 'webp'): string {
+  return `${scene.base}-1280.${ext} 1280w, ${scene.base}-2048.${ext} 2048w, ${scene.base}-3840.${ext} 3840w, ${scene.base}-max.${ext} ${scene.maxW}w`;
+}
+
 /**
- * Ultra-sharp 8K UHD Morning Daylight Dubai 2026-2027 architectural transition layer.
- * Uses pure GPU opacity + micro-Ken Burns (zero blur filters, zero softness) with interactive switcher.
+ * Real Full-Frame DSLR / Drone Morning Daylight Dubai Transition Hero.
+ * - Multi-tier AVIF + WebP responsive <picture> (1280w -> 2048w -> 3840w -> native 4.1K-5.1K max)
+ * - Zero fractional CSS scale transforms (exact 1:1 native pixel mapping for razor-sharp glass optics)
+ * - Deferred idle hydration of slides 02-04 so initial LCP downloads only 1 single AVIF image
  */
 export default function MorningHeroCarousel({ lang = 'en' }: { lang?: 'en' | 'ar' }) {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [deferredReady, setDeferredReady] = useState(false);
+
+  // Hydrate slides 02-04 only after initial LCP paint so page load is unaffected
+  useEffect(() => {
+    const win = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    if (win.requestIdleCallback) {
+      const id = win.requestIdleCallback(() => setDeferredReady(true), { timeout: 1100 });
+      return () => win.cancelIdleCallback?.(id);
+    }
+    const t = window.setTimeout(() => setDeferredReady(true), 850);
+    return () => window.clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     if (reduce || paused) return;
     const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % MORNING_8K_SCENES.length);
+      setDeferredReady(true);
+      setIndex((i) => (i + 1) % MORNING_SCENES.length);
     }, SLIDE_MS);
     return () => window.clearInterval(id);
   }, [reduce, paused]);
 
+  const selectSlide = (i: number) => {
+    setDeferredReady(true);
+    setIndex(i);
+  };
+
   return (
     <>
-      {/* 8K UHD Layered Daylight Backdrop (Zero CSS blur, instant crisp LCP on Slide 0) */}
+      {/* Native Optical DSLR / Drone Layered Morning Backdrop (Exact 1:1 Scale, Zero Blur) */}
       <div className="holo-hero__bg" aria-hidden="true">
-        {MORNING_8K_SCENES.map((scene, i) => {
+        {MORNING_SCENES.map((scene, i) => {
           const active = i === index;
+          const shouldMount = i === 0 || deferredReady || active;
+          if (!shouldMount) return null;
           return (
             <motion.div
               key={scene.id}
               initial={false}
-              animate={{
-                opacity: active ? 1 : 0,
-                scale: reduce ? 1 : active ? 1.035 : 1.0,
-              }}
+              animate={{ opacity: active ? 1 : 0 }}
               transition={{
-                opacity: { duration: reduce ? 0 : 1.15, ease: [0.22, 1, 0.36, 1] },
-                scale: { duration: reduce ? 0 : 6.4, ease: 'linear' },
+                opacity: { duration: reduce ? 0 : 1.0, ease: [0.22, 1, 0.36, 1] },
               }}
               className="absolute inset-0"
               style={{ zIndex: active ? 1 : 0 }}
             >
-              <img
-                src={scene.src4k}
-                srcSet={`${scene.src2k} 2560w, ${scene.src4k} 3840w, ${scene.src8k} 7680w`}
-                sizes="100vw"
-                alt={i === 0 ? scene.alt : ''}
-                width={7680}
-                height={4320}
-                fetchPriority={i === 0 ? 'high' : 'low'}
-                loading={i === 0 ? 'eager' : 'lazy'}
-                decoding={i === 0 ? 'sync' : 'async'}
-                className="holo-hero__8k-img"
-              />
+              <picture>
+                <source type="image/avif" srcSet={buildSrcSet(scene, 'avif')} sizes="100vw" />
+                <source type="image/webp" srcSet={buildSrcSet(scene, 'webp')} sizes="100vw" />
+                <img
+                  src={`${scene.base}-2048.webp`}
+                  alt={i === 0 ? scene.alt : ''}
+                  width={scene.maxW}
+                  height={scene.maxH}
+                  fetchPriority={i === 0 ? 'high' : 'low'}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  className="holo-hero__8k-img"
+                />
+              </picture>
             </motion.div>
           );
         })}
@@ -131,14 +148,14 @@ export default function MorningHeroCarousel({ lang = 'en' }: { lang?: 'en' | 'ar
         aria-hidden="true"
       />
 
-      {/* Interactive 8K Scene Switcher Rail (Bottom-End Corner on Desktop, Sleek Compact Bar on Mobile) */}
+      {/* Flush Interactive Scene Switcher Rail */}
       <div
         className="holo-scene-switcher"
         role="region"
-        aria-label={lang === 'ar' ? 'مشاريع دبي 2026-2027' : 'Dubai 2026-2027 morning architecture showcase'}
+        aria-label={lang === 'ar' ? 'معالم دبي الصباحية' : 'Dubai morning real estate photography showcase'}
       >
         <div className="holo-scene-switcher__tabs" role="tablist">
-          {MORNING_8K_SCENES.map((scene, i) => {
+          {MORNING_SCENES.map((scene, i) => {
             const active = i === index;
             return (
               <button
@@ -146,7 +163,8 @@ export default function MorningHeroCarousel({ lang = 'en' }: { lang?: 'en' | 'ar
                 type="button"
                 role="tab"
                 aria-selected={active}
-                onClick={() => setIndex(i)}
+                onMouseEnter={() => setDeferredReady(true)}
+                onClick={() => selectSlide(i)}
                 className={`holo-scene-tab ${active ? 'is-active' : ''}`}
               >
                 <span className="holo-scene-tab__head">
@@ -178,7 +196,7 @@ export default function MorningHeroCarousel({ lang = 'en' }: { lang?: 'en' | 'ar
           type="button"
           onClick={() => setPaused((p) => !p)}
           aria-pressed={paused}
-          aria-label={paused ? 'Resume 8K morning transition' : 'Pause 8K morning transition'}
+          aria-label={paused ? 'Resume morning showcase transition' : 'Pause morning showcase transition'}
           className="holo-scene-pause"
         >
           {paused ? <Play size={12} fill="currentColor" /> : <Pause size={12} />}

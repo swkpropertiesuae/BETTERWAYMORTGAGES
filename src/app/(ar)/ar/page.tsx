@@ -18,7 +18,15 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="bg-[#f5f6f7] pb-8">
-      {/* Holo-style Rounded Arabic 8K Morning Dubai 2026-2027 Transition Hero */}
+      <link
+        rel="preload"
+        as="image"
+        type="image/avif"
+        imageSrcSet="/images/hero-morning-01-1280.avif 1280w, /images/hero-morning-01-2048.avif 2048w, /images/hero-morning-01-3840.avif 3840w, /images/hero-morning-01-max.avif 4140w"
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
+      {/* Holo-style Rounded Arabic Morning Dubai Transition Hero */}
       <div className="px-3 pt-4 sm:px-6">
         <section className="holo-hero !min-h-[580px]" dir="rtl">
           <MorningHeroCarousel lang="ar" />

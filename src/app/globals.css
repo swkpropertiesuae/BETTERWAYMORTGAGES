@@ -77,7 +77,7 @@
   }
   html[lang='ar'] :is(h1, h2, h3, h4) { font-family: var(--font-arabic); letter-spacing: 0; }
   p { text-wrap: pretty; }
-  img { image-rendering: -webkit-optimize-contrast; }
+  img[src$='.svg'] { image-rendering: -webkit-optimize-contrast; }
   ::selection { background: #080b0f; color: #ffffff; }
   a { text-underline-offset: 0.2em; }
   :focus-visible { outline: 2px solid var(--color-navy); outline-offset: 3px; border-radius: 8px; }

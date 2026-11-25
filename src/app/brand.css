@@ -1318,9 +1318,9 @@
   width: 100%;
   height: clamp(300px, 44vw, 600px);
   object-fit: cover;
-  object-position: center 45%;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000000 18%, #000000 76%, transparent 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000000 18%, #000000 76%, transparent 100%);
+  object-position: center 62%;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000000 18%, #000000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000000 18%, #000000 78%, transparent 100%);
 }
 .homy-footer-watermark {
   position: absolute;
@@ -1720,9 +1720,7 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   height: 100%;
   object-fit: cover;
   object-position: center 46%;
-  image-rendering: -webkit-optimize-contrast;
-  backface-visibility: hidden;
-  transform: translateZ(0);
+  image-rendering: auto;
 }
 /* Crisp directional editorial morning scrim: anchors white copy & top-left transparent logo while keeping Dubai's radiant morning skyline crystal-clear */
 .holo-hero__scrim {

@@ -443,10 +443,11 @@ export function Footer() {
           <div className="homy-footer-villa">
             <img
               src="/images/footer-dubai-night-villa.webp"
-              alt="Concept image: modern Dubai waterfront luxury villa illuminated at twilight"
-              width={3840}
-              height={2160}
+              alt="High-resolution twilight aerial view of Downtown Dubai, Burj Khalifa, and illuminated Sheikh Zayed Road"
+              width={2560}
+              height={1440}
               loading="lazy"
+              decoding="async"
             />
             <div className="homy-footer-watermark" aria-hidden="true">
               BETTERWAY
