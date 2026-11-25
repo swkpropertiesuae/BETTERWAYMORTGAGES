@@ -15,22 +15,29 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="bw-page-spacer bg-white">
-      {/* Homy Asymmetric 2-Column About Hero */}
+      {/* Institutional Two-Column About Hero */}
       <section className="py-12 lg:py-20">
         <div className="wrap grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="flex min-w-0 flex-col gap-6">
-            <SectionTag>About Us</SectionTag>
+            <SectionTag>About Betterway Mortgages</SectionTag>
             <h1 className="homy-h2 !text-[clamp(36px,4.2vw,54px)]">
-              A clearer way to finance your Dubai home
+              Independent mortgage advice, grounded in written bank terms
             </h1>
             <p className="homy-sub max-w-lg">
-              Betterway Mortgages helps UAE home buyers, residents, and international investors compare lender terms,
-              statutory CBUAE rules, and transfer-day costs with total clarity.
+              Founded in Dubai by Managing Director Shabib Siraj and operated from Al Nasr Plaza in Oud Metha,
+              Betterway Mortgages LLC was built to solve a straightforward problem: UAE property buyers are routinely
+              shown one lender’s introductory fixed rate while post-fixed EIBOR revert margins, DLD transfer outlays,
+              and credit-card DBR deductions are left until the final week before closing.
+            </p>
+            <p className="max-w-lg text-sm leading-relaxed text-[#464c5c]">
+              Our advisors review 24 licensed conventional and Islamic lenders side by side, model every dirham of
+              upfront cash under Central Bank of the UAE (CBUAE) rules, and stay on the file through bank valuation,
+              Final Offer Letter review, and Dubai Land Department trustee day.
             </p>
             <div className="mt-2 overflow-hidden rounded-[20px]">
               <img
                 src="/images/dubai-waterfront-1280.webp"
-                alt="Concept image: contemporary Dubai waterfront residence with Burj Khalifa horizon"
+                alt="Morning architectural view of Dubai waterfront residences and skyline"
                 width={1280}
                 height={720}
                 className="aspect-[16/10] w-full object-cover"

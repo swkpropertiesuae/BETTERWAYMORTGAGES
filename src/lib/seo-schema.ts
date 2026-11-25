@@ -30,8 +30,8 @@ export function enhancedOrgSchema() {
     logo: {
       '@type': 'ImageObject',
       url: `${SITE.url}/brand/logo-light-4k.png`,
-      width: 3058,
-      height: 881,
+      width: 3200,
+      height: 962,
     },
     image: `${SITE.url}/og.png`,
     description:

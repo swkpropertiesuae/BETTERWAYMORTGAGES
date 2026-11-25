@@ -73,8 +73,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Betterway Mortgages — Dubai & UAE Home Mortgage Ecosystem',
-    description: 'Compare 24 UAE banks, live CBUAE EIBOR, 4% DLD fees, and free printable 2026 mortgage PDF guides.',
+    title: 'Betterway Mortgages — Independent Dubai & UAE Mortgage Advisory',
+    description: 'Compare 24 UAE banks, daily CBUAE EIBOR fixings, 4% DLD closing fees, and printable 2026 mortgage PDF guides.',
     images: ['/og.png'],
   },
   alternates: {

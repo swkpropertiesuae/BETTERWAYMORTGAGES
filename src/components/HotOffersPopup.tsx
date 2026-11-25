@@ -36,7 +36,7 @@ const HOT_OFFERS = [
       'Zero upfront advisory consultation fee from our Dubai desk',
     ],
     ctaHref: '/get-started?goal=new-mortgage',
-    ctaLabel: 'Unlock 24-Bank Pre-Approval Check',
+    ctaLabel: 'Review 24-Bank Eligibility',
   },
   {
     id: 'buyout',
@@ -106,12 +106,12 @@ export function HotOffersTrigger({
     <button
       type="button"
       onClick={open}
-      className="bw-hot-trigger-pill inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold text-white cursor-pointer"
+      className="bw-hero-chip bw-hero-chip--interactive !border-[#dec178]/55"
     >
       <Flame size={13} className="text-[#f1d57e]" />
       <span>{label}</span>
-      <span className="rounded-full bg-[#34dfac] px-1.5 py-0.5 text-[9.5px] font-extrabold uppercase tracking-wider text-[#070e1a]">
-        Live
+      <span className="rounded-full bg-[#22ba90] px-1.5 py-0.5 text-[9.5px] font-extrabold uppercase tracking-wider text-[#070e1a]">
+        Desk
       </span>
     </button>
   );

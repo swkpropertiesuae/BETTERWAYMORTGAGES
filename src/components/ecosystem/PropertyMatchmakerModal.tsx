@@ -115,7 +115,7 @@ export default function PropertyMatchmakerModal({
                 <img src="/brand/icon.png" alt="" width={36} height={36} className="h-9 w-9 object-contain" />
                 <div>
                   <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#0e6954]">
-                    Betterway Concierge &amp; Budget Matchmaker
+                    Betterway Property &amp; Budget Advisory
                   </span>
                   <h3 className="font-display text-2xl font-bold text-[#121217]">
                     {step === 'match'

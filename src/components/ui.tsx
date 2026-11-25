@@ -9,7 +9,8 @@ export const aed = (n: number) => `AED ${Math.round(n).toLocaleString('en-US')}`
 export const aedM = (n: number) => `AED ${n >= 10 ? n.toFixed(1) : n.toFixed(2)}M`;
 
 export function JsonLd({ data }: { data: object }) {
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+  const safeJson = JSON.stringify(data).replace(/</g, '\\u003c');
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJson }} />;
 }
 
 /** Renders `*word*` in a heading as a bold italic editorial accent. */
@@ -392,7 +393,7 @@ const FOOT: { title: string; links: [string, string][] }[] = [
       ['UAE National Mortgages', '/mortgages/uae-nationals'],
       ['Non-Resident Buyers', '/mortgages/non-resident-dubai'],
       ['Islamic Home Finance', '/mortgages/islamic-home-finance'],
-      ['Betterway Concierge', '/concierge'],
+      ['Property Closing Desk', '/concierge'],
     ],
   },
   {
@@ -409,8 +410,8 @@ const FOOT: { title: string; links: [string, string][] }[] = [
   {
     title: 'Partners & OS',
     links: [
-      ['Hub by Betterway (Agents)', '/hub'],
-      ['Edge by Betterway (Brokerage OS)', '/edge'],
+      ['Betterway Partner Desk (Agents)', '/hub'],
+      ['Betterway Brokerage Platform', '/edge'],
       ['Become a RERA Partner', '/partners'],
       ['Client & Staff Portal Login', '/portal/login'],
       ['About Betterway', '/about-us'],
@@ -419,23 +420,24 @@ const FOOT: { title: string; links: [string, string][] }[] = [
   },
 ];
 
-/** Exact Homy Rounded Sky-to-Twilight-Villa Dark Footer (#0b1117, radius: 30px) */
+/** Corporate Institutional Dark Footer (#0b1117, radius: 30px) */
 export function Footer() {
   return (
     <div className="homy-footer-shell">
       <footer className="homy-footer-card">
-        {/* Top Sky-to-Villa CTA Banner + Giant Fading BETTERWAY Watermark */}
+        {/* Top Executive CTA Banner + Subtle BETTERWAY Architectural Watermark */}
         <div className="homy-footer-cta">
           <div className="homy-footer-cta__copy">
-            <SectionTag>Start your Dubai mortgage</SectionTag>
-            <h2>Discover financing built around your life</h2>
+            <SectionTag>Speak with our Oud Metha desk</SectionTag>
+            <h2>Review written terms before you sign Form F</h2>
             <p>
-              Compare UAE mortgage structures across 24 lenders with clear EIBOR benchmarks and itemised closing costs.
+              Compare mortgage structures across 24 UAE lenders with daily CBUAE EIBOR benchmarks and itemised 4% DLD
+              closing schedules.
             </p>
             <div className="mt-2 flex flex-wrap justify-center gap-3">
-              <Cta href="/contact">Get in Touch</Cta>
+              <Cta href="/contact">Book an Advisory Call</Cta>
               <Cta href="/calculators/mortgage-calculator" tone="ghost">
-                Run Calculator
+                Run DLD Calculator
               </Cta>
             </div>
           </div>
@@ -464,7 +466,7 @@ export function Footer() {
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={403}
+                  height={421}
                   className="h-14 w-auto sm:h-16"
                 />
               </Link>

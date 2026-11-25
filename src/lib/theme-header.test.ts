@@ -110,11 +110,18 @@ test('English and Arabic Homy headers render 4K transparent PNG logo-horizontal-
   assert.match(brand, /\.bw-header\[data-over-hero='true'\]\[data-scrolled='false'\]\s*\{[^}]*background:\s*transparent/);
 });
 
-test('desktop header container and fluid nav sizing prevent horizontal overflow at 1200px+', () => {
+test('desktop header container and hero rail share exact 1320px alignment and prevent horizontal overflow at 1200px+', () => {
   const brand = read('src/app/brand.css');
-  assert.match(brand, /\.bw-header\s+\.wrap\s*\{[^}]*max-width:\s*1320px/);
+  const hero = read('src/components/home/HomeHero.tsx');
+  const carousel = read('src/components/home/MorningHeroCarousel.tsx');
+
+  assert.match(brand, /--bw-rail-max:\s*1320px/);
+  assert.match(brand, /\.bw-header\s+\.wrap\s*\{[^}]*max-width:\s*var\(--bw-rail-max\)/);
+  assert.match(brand, /\.holo-hero__inner\s*\{[^}]*max-width:\s*var\(--bw-rail-max\)/);
   assert.match(brand, /\.bw-header__bar\s*\{[^}]*height:\s*98px/);
   assert.match(brand, /\.bw-nav\s+a,[\s\S]*?white-space:\s*nowrap/);
+  assert.match(hero, /className="holo-hero__inner"/);
+  assert.doesNotMatch(carousel, /holo-scene-switcher/);
 });
 
 test('Arabic header defers inline nav to lg breakpoint with nowrap links and mobile header scales logo cleanly', () => {

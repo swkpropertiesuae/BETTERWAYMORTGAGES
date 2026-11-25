@@ -6,9 +6,9 @@ import { SpotlightCard } from '@/components/ui/MotionPrimitives';
 import { COMMUNITIES } from '@/data/communities';
 
 export const metadata: Metadata = {
-  title: 'Betterway Buyer Concierge — Property Budget & Closing Desk Dubai',
+  title: 'Betterway Property Closing Desk — Budget, Form F & Transfer Advisory Dubai',
   description:
-    'Align your Dubai property search with bank pre-approval, Form F valuation protection clauses, independent bank valuation tracking, and DLD trustee conveyancing.',
+    'Align your Dubai property purchase with verified bank pre-approval, Form F valuation protection clauses, independent valuation coordination, and DLD trustee conveyancing.',
   alternates: { canonical: '/concierge' },
 };
 
@@ -44,13 +44,14 @@ export default function ConciergePage() {
       <section className="holo-section">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
-            <SectionTag>Betterway Buyer Concierge</SectionTag>
+            <SectionTag>Betterway Property Closing Desk</SectionTag>
             <h1 className="holo-display-h2">
-              Buy in Dubai with financing clarity locked in first.
+              Confirm your financing before you sign Form F.
             </h1>
             <p className="holo-lead max-w-xl">
-              Most buyers view properties first and discover DBR limits, credit card hits, or valuation shortfalls too
-              late. Betterway unites mortgage underwriting, Form F protection, and DLD closing support in one desk.
+              Buyers routinely agree a price before checking credit-card DBR reductions, bank valuation norms, or total
+              DLD transfer cash. Our Oud Metha closing desk aligns mortgage approval, Form F protection clauses, and
+              trustee execution before funds move.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Cta href="/get-started">Build My 60s Dossier</Cta>
@@ -74,7 +75,7 @@ export default function ConciergePage() {
         </div>
       </section>
 
-      {/* 4 Buyer Concierge Pillars */}
+      {/* 4 Property Closing Pillars */}
       <section className="holo-section">
         <div className="mb-10 max-w-2xl space-y-3">
           <SectionTag>Why Buyers Start With Betterway</SectionTag>
@@ -131,7 +132,7 @@ export default function ConciergePage() {
       <div className="rounded-[28px] overflow-hidden">
         <CtaBand
           title="Ready to pair your property shortlist with a 24-bank pre-approval?"
-          body="Start our 60-second readiness check or speak directly with our Oud Metha, Dubai concierge desk."
+          body="Start our 60-second readiness check or speak directly with our Oud Metha, Dubai closing desk."
         />
       </div>
     </div>

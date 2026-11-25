@@ -32,9 +32,9 @@ import { TRENDING_UAE_KEYWORDS, pdfCatalogSchema, speakablePageSchema } from '@/
 import { cashToClose } from '@/lib/math';
 
 export const metadata: Metadata = {
-  title: 'Dubai & UAE Property & Mortgage Ecosystem — 24 Banks Compared | Betterway',
+  title: 'Betterway Mortgages — Independent Dubai & UAE Mortgage Advisory across 24 Banks',
   description:
-    'Everything you need to finance and buy property in Dubai & the UAE. Compare 24 licensed lenders, check 50% CBUAE DBR, itemise 4% DLD closing costs, download free 2026 PDF guides, and track pre-approval.',
+    'Independent Dubai & UAE mortgage advisory comparing 24 licensed conventional and Islamic lenders. Review CBUAE 50% DBR limits, itemised 4% DLD closing costs, live EIBOR fixings, and printable 2026 PDF guides.',
   keywords: TRENDING_UAE_KEYWORDS,
   alternates: { canonical: '/' },
 };
@@ -119,7 +119,7 @@ const FAQS = [
   },
   {
     q: 'How do RERA real estate agents and brokerages partner with Betterway?',
-    a: 'Through Hub by Betterway, RERA agents share co-branded calculators, verify buyer DBR readiness before viewings, and track referred files live from Form F to DLD trustee day inside Betterway OS.',
+    a: 'Through the Betterway Partner Desk, RERA agents share co-branded calculators, verify buyer DBR readiness before viewings, and track referred files live from Form F to DLD trustee day inside Betterway OS.',
   },
 ];
 
@@ -138,20 +138,21 @@ export default function Home() {
         fetchPriority="high"
       />
       <div className="holo-canvas">
-        {/* 1. EXACT USEHOLO ROUNDED DUBAI SKYLINE HERO + DUAL WHITE SPLIT-CARD CTAs */}
+        {/* 1. BRIGHT MORNING DAYLIGHT DUBAI HERO — ALIGNED HEADER/HERO RAIL */}
         <HomeHero />
 
-        {/* 2. "FIND IT. FINANCE IT." — EXACT HOLO 2-ROW PRODUCT ECOSYSTEM SECTION */}
+        {/* 2. INDEPENDENT UAE ADVISORY — TWO-ROW STRUCTURED FINANCE BRIEF */}
         <section className="holo-section" aria-labelledby="ecosystem-title">
           <div className="mx-auto max-w-[1220px]">
             <div className="max-w-3xl space-y-4">
-              <SectionTag>The Betterway Ecosystem</SectionTag>
+              <SectionTag>Independent UAE Advisory</SectionTag>
               <h2 id="ecosystem-title" className="holo-display-h2">
-                Find it. Finance it.
+                Clarity before you commit.
               </h2>
               <p className="holo-lead max-w-2xl" data-aeo-answer="true">
-                From checking real 50% CBUAE borrowing power and comparing 24 UAE banks to budgeting upfront 4% DLD fees
-                across {COMMUNITIES.length} freehold areas — Betterway brings it all together.
+                Before paying a booking deposit or signing RERA Form F, our Oud Metha advisory desk lays out your real
+                50% CBUAE DBR capacity, itemised 4% DLD closing costs, and side-by-side lender terms across 24 UAE
+                banks and {COMMUNITIES.length} freehold communities.
               </p>
             </div>
 
@@ -204,15 +205,16 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-6 lg:pl-6">
-                  <h3 className="holo-display-h3">The right mortgage for you in the UAE</h3>
+                  <h3 className="holo-display-h3">Twenty-four UAE lenders reviewed on one desk</h3>
                   <p className="holo-lead">
-                    Compare 24 licensed UAE lenders side by side, inspect post-fixed EIBOR revert margins and floor
-                    clauses in plain English, and get specialist guidance from DBR check through to DLD transfer.
+                    Every bank advertises its introductory fixed rate. We examine what follows it — post-fixed EIBOR
+                    revert margins, minimum rate floors, valuation terms, and insurance assignment rules in clear
+                    written schedules.
                   </p>
                   <div className="flex flex-wrap gap-3 pt-1">
-                    <Cta href="/get-started">Get a mortgage</Cta>
+                    <Cta href="/get-started">Start eligibility brief</Cta>
                     <Cta href="/rates" tone="ghost">
-                      Compare all 24 banks
+                      Review all 24 lenders
                     </Cta>
                   </div>
                 </div>
@@ -260,13 +262,13 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-6 lg:pl-6">
-                  <h3 className="holo-display-h3">Budget &amp; buy with Form F protection</h3>
+                  <h3 className="holo-display-h3">Protect your deposit before signing Form F</h3>
                   <p className="holo-lead">
-                    Don’t sign a Dubai MOU blind. Lock in your verified borrowing power, generate mortgage-contingent
-                    Form F valuation protection clauses, and itemise every trustee cheque before transfer day.
+                    Most transaction setbacks in Dubai stem from an unverified DBR cap or an unexpected valuation gap.
+                    We structure mortgage-contingent Form F addenda and verify every trustee cheque ahead of transfer.
                   </p>
                   <div className="flex flex-wrap gap-3 pt-1">
-                    <Cta href="/concierge">Explore Buyer Concierge</Cta>
+                    <Cta href="/concierge">Explore Property Closing Desk</Cta>
                     <Cta href="/tools/form-f-clause-generator" tone="ghost">
                       Form F Clause Tool
                     </Cta>
@@ -319,29 +321,29 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. B2B ECOSYSTEM — "GROW YOUR BUSINESS WITH BETTERWAY" (SOFT EMERALD-MINT CARD — PARALLEL TO HOLO'S LAVENDER CARD) */}
+        {/* 4. INSTITUTIONAL PARTNER DESK & BROKERAGE PLATFORM */}
         <section className="holo-section holo-section--mint" aria-labelledby="b2b-title">
           <div className="mx-auto max-w-[1220px]">
             <div className="max-w-3xl space-y-4">
-              <SectionTag>For Agents &amp; Brokerages</SectionTag>
+              <SectionTag>For RERA Brokerages &amp; Advisors</SectionTag>
               <h2 id="b2b-title" className="holo-display-h2">
-                Grow your business with Betterway
+                Built for Dubai brokerages and advisors
               </h2>
               <p className="holo-lead max-w-2xl">
-                Technology, 24-bank underwriting rails, and Betterway OS infrastructure that help UAE real estate
-                agents and mortgage teams close faster with zero surprises.
+                Direct 24-bank underwriting coordination and Betterway OS case tracking that help RERA agencies and
+                independent mortgage consultants bring qualified buyers cleanly to transfer.
               </p>
             </div>
 
             <div className="mt-12 grid gap-6 lg:grid-cols-2">
-              {/* Card 1: Hub by Betterway (For Real Estate Agents) */}
+              {/* Card 1: Betterway Partner Desk (For Real Estate Agencies) */}
               <SpotlightCard className="flex flex-col overflow-hidden rounded-[26px] border border-[#dce7e2] bg-white shadow-sm">
                 <div className="holo-visual-stage !min-h-[300px] !rounded-none">
                   <div className="flex items-center justify-between">
                     <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-[#121217]">
-                      <Smartphone size={14} className="text-[#0e6954]" /> HUB by Betterway
+                      <Smartphone size={14} className="text-[#0e6954]" /> Betterway Partner Desk
                     </span>
-                    <span className="text-xs font-semibold text-[#34dfac]">RERA Agent Portal</span>
+                    <span className="text-xs font-semibold text-[#34dfac]">RERA Agency Portal</span>
                   </div>
                   <div className="mx-auto my-5 w-full max-w-[320px] rounded-[22px] border border-white/20 bg-[#080b0f]/85 p-5 shadow-2xl backdrop-blur-md">
                     <div className="flex items-center gap-2.5 border-b border-white/10 pb-3">
@@ -367,25 +369,25 @@ export default function Home() {
                 <div className="flex flex-1 flex-col justify-between p-7 sm:p-8">
                   <div>
                     <h3 className="font-display text-2xl font-bold text-[#121217] sm:text-3xl">
-                      Close more deals with verified buyers
+                      Keep buyer deals moving to transfer
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-[#6c6c89]">
-                      Give your buyers co-branded DBR &amp; DLD calculators, confirm financing capacity before viewings,
-                      and track every referred mortgage live through Betterway OS.
+                      Equip your sales team with co-branded DBR and 4% DLD calculators, confirm financing capacity
+                      before viewings, and monitor every referred case inside Betterway OS.
                     </p>
                   </div>
                   <div className="mt-6">
-                    <Cta href="/hub">Explore Hub by Betterway</Cta>
+                    <Cta href="/hub">Explore Partner Desk</Cta>
                   </div>
                 </div>
               </SpotlightCard>
 
-              {/* Card 2: Edge by Betterway (Mortgage Brokerage OS) */}
+              {/* Card 2: Betterway Brokerage Platform (Betterway OS Infrastructure) */}
               <SpotlightCard className="flex flex-col overflow-hidden rounded-[26px] border border-[#dce7e2] bg-white shadow-sm">
                 <div className="holo-visual-stage !min-h-[300px] !rounded-none">
                   <div className="flex items-center justify-between">
                     <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold text-[#121217]">
-                      <Cpu size={14} className="text-[#0e6954]" /> EDGE by Betterway
+                      <Cpu size={14} className="text-[#0e6954]" /> Betterway Brokerage Platform
                     </span>
                     <span className="text-xs font-semibold text-[#f1d57e]">Betterway OS</span>
                   </div>
@@ -406,20 +408,20 @@ export default function Home() {
                       );
                     })}
                   </div>
-                  <span className="text-[11px] text-white/55">Solo advisor &amp; enterprise brokerage tiers</span>
+                  <span className="text-[11px] text-white/55">Independent advisor &amp; multi-desk brokerage tiers</span>
                 </div>
                 <div className="flex flex-1 flex-col justify-between p-7 sm:p-8">
                   <div>
                     <h3 className="font-display text-2xl font-bold text-[#121217] sm:text-3xl">
-                      Build your mortgage business
+                      Institutional infrastructure for mortgage teams
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-[#6c6c89]">
-                      Launch or scale your UAE mortgage advisory practice with Betterway OS technology, CBUAE-compliant
-                      workflows, and our 24-bank panel architecture.
+                      Operate your UAE mortgage practice on Betterway OS with CBUAE Key Facts Statement workflows,
+                      deterministic underwriting calculators, and our 24-bank directory.
                     </p>
                   </div>
                   <div className="mt-6">
-                    <Cta href="/edge">Discover Edge by Betterway</Cta>
+                    <Cta href="/edge">Explore Brokerage Platform</Cta>
                   </div>
                 </div>
               </SpotlightCard>
@@ -427,18 +429,18 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 5. BETTERWAY VS GOING DIRECT + 24-SECOND FULL-HD BRIEFING FILM */}
+        {/* 5. INDEPENDENT COMPARISON + 24-SECOND BRIEFING FILM */}
         <section className="holo-section" aria-labelledby="compare-title">
           <div className="mx-auto max-w-[1220px] space-y-14">
             <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
               <div className="space-y-5">
-                <SectionTag>The Betterway Difference</SectionTag>
+                <SectionTag>Independent Comparison</SectionTag>
                 <h2 id="compare-title" className="holo-display-h3">
-                  Why compare through Betterway instead of going direct?
+                  Why borrowers compare twenty-four banks before applying to one
                 </h2>
                 <p className="holo-lead">
-                  Most buyers only see one bank’s headline fixed rate and discover post-fixed revert margins, DLD fees,
-                  and credit-card DBR reductions far too late.
+                  Applying directly shows one lender’s credit box and introductory rate. Post-fixed revert margins,
+                  DLD outlays, and credit-card DBR deductions are far easier to address before an application is lodged.
                 </p>
                 <Cta href="/why-betterway-vs-direct-bank" tone="ghost" size="sm">
                   Read Full Comparison
@@ -483,18 +485,18 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 6. AUTHENTIC DUBAI SPECIALISTS CAROUSEL (Click to Inspect Portaled 8K Modal) */}
+        {/* 6. OUD METHA DUBAI SPECIALISTS DESK */}
         <section className="holo-section" aria-labelledby="advisors-title">
           <div className="mx-auto max-w-[1220px]">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-2xl space-y-3">
                 <SectionTag>Our Oud Metha, Dubai Desk</SectionTag>
                 <h2 id="advisors-title" className="holo-display-h3">
-                  Real UAE mortgage specialists behind every file
+                  The specialists managing your file from valuation to keys
                 </h2>
                 <p className="holo-lead">
-                  Led by Founder &amp; Managing Director Shabib Siraj in Oud Metha, Dubai — click any specialist below
-                  to inspect their full profile and focus areas.
+                  Led by Founder &amp; Managing Director Shabib Siraj from Al Nasr Plaza, Oud Metha — select any
+                  advisor below to review their desk remit and qualifications.
                 </p>
               </div>
               <Cta href="/our-underwriters" size="sm">
@@ -506,8 +508,8 @@ export default function Home() {
           <HomyAdvisorsCarousel />
         </section>
 
-        {/* 7. EXACT HOLO ANIMATED PITCH-BLACK STATS BANNER (100% Factual Audited Betterway Figures) */}
-        <section className="holo-section holo-section--dark" aria-label="Betterway ecosystem coverage">
+        {/* 7. FACTUAL UAE COVERAGE METRICS */}
+        <section className="holo-section holo-section--dark" aria-label="Betterway advisory coverage">
           <div className="mx-auto max-w-[1220px] grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <p className="font-display text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
@@ -536,13 +538,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 8. HIGHLIGHTED ADVISORY MARQUEE + SCROLL-SCALED 4K COASTAL ARCHITECTURE */}
+        {/* 8. UAE EMIRATES COVERAGE SHOWCASE */}
         <section className="holo-section overflow-hidden" aria-labelledby="highlight-title">
           <div className="mx-auto max-w-[1220px] mb-6 flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl space-y-3">
               <SectionTag>Across Dubai, Abu Dhabi &amp; Northern Emirates</SectionTag>
               <h2 id="highlight-title" className="holo-display-h3">
-                Structured pre-approval built for calm transfer days
+                Prepared well ahead of bank valuation and trustee day
               </h2>
             </div>
             <Cta href="/areas" size="sm" tone="ghost">
@@ -572,18 +574,18 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 9. EXACT HOLO HORIZONTAL SCROLLABLE "LATEST GUIDES & MARKET RULES" CAROUSEL */}
+        {/* 9. REGULATORY BRIEFINGS & PRINTABLE PDF GUIDES */}
         <section className="holo-section" aria-labelledby="guides-title">
           <div className="mx-auto max-w-[1220px]">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
               <div className="space-y-3">
-                <SectionTag>Resources &amp; Intelligence</SectionTag>
+                <SectionTag>Regulatory &amp; Market Briefings</SectionTag>
                 <h2 id="guides-title" className="holo-display-h2">
-                  Latest guides &amp; UAE rules
+                  UAE mortgage rules, written in plain English
                 </h2>
               </div>
               <Cta href="/guides" tone="ghost" size="sm">
-                Explore all guides
+                Read all guides
               </Cta>
             </div>
 
@@ -672,13 +674,13 @@ export default function Home() {
         <section id="faq" className="holo-section" aria-labelledby="faq-title">
           <div className="mx-auto max-w-[1220px] homy-faq-grid">
             <div className="homy-faq-left">
-              <SectionTag>FAQ</SectionTag>
+              <SectionTag>Frequently Asked Questions</SectionTag>
               <h2 id="faq-title" className="holo-display-h3 mt-4">
-                Things you should know
+                Direct answers to the questions buyers ask first
               </h2>
               <p className="holo-lead mt-4 max-w-sm">
-                Clear answers to the most important Dubai &amp; UAE mortgage questions, grounded in official CBUAE and
-                DLD rules.
+                Grounded in Central Bank of the UAE (CBUAE) Mortgage Loan Regulations and Dubai Land Department fee
+                schedules.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Cta href="/get-started" size="sm">

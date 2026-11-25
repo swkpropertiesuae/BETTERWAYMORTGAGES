@@ -16,11 +16,20 @@ export default function Header() {
   const reduce = useReducedMotion();
   const isHome = path === '/';
   const isFlow = path === '/get-started';
+  const [scrolled, setScrolled] = useState(!isHome);
 
   useEffect(() => {
     setOpen(null);
     setMobile(false);
-  }, [path]);
+    const sync = () => setScrolled(!isHome || window.scrollY > 24);
+    sync();
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', sync);
+      window.removeEventListener('resize', sync);
+    };
+  }, [path, isHome]);
 
   useEffect(() => {
     const close = (e: MouseEvent) => {
@@ -50,7 +59,7 @@ export default function Header() {
               src="/brand/logo-horizontal-light.png"
               alt="Betterway Mortgages"
               width={1400}
-              height={403}
+              height={421}
               fetchPriority="high"
             />
           </Link>
@@ -80,10 +89,10 @@ export default function Header() {
       ref={ref}
       className="bw-header"
       data-over-hero={isHome ? 'true' : 'false'}
-      data-scrolled={isHome ? 'false' : 'true'}
+      data-scrolled={scrolled ? 'true' : 'false'}
     >
       <div className="wrap bw-header__bar">
-        {/* Left: Large Transparent Seamless Betterway 4K PNG Logo (Zero Box, Dual Dark/Light Swap) */}
+        {/* Left: Corporate Architectural Betterway Logo (Zero Box, Dual Light/Dark Swap) */}
         <Link
           href="/"
           aria-label="Betterway Mortgages home"
@@ -94,7 +103,7 @@ export default function Header() {
             src="/brand/logo-horizontal-dark.png"
             alt="Betterway Mortgages"
             width={1400}
-            height={403}
+            height={421}
             fetchPriority="high"
             className="bw-logo-over-hero"
           />
@@ -102,7 +111,7 @@ export default function Header() {
             src="/brand/logo-horizontal-light.png"
             alt="Betterway Mortgages"
             width={1400}
-            height={403}
+            height={421}
             fetchPriority="high"
             className="bw-logo-on-light"
           />
@@ -165,7 +174,7 @@ export default function Header() {
             <span>Login</span>
           </Link>
           <span className="holo-desktop-only">
-            <Link href="/contact" className="homy-btn">
+            <Link href="/contact" className="homy-btn bw-header-cta">
               <span>Contact us</span>
               <span className="homy-btn__disc" aria-hidden="true">
                 <span className="homy-btn__arrow-track">
@@ -228,7 +237,7 @@ export default function Header() {
                 <div className="flex flex-col justify-between rounded-[20px] bg-[#eef7f4] p-6 text-[#121217]">
                   <div>
                     <span className="inline-flex rounded-full bg-white px-2.5 py-1 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#0e6954]">
-                      Betterway Ecosystem
+                      Betterway Advisory
                     </span>
                     <p className="mt-3 font-display text-lg font-bold leading-snug text-[#121217]">
                       {active.feature?.title ?? 'Plan your next move'}

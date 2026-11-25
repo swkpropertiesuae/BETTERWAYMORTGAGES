@@ -26,41 +26,43 @@ export default function Page() {
         imageSizes="100vw"
         fetchPriority="high"
       />
-      {/* Holo-style Rounded Arabic Morning Dubai Transition Hero */}
+      {/* Rounded Morning Dubai Daylight Hero — Aligned Rail, Zero Chapter Boxes */}
       <div className="px-3 pt-4 sm:px-6">
         <section className="holo-hero !min-h-[580px]" dir="rtl">
           <MorningHeroCarousel lang="ar" />
-          <div className="relative z-[2] max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/28 bg-[#080b0f]/58 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
-              <span className="h-2 w-2 rounded-full bg-[#34dfac]" />
-              24 بنكاً مرخصاً في الإمارات · ضوابط مصرف الإمارات المركزي
-            </span>
-            <h1 className="holo-hero__title mt-5 !tracking-normal">
-              كل ما تحتاجه لتمويل وشراء عقارك في الإمارات.
-            </h1>
-            <p className="holo-hero__sub">
-              قارن 24 جهة تمويلية إسلامية وتقليدية، واحسب الدفعة الأولى ورسوم دائرة الأراضي والأملاك (4%) ونسبة الاستقطاع
-              القصوى (50%) بكل شفافية قبل التقديم.
-            </p>
-            <div className="holo-hero__cards mt-7">
-              <Link href="/get-started" className="holo-cta-card !text-right">
-                <div>
-                  <span className="holo-cta-card__title">أبحث عن تمويل عقاري</span>
-                  <span className="holo-cta-card__meta">فحص الأهلية ومقارنة 24 بنكاً خلال دقيقة</span>
-                </div>
-                <span className="holo-cta-card__arrow" aria-hidden="true">
-                  <ArrowLeft size={20} strokeWidth={2.2} />
-                </span>
-              </Link>
-              <a href="#calculators" className="holo-cta-card !text-right">
-                <div>
-                  <span className="holo-cta-card__title">احسب الدفعة ورسوم الأراضي</span>
-                  <span className="holo-cta-card__meta">تفصيل كامل لرسوم دائرة الأراضي والأملاك</span>
-                </div>
-                <span className="holo-cta-card__arrow" aria-hidden="true">
-                  <ArrowLeft size={20} strokeWidth={2.2} />
-                </span>
-              </a>
+          <div className="holo-hero__inner">
+            <div className="max-w-3xl">
+              <span className="bw-hero-chip">
+                <span className="bw-live-dot" aria-hidden="true" />
+                24 بنكاً مرخصاً في الإمارات · مكتب عود ميثاء، دبي
+              </span>
+              <h1 className="holo-hero__title mt-5 !tracking-normal">
+                تمويل عقاري مُهيكل في الإمارات عبر 24 بنكاً مرخصاً.
+              </h1>
+              <p className="holo-hero__sub">
+                قارن فترات التثبيت وهوامش الإيبور ورسوم دائرة الأراضي والأملاك (4%) وسقف الاستقطاع (50%) بوضوح مع
+                مستشارينا في دبي قبل توقيع عقد البيع.
+              </p>
+              <div className="holo-hero__cards mt-7">
+                <Link href="/get-started" className="holo-cta-card !text-right">
+                  <div>
+                    <span className="holo-cta-card__title">تقييم القدرة التمويلية</span>
+                    <span className="holo-cta-card__meta">فحص نسبة الاستقطاع ومقارنة 24 بنكاً خلال دقيقة</span>
+                  </div>
+                  <span className="holo-cta-card__arrow" aria-hidden="true">
+                    <ArrowLeft size={20} strokeWidth={2.2} />
+                  </span>
+                </Link>
+                <a href="#calculators" className="holo-cta-card !text-right">
+                  <div>
+                    <span className="holo-cta-card__title">احسب الدفعة ورسوم الأراضي</span>
+                    <span className="holo-cta-card__meta">تفصيل دقيق للدفعة الأولى ورسوم التسجيل في دبي</span>
+                  </div>
+                  <span className="holo-cta-card__arrow" aria-hidden="true">
+                    <ArrowLeft size={20} strokeWidth={2.2} />
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
         </section>

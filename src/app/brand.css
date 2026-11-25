@@ -21,6 +21,9 @@
   --bw-section: 80px;
   --bw-window: 20px;
   --bw-shadow: 0 20px 50px -24px rgba(8, 11, 15, 0.22);
+  --bw-canvas-pad: clamp(12px, 1.8vw, 24px);
+  --bw-rail-max: 1320px;
+  --bw-rail-pad: clamp(20px, 2.6vw, 40px);
 }
 
 @media (max-width: 1199px) { :root { --bw-section: 60px; } }
@@ -271,16 +274,17 @@
 .bw-btn--sm { height: 42px; padding-left: 16px; font-size: 13.5px; }
 .bw-btn__label { display: inline-flex; align-items: center; }
 
-/* ---------- Homy Navbar (84px, transparent over Hero sky -> solid #fff on scroll) ---------- */
+/* ---------- Corporate Institutional Navbar (Shared Exact Grid Rail With Hero) ---------- */
 .bw-header {
   position: fixed;
   top: 0;
   inset-inline: 0;
   z-index: 50;
+  padding-inline: var(--bw-canvas-pad);
   background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(8, 11, 15, 0.07);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(10, 20, 36, 0.08);
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .bw-header[data-over-hero='true'][data-scrolled='false'] {
@@ -289,15 +293,18 @@
   -webkit-backdrop-filter: none;
   border-bottom-color: transparent;
   box-shadow: none;
+  padding-top: 14px;
 }
 .bw-header[data-scrolled='true'] {
   background: rgba(255, 255, 255, 0.98);
-  border-bottom-color: rgba(8, 11, 15, 0.08);
-  box-shadow: 0 8px 30px -16px rgba(8, 11, 15, 0.14);
+  border-bottom-color: rgba(10, 20, 36, 0.08);
+  box-shadow: 0 10px 34px -18px rgba(10, 20, 36, 0.16);
 }
 .bw-header .wrap {
-  max-width: 1320px;
-  padding-inline: clamp(16px, 2.5vw, 32px);
+  max-width: var(--bw-rail-max);
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--bw-rail-pad);
 }
 .bw-header__bar {
   display: flex;
@@ -306,6 +313,9 @@
   justify-content: space-between;
   gap: 16px;
 }
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-header__bar {
+  height: 88px;
+}
 .bw-header__logo {
   display: inline-flex;
   align-items: center;
@@ -313,13 +323,13 @@
   padding: 0;
   border-radius: 0;
   box-shadow: none;
-  transition: transform 0.25s var(--ease-expo), filter 0.25s ease;
+  transition: opacity 0.22s ease, transform 0.25s var(--ease-expo);
 }
 .bw-header__logo:hover {
-  transform: scale(1.02);
+  opacity: 0.94;
 }
 .bw-header__logo img {
-  height: clamp(54px, 4.1vw, 64px);
+  height: clamp(50px, 3.85vw, 58px);
   width: auto;
   display: block;
   object-fit: contain;
@@ -339,37 +349,39 @@
 }
 .bw-header[data-over-hero='true'][data-scrolled='false'] .bw-logo-over-hero {
   display: block !important;
-  filter: drop-shadow(0 2px 14px rgba(7, 14, 26, 0.5));
+  filter: drop-shadow(0 1px 3px rgba(7, 14, 26, 0.72)) drop-shadow(0 4px 16px rgba(7, 14, 26, 0.44));
 }
 .bw-header[data-over-hero='true'][data-scrolled='false'] .bw-logo-on-light {
   display: none !important;
 }
 @media (max-width: 639px) {
   .bw-header__bar { height: 82px; }
-  .bw-header__logo img { height: clamp(40px, 10vw, 46px); }
+  .bw-header__logo img { height: clamp(38px, 9.5vw, 44px); }
 }
 
 .bw-nav {
   display: none;
   align-items: center;
-  gap: clamp(12px, 1.5vw, 22px);
+  gap: clamp(12px, 1.45vw, 22px);
 }
 @media (min-width: 1200px) {
   .bw-nav { display: flex; }
 }
 .holo-nav-pill {
-  padding: 8px 22px;
+  height: 44px;
+  padding: 0 22px;
   border-radius: 9999px;
-  background: rgba(18, 18, 23, 0.56);
-  backdrop-filter: blur(28px) saturate(1.3);
-  -webkit-backdrop-filter: blur(28px) saturate(1.3);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 14px 36px -16px rgba(8, 11, 15, 0.45);
-  transition: background 0.28s ease, border-color 0.28s ease;
+  background: rgba(10, 20, 36, 0.56);
+  backdrop-filter: blur(24px) saturate(1.35);
+  -webkit-backdrop-filter: blur(24px) saturate(1.35);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 14px 34px -16px rgba(7, 14, 26, 0.48);
+  transition: background 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
 }
 .bw-header[data-scrolled='true'] .holo-nav-pill {
-  background: rgba(18, 18, 23, 0.9);
-  border-color: rgba(18, 18, 23, 0.08);
+  background: rgba(10, 20, 36, 0.94);
+  border-color: rgba(10, 20, 36, 0.1);
+  box-shadow: 0 10px 26px -14px rgba(10, 20, 36, 0.28);
 }
 .bw-nav a,
 .bw-nav button {
@@ -377,13 +389,14 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 6px;
+  height: 100%;
+  padding: 0 6px;
   font-size: 13.5px;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.008em;
   text-transform: none;
   white-space: nowrap;
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(255, 255, 255, 0.88);
   transition: color 0.2s ease;
   cursor: pointer;
 }
@@ -392,10 +405,10 @@
   content: '';
   position: absolute;
   inset-inline: 6px;
-  bottom: 0;
+  bottom: 7px;
   height: 2px;
   border-radius: 99px;
-  background: linear-gradient(90deg, #34dfac, #d7b158);
+  background: linear-gradient(90deg, #22ba90, #dec178);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.25s var(--ease-expo);
@@ -414,49 +427,114 @@
 .bw-nav button[aria-expanded='true']::after {
   transform: scaleX(1);
 }
-.holo-icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  min-width: 42px;
-  height: 42px;
-  padding-inline: 11px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(18, 18, 23, 0.1);
-  color: #121217;
-  box-shadow: 0 8px 20px -12px rgba(8, 11, 15, 0.25);
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-.holo-icon-btn:hover {
-  background: #ffffff;
-  border-color: #121217;
-}
-.holo-login-btn {
+
+/* Unified 44px Corporate Utility Controls (Matching Glass Over Hero -> Crisp Slate On Scrolled White) */
+.holo-icon-btn,
+.holo-login-btn,
+.bw-header .alert-bell {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  height: 42px;
-  padding-inline: 16px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(18, 18, 23, 0.12);
-  color: #121217;
+  height: 44px;
+  border-radius: 9999px;
   font-size: 13.5px;
   font-weight: 600;
   white-space: nowrap;
-  box-shadow: 0 8px 20px -12px rgba(8, 11, 15, 0.25);
-  transition: all 0.2s ease;
+  background-color: #f4f6f8;
+  border: 1px solid rgba(10, 20, 36, 0.16);
+  color: #0a1424;
+  box-shadow: 0 4px 12px -8px rgba(10, 20, 36, 0.16);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.22s var(--ease-expo), box-shadow 0.2s ease;
   cursor: pointer;
 }
-.holo-login-btn:hover {
-  background: #121217;
-  border-color: #121217;
+.holo-icon-btn {
+  min-width: 44px;
+  padding-inline: 14px;
+}
+.holo-login-btn {
+  padding-inline: 16px;
+}
+.bw-header .alert-bell {
+  width: 44px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+.holo-icon-btn:hover,
+.holo-login-btn:hover,
+.bw-header .alert-bell:hover {
+  background-color: #0a1424;
+  border-color: #0a1424;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px -12px rgba(10, 20, 36, 0.35);
+}
+
+/* Cohesive Smoked Architectural Glass Utility Controls Over Morning Daylight Hero */
+.bw-header[data-over-hero='true'][data-scrolled='false'] .holo-icon-btn,
+.bw-header[data-over-hero='true'][data-scrolled='false'] .holo-login-btn,
+.bw-header[data-over-hero='true'][data-scrolled='false'] .alert-bell {
+  background-color: rgba(10, 20, 36, 0.54);
+  backdrop-filter: blur(22px) saturate(1.3);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+  box-shadow: 0 12px 28px -14px rgba(7, 14, 26, 0.45);
+}
+.bw-header[data-over-hero='true'][data-scrolled='false'] .holo-icon-btn:hover,
+.bw-header[data-over-hero='true'][data-scrolled='false'] .holo-login-btn:hover,
+.bw-header[data-over-hero='true'][data-scrolled='false'] .alert-bell:hover {
+  background-color: rgba(10, 20, 36, 0.82);
+  border-color: rgba(222, 193, 120, 0.72);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Executive Primary Header CTA Pill: Crisp Obsidian on Scrolled White Bar -> Luminous Pure White over Morning Hero */
+.bw-header-cta {
+  height: 44px !important;
+  border-radius: 9999px !important;
+  padding: 5px 7px 5px 18px !important;
+  background-color: #0a1424;
+  color: #ffffff;
+  --hbtn-bg: #0a1424;
+  --hbtn-fg: #ffffff;
+  --hbtn-disc-bg: #ffffff;
+  --hbtn-disc-fg: #0a1424;
+  border: 1px solid #0a1424;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.22s var(--ease-expo), box-shadow 0.2s ease !important;
+}
+.bw-header-cta .homy-btn__disc {
+  background-color: #ffffff;
+  color: #0a1424;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.bw-header-cta:hover {
+  background-color: #0e6954 !important;
+  border-color: #0e6954;
+  color: #ffffff !important;
+}
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-header-cta {
+  background-color: #ffffff;
+  color: #0a1424;
+  --hbtn-bg: #ffffff;
+  --hbtn-fg: #0a1424;
+  --hbtn-disc-bg: #0a1424;
+  --hbtn-disc-fg: #ffffff;
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 30px -12px rgba(7, 14, 26, 0.42);
+}
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-header-cta .homy-btn__disc {
+  background-color: #0a1424;
   color: #ffffff;
 }
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-header-cta:hover {
+  background-color: #f5f0e3 !important;
+  border-color: #dec178;
+  color: #0a1424 !important;
+}
+
 .holo-desktop-only {
   display: none !important;
 }
@@ -471,23 +549,8 @@
     display: none !important;
   }
 }
-.bw-header .alert-bell {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  border-radius: 12px;
-  border: 1px solid rgba(18, 18, 23, 0.12);
-  background: rgba(255, 255, 255, 0.94);
-  color: #121217;
-}
-.bw-header .alert-bell:hover {
-  background: #ffffff;
-  border-color: #080b0f;
-}
 .bw-header .alert-bell > span {
-  background: #080b0f;
+  background: #13765e;
   color: #ffffff;
   border-color: #ffffff;
 }
@@ -1683,11 +1746,11 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
 }
 
 /* ==========================================================================
-   USEHOLO-INSPIRED CONSUMER FINTECH ECOSYSTEM (BETTERWAY COMPETITOR EDITION)
+   BETTERWAY INSTITUTIONAL MORNING HERO & EXECUTIVE CANVAS
    ========================================================================== */
 .holo-canvas {
   background: #f5f6f7;
-  padding: 14px clamp(12px, 1.8vw, 24px) 24px;
+  padding: 14px var(--bw-canvas-pad) 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1696,16 +1759,24 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
 
 .holo-hero {
   position: relative;
-  min-height: clamp(640px, 88svh, 800px);
+  min-height: clamp(640px, 88svh, 810px);
   border-radius: 28px;
   overflow: hidden;
   isolation: isolate;
-  background: #0b1117;
+  background: #1a3554;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(120px, 13.5vh, 152px) clamp(22px, 5vw, 76px) clamp(28px, 3.8vw, 44px);
-  box-shadow: 0 32px 80px -36px rgba(11, 17, 23, 0.55);
+  padding: clamp(136px, 15vh, 172px) 0 clamp(46px, 5.2vw, 68px);
+  box-shadow: 0 32px 80px -36px rgba(10, 20, 36, 0.38);
+}
+.holo-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--bw-rail-max);
+  margin-inline: auto;
+  padding-inline: var(--bw-rail-pad);
 }
 .holo-hero__bg {
   position: absolute;
@@ -1718,142 +1789,96 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 46%;
+  object-position: center 42%;
+  filter: brightness(1.06) saturate(1.06) contrast(1.02);
   image-rendering: auto;
 }
-/* Crisp directional editorial morning scrim: anchors white copy & top-left transparent logo while keeping Dubai's radiant morning skyline crystal-clear */
+/* Feather-light sunlit morning daylight scrim: keeps Dubai morning sky & architecture vividly visible from edge to edge */
 .holo-hero__scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(98deg, rgba(7, 14, 26, 0.74) 0%, rgba(7, 14, 26, 0.48) 38%, rgba(7, 14, 26, 0.14) 62%, rgba(7, 14, 26, 0) 82%),
-    linear-gradient(180deg, rgba(7, 14, 26, 0.54) 0%, rgba(7, 14, 26, 0.22) 13%, rgba(7, 14, 26, 0) 27%, rgba(7, 14, 26, 0) 74%, rgba(7, 14, 26, 0.46) 100%);
+    radial-gradient(ellipse 30% 24% at 15% 7%, rgba(9, 19, 36, 0.34) 0%, rgba(9, 19, 36, 0) 100%),
+    radial-gradient(ellipse 68% 82% at 18% 60%, rgba(9, 19, 36, 0.56) 0%, rgba(9, 19, 36, 0.28) 46%, rgba(9, 19, 36, 0) 78%),
+    linear-gradient(180deg, rgba(9, 19, 36, 0.32) 0%, rgba(9, 19, 36, 0.08) 16%, rgba(9, 19, 36, 0) 30%, rgba(9, 19, 36, 0) 74%, rgba(9, 19, 36, 0.48) 100%);
 }
 .holo-hero__scrim--rtl {
   background:
-    linear-gradient(262deg, rgba(7, 14, 26, 0.74) 0%, rgba(7, 14, 26, 0.48) 38%, rgba(7, 14, 26, 0.14) 62%, rgba(7, 14, 26, 0) 82%),
-    linear-gradient(180deg, rgba(7, 14, 26, 0.54) 0%, rgba(7, 14, 26, 0.22) 13%, rgba(7, 14, 26, 0) 27%, rgba(7, 14, 26, 0) 74%, rgba(7, 14, 26, 0.46) 100%);
+    radial-gradient(ellipse 30% 24% at 85% 7%, rgba(9, 19, 36, 0.34) 0%, rgba(9, 19, 36, 0) 100%),
+    radial-gradient(ellipse 68% 82% at 82% 60%, rgba(9, 19, 36, 0.56) 0%, rgba(9, 19, 36, 0.28) 46%, rgba(9, 19, 36, 0) 78%),
+    linear-gradient(180deg, rgba(9, 19, 36, 0.32) 0%, rgba(9, 19, 36, 0.08) 16%, rgba(9, 19, 36, 0) 30%, rgba(9, 19, 36, 0) 74%, rgba(9, 19, 36, 0.48) 100%);
 }
-.holo-hero__title {
-  font-family: var(--font-display);
-  font-size: clamp(38px, 5.1vw, 74px);
-  font-weight: 800;
-  line-height: 1.01;
-  letter-spacing: -0.032em;
-  color: #ffffff;
-  max-width: 760px;
-  text-shadow: 0 2px 24px rgba(7, 14, 26, 0.44), 0 1px 3px rgba(7, 14, 26, 0.55);
-}
-.holo-hero__sub {
-  margin-top: 20px;
-  font-size: clamp(16px, 1.5vw, 21px);
-  font-weight: 500;
-  line-height: 1.48;
-  color: rgba(255, 255, 255, 0.96);
-  max-width: 640px;
-  text-shadow: 0 1px 16px rgba(7, 14, 26, 0.55);
-}
-
-/* Interactive 8K Morning Architecture Scene Switcher Rail (Always flush with 660px CTA grid — zero overlap at any viewport, EN & AR) */
-.holo-scene-switcher {
-  position: relative;
-  z-index: 4;
-  order: 3;
-  margin-top: 22px;
-  width: 100%;
-  max-width: 660px;
-  display: flex;
-  align-items: stretch;
+.bw-hero-chip {
+  display: inline-flex;
+  align-items: center;
   gap: 8px;
+  height: 36px;
+  padding-inline: 14px;
+  border-radius: 9999px;
+  background: rgba(10, 20, 36, 0.54);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  box-shadow: 0 10px 24px -12px rgba(7, 14, 26, 0.45);
 }
-.holo-scene-switcher__tabs {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 7px;
-}
-@media (min-width: 640px) {
-  .holo-scene-switcher__tabs {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-.holo-scene-tab {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 5px;
-  min-width: 0;
-  padding: 9px 11px 8px;
-  border-radius: 13px;
-  background: rgba(7, 14, 26, 0.62);
-  backdrop-filter: blur(16px) saturate(1.25);
-  -webkit-backdrop-filter: blur(16px) saturate(1.25);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  text-align: start;
+.bw-hero-chip--interactive {
   cursor: pointer;
   transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s var(--ease-expo);
 }
-.holo-scene-tab:hover {
-  background: rgba(7, 14, 26, 0.78);
-  border-color: rgba(255, 255, 255, 0.42);
+.bw-hero-chip--interactive:hover {
+  background: rgba(10, 20, 36, 0.8);
+  border-color: rgba(222, 193, 120, 0.72);
+  transform: translateY(-1px);
 }
-.holo-scene-tab.is-active {
-  background: rgba(7, 14, 26, 0.84);
-  border-color: rgba(52, 223, 172, 0.72);
-  box-shadow: 0 12px 28px -12px rgba(7, 14, 26, 0.65);
+@keyframes bw-live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 223, 172, 0.55); }
+  50% { box-shadow: 0 0 0 5px rgba(52, 223, 172, 0); }
 }
-.holo-scene-tab__head {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
+.bw-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #34dfac;
+  animation: bw-live-pulse 2.4s ease-in-out infinite;
 }
-.holo-scene-tab__bar {
+.bw-hero-link {
   position: relative;
-  display: block;
-  width: 100%;
-  height: 2.5px;
-  margin-top: 4px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.2);
-  overflow: hidden;
+  color: rgba(255, 255, 255, 0.96);
+  text-shadow: 0 1px 10px rgba(8, 16, 30, 0.62);
+  transition: color 0.2s ease, transform 0.2s var(--ease-expo);
 }
-.holo-scene-tab__fill {
-  position: absolute;
-  inset: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #34dfac, #f1d57e);
-  transform-origin: left center;
+.bw-hero-link:hover {
+  color: #f2df9f;
 }
-html[dir='rtl'] .holo-scene-tab__fill {
-  transform-origin: right center;
-}
-.holo-scene-pause {
-  flex: none;
-  width: 36px;
-  min-height: 36px;
-  border-radius: 13px;
-  display: grid;
-  place-items: center;
-  background: rgba(7, 14, 26, 0.64);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.24);
+.holo-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 72px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.032em;
   color: #ffffff;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  max-width: 740px;
+  text-shadow: 0 2px 24px rgba(8, 16, 30, 0.46), 0 1px 4px rgba(8, 16, 30, 0.52);
 }
-.holo-scene-pause:hover {
-  background: rgba(7, 14, 26, 0.88);
-  border-color: #34dfac;
+.holo-hero__sub {
+  margin-top: 20px;
+  font-size: clamp(16px, 1.45vw, 20px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.97);
+  max-width: 630px;
+  text-shadow: 0 1px 14px rgba(8, 16, 30, 0.56);
 }
 .holo-hero__cards {
-  margin-top: clamp(26px, 3.2vw, 40px);
+  margin-top: clamp(28px, 3.2vw, 40px);
   display: grid;
   gap: 14px;
-  max-width: 660px;
+  max-width: 676px;
 }
 @media (min-width: 640px) {
   .holo-hero__cards {
@@ -1861,59 +1886,76 @@ html[dir='rtl'] .holo-scene-tab__fill {
     gap: 16px;
   }
 }
-/* Static clean CTA cards (zero hover lift/scale bounce) */
+/* Executive Split Action Cards: Crisp Corporate Hover Illumination & Hairline Top Gold-Emerald Accent */
 .holo-cta-card {
   position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 96px;
-  padding: 18px 18px 18px 22px;
-  border-radius: 22px;
-  background: #ffffff;
-  color: #121217;
+  min-height: 98px;
+  padding: 20px 20px 20px 24px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.97);
+  color: #0a1424;
   text-align: left;
-  border: 1px solid rgba(18, 18, 23, 0.06);
-  box-shadow: 0 22px 48px -20px rgba(0, 0, 0, 0.45);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 20px 44px -20px rgba(7, 14, 26, 0.42);
+  transition: border-color 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
   cursor: pointer;
 }
+.holo-cta-card::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #13765e, #c8a352);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.32s var(--ease-expo);
+}
 .holo-cta-card:hover {
-  border-color: #179373;
-  box-shadow: 0 24px 52px -20px rgba(0, 0, 0, 0.52);
+  background: #ffffff;
+  border-color: rgba(19, 118, 94, 0.55);
+  box-shadow: 0 26px 56px -20px rgba(7, 14, 26, 0.52);
+}
+.holo-cta-card:hover::before {
+  transform: scaleX(1);
 }
 .holo-cta-card__title {
   display: block;
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 16.5px;
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.015em;
-  color: #121217;
+  color: #0a1424;
 }
 .holo-cta-card__meta {
   display: block;
-  margin-top: 4px;
+  margin-top: 5px;
   font-size: 12.5px;
   font-weight: 500;
-  color: #6c6c89;
+  line-height: 1.38;
+  color: #4f596b;
 }
 .holo-cta-card__arrow {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   flex: none;
-  border-radius: 14px;
-  background: #f3f4f6;
-  color: #121217;
+  border-radius: 9999px;
+  background: #f1f4f7;
+  color: #0a1424;
   display: grid;
   place-items: center;
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s var(--ease-expo);
 }
 .holo-cta-card:hover .holo-cta-card__arrow {
-  background: #121217;
+  background: #0a1424;
   color: #ffffff;
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 
 /* Rounded Bento Ecosystem Sections (#FFFFFF, Soft Mint #EEF7F4, Pitch Black #0B1117) */

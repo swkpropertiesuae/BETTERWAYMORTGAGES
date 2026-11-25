@@ -40,7 +40,7 @@ export default function PhoneHero() {
 
       </div>
       <div className="scene-controls" role="group" aria-label="Hero backdrop"><button type="button" aria-pressed={scene === 'home'} onClick={() => setScene('home')}>Residence</button><button type="button" aria-pressed={scene === 'skyline'} onClick={() => setScene('skyline')}>Skyline</button></div>
-      <div className="visual-caption"><span className="h-1.5 w-1.5 rounded-full bg-mint" /> A clearer way home.</div>
+      <div className="visual-caption"><span className="h-1.5 w-1.5 rounded-full bg-mint" /> Al Nasr Plaza · Oud Metha, Dubai</div>
 
       <div className="iphone iphone-back" aria-hidden="true">
         <div className="iphone-screen">

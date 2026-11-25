@@ -17,8 +17,8 @@ export const NAV: NavItem[] = [
       {
         title: 'Mortgages & Financing',
         links: [
-          { label: 'Hot UAE Mortgage Offers', href: '/hot-offers', desc: 'Priority bank desk' },
-          { label: 'Start Pre-Approval Wizard', href: '/get-started', desc: '60s DBR & DLD dossier' },
+          { label: 'Priority Lender Desk', href: '/hot-offers', desc: '24-bank advisory' },
+          { label: 'Pre-Approval Eligibility Check', href: '/get-started', desc: '60s DBR & DLD brief' },
           { label: 'UAE Resident Mortgages', href: '/mortgages/uae-residents', desc: 'Up to 80% LTV' },
           { label: 'UAE National Mortgages', href: '/mortgages/uae-nationals', desc: 'Up to 85% LTV' },
           { label: 'Non-Resident & Global Expats', href: '/mortgages/non-resident-dubai', desc: '25 countries' },
@@ -29,7 +29,7 @@ export const NAV: NavItem[] = [
       {
         title: 'Property & Closing Desk',
         links: [
-          { label: 'Betterway Buyer Concierge', href: '/concierge', desc: 'Budget-to-area matcher' },
+          { label: 'Property Closing Desk', href: '/concierge', desc: 'Budget & Form F prep' },
           { label: 'Off-Plan & Handover Finance', href: '/handover/dubai-off-plan-handover-mortgage-guide', desc: '80+ projects' },
           { label: 'Commercial Property Finance', href: '/advisory/commercial-property-finance' },
           { label: 'RERA Conveyancing Services', href: '/advisory/rera-conveyancing-services' },
@@ -61,26 +61,26 @@ export const NAV: NavItem[] = [
       {
         title: 'Real Estate Agencies & Brokers',
         links: [
-          { label: 'Hub by Betterway', href: '/hub', desc: 'Agent referral & buyer portal' },
+          { label: 'Betterway Partner Desk', href: '/hub', desc: 'RERA referral & buyer portal' },
           { label: 'Become a Partner', href: '/partners', desc: 'RERA agency onboarding' },
           { label: 'Co-Branded Calculators', href: '/partners/co-branded-tools', desc: 'Share with buyers' },
           { label: 'Partner Dashboard', href: '/partners/dashboard', desc: 'Live case milestones' },
         ],
       },
       {
-        title: 'Mortgage Brokerage OS',
+        title: 'Brokerage Operating System',
         links: [
-          { label: 'Edge by Betterway', href: '/edge', desc: 'Brokerage infrastructure' },
+          { label: 'Betterway Brokerage Platform', href: '/edge', desc: 'Practice infrastructure' },
           { label: 'Betterway OS Login', href: '/portal/login', desc: 'Client & staff access' },
           { label: 'Conveyancing Desk', href: '/advisory/rera-conveyancing-services', desc: 'Trustee execution' },
         ],
       },
     ],
     feature: {
-      title: 'Close deals faster with verified buyers',
-      body: 'Give your buyers verified DBR readiness and track mortgage milestones from Form F to DLD trustee day.',
+      title: 'Keep buyer deals moving to transfer',
+      body: 'Confirm buyer DBR headroom ahead of viewings and track mortgage files from Form F to DLD trustee day.',
       href: '/hub',
-      cta: 'Explore Betterway Hub',
+      cta: 'Explore Partner Desk',
     },
   },
   {

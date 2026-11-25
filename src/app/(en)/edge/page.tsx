@@ -5,17 +5,17 @@ import { SpotlightCard } from '@/components/ui/MotionPrimitives';
 import { SITE } from '@/data/site';
 
 export const metadata: Metadata = {
-  title: 'Edge by Betterway — UAE Mortgage Brokerage OS & Infrastructure',
+  title: 'Betterway Brokerage Platform — UAE Mortgage Operating Infrastructure',
   description:
-    'Scale your UAE mortgage practice with Edge by Betterway: Betterway OS CRM, 24-bank comparison architecture, CBUAE KFS & DBR tools, and bilingual EN/AR client portals.',
+    'Operate your UAE mortgage practice on the Betterway Brokerage Platform: Betterway OS CRM, 24-bank policy matrices, CBUAE KFS & DBR tools, and bilingual EN/AR client portals.',
   alternates: { canonical: '/edge' },
 };
 
 const TIERS = [
   {
     badge: 'For Independent Advisors',
-    name: 'Edge Solo',
-    desc: 'Purpose-built operating stack for senior Dubai mortgage consultants who want institutional tools without rebuilding technology from scratch.',
+    name: 'Betterway Solo Desk',
+    desc: 'Structured operating stack for experienced Dubai mortgage advisors who want institutional lender tools and compliance documentation ready from day one.',
     points: [
       'Direct access to Betterway OS client pipeline & document vault',
       'Deterministic CBUAE 50% DBR, DLD Closing & Fixed-vs-Revert tools',
@@ -25,11 +25,11 @@ const TIERS = [
   },
   {
     badge: 'For Brokerages & Teams',
-    name: 'Edge Enterprise',
-    desc: 'Complete multi-advisor infrastructure for growing UAE mortgage brokerages and real estate groups launching an in-house finance desk.',
+    name: 'Betterway Enterprise Desk',
+    desc: 'Multi-advisor infrastructure for growing UAE mortgage brokerages and real estate groups building an in-house home finance division.',
     points: [
       'Multi-seat Betterway OS workspace with role-based permissions',
-      'Co-branded RERA Partner Hub for external real estate agencies',
+      'Co-branded RERA Partner Portal for external real estate agencies',
       'Standardised CBUAE Key Facts Statement (KFS) & compliance audit trails',
       'Dedicated onboarding from our Oud Metha, Dubai leadership team',
     ],
@@ -42,17 +42,17 @@ export default function EdgePage() {
       <section className="holo-section holo-section--dark">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
-            <SectionTag light>Edge by Betterway · Brokerage OS</SectionTag>
+            <SectionTag light>Betterway Brokerage Platform · Betterway OS</SectionTag>
             <h1 className="font-display text-[clamp(36px,4.8vw,68px)] font-extrabold leading-[1.03] tracking-[-0.03em] text-white">
-              Build and scale your UAE mortgage business on Betterway OS.
+              Run your UAE mortgage practice on Betterway OS.
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-white/75">
-              Everything behind Betterway’s 24-bank comparison intelligence, live CBUAE EIBOR calculators, and digital
-              closing workflows — engineered as modern infrastructure for advisors and teams.
+              Our 24-bank comparison schedules, daily CBUAE EIBOR calculators, and structured transfer-day workflows —
+              built as reliable operating infrastructure for advisors and brokerage teams.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Cta href="/contact" tone="light">
-                Request Edge Demo
+                Request Platform Demo
               </Cta>
               <Cta href={SITE.osLoginUrl} tone="ghost" external className="!border-white/30 !text-white hover:!bg-white/10">
                 Sign in to Betterway OS

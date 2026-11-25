@@ -82,7 +82,7 @@ export default function CoPilot() {
   };
 
   return (
-    <div className="fixed bottom-4 end-4 z-50">
+    <div className="fixed bottom-3 end-3 z-50 sm:bottom-4 sm:end-4">
       <AnimatePresence>
         {open && (
           <motion.div
@@ -187,13 +187,14 @@ export default function CoPilot() {
         whileTap={reduce ? undefined : { scale: 0.97 }}
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="homy-btn !rounded-full !pl-3.5 !pr-4 shadow-[0_14px_34px_-10px_rgba(8,11,15,0.55)] ring-1 ring-white/20"
+        className="homy-btn !h-10 !rounded-full !pl-2.5 !pr-3.5 !text-xs shadow-[0_14px_34px_-10px_rgba(8,11,15,0.55)] ring-1 ring-white/20 sm:!h-[46px] sm:!pl-3.5 sm:!pr-4 sm:!text-sm"
       >
         <span className="relative flex h-6 w-6 items-center justify-center rounded-full bg-white/10">
           <Sparkles size={14} className="text-[#34dfac]" />
           <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-[#d7b158]" />
         </span>
-        <span>Mortgage help</span>
+        <span className="hidden sm:inline">Advisory desk</span>
+        <span className="sm:hidden">Help</span>
       </motion.button>
     </div>
   );
