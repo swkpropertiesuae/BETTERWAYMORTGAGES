@@ -124,14 +124,15 @@ export default function Header() {
   }
 
   const active = NAV.find((n) => n.label === open);
-  const overDarkHero = isHome && !scrolled;
+  const isSolidHeader = scrolled || mobile || Boolean(open);
+  const overDarkHero = isHome && !isSolidHeader;
 
   return (
     <header
       ref={ref}
       className={`bw-header ${mobile ? '!z-[52]' : ''}`}
       data-over-hero={isHome ? 'true' : 'false'}
-      data-scrolled={scrolled ? 'true' : 'false'}
+      data-scrolled={isSolidHeader ? 'true' : 'false'}
     >
       <div className="wrap bw-header__bar">
         {/* Left: Official 4K Transparent Betterway Mortgages Wordmark */}
