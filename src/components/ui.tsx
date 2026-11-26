@@ -14,14 +14,14 @@ export function JsonLd({ data }: { data: object }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJson }} />;
 }
 
-/** Renders `*word*` in a heading as a bold italic editorial accent. */
+/** Renders `*word*` in a heading as an Instrument Serif italic editorial accent. */
 export function Rich({ text }: { text: string }) {
   const parts = text.split(/\*([^*]+)\*/g);
-  return <>{parts.map((p, i) => (i % 2 ? <em key={i}>{p}</em> : p))}</>;
+  return <>{parts.map((p, i) => (i % 2 ? <em key={i} className="serif font-normal">{p}</em> : p))}</>;
 }
 export const plain = (text: string) => text.replace(/\*/g, '');
 
-/** Homy Dot-Ring Section Tag */
+/** Swiss Institutional Hairline Section Tag */
 export function SectionTag({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
     <span className={`homy-tag ${light ? 'homy-tag--light' : ''}`}>
@@ -31,7 +31,7 @@ export function SectionTag({ children, light = false }: { children: ReactNode; l
   );
 }
 
-/** Homy Signature Button: 12px radius + 28x28 circular sliding-arrow badge (or crisp Outline variant). */
+/** Swiss Signature CTA Button */
 export function Cta({
   href,
   children,
@@ -75,17 +75,16 @@ export function Cta({
   );
 }
 
-/** Kept exported for compatibility where needed. */
 export function UtilityBar() {
   return (
-    <div className="bg-[#080b0f] text-xs text-white/75">
-      <div className="wrap flex min-h-[38px] items-center justify-center gap-3 py-1.5 text-center">
+    <div className="bg-[#070e1a] text-xs text-white/75">
+      <div className="wrap flex min-h-[36px] items-center justify-center gap-3 py-1.5 text-center">
         <p className="truncate">
           <ShieldCheck size={13} className="me-1.5 inline -translate-y-px text-[#d7b158]" />
           <b className="font-medium text-white">CBUAE EIBOR fixings</b>
           <span className="hidden sm:inline"> are published every business day. Compare your offer against the benchmark.</span>
         </p>
-        <Link href="/rates/eibor-live-tracker" className="whitespace-nowrap font-semibold text-[#f1d57e] hover:underline">
+        <Link href="/rates/eibor-live-tracker" className="whitespace-nowrap font-semibold text-[#fcf1b7] hover:underline">
           EIBOR tracker →
         </Link>
       </div>
@@ -95,10 +94,14 @@ export function UtilityBar() {
 
 export function Disclosure({ dark = false }: { dark?: boolean }) {
   return (
-    <details className={`group mt-4 max-w-2xl text-xs ${dark ? 'text-white/60' : 'text-[#606060]'}`}>
+    <details className={`group mt-4 max-w-2xl text-xs ${dark ? 'text-white/60' : 'text-[#4a5568]'}`}>
       <summary className="cursor-pointer list-none">
         {DISCLOSURE_SHORT}{' '}
-        <span className={`inline-flex items-center gap-1 font-semibold underline-offset-2 hover:underline ${dark ? 'text-[#f1d57e]' : 'text-[#0e6954]'}`}>
+        <span
+          className={`inline-flex items-center gap-1 font-semibold underline-offset-2 hover:underline ${
+            dark ? 'text-[#fcf1b7]' : 'text-[#0e6954]'
+          }`}
+        >
           <Info size={12} /> Rate assumptions &amp; fees
         </span>
       </summary>
@@ -111,21 +114,21 @@ export function Crumbs({ items }: { items: { name: string; href: string }[] }) {
   const all = [{ name: 'Home', href: '/' }, ...items];
   return (
     <>
-      <nav aria-label="Breadcrumb" className="text-sm text-[#606060]">
+      <nav aria-label="Breadcrumb" className="text-xs font-medium text-[#4a5568]">
         <ol className="flex flex-wrap items-center gap-1.5">
           {all.map((c, i) => (
             <li key={c.href} className="flex items-center gap-1.5">
               {i > 0 && (
-                <span aria-hidden="true" className="text-[#c7c7c7]">
+                <span aria-hidden="true" className="text-[#cbd5e1]">
                   /
                 </span>
               )}
               {i < all.length - 1 ? (
-                <Link href={c.href} className="hover:text-[#080b0f]">
+                <Link href={c.href} className="transition hover:text-[#070e1a]">
                   {c.name}
                 </Link>
               ) : (
-                <span aria-current="page" className="font-medium text-[#080b0f]">
+                <span aria-current="page" className="font-semibold text-[#070e1a]">
                   {c.name}
                 </span>
               )}
@@ -137,42 +140,52 @@ export function Crumbs({ items }: { items: { name: string; href: string }[] }) {
         data={{
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
-          itemListElement: all.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + c.href })),
+          itemListElement: all.map((c, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: c.name,
+            item: SITE.url + c.href,
+          })),
         }}
       />
     </>
   );
 }
 
-/** Sleek 21st.dev fintech CBUAE benchmark summary card shown beside inner-page headers. */
+/** Swiss Midnight Navy CBUAE Statutory Reference Card (preserves MiniPhone export). */
 export function MiniPhone() {
   return (
     <div
-      className="bw-fintech-stage relative mx-auto hidden w-[280px] !min-h-0 !rounded-[24px] !p-5 shadow-[0_24px_60px_-26px_rgba(7,13,25,0.55)] lg:block"
+      className="relative mx-auto hidden w-[280px] overflow-hidden rounded-[18px] border border-[#d7b158]/30 bg-[#070e1a] p-5 text-white shadow-[0_24px_56px_-26px_rgba(7,14,26,0.5)] lg:block"
       aria-hidden="true"
     >
-      <div className="relative z-10 flex items-center gap-2.5">
-        <img src="/brand/icon.png" alt="" width={34} height={34} className="h-[34px] w-[34px] object-contain" />
-        <span className="font-display text-sm font-bold text-white">Betterway CBUAE Caps</span>
+      <div className="flex items-center gap-2.5">
+        <img src="/brand/icon.png" alt="" width={26} height={26} className="h-[26px] w-[26px] object-contain" />
+        <span className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-[#fcf1b7]">
+          CBUAE Statutory Reference
+        </span>
       </div>
-      <div className="relative z-10 mt-4 rounded-[16px] border border-white/14 bg-white/[0.07] p-4 text-white backdrop-blur-md">
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-[#ffe074]">CBUAE max DBR</p>
-        <p className="num mt-1 text-[28px] font-extrabold text-white">{BENCH.maxDbrPct}%</p>
+      <div className="mt-4 rounded-[12px] border border-white/12 bg-[#0c1524] p-4">
+        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#d7b158]">CBUAE Max DBR</p>
+        <p className="num mt-1 text-[28px] font-bold text-white">{BENCH.maxDbrPct}%</p>
       </div>
-      <div className="relative z-10 mt-2.5 space-y-1.5 text-[12px]">
+      <div className="mt-2.5 space-y-1.5 text-[12px]">
         {[
           ['Expat first home', `Up to ${BENCH.expatFirstHomeLtv}% LTV`],
           ['UAE National', `Up to ${BENCH.nationalFirstHomeLtv}% LTV`],
           ['Max tenure', `${BENCH.maxTenureYears} years`],
           ['Lender directory', `${BENCH.bankCount} banks`],
         ].map(([a, b]) => (
-          <div key={a} className="flex justify-between rounded-[10px] border border-white/10 bg-white/[0.05] px-3 py-2">
+          <div
+            key={a}
+            className="flex justify-between rounded-[9px] border border-white/10 bg-white/[0.04] px-3 py-2"
+          >
             <span className="text-white/70">{a}</span>
-            <span className="num font-semibold text-[#7ef7d2]">{b}</span>
+            <span className="num font-semibold text-[#34dfac]">{b}</span>
           </div>
         ))}
       </div>
-      <div className="relative z-10 mt-3 rounded-[10px] bg-white py-2.5 text-center text-[12px] font-bold text-[#080b0f]">
+      <div className="mt-3 rounded-[9px] bg-white py-2 text-center text-xs font-semibold text-[#070e1a]">
         Compare 24 UAE Banks
       </div>
     </div>
@@ -201,33 +214,33 @@ export function PageHero({
   const side = aside === undefined ? <MiniPhone /> : aside;
   const sideCols =
     aside === undefined
-      ? 'lg:grid-cols-[minmax(0,1fr)_270px]'
+      ? 'lg:grid-cols-[minmax(0,1fr)_280px]'
       : side
         ? 'lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,0.85fr)]'
         : '';
   return (
     <section className="bw-pagehero">
-      <div className="wrap relative py-10 lg:py-16">
+      <div className="wrap relative py-10 lg:py-14">
         <Crumbs items={crumbs} />
-        <div className={`mt-8 grid gap-10 ${sideCols ? `${sideCols} lg:items-center` : ''}`}>
+        <div className={`mt-7 grid gap-10 ${sideCols ? `${sideCols} lg:items-center` : ''}`}>
           <div>
             {eyebrow && (
-              <div className="mb-5">
+              <div className="mb-4">
                 <SectionTag>{eyebrow}</SectionTag>
               </div>
             )}
             <h1 className="max-w-4xl">
               {head}
               {sub && (
-                <span className="mt-4 block font-sans text-lg font-normal leading-snug tracking-normal text-[#606060] sm:text-xl">
+                <span className="mt-3.5 block font-sans text-lg font-normal leading-snug tracking-normal text-[#4a5568] sm:text-xl">
                   {sub}
                 </span>
               )}
             </h1>
             {capsule && (
-              <div className="bw-capsule mt-7 max-w-2xl" data-capsule>
-                <p className="text-[15.5px] leading-relaxed text-[#262626]">{capsule}</p>
-                {updated && <p className="mt-2 text-xs text-[#606060]">{SITE.asOf}</p>}
+              <div className="bw-capsule mt-6 max-w-2xl" data-capsule>
+                <p className="text-[15.5px] leading-relaxed text-[#0b1320]">{capsule}</p>
+                {updated && <p className="mt-2 text-xs text-[#4a5568]">{SITE.asOf}</p>}
               </div>
             )}
             {children}
@@ -258,10 +271,10 @@ export function Section({
 }) {
   const bg =
     tone === 'mist'
-      ? 'bg-transparent border-y border-[#0a1424]/[0.07]'
+      ? 'bg-[#f7f8fa] border-y border-[#e3e7ee]'
       : tone === 'navy'
-        ? 'bw-fintech-stage !min-h-0 !rounded-none !border-0 text-white'
-        : 'bg-transparent';
+        ? 'bg-[#070e1a] text-white'
+        : 'bg-white';
   const dark = tone === 'navy';
   return (
     <section id={id} className={`${bg} py-16 lg:py-20`}>
@@ -296,10 +309,16 @@ export function Facts({ facts }: { facts: [string, string][] }) {
       {facts.map(([k, v]) => (
         <div
           key={k}
-          className="rounded-[16px] border border-[#dce7e2] bg-white/88 p-5 shadow-[0_12px_30px_-24px_rgba(8,15,28,0.16)] backdrop-blur-md max-sm:odd:last:col-span-2"
+          className="rounded-[14px] border border-[#e3e7ee] bg-white p-5 max-sm:odd:last:col-span-2"
         >
-          <dt className="text-xs font-semibold uppercase tracking-wide text-[#4b5b63]">{k}</dt>
-          <dd className={`mt-1.5 text-lg font-bold text-[#080b0f] ${/^[\d+−-]|^AED|^3M/.test(v) ? 'num' : 'font-display'}`}>{v}</dd>
+          <dt className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-[#4a5568]">{k}</dt>
+          <dd
+            className={`mt-1.5 text-lg font-bold text-[#070e1a] ${
+              /^[\d+−-]|^AED|^3M/.test(v) ? 'num' : 'font-display'
+            }`}
+          >
+            {v}
+          </dd>
         </div>
       ))}
     </dl>
@@ -315,7 +334,7 @@ export function FaqList({ faqs }: { faqs: FaqT[] }) {
           <details key={f.q} open={i === 0} className="homy-faq-item group">
             <summary className="homy-faq-btn list-none">
               <span>{f.q}</span>
-              <span className="homy-faq-icon transition group-open:rotate-45" aria-hidden="true">
+              <span className="homy-faq-icon bg-[#f7f8fa] transition group-open:rotate-45" aria-hidden="true">
                 +
               </span>
             </summary>
@@ -327,7 +346,11 @@ export function FaqList({ faqs }: { faqs: FaqT[] }) {
         data={{
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
-          mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+          mainEntity: faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
         }}
       />
     </>
@@ -348,26 +371,30 @@ export function LinkGrid({
         <Link
           key={l.href}
           href={l.href}
-          className="card bw-beam-box group flex flex-col !rounded-[20px] !border-[#0a1424]/10 !bg-white/78 backdrop-blur-md transition duration-200 hover:!-translate-y-1 hover:!border-[#d7b158]"
+          className="card group flex flex-col justify-between transition duration-200 hover:-translate-y-0.5 hover:border-[#070e1a]/35"
         >
-          {l.logo && (
-            <span className="mb-4 inline-flex h-11 w-[136px] items-center justify-start rounded-[12px] border border-[#ebf0ee] bg-white px-3 py-1.5 shadow-[0_4px_14px_-10px_rgba(8,15,28,0.2)]">
-              <img
-                src={l.logo}
-                alt=""
-                width={112}
-                height={28}
-                className="h-7 w-[112px] object-contain object-left"
-                loading="eager"
-                decoding="sync"
-              />
+          <div>
+            {l.logo && (
+              <span className="mb-4 inline-flex h-11 w-[132px] items-center justify-start rounded-[10px] border border-[#e3e7ee] bg-[#f7f8fa] px-3 py-1.5">
+                <img
+                  src={l.logo}
+                  alt=""
+                  width={108}
+                  height={26}
+                  className="h-6 w-[108px] object-contain object-left"
+                  loading="eager"
+                  decoding="sync"
+                />
+              </span>
+            )}
+            {l.tag && <span className="tag mb-3 self-start">{l.tag}</span>}
+            <span className="block font-display text-[17px] font-bold text-[#070e1a] group-hover:text-[#0e6954]">
+              {l.title}
             </span>
-          )}
-          {l.tag && <span className="tag mb-3 self-start">{l.tag}</span>}
-          <span className="font-display text-[17px] font-bold text-[#080b0f] group-hover:text-[#0e6954]">{l.title}</span>
-          {l.body && <span className="mt-2 text-sm leading-relaxed text-[#4f596b]">{l.body}</span>}
-          <span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-bold text-[#080b0f] group-hover:text-[#0e6954]">
-            Explore <ArrowRight size={14} className="transition group-hover:translate-x-0.5" />
+            {l.body && <span className="mt-2 block text-sm leading-relaxed text-[#4a5568]">{l.body}</span>}
+          </div>
+          <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#070e1a] group-hover:text-[#0e6954]">
+            Explore <ArrowRight size={13} className="transition group-hover:translate-x-0.5" />
           </span>
         </Link>
       ))}
@@ -383,10 +410,10 @@ export function CtaBand({
   body?: string;
 }) {
   return (
-    <section className="bg-transparent py-14 lg:py-20">
+    <section className="bg-white py-14 lg:py-20">
       <div className="wrap">
-        <div className="bw-hot-beam-shell overflow-hidden rounded-[28px] p-[2px] shadow-[0_30px_76px_-30px_rgba(7,13,25,0.52)]">
-          <div className="bw-fintech-stage !min-h-0 !rounded-[26px] !border-0 !p-8 sm:!p-12 lg:flex lg:items-end lg:justify-between lg:gap-12">
+        <div className="bw-hot-beam-shell overflow-hidden p-[1px] shadow-[0_28px_70px_-32px_rgba(7,14,26,0.48)]">
+          <div className="bw-fintech-stage !rounded-[21px] !border-0 p-8 sm:p-12 lg:flex lg:items-end lg:justify-between lg:gap-12">
             <div className="relative z-10 max-w-2xl">
               <div className="mb-4 flex flex-wrap items-center gap-3">
                 <img
@@ -394,14 +421,14 @@ export function CtaBand({
                   alt="Betterway Mortgages"
                   width={1400}
                   height={459}
-                  className="h-10 w-auto"
+                  className="h-9 w-auto"
                 />
                 <SectionTag light>1-on-1 Dubai Advisory Desk</SectionTag>
               </div>
               <h2 className="homy-h2 mt-2 !text-white">
                 <Rich text={title} />
               </h2>
-              <p className="mt-4 max-w-xl text-[15.5px] leading-relaxed text-white/76">{body}</p>
+              <p className="mt-4 max-w-xl text-[15.5px] leading-relaxed text-white/75">{body}</p>
             </div>
             <div className="relative z-10 mt-7 flex flex-wrap gap-3 lg:mt-0 lg:shrink-0">
               <Cta href="/contact" tone="light">
@@ -410,7 +437,7 @@ export function CtaBand({
               <a
                 href={waLink()}
                 rel="noopener"
-                className="inline-flex h-12 items-center gap-2 rounded-[12px] border border-white/25 bg-white/10 px-5 text-sm font-bold text-white backdrop-blur-md transition hover:border-[#00d69a] hover:bg-white/18"
+                className="inline-flex h-[46px] items-center gap-2 rounded-[10px] border border-white/22 bg-white/[0.06] px-5 text-sm font-semibold text-white transition hover:border-[#d7b158] hover:bg-white/[0.12]"
               >
                 Ask on WhatsApp
               </a>
@@ -422,7 +449,7 @@ export function CtaBand({
   );
 }
 
-/** Corporate Institutional Dark Footer (#0b1117, radius: 30px) — 100% localized across EN, AR, RU, ZH, FR, ES */
+/** Institutional Midnight Navy Footer — 100% localized across EN, AR, RU, ZH, FR, ES */
 export function Footer() {
   return <FooterClient />;
 }

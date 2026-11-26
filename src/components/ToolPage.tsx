@@ -17,9 +17,9 @@ export default function ToolPage({ t }: { t: ToolMeta }) {
         title={t.title}
         capsule={t.capsule}
       />
-      <section className="bg-transparent py-12">
+      <section className="bg-[#f7f8fa] py-12">
         <div className="wrap">
-          <div className="rounded-card border border-[#0a1424]/10 bg-white/78 p-5 backdrop-blur-md sm:p-8">
+          <div className="rounded-[20px] border border-[#e3e7ee] bg-white p-6 shadow-[0_18px_44px_-32px_rgba(7,14,26,0.16)] sm:p-10">
             <Calculator slug={t.slug} />
           </div>
         </div>
@@ -34,8 +34,9 @@ export default function ToolPage({ t }: { t: ToolMeta }) {
           ))}
         </ol>
         <p className="mt-6 max-w-3xl text-sm text-slate">
-          Results are illustrative planning estimates based on your inputs and statutory CBUAE and DLD rules. Your bank’s written Final Offer Letter is binding.{' '}
-          <Link href="/privacy-and-cbuae-disclosure" className="text-teal underline">
+          Results are illustrative planning estimates based on your inputs and statutory CBUAE and DLD rules. Your
+          bank’s written Final Offer Letter is binding.{' '}
+          <Link href="/privacy-and-cbuae-disclosure" className="font-semibold text-teal underline">
             Full disclosure
           </Link>
           .

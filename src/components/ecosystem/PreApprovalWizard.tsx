@@ -145,14 +145,14 @@ export default function PreApprovalWizard() {
   };
 
   return (
-    <div className="min-h-screen bg-transparent pt-[110px] max-sm:pt-[86px]">
-      {/* Exact UseHolo Top Progress Rail (Emerald-to-Obsidian) */}
-      <div className="sticky top-[98px] z-30 h-1.5 w-full bg-[#0a1424]/10 backdrop-blur-sm max-sm:top-[78px]">
+    <div className="min-h-screen bg-[#f7f8fa]">
+      {/* Swiss Institutional Top Progress Rail aligned cleanly beneath 80px/68px sticky header */}
+      <div className="sticky top-[80px] z-30 h-1 w-full bg-[#e3e7ee] max-sm:top-[68px]">
         <motion.div
-          className="h-full bg-gradient-to-r from-[#121217] via-[#179373] to-[#d7b158]"
+          className="h-full bg-gradient-to-r from-[#070e1a] via-[#0e6954] to-[#d7b158]"
           initial={false}
           animate={{ width: `${progressPct}%` }}
-          transition={{ duration: reduce ? 0 : 0.35, ease: EASE_HOMY }}
+          transition={{ duration: reduce ? 0 : 0.32, ease: EASE_HOMY }}
         />
       </div>
 
