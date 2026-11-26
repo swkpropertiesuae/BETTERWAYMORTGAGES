@@ -7,8 +7,8 @@ import { useLocaleCurrency } from '@/components/LocaleCurrencyContext';
 import { waLink } from '@/data/site';
 
 /**
- * Flagship Brand-Quality Executive CTA Band (Obsidian Silk + Champagne Gold Animated Border Beam).
- * 100% localized across EN, AR, RU, ZH, FR, ES.
+ * Band 8: Authoritative Framed Midnight Navy (#070E1A) Swiss Executive CTA Panel.
+ * 100% localized across EN, AR, RU, ZH, FR, ES with 4K dark transparent brand wordmark.
  */
 export default function FlagshipCta() {
   const { data } = useBenchmark();
@@ -16,10 +16,10 @@ export default function FlagshipCta() {
   const icons = [ShieldCheck, FileDown, Globe, ArrowRight] as const;
 
   return (
-    <section className="mx-auto w-full max-w-[1320px] px-1" aria-labelledby="flagship-cta-title">
-      <div className="bw-hot-beam-shell overflow-hidden rounded-[30px] p-[2px] shadow-[0_38px_90px_-32px_rgba(7,13,25,0.62)]">
-        <div className="bw-fintech-stage !min-h-0 !rounded-[28px] !border-0 !p-8 sm:!p-12 lg:!p-14">
-          <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+    <section className="wrap py-16 lg:py-20" aria-labelledby="flagship-cta-title">
+      <div className="bw-hot-beam-shell overflow-hidden p-[1px] shadow-[0_36px_84px_-34px_rgba(7,14,26,0.55)]">
+        <div className="bw-fintech-stage !rounded-[21px] !border-0 p-8 sm:p-12 lg:p-14">
+          <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.14fr_0.86fr]">
             <div className="space-y-6">
               <div className="flex flex-wrap items-center gap-4">
                 <img
@@ -27,28 +27,26 @@ export default function FlagshipCta() {
                   alt="Betterway Mortgages"
                   width={1400}
                   height={459}
-                  className="h-11 w-auto sm:h-12"
+                  className="h-10 w-auto sm:h-11"
                 />
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-bold text-white">
-                  <span className="h-2 w-2 rounded-full bg-[#f1d57e]" />
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#070e1a]/75 px-3 py-1 text-xs font-medium text-white">
+                  <span className="bw-live-dot" aria-hidden="true" />
                   <span>CBUAE 3M EIBOR</span>
-                  <strong className="num text-[#f1d57e]">{data.latest.threeMonth.toFixed(2)}%</strong>
+                  <strong className="num text-[#fcf1b7]">{data.latest.threeMonth.toFixed(2)}%</strong>
                 </span>
               </div>
 
               <h2
                 id="flagship-cta-title"
-                className="font-display text-[clamp(30px,4vw,52px)] font-extrabold leading-[1.06] tracking-[-0.03em] text-white"
+                className="font-display text-[clamp(28px,3.6vw,46px)] font-bold leading-[1.08] tracking-[-0.028em] text-white"
               >
                 {ext.flagshipCta.heading}
               </h2>
 
-              <p className="max-w-xl text-[16px] leading-relaxed text-white/78">
-                {ext.flagshipCta.sub}
-              </p>
+              <p className="max-w-xl text-[15.5px] leading-relaxed text-white/74">{ext.flagshipCta.sub}</p>
 
               <div className="flex flex-wrap items-center gap-3 pt-1">
-                <Link href="/contact" className="homy-btn homy-btn--white !h-12 !px-6 !text-[14.5px]">
+                <Link href="/contact" className="homy-btn homy-btn--white !h-12 !px-6">
                   <span>{ext.flagshipCta.primaryCta}</span>
                   <span className="homy-btn__disc" aria-hidden="true">
                     <span className="homy-btn__arrow-track">
@@ -60,9 +58,9 @@ export default function FlagshipCta() {
                 <a
                   href={waLink('Hi Betterway Mortgages, I would like a 1-on-1 UAE mortgage comparison.')}
                   rel="noopener"
-                  className="inline-flex h-12 items-center gap-2 rounded-[12px] border border-white/25 bg-white/10 px-5 text-sm font-bold text-white backdrop-blur-md transition hover:border-[#f1d57e] hover:bg-white/18"
+                  className="inline-flex h-12 items-center gap-2 rounded-[10px] border border-white/22 bg-white/[0.06] px-5 text-sm font-semibold text-white transition hover:border-[#d7b158]/70 hover:bg-white/[0.12]"
                 >
-                  <MessageCircle size={16} className="text-[#f1d57e]" />
+                  <MessageCircle size={15} className="text-[#34dfac]" />
                   <span>{ext.flagshipCta.whatsappCta}</span>
                 </a>
               </div>
@@ -74,13 +72,13 @@ export default function FlagshipCta() {
                 return (
                   <div
                     key={metric}
-                    className="rounded-[18px] border border-white/14 bg-white/[0.06] p-5 backdrop-blur-md"
+                    className="rounded-[16px] border border-white/12 bg-[#070e1a]/75 p-5"
                   >
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] bg-white/10 text-[#f1d57e]">
-                      <Icon size={17} />
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/12 bg-white/[0.05] text-[#d7b158]">
+                      <Icon size={16} />
                     </span>
-                    <p className="mt-3 font-display text-xl font-extrabold text-white">{metric}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-white/70">{label}</p>
+                    <p className="mt-3 font-display text-lg font-bold text-white">{metric}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-white/65">{label}</p>
                   </div>
                 );
               })}
