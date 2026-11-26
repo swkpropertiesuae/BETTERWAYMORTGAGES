@@ -73,7 +73,7 @@ export default async function HotOffersPage() {
         ];
 
   return (
-    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
+    <div className="holo-canvas holo-canvas--page">
       <section className="holo-section holo-section--dark">
         <div className="mx-auto max-w-[1160px] space-y-6">
           <Crumbs items={[{ name: 'Hot Offers Desk', href: '/hot-offers' }]} />

@@ -10,6 +10,7 @@ import HotOffersPopup from '@/components/HotOffersPopup';
 import LiveAnnouncementBar from '@/components/LiveAnnouncementBar';
 import Analytics from '@/components/Analytics';
 import MotionKit from '@/components/MotionKit';
+import GlobalShaderBackdrop from '@/components/ui/GlobalShaderBackdrop';
 import { LocaleCurrencyProvider } from '@/components/LocaleCurrencyContext';
 import { Footer, JsonLd } from '@/components/ui';
 import { SITE } from '@/data/site';
@@ -94,12 +95,13 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = { themeColor: '#070E1A', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#0E9E77', width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr">
-      <body className="relative min-h-screen bg-white">
+      <body className="relative min-h-screen bg-transparent">
+        <GlobalShaderBackdrop />
         <LocaleCurrencyProvider initialLocale="en">
           <a
             href="#main"

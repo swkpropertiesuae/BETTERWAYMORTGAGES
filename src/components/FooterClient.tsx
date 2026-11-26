@@ -66,7 +66,7 @@ export default function FooterClient() {
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={435}
+                  height={459}
                   className="h-14 w-auto sm:h-16"
                 />
               </Link>

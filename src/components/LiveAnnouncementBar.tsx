@@ -30,7 +30,7 @@ export default function LiveAnnouncementBar() {
     <div
       role="region"
       aria-label="Betterway Live Update"
-      className="fixed bottom-4 start-4 z-[55] max-w-md rounded-2xl border border-[#d4af37]/45 bg-[#070e1a]/95 px-4 py-3 text-white shadow-2xl backdrop-blur-md"
+      className="fixed bottom-20 start-5 z-[55] max-w-md rounded-2xl border border-[#d4af37]/45 bg-[#070e1a]/95 px-4 py-3 text-white shadow-2xl backdrop-blur-md"
     >
       <div className="flex items-start gap-2.5">
         <Sparkles size={15} className="mt-0.5 shrink-0 text-[#f1d57e]" />

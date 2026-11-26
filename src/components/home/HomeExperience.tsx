@@ -54,8 +54,8 @@ export default function HomeExperience() {
           <div className="mx-auto max-w-[1220px]">
             <HoloMortgageCalc />
 
-            {/* Endless Slow Horizontal Infinite 24-Bank Marquee */}
-            <div className="bw-beam-box mt-14 p-6 sm:p-8">
+            {/* Endless Slow Horizontal Infinite 24-Bank Marquee — Directly on Global ShaderArt */}
+            <div className="mt-14 border-t border-[#0a1424]/[0.08] pt-10">
               <p className="mb-5 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#4f596b]">
                 {t.calc.marqueeTitle}
               </p>

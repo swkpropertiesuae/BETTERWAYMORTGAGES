@@ -281,7 +281,7 @@
   inset-inline: 0;
   z-index: 50;
   padding-inline: var(--bw-canvas-pad);
-  background: rgba(255, 255, 255, 0.84);
+  background: rgba(247, 249, 252, 0.78);
   backdrop-filter: blur(22px) saturate(1.45);
   -webkit-backdrop-filter: blur(22px) saturate(1.45);
   border-bottom: 1px solid rgba(10, 20, 36, 0.09);
@@ -296,7 +296,7 @@
   padding-top: 14px;
 }
 .bw-header[data-scrolled='true'] {
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(247, 249, 252, 0.82);
   border-bottom-color: rgba(10, 20, 36, 0.09);
   box-shadow: 0 12px 36px -18px rgba(10, 20, 36, 0.14);
 }
@@ -329,11 +329,12 @@
   opacity: 0.94;
 }
 .bw-header__logo img {
-  height: clamp(54px, 4.1vw, 62px);
+  height: clamp(56px, 4.4vw, 64px);
   width: auto;
   display: block;
   object-fit: contain;
   image-rendering: auto;
+  filter: contrast(1.03) saturate(1.06);
 }
 .bw-header__logo--blend {
   background: transparent;
@@ -349,16 +350,16 @@
 }
 .bw-header[data-over-hero='true'][data-scrolled='false'] .bw-logo-over-hero {
   display: block !important;
-  filter: drop-shadow(0 1px 2px rgba(5, 11, 22, 0.88)) drop-shadow(0 4px 18px rgba(5, 11, 22, 0.62));
+  filter: contrast(1.05) saturate(1.08) drop-shadow(0 1px 2px rgba(5, 11, 22, 0.9)) drop-shadow(0 4px 18px rgba(5, 11, 22, 0.65));
 }
 .bw-header[data-over-hero='true'][data-scrolled='false'] .bw-logo-on-light {
   display: none !important;
 }
 @media (max-width: 639px) {
   :root { --bw-rail-pad: 14px; }
-  .bw-header__bar { height: 76px; gap: 8px; }
-  .bw-header[data-over-hero='true'][data-scrolled='false'] .bw-header__bar { height: 74px; }
-  .bw-header__logo img { height: clamp(34px, 9.2vw, 40px); }
+  .bw-header__bar { height: 78px; gap: 8px; }
+  .bw-header[data-over-hero='true'][data-scrolled='false'] .bw-header__bar { height: 76px; }
+  .bw-header__logo img { height: clamp(38px, 10vw, 44px); }
   .holo-icon-btn { height: 40px; min-width: 40px; padding-inline: 10px; gap: 5px; font-size: 12px; }
 }
 
@@ -566,12 +567,12 @@
   opacity: 1;
 }
 
-/* Push non-home pages cleanly below the fixed 98px header */
+/* Push non-home pages cleanly below the fixed 98px header with generous breathing room */
 .bw-page-spacer {
-  padding-top: 98px;
+  padding-top: 120px;
 }
 @media (max-width: 639px) {
-  .bw-page-spacer { padding-top: 82px; }
+  .bw-page-spacer { padding-top: 94px; }
 }
 
 /* ==========================================================================
@@ -1272,13 +1273,17 @@
   gap: 10px;
 }
 .homy-faq-item {
-  border-radius: 12px;
-  background: var(--homy-surface);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(10, 20, 36, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   overflow: hidden;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 .homy-faq-item[data-open='true'] {
-  background: #f1f2f3;
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(14, 105, 84, 0.22);
 }
 .homy-faq-btn {
   width: 100%;
@@ -1315,8 +1320,8 @@
    SECTION 10: HOMY ROUNDED SKY-TO-TWILIGHT FOOTER (#0b1117, radius: 30px)
    ========================================================================== */
 .homy-footer-shell {
-  background: #ffffff;
-  padding: 6px clamp(12px, 1.8vw, 24px) 20px;
+  background: transparent;
+  padding: 16px clamp(12px, 1.8vw, 24px) 24px;
 }
 .homy-footer-card {
   position: relative;
@@ -1471,11 +1476,11 @@
 .bw-pagehero {
   position: relative;
   overflow: clip;
-  background: #ffffff;
-  border-bottom: 1px solid #eef1f5;
-  padding-top: 98px;
+  background: transparent;
+  border-bottom: 1px solid rgba(10, 20, 36, 0.08);
+  padding-top: 124px;
 }
-@media (max-width: 639px) { .bw-pagehero { padding-top: 82px; } }
+@media (max-width: 639px) { .bw-pagehero { padding-top: 96px; } }
 .bw-pagehero h1 {
   font-family: var(--font-display);
   font-size: clamp(32px, 4.4vw, 56px);
@@ -1571,8 +1576,11 @@ html[dir='rtl'] .bw-capsule {
   min-height: 520px;
 }
 .homy-contact-form-box {
-  border-radius: 20px;
-  background: var(--homy-surface);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(10, 20, 36, 0.09);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   padding: clamp(22px, 3vw, 34px);
 }
 
@@ -1745,12 +1753,22 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
    BETTERWAY INSTITUTIONAL MORNING HERO & EXECUTIVE CANVAS
    ========================================================================== */
 .holo-canvas {
-  background: #ffffff;
-  padding: 14px var(--bw-canvas-pad) 24px;
+  background: transparent;
+  padding-inline: var(--bw-canvas-pad);
+  padding-top: 14px;
+  padding-bottom: 24px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
   overflow-x: clip;
+}
+.holo-canvas--page {
+  padding-top: 126px;
+}
+@media (max-width: 639px) {
+  .holo-canvas--page {
+    padding-top: 96px;
+  }
 }
 
 .holo-hero {
@@ -1969,42 +1987,34 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   to { --bw-line-angle: 360deg; }
 }
 
+/* Borderless Architectural Sections Directly Attached to Global ShaderArt Background */
 .holo-section {
   position: relative;
-  border-radius: 28px;
-  background: #ffffff;
-  border: 1px solid #e7ecf2;
-  padding: clamp(44px, 5.6vw, 84px) clamp(20px, 4.2vw, 64px);
-  box-shadow: 0 14px 44px -32px rgba(10, 20, 36, 0.14);
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(10, 20, 36, 0.07);
+  padding: clamp(48px, 5.8vw, 84px) clamp(8px, 2vw, 24px);
+  box-shadow: none;
+}
+.holo-section:first-child,
+.holo-hero + .holo-section {
+  border-top: 0;
 }
 .holo-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: conic-gradient(
-    from var(--bw-line-angle),
-    transparent 0deg,
-    transparent 285deg,
-    rgba(15, 23, 42, 0.16) 315deg,
-    rgba(215, 177, 88, 0.72) 340deg,
-    transparent 360deg
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: bw-border-trace 11s linear infinite;
-  pointer-events: none;
-  z-index: 2;
+  display: none;
 }
 .holo-section--mint {
-  background: #fbfcfd;
-  border: 1px solid #e7ecf2;
+  background: transparent;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
 }
 .holo-section--dark {
+  border-radius: 28px;
   background: #0b0f17;
   border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: clamp(40px, 5vw, 72px) clamp(20px, 4vw, 56px);
   color: #ffffff;
 }
 .holo-display-h2 {
@@ -2278,16 +2288,18 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   }
 }
 
-/* Animated Hairline Border-Line Card System on Pure Premium White */
+/* Animated Hairline Border-Line Glass Cards Over Unified ShaderArt Backdrop */
 .bw-21-card,
 .bw-beam-box {
   position: relative;
   overflow: hidden;
-  border-radius: 26px;
-  border: 1px solid #e5eaf0;
-  background: #ffffff;
-  box-shadow: 0 18px 48px -32px rgba(10, 20, 36, 0.18);
-  transition: border-color 0.3s ease, box-shadow 0.35s var(--ease-expo), transform 0.35s var(--ease-expo);
+  border-radius: 24px;
+  border: 1px solid rgba(10, 20, 36, 0.09);
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  box-shadow: 0 18px 48px -34px rgba(10, 20, 36, 0.16);
+  transition: border-color 0.3s ease, box-shadow 0.35s var(--ease-expo), transform 0.35s var(--ease-expo), background 0.3s ease;
 }
 .bw-21-card::before,
 .bw-beam-box::before {

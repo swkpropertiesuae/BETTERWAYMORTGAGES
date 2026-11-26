@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function Page() {
   const q = encodeURIComponent(`${SITE.address.building}, ${SITE.address.street}, ${SITE.address.district}, Dubai`);
   return (
-    <div className="bw-page-spacer bg-white">
+    <div className="bw-page-spacer bg-transparent">
       {/* Fintech Contact Page Split Header + Dark Commitment Card & Frosted Form */}
       <section className="py-12 lg:py-20">
         <div className="wrap">

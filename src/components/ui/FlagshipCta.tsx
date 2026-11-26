@@ -26,7 +26,7 @@ export default function FlagshipCta() {
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={435}
+                  height={459}
                   className="h-11 w-auto sm:h-12"
                 />
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-bold text-white">

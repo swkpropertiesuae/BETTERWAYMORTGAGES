@@ -47,10 +47,20 @@
 }
 
 @layer base {
+  :root {
+    --background: #f6f8fb;
+    --foreground: #080b0f;
+    --primary: #15a681;
+    --primary-foreground: #ffffff;
+    --border: #e2e8f0;
+    --muted-foreground: #4b5b63;
+    --ring: #0a1424;
+  }
   html {
+    background-color: #f6f8fb;
     -webkit-text-size-adjust: 100%;
     overflow-x: clip;
-    scroll-padding-top: 104px;
+    scroll-padding-top: 118px;
     scroll-behavior: smooth;
     accent-color: var(--color-navy);
     caret-color: var(--color-navy);
@@ -60,7 +70,7 @@
     font-synthesis: none;
   }
   body {
-    @apply bg-white font-sans text-ink antialiased;
+    @apply bg-transparent font-sans text-ink antialiased;
     overflow-x: clip;
     font-feature-settings: 'cv11', 'ss01';
     font-optical-sizing: auto;
@@ -103,8 +113,8 @@
   .btn-ghost { @apply border border-[#080b0f] bg-transparent text-[#080b0f] hover:bg-[#080b0f] hover:text-white; }
   .btn-light { @apply bg-white text-[#080b0f] hover:bg-[#f6f6f6]; }
 
-  .card { @apply rounded-[20px] border border-[#ebebeb] bg-[#f6f6f6] p-6 transition duration-300; }
-  a.card:hover, .card-link:hover { @apply border-[#080b0f]/25 bg-white; transform: translateY(-2px); box-shadow: 0 20px 44px -24px rgba(8, 11, 15, 0.18); }
+  .card { @apply rounded-[20px] border border-[#0a1424]/10 bg-white/75 p-6 backdrop-blur-md transition duration-300; }
+  a.card:hover, .card-link:hover { @apply border-[#080b0f]/25 bg-white/92; transform: translateY(-2px); box-shadow: 0 20px 44px -24px rgba(8, 11, 15, 0.18); }
   .chip { @apply rounded-full border border-[#dcdcdc] bg-white px-4 py-1.5 text-sm font-medium text-[#0c0c0c] transition hover:border-[#080b0f]; }
   .chip-on { @apply border-[#080b0f] bg-[#080b0f] text-white hover:border-[#080b0f]; }
   .tag { @apply inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium text-[#080b0f] border border-[#e5e7eb]; }

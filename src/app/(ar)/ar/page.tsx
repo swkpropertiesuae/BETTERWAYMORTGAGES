@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="bg-[#f5f6f7] pb-8">
+    <div className="bg-transparent pb-8">
       <link
         rel="preload"
         as="image"

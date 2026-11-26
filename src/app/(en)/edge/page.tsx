@@ -41,7 +41,7 @@ const TIERS = [
 
 export default function EdgePage() {
   return (
-    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
+    <div className="holo-canvas holo-canvas--page">
       <section className="holo-section bw-fintech-stage !min-h-0 !rounded-[28px] !border-0">
         <div className="relative z-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
@@ -116,7 +116,7 @@ export default function EdgePage() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-[24px] border border-[#dce7e2] bg-white/88 p-6 backdrop-blur-md">
+        <div className="mt-10 border-y border-[#0a1424]/[0.08] py-6">
           <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#4f596b]">
             BetterCore structured policy matrix across {BANKS.length} UAE lenders
           </p>

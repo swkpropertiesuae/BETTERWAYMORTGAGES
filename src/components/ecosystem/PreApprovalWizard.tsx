@@ -145,9 +145,9 @@ export default function PreApprovalWizard() {
   };
 
   return (
-    <div className="min-h-[calc(100svh-98px)] bg-white pt-[98px] max-sm:pt-[82px]">
+    <div className="min-h-screen bg-transparent pt-[110px] max-sm:pt-[86px]">
       {/* Exact UseHolo Top Progress Rail (Emerald-to-Obsidian) */}
-      <div className="sticky top-[98px] z-30 h-1.5 w-full bg-[#eef0f3] max-sm:top-[82px]">
+      <div className="sticky top-[98px] z-30 h-1.5 w-full bg-[#0a1424]/10 backdrop-blur-sm max-sm:top-[78px]">
         <motion.div
           className="h-full bg-gradient-to-r from-[#121217] via-[#179373] to-[#d7b158]"
           initial={false}

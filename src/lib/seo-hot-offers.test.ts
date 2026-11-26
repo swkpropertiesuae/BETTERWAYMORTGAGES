@@ -96,13 +96,19 @@ test('21st.dev PhoneCarousel hero, pure white bg, animated border lines, Obsidia
   for (const s of ['screen-1-rates.webp', 'screen-2-dbr.webp', 'screen-3-dld.webp', 'screen-4-vault.webp']) {
     assert.ok(existsSync(repo(`public/images/phone-screens/${s}`)), `Missing phone screen asset: ${s}`);
   }
-  assert.match(enLayout, /bg-white/);
+  assert.match(enLayout, /<GlobalShaderBackdrop\b/);
+  assert.match(enLayout, /bg-transparent/);
   assert.doesNotMatch(enLayout, /<GradientBackground\b/);
-  assert.match(arLayout, /bg-white/);
+  assert.match(arLayout, /<GlobalShaderBackdrop\b/);
+  assert.match(arLayout, /bg-transparent/);
   assert.doesNotMatch(arLayout, /<GradientBackground\b/);
+  assert.ok(existsSync(repo('src/components/ui/shader-art.tsx')), 'Missing ShaderArt component');
+  assert.match(readFileSync(repo('src/components/ui/shader-art.tsx'), 'utf8'), /export function ShaderArt/);
+  assert.match(brandCss, /\.holo-canvas--page/);
   assert.match(brandCss, /@keyframes\s+bw-border-trace/);
   assert.match(brandCss, /\.bw-beam-box/);
   assert.doesNotMatch(brandCss, /background-size:\s*100%\s+100%,[^;]*28px\s+28px/);
+  assert.doesNotMatch(readFileSync(repo('public/favicon.svg'), 'utf8'), /fill="#070E1A"/);
   assert.match(homeHero, /PhoneMockupBasic/);
   assert.doesNotMatch(homeHero, /FloatingDeviceMockups/);
   assert.match(homeExp, /InteractiveReadinessStudio/);

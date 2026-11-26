@@ -21,7 +21,7 @@ export default function Page() {
         capsule="Explore 14 UAE mortgage product structures across 24 licensed lenders—covering residential purchases, Islamic home finance, off-plan handovers, bank buyouts, equity release, non-resident applications and Golden Visa property thresholds. Each guide outlines statutory CBUAE rules, required documents and an interactive calculator."
       />
       <Section title="14 mortgage product guides">
-        <div className="mb-8 rounded-[22px] border border-[#dce7e2] bg-white/90 p-5 backdrop-blur-md">
+        <div className="mb-10 border-y border-[#0a1424]/[0.08] py-6">
           <p className="mb-3 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#4f596b]">
             Compare conventional &amp; Islamic offers across {BANKS.length} licensed UAE banks
           </p>

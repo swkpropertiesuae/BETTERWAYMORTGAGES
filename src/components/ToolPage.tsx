@@ -17,9 +17,9 @@ export default function ToolPage({ t }: { t: ToolMeta }) {
         title={t.title}
         capsule={t.capsule}
       />
-      <section className="bg-white py-12">
+      <section className="bg-transparent py-12">
         <div className="wrap">
-          <div className="rounded-card border border-line p-5 sm:p-8">
+          <div className="rounded-card border border-[#0a1424]/10 bg-white/78 p-5 backdrop-blur-md sm:p-8">
             <Calculator slug={t.slug} />
           </div>
         </div>

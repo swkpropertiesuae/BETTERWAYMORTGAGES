@@ -85,7 +85,7 @@ export default async function InsightTopicPage({
   };
 
   return (
-    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
+    <div className="holo-canvas holo-canvas--page">
       <article className="holo-section">
         <div className="mx-auto max-w-[960px] space-y-6">
           <Crumbs
