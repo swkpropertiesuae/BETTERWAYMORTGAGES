@@ -29,7 +29,7 @@ function nowTime() {
  */
 export default function OsLiveChat({ embedded = false }: { embedded?: boolean }) {
   const pathname = usePathname() || '/';
-  const { locale, ext } = useLocaleCurrency();
+  const { locale, ext, swiss } = useLocaleCurrency();
   const reduce = useReducedMotion();
   const c = ext.liveChat;
 
@@ -137,7 +137,7 @@ export default function OsLiveChat({ embedded = false }: { embedded?: boolean })
       <div className="flex items-center justify-between gap-2 border-b border-[#e3e7ee] bg-[#f7f8fa] px-4 py-2 text-[11px] font-medium text-[#4a5568]">
         <span className="inline-flex items-center gap-1.5">
           <Headphones size={12} className="text-[#0e6954]" />
-          Al Nasr Plaza · Oud Metha Desk
+          {swiss.concierge.deskSubtitle}
         </span>
         <span className="inline-flex items-center gap-1 rounded-full bg-[#edf7f4] px-2 py-0.5 font-mono text-[10px] font-semibold text-[#0e6954]">
           <CheckCircle2 size={10} />
@@ -147,7 +147,7 @@ export default function OsLiveChat({ embedded = false }: { embedded?: boolean })
 
       {/* Messages Thread */}
       <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto bg-white p-4 text-[13px]">
-        <div className="max-w-[88%] rounded-[14px] rounded-ts-sm border border-[#e3e7ee] bg-[#f7f8fa] px-3.5 py-2.5 leading-relaxed text-[#0b1320]">
+        <div className="max-w-[88%] rounded-[14px] rounded-ss-sm border border-[#e3e7ee] bg-[#f7f8fa] px-3.5 py-2.5 leading-relaxed text-[#0b1320]">
           {c.greeting}
         </div>
 
@@ -174,8 +174,8 @@ export default function OsLiveChat({ embedded = false }: { embedded?: boolean })
             <div
               className={`max-w-[88%] rounded-[14px] px-3.5 py-2.5 leading-relaxed ${
                 m.sender === 'visitor'
-                  ? 'rounded-te-sm bg-[#070e1a] text-white'
-                  : 'rounded-ts-sm border border-[#e3e7ee] bg-[#f7f8fa] text-[#0b1320]'
+                  ? 'rounded-se-sm bg-[#070e1a] text-white'
+                  : 'rounded-ss-sm border border-[#e3e7ee] bg-[#f7f8fa] text-[#0b1320]'
               }`}
             >
               {m.text}

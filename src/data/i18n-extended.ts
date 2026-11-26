@@ -1179,6 +1179,7 @@ export type SwissUiCopy = {
     dldLabel: string;
     totalCashLabel: string;
     ctaLabel: string;
+    estimateNote: string;
   };
   metrics: readonly [
     readonly [string, string],
@@ -1206,6 +1207,7 @@ export type SwissUiCopy = {
     tabGuide: string;
     priorityOffersBtn: string;
     ratesDirectoryLink: string;
+    whatsappDesk: string;
   };
 };
 
@@ -1224,6 +1226,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       dldLabel: '4% DLD & Closing Fees',
       totalCashLabel: 'Total Cash at Transfer',
       ctaLabel: 'Compare 24 UAE Banks',
+      estimateNote: 'Illustrative CBUAE & DLD estimate · Zero AECB inquiry',
     },
     metrics: [
       ['24', 'Licensed UAE Conventional & Islamic Banks'],
@@ -1275,6 +1278,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       tabGuide: 'CBUAE Guide',
       priorityOffersBtn: 'Priority Offers Desk',
       ratesDirectoryLink: '24-Bank Directory',
+      whatsappDesk: 'WhatsApp Advisory Desk',
     },
   },
   ar: {
@@ -1291,6 +1295,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       dldLabel: 'رسوم الأراضي 4% والتسجيل',
       totalCashLabel: 'إجمالي النقد عند النقل',
       ctaLabel: 'قارن 24 بنكاً في الإمارات',
+      estimateNote: 'تقدير استرشادي وفق ضوابط المركزي ودائرة الأراضي · دون فحص ائتماني',
     },
     metrics: [
       ['24', 'بنكاً مرخصاً تقليدياً وإسلامياً في الإمارات'],
@@ -1342,6 +1347,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       tabGuide: 'دليل المركزي',
       priorityOffersBtn: 'عروض البنوك',
       ratesDirectoryLink: 'دليل 24 بنكاً',
+      whatsappDesk: 'واتساب مكتب الاستشارات',
     },
   },
   ru: {
@@ -1358,6 +1364,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       dldLabel: '4% DLD и сборы',
       totalCashLabel: 'Итого наличными',
       ctaLabel: 'Сравнить 24 банка ОАЭ',
+      estimateNote: 'Ориентировочный расчёт CBUAE и DLD · Без запроса в AECB',
     },
     metrics: [
       ['24', 'Лицензированных банка ОАЭ (классика и исламские)'],
@@ -1409,6 +1416,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       tabGuide: 'Гид CBUAE',
       priorityOffersBtn: 'Приоритетные предложения',
       ratesDirectoryLink: 'Каталог 24 банков',
+      whatsappDesk: 'Консультация в WhatsApp',
     },
   },
   zh: {
@@ -1425,6 +1433,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       dldLabel: '4% DLD 与交易税费',
       totalCashLabel: '过户所需总现金',
       ctaLabel: '对比 24 家阿联酋银行',
+      estimateNote: '依据央行 CBUAE 与 DLD 规则测算 · 不影响信用记录',
     },
     metrics: [
       ['24', '阿联酋持牌传统与伊斯兰银行'],
@@ -1476,6 +1485,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       tabGuide: '央行规则速查',
       priorityOffersBtn: '优先银行方案',
       ratesDirectoryLink: '24 家银行名录',
+      whatsappDesk: 'WhatsApp 顾问专席',
     },
   },
   fr: {
@@ -1492,6 +1502,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       dldLabel: '4 % DLD & frais',
       totalCashLabel: 'Trésorerie au transfert',
       ctaLabel: 'Comparer 24 banques ÉAU',
+      estimateNote: 'Estimation indicative CBUAE & DLD · Sans impact AECB',
     },
     metrics: [
       ['24', 'Banques conventionnelles et islamiques agréées'],
@@ -1543,6 +1554,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       tabGuide: 'Guide CBUAE',
       priorityOffersBtn: 'Offres Prioritaires',
       ratesDirectoryLink: 'Annuaire 24 Banques',
+      whatsappDesk: 'Bureau Conseil WhatsApp',
     },
   },
   es: {
@@ -1559,6 +1571,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       dldLabel: '4 % DLD y cierre',
       totalCashLabel: 'Efectivo total al cierre',
       ctaLabel: 'Comparar 24 bancos EAU',
+      estimateNote: 'Estimación ilustrativa CBUAE y DLD · Sin consulta AECB',
     },
     metrics: [
       ['24', 'Bancos convencionales e islámicos con licencia'],
@@ -1610,6 +1623,7 @@ export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
       tabGuide: 'Guía CBUAE',
       priorityOffersBtn: 'Ofertas Prioritarias',
       ratesDirectoryLink: 'Directorio 24 Bancos',
+      whatsappDesk: 'Mesa de Asesoría WhatsApp',
     },
   },
 };

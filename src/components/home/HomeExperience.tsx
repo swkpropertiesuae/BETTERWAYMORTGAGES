@@ -63,11 +63,13 @@ export default function HomeExperience() {
             speed={64}
           />
 
-          <div className="mt-10 grid grid-cols-2 divide-y divide-[#e3e7ee] border-t border-[#e3e7ee] pt-8 lg:grid-cols-4 lg:divide-x lg:divide-y-0">
+          <div className="mt-10 grid grid-cols-2 border-t border-[#e3e7ee] pt-8 lg:grid-cols-4 lg:divide-x rtl:lg:divide-x-reverse lg:divide-[#e3e7ee]">
             {swiss.metrics.map(([figure, caption], i) => (
               <div
                 key={figure}
-                className={`px-4 py-3 ${i % 2 === 0 ? 'lg:ps-6' : ''} ${i === 0 ? 'lg:ps-0' : 'lg:ps-8'}`}
+                className={`px-4 py-3 ${i >= 2 ? 'max-lg:border-t max-lg:border-[#e3e7ee]' : ''} ${
+                  i === 0 ? 'lg:ps-0' : 'lg:ps-8'
+                }`}
               >
                 <p className="num font-display text-2xl font-bold tracking-tight text-[#070e1a] sm:text-3xl">
                   {figure}
@@ -248,6 +250,7 @@ export default function HomeExperience() {
                 <button
                   key={step.num}
                   type="button"
+                  aria-pressed={isSelected}
                   onClick={() => setActiveStep(idx)}
                   className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[16px] border p-7 text-start transition duration-200 cursor-pointer ${
                     isSelected

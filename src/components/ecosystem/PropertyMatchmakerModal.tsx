@@ -37,7 +37,10 @@ export default function PropertyMatchmakerModal({
   }, []);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      setStep('match');
+      return;
+    }
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     const onKey = (e: KeyboardEvent) => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, MessageCircle, Send, Sparkles, X } from 'lucide-react';
@@ -110,6 +110,7 @@ export default function CoPilot({
   const intents = locale === 'ar' ? AR_INTENTS : EN_INTENTS;
   const [open, setOpen] = useState(embedded);
   const reduce = useReducedMotion();
+  const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (embedded || !open) return;
@@ -130,6 +131,12 @@ export default function CoPilot({
     );
   }, [cp.welcome]);
 
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
+  }, [msgs]);
+
   const ask = (intent: IntentItem) => {
     const stamp = `${Date.now()}-${Math.random()}`;
     setMsgs((m) => [
@@ -141,7 +148,7 @@ export default function CoPilot({
 
   const body = (
     <div className="flex flex-1 flex-col overflow-hidden">
-      <div className="flex-1 space-y-3 overflow-y-auto bg-[#f7f8fa] p-4 text-[13px]">
+      <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto bg-[#f7f8fa] p-4 text-[13px]">
         {msgs.map((m) => (
           <motion.div
             key={m.id}
@@ -164,7 +171,7 @@ export default function CoPilot({
                   onNavigate?.();
                 }}
               >
-                {m.link.label} <ArrowRight size={12} />
+                {m.link.label} <ArrowRight size={12} className="rtl:rotate-180" />
               </Link>
             )}
           </motion.div>

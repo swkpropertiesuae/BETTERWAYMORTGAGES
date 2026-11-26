@@ -56,7 +56,7 @@ export default function HeroPreCheckConsole() {
     return { ctc, monthly, feesOnly, ltv };
   }, [price, safeDownPct]);
 
-  const handoffHref = `/get-started?price=${price}&down=${safeDownPct}&rate=4.19&residency=${residency}`;
+  const handoffHref = `/get-started?price=${price}&down=${safeDownPct}&years=${HERO_TENURE_YEARS}&rate=4.19&residency=${residency}&goal=new-mortgage`;
 
   return (
     <div className="relative overflow-hidden rounded-[20px] border border-[#d7b158]/30 bg-[#0c1524] p-5 text-white shadow-[0_36px_90px_-30px_rgba(0,0,0,0.75)] sm:p-6">
@@ -205,7 +205,7 @@ export default function HeroPreCheckConsole() {
 
       <p className="mt-3 flex items-center justify-center gap-1.5 text-[10.5px] text-white/52">
         <ShieldCheck size={12} className="shrink-0 text-[#34dfac]" />
-        <span>Illustrative CBUAE &amp; DLD estimate · Zero AECB inquiry</span>
+        <span>{hc.estimateNote}</span>
       </p>
     </div>
   );

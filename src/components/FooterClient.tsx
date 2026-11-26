@@ -13,7 +13,7 @@ const COL_KEYS: ('colBuyers' | 'colTools' | 'colSuite')[] = ['colBuyers', 'colTo
  * 100% localized across EN, AR, RU, ZH, FR, ES with 4K dark transparent logo & CBUAE disclosures.
  */
 export default function FooterClient() {
-  const { locale, t, ext } = useLocaleCurrency();
+  const { locale, t, ext, swiss } = useLocaleCurrency();
   const f = t.footer;
   const fx = ext.footerExtra;
   const localizedLinks = FOOTER_LINKS_I18N[locale] ?? FOOTER_LINKS_I18N.en;
@@ -50,7 +50,7 @@ export default function FooterClient() {
                 className="inline-flex items-center gap-2 rounded-[10px] border border-white/15 bg-white/[0.04] px-3.5 py-2 text-xs font-semibold text-white transition hover:border-[#d7b158]/60 hover:bg-white/[0.08]"
               >
                 <MessageCircle size={14} className="text-[#34dfac]" />
-                <span>WhatsApp Advisory Desk</span>
+                <span>{swiss.concierge.whatsappDesk}</span>
               </a>
             </div>
           </div>

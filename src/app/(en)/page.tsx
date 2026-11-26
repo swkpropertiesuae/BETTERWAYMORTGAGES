@@ -26,14 +26,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <link
-        rel="preload"
-        as="image"
-        type="image/avif"
-        imageSrcSet="/images/hero-morning-01-1280.avif 1280w, /images/hero-morning-01-2048.avif 2048w, /images/hero-morning-01-3840.avif 3840w, /images/hero-morning-01-max.avif 4140w"
-        imageSizes="100vw"
-        fetchPriority="high"
-      />
       <HomeExperience />
       <JsonLd
         data={speakablePageSchema(

@@ -7,6 +7,7 @@ import { AR_UI } from '@/data/ar';
 
 export function ArHero({
   crumbs,
+  eyebrow,
   title,
   capsule,
   en,
@@ -27,7 +28,11 @@ export function ArHero({
           <ol className="flex flex-wrap gap-1.5">
             {all.map(([n, h], i) => (
               <li key={h} className="flex gap-1.5">
-                {i > 0 && <span className="text-[#cbd5e1]">/</span>}
+                {i > 0 && (
+                  <span aria-hidden="true" className="text-[#cbd5e1]">
+                    /
+                  </span>
+                )}
                 {i < all.length - 1 ? (
                   <Link href={h} className="hover:text-[#0e6954]">
                     {n}
@@ -53,7 +58,8 @@ export function ArHero({
             })),
           }}
         />
-        <h1 className="mt-6 max-w-4xl text-[2rem] font-bold leading-snug text-[#070e1a] sm:text-[2.6rem]">{title}</h1>
+        {eyebrow && <p className="eyebrow mt-5">{eyebrow}</p>}
+        <h1 className="mt-4 max-w-4xl text-[2rem] font-bold leading-snug text-[#070e1a] sm:text-[2.6rem]">{title}</h1>
         <div
           className="mt-6 max-w-3xl rounded-[14px] border border-[#e3e7ee] border-s-[3px] border-s-[#0e6954] bg-[#f7f8fa] p-5"
           data-capsule

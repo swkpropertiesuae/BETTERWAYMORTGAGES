@@ -195,7 +195,10 @@ export default function HotOffersPopup() {
     };
   }, [open]);
 
-  const close = () => setOpen(false);
+  const close = () => {
+    setOpen(false);
+    setSent(false);
+  };
 
   const submitQuickDesk = async (e: React.FormEvent) => {
     e.preventDefault();

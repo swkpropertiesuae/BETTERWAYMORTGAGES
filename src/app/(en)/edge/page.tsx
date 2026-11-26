@@ -42,7 +42,8 @@ const TIERS = [
 export default function EdgePage() {
   return (
     <div className="holo-canvas holo-canvas--page">
-      <section className="holo-section bw-fintech-stage !min-h-0 !rounded-[28px] !border-0">
+      <div className="wrap py-8 lg:py-12">
+      <section className="holo-section bw-fintech-stage !min-h-0 !rounded-[22px] !border border-[#d7b158]/25">
         <div className="relative z-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
             <SectionTag light>BetterCore · Proprietary Operating Core</SectionTag>
@@ -85,6 +86,7 @@ export default function EdgePage() {
           </div>
         </div>
       </section>
+      </div>
 
       <section className="holo-section">
         <div className="mb-10 max-w-2xl space-y-3">

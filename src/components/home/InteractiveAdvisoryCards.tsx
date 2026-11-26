@@ -83,7 +83,7 @@ export default function InteractiveAdvisoryCards() {
                   <span className="rounded-[7px] bg-[#edf7f4] px-2.5 py-1 font-mono text-[10.5px] font-semibold text-[#0e6954]">
                     {item.badge}
                   </span>
-                  <span className="num text-[11px] font-medium text-[#94a3b8]">0{idx + 1}</span>
+                  <span className="num text-[11px] font-semibold text-[#4a5568]">0{idx + 1}</span>
                 </div>
                 <h3 className="mt-4 font-display text-lg font-bold tracking-tight text-[#070e1a]">
                   {item.title}
@@ -95,7 +95,7 @@ export default function InteractiveAdvisoryCards() {
                 className="relative z-10 mt-5 inline-flex items-center gap-1.5 border-t border-[#e3e7ee] pt-4 text-xs font-semibold text-[#070e1a] transition hover:text-[#0e6954]"
               >
                 <span>{item.cta}</span>
-                <ArrowRight size={13} />
+                <ArrowRight size={13} className="rtl:rotate-180" />
               </Link>
             </SwissSpotlightCard>
           ))}
@@ -184,7 +184,7 @@ export default function InteractiveAdvisoryCards() {
                     onClick={() => setBankPage((p) => (p - 1 + pageCount) % pageCount)}
                     className="grid h-7 w-7 place-items-center rounded-[7px] border border-white/15 bg-white/5 text-white hover:bg-white/15 cursor-pointer"
                   >
-                    <ChevronLeft size={13} />
+                    <ChevronLeft size={13} className="rtl:rotate-180" />
                   </button>
                   <button
                     type="button"
@@ -192,7 +192,7 @@ export default function InteractiveAdvisoryCards() {
                     onClick={() => setBankPage((p) => (p + 1) % pageCount)}
                     className="grid h-7 w-7 place-items-center rounded-[7px] border border-white/15 bg-white/5 text-white hover:bg-white/15 cursor-pointer"
                   >
-                    <ChevronRight size={13} />
+                    <ChevronRight size={13} className="rtl:rotate-180" />
                   </button>
                 </div>
               </div>

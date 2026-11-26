@@ -203,14 +203,13 @@ export function TeamPortfolio({
               <motion.article
                 layout
                 key={member.slug}
-                initial={reduce ? false : { opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={reduce ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.97 }}
-                viewport={{ once: true, amount: 0.12 }}
                 transition={{
                   layout: { type: 'spring', stiffness: 320, damping: 30 },
-                  duration: 0.42,
-                  delay: Math.min(idx * 0.04, 0.25),
+                  duration: 0.34,
+                  delay: Math.min(idx * 0.03, 0.2),
                   ease: EASE_SWISS,
                 }}
                 className="group flex flex-col overflow-hidden rounded-[16px] border border-[#e3e7ee] bg-white transition duration-200 hover:-translate-y-1 hover:border-[#070e1a]/35 hover:shadow-[0_24px_50px_-28px_rgba(7,14,26,0.25)]"

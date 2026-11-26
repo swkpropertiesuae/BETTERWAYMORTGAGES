@@ -43,7 +43,7 @@ export default function HomeHero() {
             height={1080}
             className="h-full w-full object-cover object-center grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#070e1a] via-[#070e1a]/55 to-[#070e1a]/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#070e1a] via-[#070e1a]/55 to-[#070e1a]/30 rtl:bg-gradient-to-l" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#070e1a] via-transparent to-[#070e1a]/70" />
         </div>
 
@@ -119,10 +119,10 @@ export default function HomeHero() {
                   <span>{t.hero.jumpCalc}</span>
                 </a>
                 <Link href="/rates/eibor-live-tracker" className="transition hover:text-white">
-                  {t.hero.jumpEibor} →
+                  {t.hero.jumpEibor}
                 </Link>
                 <Link href="/hub" className="transition hover:text-white">
-                  {t.hero.jumpHub} →
+                  {t.hero.jumpHub}
                 </Link>
               </div>
 

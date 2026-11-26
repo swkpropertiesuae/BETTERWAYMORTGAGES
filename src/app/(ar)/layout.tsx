@@ -4,6 +4,7 @@ import '../globals.css';
 import '../brand.css';
 import { JsonLd } from '@/components/ui';
 import Analytics from '@/components/Analytics';
+import LiveAnnouncementBar from '@/components/LiveAnnouncementBar';
 import ExecutiveConciergeDock from '@/components/ExecutiveConciergeDock';
 import { LocaleCurrencyProvider } from '@/components/LocaleCurrencyContext';
 import { enhancedOrgSchema, websiteSchema } from '@/lib/seo-schema';
@@ -50,6 +51,7 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
     <html lang="ar" dir="rtl">
       <body className="relative min-h-screen bg-white text-ink">
         <LocaleCurrencyProvider initialLocale="ar">
+          <LiveAnnouncementBar />
           <header className="bw-header" data-scrolled="true">
             <div className="wrap bw-header__bar">
               <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0">

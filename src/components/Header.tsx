@@ -129,7 +129,7 @@ export default function Header() {
   return (
     <header
       ref={ref}
-      className="bw-header"
+      className={`bw-header ${mobile ? '!z-[52]' : ''}`}
       data-over-hero={isHome ? 'true' : 'false'}
       data-scrolled={scrolled ? 'true' : 'false'}
     >
@@ -201,7 +201,7 @@ export default function Header() {
           {NAV.map((n) => {
             const locKey = NAV_LOCALE_KEY[n.label];
             const displayLabel = locKey ? t.nav[locKey] : n.label;
-            const isActive = isNavActive(path, n.label);
+            const isActive = activeBarKey === n.label;
             const isExpanded = open === n.label;
             const showBar = indicatorKey === n.label;
             return (
@@ -428,6 +428,7 @@ export default function Header() {
                           <Link
                             href={l.href}
                             aria-current={path === l.href ? 'page' : undefined}
+                            onClick={() => setOpen(null)}
                             className="group -mx-2.5 flex items-baseline justify-between gap-3 rounded-[9px] px-2.5 py-1.5 text-[13.5px] font-medium text-[#070e1a] transition hover:bg-[#f7f8fa] hover:text-[#0e6954]"
                           >
                             <span>{l.label}</span>
@@ -483,6 +484,7 @@ export default function Header() {
               <Link
                 href="/"
                 aria-current={isNavActive(path, 'Home') ? 'page' : undefined}
+                onClick={() => setMobile(false)}
                 className={`flex items-center justify-between border-b border-[#e3e7ee] py-3.5 text-[15px] font-semibold ${
                   isNavActive(path, 'Home') ? 'text-[#0e6954]' : 'text-[#070e1a]'
                 }`}
@@ -492,6 +494,7 @@ export default function Header() {
               <Link
                 href="/about-us"
                 aria-current={isNavActive(path, 'About Us') ? 'page' : undefined}
+                onClick={() => setMobile(false)}
                 className={`flex items-center justify-between border-b border-[#e3e7ee] py-3.5 text-[15px] font-semibold ${
                   isNavActive(path, 'About Us') ? 'text-[#0e6954]' : 'text-[#070e1a]'
                 }`}
@@ -514,6 +517,7 @@ export default function Header() {
                         <Link
                           href={l.href}
                           aria-current={path === l.href ? 'page' : undefined}
+                          onClick={() => setMobile(false)}
                           className="block rounded-lg py-1 text-[14px] text-[#4a5568] transition hover:text-[#070e1a]"
                         >
                           {l.label}
@@ -566,7 +570,7 @@ export default function Header() {
               </div>
 
               <div className="mt-5 grid gap-2.5">
-                <Link href="/get-started" className="homy-btn w-full justify-between">
+                <Link href="/get-started" onClick={() => setMobile(false)} className="homy-btn w-full justify-between">
                   <span>{t.nav.startCheck}</span>
                   <span className="homy-btn__disc" aria-hidden="true">
                     <span className="homy-btn__arrow-track">
@@ -576,10 +580,10 @@ export default function Header() {
                   </span>
                 </Link>
                 <div className="grid grid-cols-2 gap-2.5">
-                  <Link href="/portal/login" className="homy-btn homy-btn--outline w-full">
+                  <Link href="/portal/login" onClick={() => setMobile(false)} className="homy-btn homy-btn--outline w-full">
                     {t.nav.login}
                   </Link>
-                  <Link href="/contact" className="homy-btn homy-btn--outline w-full">
+                  <Link href="/contact" onClick={() => setMobile(false)} className="homy-btn homy-btn--outline w-full">
                     {t.nav.contact}
                   </Link>
                 </div>

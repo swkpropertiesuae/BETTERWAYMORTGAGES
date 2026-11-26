@@ -86,6 +86,7 @@ export default function PreApprovalWizard() {
       const next: JourneyState = {
         ...base,
         ...(qGoal ? { goal: qGoal } : {}),
+        ...(qGoal === 'new-mortgage' && base.stage === 'off-plan-handover' ? { stage: 'found-ready' } : {}),
         ...(qRes && ['resident', 'national', 'gcc', 'non-resident'].includes(qRes) ? { residency: qRes } : {}),
         ...(Number.isFinite(qPrice) && qPrice >= 500_000 ? { propertyValue: qPrice } : {}),
         ...(Number.isFinite(qDown) && qDown >= 15 && qDown <= 80 ? { downPaymentPct: qDown } : {}),

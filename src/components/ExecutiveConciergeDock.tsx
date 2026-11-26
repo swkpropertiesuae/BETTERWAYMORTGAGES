@@ -12,11 +12,10 @@ import { waLink } from '@/data/site';
 import { trackEvent } from '@/lib/analytics';
 
 /**
- * Unified Swiss / DIFC Executive Concierge Dock — replaces colliding bottom-left/right widgets
- * with ONE calm Midnight Navy + Champagne Gold hairline pill opening a tabbed drawer combining:
- * 1) Live Advisor Desk (two-way Betterway OS v3 sync via OsLiveChat)
- * 2) CBUAE Mortgage Guide (deterministic math Q&A via CoPilot, localized for EN & AR)
- * Plus a locale-aware footer action (Priority Offers modal on EN/intl routes, /ar#rates on Arabic RTL).
+ * Unified Swiss / DIFC Executive Concierge Dock.
+ * - z-40 when closed (never overlaps mobile header drawer z-[52]), z-[55] when open.
+ * - Deterministic active tab styling works cleanly in both LTR and Arabic RTL.
+ * - Keeps Live Desk and CBUAE Guide mounted via CSS visibility so thread history persists across tab switches.
  */
 export default function ExecutiveConciergeDock({
   showHotOffersTrigger = true,
@@ -44,7 +43,7 @@ export default function ExecutiveConciergeDock({
   };
 
   return (
-    <div className="fixed bottom-5 end-5 z-50">
+    <div className={`fixed bottom-5 end-5 ${open ? 'z-[55]' : 'z-40'}`}>
       <AnimatePresence>
         {open && (
           <motion.aside
@@ -82,7 +81,7 @@ export default function ExecutiveConciergeDock({
                 </button>
               </div>
 
-              {/* 2-Tab Institutional Switcher */}
+              {/* 2-Tab Institutional Switcher (RTL-safe deterministic active state) */}
               <div
                 role="tablist"
                 aria-label="Advisory concierge modes"
@@ -102,33 +101,26 @@ export default function ExecutiveConciergeDock({
                       role="tab"
                       aria-selected={active}
                       onClick={() => setTab(key)}
-                      className={`relative inline-flex items-center justify-center gap-1.5 rounded-[8px] px-2.5 py-1.5 text-xs font-semibold transition cursor-pointer ${
-                        active ? 'text-[#070e1a]' : 'text-white/72 hover:text-white'
+                      className={`inline-flex items-center justify-center gap-1.5 rounded-[8px] px-2.5 py-1.5 text-xs font-semibold transition-colors duration-150 cursor-pointer ${
+                        active
+                          ? 'bg-white text-[#070e1a] shadow-sm'
+                          : 'text-white/75 hover:bg-white/[0.06] hover:text-white'
                       }`}
                     >
-                      {active && (
-                        <motion.span
-                          layoutId="bw-concierge-tab"
-                          transition={reduce ? { duration: 0 } : SPRING_INSTITUTIONAL}
-                          className="absolute inset-0 rounded-[8px] bg-white"
-                          aria-hidden="true"
-                        />
-                      )}
-                      <Icon size={13} className="relative z-10" />
-                      <span className="relative z-10">{label}</span>
+                      <Icon size={13} />
+                      <span>{label}</span>
                     </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Active Tab Body */}
-            <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-              {tab === 'live' ? (
-                <OsLiveChat embedded />
-              ) : (
-                <CoPilot embedded onNavigate={() => setOpen(false)} />
-              )}
+            {/* Both tab panels stay mounted while drawer is open so CoPilot Q&A thread persists across tab switches */}
+            <div className={tab === 'live' ? 'flex min-h-0 flex-1 flex-col overflow-hidden' : 'hidden'}>
+              <OsLiveChat embedded />
+            </div>
+            <div className={tab === 'guide' ? 'flex min-h-0 flex-1 flex-col overflow-hidden' : 'hidden'}>
+              <CoPilot embedded onNavigate={() => setOpen(false)} />
             </div>
 
             {/* Locale-Aware Footer Strip */}
