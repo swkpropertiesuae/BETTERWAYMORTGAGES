@@ -1,18 +1,68 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { ArrowRight, Play, ShieldCheck, Sparkles, X } from 'lucide-react';
+import { ArrowRight, Play, ShieldCheck, X } from 'lucide-react';
 import { useLocaleCurrency } from '@/components/LocaleCurrencyContext';
 
-export const SPRING_SNAPPY = { type: 'spring', stiffness: 380, damping: 32, mass: 0.85 } as const;
-export const EASE_HOMY = [0.22, 1, 0.36, 1] as const;
+export const SPRING_INSTITUTIONAL = { type: 'spring', stiffness: 360, damping: 34, mass: 0.9 } as const;
+export const EASE_SWISS = [0.22, 1, 0.36, 1] as const;
+
+// Backwards-compatible aliases
+export const SPRING_SNAPPY = SPRING_INSTITUTIONAL;
+export const EASE_HOMY = EASE_SWISS;
 
 /**
- * Clean static card container (zero cursor-tracking glow, zero hover translate/scale animations).
+ * GPU-composited Swiss institutional scroll reveal (transform + opacity only).
  */
+export function SwissReveal({
+  children,
+  className = '',
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.44, delay, ease: EASE_SWISS }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/**
+ * 21st.dev restrained hairline spotlight card (zero React re-renders on mousemove).
+ */
+export function SwissSpotlightCard({
+  children,
+  className = '',
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const handleMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--spot-x', `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty('--spot-y', `${e.clientY - rect.top}px`);
+  };
+  return (
+    <div onMouseMove={handleMove} className={`bw-swiss-card ${className}`}>
+      {children}
+    </div>
+  );
+}
+
 export function SpotlightCard({
   children,
   className = '',
@@ -21,12 +71,9 @@ export function SpotlightCard({
   className?: string;
   dark?: boolean;
 }) {
-  return <div className={className}>{children}</div>;
+  return <SwissSpotlightCard className={className}>{children}</SwissSpotlightCard>;
 }
 
-/**
- * Clean static showcase frame (exact 1:1 native pixel clarity, zero scroll-linked zoom/parallax).
- */
 export function ScrollScaleFrame({
   children,
   className = '',
@@ -37,16 +84,10 @@ export function ScrollScaleFrame({
   return <div className={`flex w-full justify-center ${className}`}>{children}</div>;
 }
 
-/**
- * Static hero media container (zero scroll-linked scale/y blur).
- */
 export function HeroParallaxMedia({ children }: { children: ReactNode }) {
-  return <div className="homy-hero__media">{children}</div>;
+  return <div className="relative">{children}</div>;
 }
 
-/**
- * Clean static announcement pill with live CBUAE 3M EIBOR & briefing trigger.
- */
 export function AnimatedAnnouncementBar({
   eiborText,
   onWatchVideo,
@@ -55,16 +96,16 @@ export function AnimatedAnnouncementBar({
   onWatchVideo: () => void;
 }) {
   return (
-    <div className="bw-announce-pill">
-      <span className="bw-announce-pill__dot" aria-hidden="true" />
-      <span className="bw-announce-pill__text">
-        Live CBUAE 3M EIBOR <strong className="num font-semibold text-[#080b0f]">{eiborText}</strong>
+    <div className="inline-flex flex-wrap items-center gap-2.5 rounded-full border border-[#e3e7ee] bg-white px-3.5 py-1.5 text-xs text-[#4a5568]">
+      <span className="bw-live-dot" aria-hidden="true" />
+      <span>
+        Live CBUAE 3M EIBOR <strong className="num font-semibold text-[#070e1a]">{eiborText}</strong>
       </span>
-      <span className="h-3.5 w-px bg-[#080b0f]/15" aria-hidden="true" />
+      <span className="h-3.5 w-px bg-[#e3e7ee]" aria-hidden="true" />
       <button
         type="button"
         onClick={onWatchVideo}
-        className="inline-flex items-center gap-1.5 font-semibold text-[#0a4a3e] transition-colors hover:text-[#080b0f] cursor-pointer"
+        className="inline-flex items-center gap-1.5 font-semibold text-[#0e6954] transition-colors hover:text-[#070e1a] cursor-pointer"
       >
         <Play size={11} fill="currentColor" />
         <span>Watch Briefing</span>
@@ -74,7 +115,7 @@ export function AnimatedAnnouncementBar({
 }
 
 /**
- * Cinema Video Briefing Modal Popup (portaled cleanly above sticky header).
+ * Corporate Video Briefing Modal (portaled cleanly above sticky header).
  */
 export function VideoBriefingModal({
   open,
@@ -121,14 +162,18 @@ export function VideoBriefingModal({
           exit={{ opacity: 0 }}
           transition={{ duration: reduce ? 0 : 0.2 }}
           onClick={onClose}
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-[#080b0f]/82 p-4 backdrop-blur-xl sm:p-6"
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-[#070e1a]/82 p-4 backdrop-blur-lg sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-label="Betterway Mortgages corporate advisory briefing"
         >
-          <div
+          <motion.div
+            initial={reduce ? false : { opacity: 0, scale: 0.97, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, scale: 0.98 }}
+            transition={{ duration: reduce ? 0 : 0.22, ease: EASE_SWISS }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[1040px] overflow-hidden rounded-[26px] border border-white/15 bg-[#0b1117] shadow-[0_48px_120px_-24px_rgba(0,0,0,0.8)]"
+            className="relative w-full max-w-[1020px] overflow-hidden rounded-[20px] border border-white/15 bg-[#0c1524] shadow-[0_48px_120px_-24px_rgba(0,0,0,0.85)]"
           >
             <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4 sm:px-7">
               <div className="flex items-center gap-3.5">
@@ -136,10 +181,10 @@ export function VideoBriefingModal({
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={435}
-                  className="h-9 w-auto sm:h-10"
+                  height={459}
+                  className="h-8 w-auto sm:h-9"
                 />
-                <span className="hidden rounded-full border border-[#179373]/40 bg-[#179373]/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#34dfac] sm:inline-flex">
+                <span className="hidden rounded-full border border-[#d7b158]/35 bg-white/[0.05] px-3 py-1 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-[#fcf1b7] sm:inline-flex">
                   Advisory Briefing
                 </span>
               </div>
@@ -147,9 +192,9 @@ export function VideoBriefingModal({
                 type="button"
                 onClick={onClose}
                 aria-label="Close briefing video"
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/10 text-white transition-colors hover:border-white/40 hover:bg-white/20 cursor-pointer"
+                className="grid h-9 w-9 place-items-center rounded-[10px] border border-white/15 bg-white/5 text-white transition-colors hover:border-white/40 hover:bg-white/15 cursor-pointer"
               >
-                <X size={18} />
+                <X size={17} />
               </button>
             </div>
 
@@ -166,27 +211,25 @@ export function VideoBriefingModal({
               </video>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 bg-[#080b0f] px-5 py-4 sm:px-7">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 bg-[#070e1a] px-5 py-4 sm:px-7">
               <p className="flex items-center gap-2 text-xs text-white/65">
                 <ShieldCheck size={15} className="shrink-0 text-[#d7b158]" />
                 <span>
-                  Statutory CBUAE &amp; DLD planning overview across 24 UAE lenders. Final offers are issued by the bank.
+                  Statutory CBUAE &amp; DLD planning overview across 24 UAE lenders. Final offers are issued in writing by the bank.
                 </span>
               </p>
-              <div className="flex flex-wrap items-center gap-2.5">
-                <Link
-                  href="/calculators/mortgage-calculator"
-                  onClick={onClose}
-                  className="homy-btn homy-btn--white !h-10 !text-[13px]"
-                >
-                  <span>Run Calculator</span>
-                  <span className="homy-btn__disc !h-6 !w-6" aria-hidden="true">
-                    <ArrowRight size={13} strokeWidth={2.2} />
-                  </span>
-                </Link>
-              </div>
+              <Link
+                href="/calculators/mortgage-calculator"
+                onClick={onClose}
+                className="homy-btn homy-btn--white bw-btn--sm"
+              >
+                <span>Run Calculator</span>
+                <span className="homy-btn__disc !h-6 !w-6" aria-hidden="true">
+                  <ArrowRight size={13} strokeWidth={2.2} />
+                </span>
+              </Link>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>,
@@ -195,7 +238,7 @@ export function VideoBriefingModal({
 }
 
 /**
- * Static crisp Homepage Cinema Video Preview Card (zero image zoom or pulsing animations).
+ * Swiss Institutional Advisory Briefing Card (embedded in Band 5).
  */
 export function VideoBriefingShowcase() {
   const [open, setOpen] = useState(false);
@@ -205,32 +248,27 @@ export function VideoBriefingShowcase() {
   return (
     <>
       <div className="bw-video-card">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="space-y-5 text-white">
+        <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div className="space-y-4 text-white">
             <span className="homy-tag homy-tag--light">
               <span className="homy-tag__ring" aria-hidden="true" />
               <span>{b.badge}</span>
             </span>
-            <h2 className="font-display text-[clamp(28px,3.2vw,42px)] font-semibold leading-[1.12] tracking-[-0.025em] text-white">
+            <h3 className="font-display text-[clamp(24px,2.6vw,34px)] font-semibold leading-[1.15] tracking-[-0.024em] text-white">
               {b.heading}
-            </h2>
-            <p className="text-[15.5px] leading-relaxed text-white/75">{b.sub}</p>
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              <button
-                type="button"
-                onClick={() => setOpen(true)}
-                className="homy-btn homy-btn--white"
-              >
-                <Play size={14} fill="currentColor" />
+            </h3>
+            <p className="text-[15px] leading-relaxed text-white/70">{b.sub}</p>
+            <div className="pt-1">
+              <button type="button" onClick={() => setOpen(true)} className="homy-btn homy-btn--white">
+                <Play size={13} fill="currentColor" />
                 <span>{b.playCta}</span>
                 <span className="homy-btn__disc" aria-hidden="true">
-                  <ArrowRight size={14} strokeWidth={2.2} />
+                  <span className="homy-btn__arrow-track">
+                    <ArrowRight size={14} strokeWidth={2.2} />
+                    <ArrowRight size={14} strokeWidth={2.2} />
+                  </span>
                 </span>
               </button>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-medium text-white/80">
-                <Sparkles size={13} className="text-[#f1d57e]" />
-                {b.badge}
-              </span>
             </div>
           </div>
 
@@ -238,7 +276,7 @@ export function VideoBriefingShowcase() {
             type="button"
             onClick={() => setOpen(true)}
             aria-label="Play Betterway Mortgages advisory briefing"
-            className="group relative aspect-video w-full overflow-hidden rounded-[20px] border border-white/15 bg-[#080b0f] text-left shadow-[0_32px_70px_-24px_rgba(0,0,0,0.75)] cursor-pointer"
+            className="group relative aspect-video w-full overflow-hidden rounded-[16px] border border-white/15 bg-[#070e1a] text-left shadow-[0_28px_60px_-24px_rgba(0,0,0,0.7)] cursor-pointer"
           >
             <img
               src="/video/betterway-explainer.jpg"
@@ -247,21 +285,21 @@ export function VideoBriefingShowcase() {
               height={1080}
               loading="lazy"
               decoding="async"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080b0f]/70 via-[#080b0f]/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#070e1a]/75 via-[#070e1a]/20 to-transparent" />
             <div className="absolute inset-0 grid place-items-center">
               <span className="bw-play-orb">
-                <Play size={26} fill="currentColor" className="translate-x-0.5" />
+                <Play size={24} fill="currentColor" className="translate-x-0.5" />
               </span>
             </div>
             <div className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#080b0f]/75 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-md">
-                <img src="/brand/icon.png" alt="" width={18} height={18} className="h-[18px] w-[18px] object-contain" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#070e1a]/80 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
+                <img src="/brand/icon.png" alt="" width={16} height={16} className="h-4 w-4 object-contain" />
                 Betterway Mortgages · Advisory Briefing
               </span>
-              <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#080b0f]">
-                Watch Briefing
+              <span className="rounded-[8px] bg-white px-2.5 py-1 text-[11px] font-semibold text-[#070e1a]">
+                Play
               </span>
             </div>
           </button>

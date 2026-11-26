@@ -11,11 +11,10 @@ import {
   loadSavedJourney,
   type JourneyState,
 } from '@/lib/journey';
-import { SPRING_SNAPPY } from '@/components/ui/MotionPrimitives';
+import { SPRING_INSTITUTIONAL } from '@/components/ui/MotionPrimitives';
 
 /**
- * Exact UseHolo persistent "Pick up where you left off" progress bar.
- * Appears automatically whenever a buyer has started /get-started and navigates away.
+ * Contextual Swiss resume banner — renders ONLY when a visitor leaves /get-started mid-flow (steps 1–4).
  */
 export default function ResumeJourneyToast() {
   const pathname = usePathname();
@@ -41,54 +40,51 @@ export default function ResumeJourneyToast() {
 
   const dossier = buildJourneyDossier(saved);
   const pct = dossier.completionPct;
-  const r = 18;
+  const r = 17;
   const circ = 2 * Math.PI * r;
   const offset = circ * (1 - pct / 100);
 
   return (
     <AnimatePresence>
       <motion.div
-        key="holo-resume-toast"
-        initial={reduce ? false : { opacity: 0, y: 24, scale: 0.96 }}
+        key="bw-resume-toast"
+        initial={reduce ? false : { opacity: 0, y: 18, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={reduce ? undefined : { opacity: 0, y: 18, scale: 0.96 }}
-        transition={reduce ? { duration: 0 } : SPRING_SNAPPY}
+        exit={reduce ? undefined : { opacity: 0, y: 14, scale: 0.97 }}
+        transition={reduce ? { duration: 0 } : SPRING_INSTITUTIONAL}
         className="holo-resume-toast"
         role="region"
         aria-label="Resume mortgage readiness check"
       >
-        {/* SVG Circular Progress Ring matching UseHolo */}
-        <div className="relative grid h-11 w-11 shrink-0 place-items-center">
-          <svg className="-rotate-90 h-11 w-11" viewBox="0 0 44 44" aria-hidden="true">
-            <circle cx="22" cy="22" r={r} fill="none" stroke="#e5e7eb" strokeWidth="3.5" />
+        <div className="relative grid h-10 w-10 shrink-0 place-items-center">
+          <svg className="-rotate-90 h-10 w-10" viewBox="0 0 42 42" aria-hidden="true">
+            <circle cx="21" cy="21" r={r} fill="none" stroke="#e3e7ee" strokeWidth="3" />
             <circle
-              cx="22"
-              cy="22"
+              cx="21"
+              cy="21"
               r={r}
               fill="none"
-              stroke="#179373"
-              strokeWidth="3.5"
+              stroke="#0e6954"
+              strokeWidth="3"
               strokeLinecap="round"
               strokeDasharray={circ}
               strokeDashoffset={offset}
             />
           </svg>
-          <span className="num absolute text-[10px] font-bold text-[#121217]">{pct}%</span>
+          <span className="num absolute text-[9.5px] font-bold text-[#070e1a]">{pct}%</span>
         </div>
 
         <div className="min-w-0 flex-1">
-          <p className="truncate font-display text-sm font-bold text-[#121217]">Pick up where you left off</p>
-          <p className="truncate text-xs text-[#6c6c89]">
-            Your Betterway mortgage dossier is waiting (Step {saved.step + 1} of 6)
-          </p>
+          <p className="truncate font-display text-xs font-bold text-[#070e1a]">Resume Mortgage Dossier</p>
+          <p className="truncate text-[11px] text-[#4a5568]">Step {saved.step + 1} of 6 saved</p>
         </div>
 
         <Link
           href={`/get-started?q=${saved.step}`}
           aria-label="Continue mortgage readiness wizard"
-          className="grid h-10 w-10 shrink-0 place-items-center rounded-[12px] bg-[#121217] text-white transition hover:bg-[#179373]"
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-[10px] bg-[#070e1a] text-white transition hover:bg-[#0e6954]"
         >
-          <ArrowRight size={17} />
+          <ArrowRight size={15} />
         </Link>
 
         <button
@@ -98,9 +94,9 @@ export default function ResumeJourneyToast() {
             setDismissed(true);
             clearSavedJourney();
           }}
-          className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-[#6c6c89] transition hover:bg-[#f3f4f6] hover:text-[#121217] cursor-pointer"
+          className="grid h-7 w-7 shrink-0 place-items-center rounded-lg text-[#4a5568] transition hover:bg-[#f7f8fa] hover:text-[#070e1a] cursor-pointer"
         >
-          <X size={15} />
+          <X size={14} />
         </button>
       </motion.div>
     </AnimatePresence>

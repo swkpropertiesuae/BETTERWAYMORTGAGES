@@ -3,14 +3,12 @@ import '../globals.css';
 import '../startup.css';
 import '../brand.css';
 import Header from '@/components/Header';
-import CoPilot from '@/components/CoPilot';
-import OsLiveChat from '@/components/OsLiveChat';
+import ExecutiveConciergeDock from '@/components/ExecutiveConciergeDock';
 import ResumeJourneyToast from '@/components/ecosystem/ResumeJourneyToast';
 import HotOffersPopup from '@/components/HotOffersPopup';
 import LiveAnnouncementBar from '@/components/LiveAnnouncementBar';
 import Analytics from '@/components/Analytics';
 import MotionKit from '@/components/MotionKit';
-import GlobalShaderBackdrop from '@/components/ui/GlobalShaderBackdrop';
 import { LocaleCurrencyProvider } from '@/components/LocaleCurrencyContext';
 import { Footer, JsonLd } from '@/components/ui';
 import { SITE } from '@/data/site';
@@ -61,7 +59,7 @@ export const metadata: Metadata = {
     ],
     shortcut: [{ url: '/favicon.ico' }],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
-    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#179373' }],
+    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#0E6954' }],
   },
   manifest: '/site.webmanifest',
   openGraph: {
@@ -95,13 +93,12 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = { themeColor: '#0E9E77', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#070E1A', width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr">
-      <body className="relative min-h-screen bg-transparent">
-        <GlobalShaderBackdrop />
+      <body className="relative min-h-screen bg-white text-ink">
         <LocaleCurrencyProvider initialLocale="en">
           <a
             href="#main"
@@ -109,14 +106,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             Skip to content
           </a>
+          <LiveAnnouncementBar />
           <Header />
           <main id="main">{children}</main>
           <Footer />
           <HotOffersPopup />
-          <LiveAnnouncementBar />
           <ResumeJourneyToast />
-          <OsLiveChat />
-          <CoPilot />
+          <ExecutiveConciergeDock showHotOffersTrigger />
           <MotionKit />
           <Analytics />
           <JsonLd data={enhancedOrgSchema()} />

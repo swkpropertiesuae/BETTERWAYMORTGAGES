@@ -1,11 +1,12 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, MessageCircle, Send, Sparkles, X } from 'lucide-react';
 import { cashToClose, borrowingPower, earlySettlementFee } from '@/lib/math';
 import { waLink } from '@/data/site';
-import { SPRING_SNAPPY } from '@/components/ui/MotionPrimitives';
+import { SPRING_INSTITUTIONAL } from '@/components/ui/MotionPrimitives';
 import { useLocaleCurrency } from '@/components/LocaleCurrencyContext';
 import { COPILOT_I18N } from '@/data/i18n-extended';
 
@@ -13,7 +14,9 @@ const aed = (n: number) => `AED ${Math.round(n).toLocaleString('en-US')}`;
 
 type Msg = { id: string; from: 'bot' | 'me'; text: string; link?: { href: string; label: string } };
 
-const INTENTS: { chip: string; answer: () => Omit<Msg, 'id'> }[] = [
+type IntentItem = { chip: string; answer: () => Omit<Msg, 'id'> };
+
+const EN_INTENTS: IntentItem[] = [
   {
     chip: 'Upfront fees on an AED 2.5M purchase?',
     answer: () => {
@@ -54,37 +57,80 @@ const INTENTS: { chip: string; answer: () => Omit<Msg, 'id'> }[] = [
   },
 ];
 
-export default function CoPilot() {
+const AR_INTENTS: IntentItem[] = [
+  {
+    chip: 'ما هي الرسوم المقدمة لعقار بقيمة 2.5 مليون درهم؟',
+    answer: () => {
+      const c = cashToClose({ price: 2_500_000, downPct: 20 });
+      return {
+        from: 'bot',
+        text: `عند دفعة أولى 20% (${aed(c.down)})، تشمل التكاليف التنظيمية في دبي ${aed(c.dld)} رسوم دائرة الأراضي وإصدار سند الملكية، و${aed(c.mortgageReg)} رسوم تسجيل الرهن، و4,200 درهم رسوم أمين التسجيل، و3,150 درهم تقدير للتقييم، ليصل إجمالي النقد المطلوب عند النقل إلى ${aed(c.total)}.`,
+        link: { href: '/ar#calculators', label: 'افتح حاسبة التمويل' },
+      };
+    },
+  },
+  {
+    chip: 'كيف يعمل سقف الاستقطاع 50% (DBR)؟',
+    answer: () => {
+      const r = borrowingPower({ salary: 35_000, existingEmis: 0, cardLimits: 50_000, years: 25 });
+      return {
+        from: 'bot',
+        text: `وفق أنظمة المصرف المركزي الإماراتي، لا يجوز أن تتجاوز التزامات الديون الشهرية 50% من الدخل الشهري. لراتب استرشادي 35,000 درهم وحد بطاقات ائتمانية 50,000 درهم (يُحتسب 5% منها)، تبلغ القدرة الشهرية للتمويل العقاري ${aed(r.available)} شهرياً.`,
+        link: { href: '/ar/calculators/dbr-borrowing-power', label: 'احسب نسبة الاستقطاع' },
+      };
+    },
+  },
+  {
+    chip: 'ما هو سقف رسوم السداد المبكر أو إعادة التمويل؟',
+    answer: () => ({
+      from: 'bot',
+      text: `يحدد المصرف المركزي رسوم السداد المبكر أو نقل الرهن بنسبة 1% من الرصيد المتبقي أو 10,000 درهم أيهما أقل، مضافاً إليها 5% ضريبة القيمة المضافة (بحد أقصى ${aed(earlySettlementFee(1e9))}).`,
+      link: { href: '/ar/calculators/buyout-refinance-savings', label: 'قارن تكلفة إعادة التمويل' },
+    }),
+  },
+  {
+    chip: 'هل يؤهل العقار الممول للإقامة الذهبية؟',
+    answer: () => ({
+      from: 'bot',
+      text: 'يمكن التقدم بطلب الإقامة الذهبية للعقار الذي تبلغ قيمته 2,000,000 درهم فأكثر في سند الملكية أو عقود (Oqood) مع خطاب عدم ممانعة من البنك الممول وفق ضوابط دائرة الأراضي والإقامة.',
+      link: { href: '/ar/mortgages/golden-visa-mortgage', label: 'دليل الإقامة الذهبية' },
+    }),
+  },
+];
+
+export default function CoPilot({
+  embedded = false,
+  onNavigate,
+}: {
+  embedded?: boolean;
+  onNavigate?: () => void;
+}) {
   const { locale } = useLocaleCurrency();
   const cp = COPILOT_I18N[locale] ?? COPILOT_I18N.en;
-  const [open, setOpen] = useState(false);
+  const intents = locale === 'ar' ? AR_INTENTS : EN_INTENTS;
+  const [open, setOpen] = useState(embedded);
   const reduce = useReducedMotion();
 
   useEffect(() => {
-    if (!open) return;
+    if (embedded || !open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open]);
-  const [msgs, setMsgs] = useState<Msg[]>([
-    {
-      id: 'welcome',
-      from: 'bot',
-      text: cp.welcome,
-    },
-  ]);
+  }, [embedded, open]);
+
+  const [msgs, setMsgs] = useState<Msg[]>([{ id: 'welcome', from: 'bot', text: cp.welcome }]);
 
   useEffect(() => {
     setMsgs((prev) =>
       prev.length === 1 && prev[0].id === 'welcome'
         ? [{ id: 'welcome', from: 'bot', text: cp.welcome }]
-        : prev
+        : prev,
     );
   }, [cp.welcome]);
 
-  const ask = (intent: (typeof INTENTS)[number]) => {
+  const ask = (intent: IntentItem) => {
     const stamp = `${Date.now()}-${Math.random()}`;
     setMsgs((m) => [
       ...m,
@@ -93,33 +139,92 @@ export default function CoPilot() {
     ]);
   };
 
+  const body = (
+    <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex-1 space-y-3 overflow-y-auto bg-[#f7f8fa] p-4 text-[13px]">
+        {msgs.map((m) => (
+          <motion.div
+            key={m.id}
+            initial={reduce ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduce ? 0 : 0.2 }}
+            className={`max-w-[88%] rounded-[14px] px-3.5 py-2.5 ${
+              m.from === 'bot'
+                ? 'border border-[#e3e7ee] bg-white text-[#0b1320]'
+                : 'ms-auto bg-[#070e1a] text-white'
+            }`}
+          >
+            <p className="leading-relaxed">{m.text}</p>
+            {m.link && (
+              <Link
+                href={m.link.href}
+                className="mt-2 inline-flex items-center gap-1 font-semibold text-[#0e6954] hover:underline"
+                onClick={() => {
+                  setOpen(false);
+                  onNavigate?.();
+                }}
+              >
+                {m.link.label} <ArrowRight size={12} />
+              </Link>
+            )}
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="border-t border-[#e3e7ee] bg-white p-3.5">
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          {intents.map((i) => (
+            <button
+              key={i.chip}
+              type="button"
+              className="rounded-full border border-[#d6dce6] bg-[#f7f8fa] px-3 py-1.5 text-start text-[11.5px] font-medium text-[#070e1a] transition hover:border-[#070e1a] hover:bg-white cursor-pointer"
+              onClick={() => ask(i)}
+            >
+              {i.chip}
+            </button>
+          ))}
+        </div>
+        <a
+          href={waLink(
+            locale === 'ar'
+              ? 'مرحباً بيترواي، لدي استفسار حول التمويل العقاري.'
+              : 'Hi Betterway, I have a mortgage question.',
+          )}
+          rel="noopener"
+          className="homy-btn bw-btn--sm w-full justify-between"
+        >
+          <span className="inline-flex items-center gap-2">
+            <MessageCircle size={14} /> {cp.askAdvisor}
+          </span>
+          <span className="homy-btn__disc !h-6 !w-6" aria-hidden="true">
+            <Send size={11} />
+          </span>
+        </a>
+      </div>
+    </div>
+  );
+
+  if (embedded) return body;
+
   return (
-    <div className="fixed bottom-3 end-3 z-50 sm:bottom-4 sm:end-4">
+    <div className="fixed bottom-4 end-4 z-50">
       <AnimatePresence>
         {open && (
           <motion.div
             key="bw-copilot-dialog"
-            initial={reduce ? false : { opacity: 0, y: 20, scale: 0.94 }}
+            initial={reduce ? false : { opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={reduce ? undefined : { opacity: 0, y: 14, scale: 0.96 }}
-            transition={reduce ? { duration: 0 } : SPRING_SNAPPY}
+            exit={reduce ? undefined : { opacity: 0, y: 12, scale: 0.97 }}
+            transition={reduce ? { duration: 0 } : SPRING_INSTITUTIONAL}
             role="dialog"
             aria-label="Mortgage assistant guide"
-            className="mb-3 flex h-[min(560px,80dvh)] w-[min(392px,calc(100vw-2rem))] flex-col overflow-hidden rounded-[22px] border border-[#e5e7eb] bg-white shadow-[0_36px_90px_-24px_rgba(8,11,15,0.45)]"
+            className="mb-3 flex h-[min(540px,78dvh)] w-[min(392px,calc(100vw-2rem))] flex-col overflow-hidden rounded-[20px] border border-[#e3e7ee] bg-white shadow-[0_32px_80px_-24px_rgba(7,14,26,0.42)]"
           >
-            <div className="flex items-center justify-between bg-[#0b1117] px-5 py-4 text-white">
+            <div className="flex items-center justify-between bg-[#070e1a] px-5 py-4 text-white">
               <div className="flex items-center gap-2.5">
-                <img
-                  src="/brand/icon.png"
-                  alt=""
-                  width={28}
-                  height={28}
-                  className="h-7 w-7 shrink-0 object-contain"
-                />
+                <img src="/brand/icon.png" alt="" width={26} height={26} className="h-6 w-6 shrink-0 object-contain" />
                 <div>
-                  <p className="font-display text-sm font-semibold leading-tight text-white">
-                    {cp.title}
-                  </p>
+                  <p className="font-display text-sm font-semibold leading-tight text-white">{cp.title}</p>
                   <p className="text-[11px] text-white/60">{cp.subtitle}</p>
                 </div>
               </div>
@@ -127,87 +232,26 @@ export default function CoPilot() {
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close guide"
-                className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20 cursor-pointer"
+                className="grid h-8 w-8 place-items-center rounded-lg bg-white/10 text-white hover:bg-white/20 cursor-pointer"
               >
-                <X size={16} />
+                <X size={15} />
               </button>
             </div>
-
-            <div className="flex-1 space-y-3 overflow-y-auto bg-[#fafafa] p-4 text-sm">
-              {msgs.map((m) => (
-                <motion.div
-                  key={m.id}
-                  initial={reduce ? false : { opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: reduce ? 0 : 0.22 }}
-                  className={`max-w-[88%] rounded-[16px] px-4 py-3 ${
-                    m.from === 'bot'
-                      ? 'border border-[#e8eaed] bg-white text-[#0c0c0c] shadow-[0_4px_14px_-8px_rgba(8,11,15,0.12)]'
-                      : 'ms-auto bg-[#080b0f] text-white'
-                  }`}
-                >
-                  <p className="leading-relaxed">{m.text}</p>
-                  {m.link && (
-                    <Link
-                      href={m.link.href}
-                      className="mt-2 inline-flex items-center gap-1 font-semibold text-[#0e6954] hover:underline"
-                      onClick={() => setOpen(false)}
-                    >
-                      {m.link.label} <ArrowRight size={13} />
-                    </Link>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="border-t border-[#e5e7eb] bg-white p-3.5">
-              <div className="mb-3 flex flex-wrap gap-1.5">
-                {INTENTS.map((i) => (
-                  <button
-                    key={i.chip}
-                    type="button"
-                    className="rounded-full border border-[#e0e3e7] bg-[#f6f6f6] px-3 py-1.5 text-left text-[11.5px] font-medium text-[#080b0f] transition hover:border-[#080b0f] hover:bg-white cursor-pointer"
-                    onClick={() => ask(i)}
-                  >
-                    {i.chip}
-                  </button>
-                ))}
-              </div>
-              <a
-                href={waLink('Hi Betterway, I have a mortgage question.')}
-                rel="noopener"
-                className="homy-btn w-full justify-between"
-              >
-                <span className="inline-flex items-center gap-2">
-                  <MessageCircle size={15} /> {cp.askAdvisor}
-                </span>
-                <span className="homy-btn__disc" aria-hidden="true">
-                  <span className="homy-btn__arrow-track">
-                    <Send size={12} />
-                    <Send size={12} />
-                  </span>
-                </span>
-              </a>
-            </div>
+            {body}
           </motion.div>
         )}
       </AnimatePresence>
 
-      <motion.button
+      <button
         type="button"
-        whileHover={reduce ? undefined : { scale: 1.03, y: -1 }}
-        whileTap={reduce ? undefined : { scale: 0.97 }}
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="homy-btn !h-10 !rounded-full !pl-2.5 !pr-3.5 !text-xs shadow-[0_14px_34px_-10px_rgba(8,11,15,0.55)] ring-1 ring-white/20 sm:!h-[46px] sm:!pl-3.5 sm:!pr-4 sm:!text-sm"
+        className="homy-btn !h-11 !rounded-full !px-4 !text-xs shadow-lg"
       >
-        <span className="relative flex h-6 w-6 items-center justify-center rounded-full bg-white/10">
-          <Sparkles size={14} className="text-[#34dfac]" />
-          <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-[#d7b158]" />
-        </span>
+        <Sparkles size={14} className="text-[#34dfac]" />
         <span className="hidden sm:inline">{cp.launcher}</span>
         <span className="sm:hidden">{cp.mobileLauncher}</span>
-      </motion.button>
+      </button>
     </div>
   );
 }
