@@ -4,35 +4,35 @@
   <defs>
     
     <linearGradient id="bw-icon-light-em-stem" x1="88" y1="42" x2="175" y2="430" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#16866A"/>
-      <stop offset="52%" stop-color="#0F664F"/>
-      <stop offset="100%" stop-color="#094133"/>
+      <stop offset="0%" stop-color="#00A87A"/>
+      <stop offset="52%" stop-color="#0A7B5C"/>
+      <stop offset="100%" stop-color="#054A38"/>
     </linearGradient>
     <linearGradient id="bw-icon-light-em-arch" x1="120" y1="168" x2="412" y2="330" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#16866A"/>
-      <stop offset="58%" stop-color="#0F664F"/>
-      <stop offset="100%" stop-color="#094133"/>
+      <stop offset="0%" stop-color="#00A87A"/>
+      <stop offset="58%" stop-color="#0A7B5C"/>
+      <stop offset="100%" stop-color="#054A38"/>
     </linearGradient>
     <linearGradient id="bw-icon-light-em-facet" x1="94" y1="44" x2="148" y2="210" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#35BFA0" stop-opacity="0.42"/>
       <stop offset="100%" stop-color="#13755C" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="bw-icon-light-gold-ring" x1="158" y1="242" x2="414" y2="452" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#6F4B0C"/>
-      <stop offset="28%" stop-color="#8E6312"/>
-      <stop offset="58%" stop-color="#BE8F2A"/>
-      <stop offset="82%" stop-color="#A8791B"/>
-      <stop offset="100%" stop-color="#6F4B0C"/>
+      <stop offset="0%" stop-color="#754C04"/>
+      <stop offset="28%" stop-color="#996809"/>
+      <stop offset="58%" stop-color="#D49B22"/>
+      <stop offset="82%" stop-color="#BA8414"/>
+      <stop offset="100%" stop-color="#754C04"/>
     </linearGradient>
     <linearGradient id="bw-icon-light-gold-roof" x1="184" y1="224" x2="366" y2="368" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#BE8F2A"/>
-      <stop offset="48%" stop-color="#A8791B"/>
-      <stop offset="100%" stop-color="#6F4B0C"/>
+      <stop offset="0%" stop-color="#D49B22"/>
+      <stop offset="48%" stop-color="#BA8414"/>
+      <stop offset="100%" stop-color="#754C04"/>
     </linearGradient>
     <linearGradient id="bw-icon-light-gold-text" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#A8791B"/>
-      <stop offset="50%" stop-color="#BE8F2A"/>
-      <stop offset="100%" stop-color="#8E6312"/>
+      <stop offset="0%" stop-color="#BA8414"/>
+      <stop offset="50%" stop-color="#D49B22"/>
+      <stop offset="100%" stop-color="#996809"/>
     </linearGradient>
     <linearGradient id="bw-icon-light-crest-bg" x1="40" y1="20" x2="472" y2="492" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#101D33"/>

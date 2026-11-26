@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="bw-page-spacer bg-white">
+    <div className="bw-page-spacer bg-transparent">
       {/* Institutional Two-Column About Hero */}
       <section className="py-12 lg:py-20">
         <div className="wrap grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
@@ -33,10 +33,10 @@ export default function Page() {
               We educate clients one-on-one across 24 licensed conventional and Islamic lenders, clarify CBUAE 50% DBR
               caps and 4% DLD transfer fees upfront, and manage every milestone calmly through valuation and keys.
             </p>
-            <div className="mt-2 overflow-hidden rounded-[20px]">
+            <div className="mt-2 overflow-hidden rounded-[22px] border border-white/80 shadow-[0_22px_50px_-28px_rgba(8,15,28,0.28)]">
               <img
                 src="/images/dubai-waterfront-1280.webp"
-                alt="Morning architectural view of Dubai waterfront residences and skyline"
+                alt="Sunlit morning architectural view of Dubai Marina crystal waterfront residences and skyline"
                 width={1280}
                 height={720}
                 className="aspect-[16/10] w-full object-cover"
@@ -45,18 +45,18 @@ export default function Page() {
           </div>
 
           <div className="flex min-w-0 flex-col gap-6">
-            <div className="overflow-hidden rounded-[20px]">
+            <div className="overflow-hidden rounded-[22px] border border-white/80 shadow-[0_22px_50px_-28px_rgba(8,15,28,0.28)]">
               <img
                 src="/images/villa-courtyard-1792.webp"
-                alt="Concept image: calm Arabian courtyard villa with reflecting pool"
+                alt="Sunlit morning architectural view of DIFC Gate Building and Downtown Dubai skyline"
                 width={1792}
                 height={2400}
                 className="aspect-[4/4.3] w-full object-cover"
               />
             </div>
-            <div className="min-w-0 overflow-hidden rounded-[16px] bg-[#f6f6f6] px-5 py-4">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#4b5b63]">
-                {BANKS.length} UAE Lenders Compared
+            <div className="min-w-0 overflow-hidden rounded-[18px] border border-[#dce7e2] bg-white/88 px-5 py-4 backdrop-blur-md">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-[#4b5b63]">
+                {BANKS.length} Licensed UAE Banks Compared
               </p>
               <LogoMarquee
                 label="UAE banks in the lender directory"

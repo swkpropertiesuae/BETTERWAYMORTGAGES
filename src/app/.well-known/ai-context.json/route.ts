@@ -19,7 +19,7 @@ export const GET = () =>
         currencies: ['AED', 'USD', 'GBP', 'EUR', 'SAR', 'RUB', 'CNY', 'INR'],
         sitemapXml: `${SITE.url}/sitemap.xml`,
         pdfDownloads: `${SITE.url}/downloads`,
-        partnerRealEstate: 'https://swkpropertiesuae.com',
+        independentAdvisory: true,
       },
       null,
       2,

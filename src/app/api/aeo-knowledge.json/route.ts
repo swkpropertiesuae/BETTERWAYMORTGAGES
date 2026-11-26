@@ -32,7 +32,7 @@ export const GET = () => {
         betterVault: `${SITE.url}/portal/login`,
         betterDesk: `${SITE.url}/hot-offers`,
       },
-      partnerEcosystem: ['https://swkpropertiesuae.com', SITE.osUrl],
+      operatingPlatform: SITE.osUrl,
       languages: ['en-AE', 'ar-AE', 'ru', 'zh-Hans', 'fr', 'es'],
       currencies: ['AED', 'USD', 'GBP', 'EUR', 'SAR', 'RUB', 'CNY', 'INR'],
       liveFxEndpoint: `${SITE.url}/api/market/fx`,

@@ -135,7 +135,7 @@ export function VideoBriefingModal({
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={431}
+                  height={419}
                   className="h-9 w-auto sm:h-10"
                 />
                 <span className="hidden rounded-full border border-[#179373]/40 bg-[#179373]/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#34dfac] sm:inline-flex">

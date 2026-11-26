@@ -209,13 +209,11 @@ export function TeamPortfolio({
               <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#0a1424]">
                 <img
                   src={member.portrait}
-                  srcSet={`${member.portrait1080} 900w, ${member.portrait8k} 1500w`}
-                  sizes="(min-width: 1024px) 23vw, (min-width: 640px) 46vw, 100vw"
                   alt={`${member.name} — ${member.designation} at Betterway Mortgages Dubai`}
                   width={900}
                   height={1200}
-                  loading={idx < 4 ? 'eager' : 'lazy'}
-                  decoding="async"
+                  loading="eager"
+                  decoding="sync"
                   className="h-full w-full object-cover object-center transition duration-500 ease-out group-hover:scale-[1.03]"
                 />
                 <div

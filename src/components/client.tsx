@@ -328,7 +328,7 @@ export function LeadForm({
         <div className="grid gap-4 sm:grid-cols-3">
           <label className="text-sm font-medium text-navy sm:col-span-3">
             Brokerage / agency name
-            <input required className={field} value={f.agencyName} onChange={(e) => setF({ ...f, agencyName: e.target.value })} placeholder="e.g. SWK Properties LLC" />
+            <input required className={field} value={f.agencyName} onChange={(e) => setF({ ...f, agencyName: e.target.value })} placeholder="e.g. Dubai Prime Realty LLC" />
           </label>
           <label className="text-sm font-medium text-navy sm:col-span-2">
             RERA ORN

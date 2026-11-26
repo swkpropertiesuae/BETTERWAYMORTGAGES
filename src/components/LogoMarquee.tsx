@@ -40,9 +40,11 @@ export default function LogoMarquee({
                 <img
                   src={it.logo}
                   alt={isClone ? '' : it.label}
-                  className="h-7 w-auto max-w-[126px] object-contain"
-                  loading="lazy"
-                  decoding="async"
+                  width={116}
+                  height={28}
+                  className="h-7 w-[116px] object-contain"
+                  loading="eager"
+                  decoding="sync"
                 />
               ) : (
                 <span className="truncate">{it.label}</span>

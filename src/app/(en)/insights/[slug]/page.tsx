@@ -85,7 +85,7 @@ export default async function InsightTopicPage({
   };
 
   return (
-    <div className="holo-canvas pt-[112px] max-sm:pt-[94px]">
+    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
       <article className="holo-section">
         <div className="mx-auto max-w-[960px] space-y-6">
           <Crumbs
@@ -183,22 +183,22 @@ export default async function InsightTopicPage({
             <div className="flex flex-col justify-between rounded-[20px] border border-[#e5e7eb] bg-[#070e1a] p-6 text-white">
               <div>
                 <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#f1d57e]">
-                  <ShieldCheck size={14} /> Betterway × SWK Properties UAE
+                  <ShieldCheck size={14} /> BetterClose · Dubai Closing Desk
                 </span>
                 <h3 className="mt-2 font-display text-lg font-bold text-white">
-                  Align pre-approval with verified Dubai listings
+                  Align 24-bank pre-approval before signing Form F
                 </h3>
                 <p className="mt-1 text-sm text-white/75">
-                  Explore curated ready &amp; off-plan communities alongside 24-bank mortgage structuring.
+                  Review 60 UAE freehold communities alongside CBUAE 50% DBR structuring and 1-on-1 closing support.
                 </p>
               </div>
               <div className="mt-4 flex flex-wrap gap-4 text-xs font-bold">
                 <Link href="/areas" className="text-[#34dfac] hover:underline">
                   60 UAE Communities →
                 </Link>
-                <a href="https://swkpropertiesuae.com" target="_blank" rel="noopener noreferrer" className="text-[#f1d57e] hover:underline">
-                  swkpropertiesuae.com ↗
-                </a>
+                <Link href="/concierge" className="text-[#f1d57e] hover:underline">
+                  Open BetterClose →
+                </Link>
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ import { AR_UI } from '@/data/ar';
 export function ArHero({ crumbs, eyebrow, title, capsule, en, children }: { crumbs: [string, string][]; eyebrow?: string; title: string; capsule: string; en?: string; children?: ReactNode }) {
   const all: [string, string][] = [[AR_UI.home, '/ar'], ...crumbs];
   return (
-    <section className="border-b border-line bg-mist">
+    <section className="border-b border-white/60 bg-white/58 backdrop-blur-md">
       <div className="wrap py-10 lg:py-14">
         <nav aria-label="مسار التنقل" className="text-sm text-slate">
           <ol className="flex flex-wrap gap-1.5">{all.map(([n, h], i) => <li key={h} className="flex gap-1.5">{i > 0 && <span className="text-line">/</span>}{i < all.length - 1 ? <Link href={h} className="hover:text-teal">{n}</Link> : <span aria-current="page" className="text-navy">{n}</span>}</li>)}</ol>
@@ -31,7 +31,7 @@ export function ArHero({ crumbs, eyebrow, title, capsule, en, children }: { crum
 
 export function ArSection({ title, children, tone = 'white', id }: { title: string; children: ReactNode; tone?: 'white' | 'mist'; id?: string }) {
   return (
-    <section id={id} className={`${tone === 'mist' ? 'bg-mist' : 'bg-white'} py-14`}>
+    <section id={id} className={`${tone === 'mist' ? 'border-y border-white/60 bg-white/58 backdrop-blur-md' : 'bg-transparent'} py-14`}>
       <div className="wrap"><h2 className="mb-8 text-[1.75rem] font-bold sm:text-3xl">{title}</h2>{children}</div>
     </section>
   );

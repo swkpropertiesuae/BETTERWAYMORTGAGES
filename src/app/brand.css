@@ -74,7 +74,7 @@
 .bw-section {
   position: relative;
   padding-block: var(--bw-section);
-  background: #ffffff;
+  background: transparent;
 }
 .bw-section--tight {
   padding-block: 56px;
@@ -274,18 +274,18 @@
 .bw-btn--sm { height: 42px; padding-left: 16px; font-size: 13.5px; }
 .bw-btn__label { display: inline-flex; align-items: center; }
 
-/* ---------- Corporate Institutional Navbar (Shared Exact Grid Rail With Hero) ---------- */
+/* ---------- 21st.dev Corporate Fintech Floating Navbar (Shared 1320px Rail With Hero) ---------- */
 .bw-header {
   position: fixed;
   top: 0;
   inset-inline: 0;
   z-index: 50;
   padding-inline: var(--bw-canvas-pad);
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(10, 20, 36, 0.08);
-  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(22px) saturate(1.45);
+  -webkit-backdrop-filter: blur(22px) saturate(1.45);
+  border-bottom: 1px solid rgba(10, 20, 36, 0.09);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .bw-header[data-over-hero='true'][data-scrolled='false'] {
   background: transparent;
@@ -296,9 +296,9 @@
   padding-top: 14px;
 }
 .bw-header[data-scrolled='true'] {
-  background: rgba(255, 255, 255, 0.98);
-  border-bottom-color: rgba(10, 20, 36, 0.08);
-  box-shadow: 0 10px 34px -18px rgba(10, 20, 36, 0.16);
+  background: rgba(255, 255, 255, 0.86);
+  border-bottom-color: rgba(10, 20, 36, 0.09);
+  box-shadow: 0 12px 36px -18px rgba(10, 20, 36, 0.14);
 }
 .bw-header .wrap {
   max-width: var(--bw-rail-max);
@@ -365,26 +365,28 @@
 .bw-nav {
   display: none;
   align-items: center;
-  gap: clamp(12px, 1.45vw, 22px);
+  gap: 2px;
 }
 @media (min-width: 1200px) {
   .bw-nav { display: flex; }
 }
+.bw-fintech-nav,
 .holo-nav-pill {
-  height: 44px;
-  padding: 0 22px;
+  height: 46px;
+  padding: 0 8px;
   border-radius: 9999px;
-  background: rgba(10, 20, 36, 0.56);
-  backdrop-filter: blur(24px) saturate(1.35);
-  -webkit-backdrop-filter: blur(24px) saturate(1.35);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 14px 34px -16px rgba(7, 14, 26, 0.48);
-  transition: background 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(10, 20, 36, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 8px 22px -14px rgba(10, 20, 36, 0.16);
+  transition: background 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
 }
-.bw-header[data-scrolled='true'] .holo-nav-pill {
-  background: rgba(10, 20, 36, 0.94);
-  border-color: rgba(10, 20, 36, 0.1);
-  box-shadow: 0 10px 26px -14px rgba(10, 20, 36, 0.28);
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-fintech-nav,
+.bw-header[data-over-hero='true'][data-scrolled='false'] .holo-nav-pill {
+  background: rgba(7, 13, 25, 0.56);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 16px 36px -16px rgba(5, 11, 22, 0.52);
 }
 .bw-nav a,
 .bw-nav button {
@@ -393,42 +395,33 @@
   align-items: center;
   gap: 5px;
   height: 100%;
-  padding: 0 6px;
+  padding: 0 13px;
   font-size: 13.5px;
-  font-weight: 500;
-  letter-spacing: -0.008em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   text-transform: none;
   white-space: nowrap;
-  color: rgba(255, 255, 255, 0.88);
-  transition: color 0.2s ease;
+  color: #334155;
+  transition: color 0.18s ease;
   cursor: pointer;
-}
-.bw-nav a::after,
-.bw-nav button::after {
-  content: '';
-  position: absolute;
-  inset-inline: 6px;
-  bottom: 7px;
-  height: 2px;
-  border-radius: 99px;
-  background: linear-gradient(90deg, #22ba90, #dec178);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.25s var(--ease-expo);
 }
 .bw-nav a:hover,
 .bw-nav button:hover,
 .bw-nav a[data-active='true'],
 .bw-nav button[data-active='true'],
 .bw-nav button[aria-expanded='true'] {
-  color: #ffffff;
+  color: #070e1a;
 }
-.bw-nav a:hover::after,
-.bw-nav button:hover::after,
-.bw-nav a[data-active='true']::after,
-.bw-nav button[data-active='true']::after,
-.bw-nav button[aria-expanded='true']::after {
-  transform: scaleX(1);
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-nav a,
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-nav button {
+  color: rgba(255, 255, 255, 0.88);
+}
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-nav a:hover,
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-nav button:hover,
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-nav a[data-active='true'],
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-nav button[data-active='true'],
+.bw-header[data-over-hero='true'][data-scrolled='false'] .bw-nav button[aria-expanded='true'] {
+  color: #ffffff;
 }
 
 /* Unified 44px Corporate Utility Controls (Matching Glass Over Hero -> Crisp Slate On Scrolled White) */
@@ -1322,7 +1315,7 @@
    SECTION 10: HOMY ROUNDED SKY-TO-TWILIGHT FOOTER (#0b1117, radius: 30px)
    ========================================================================== */
 .homy-footer-shell {
-  background: #f5f6f7;
+  background: transparent;
   padding: 6px clamp(12px, 1.8vw, 24px) 20px;
 }
 .homy-footer-card {
@@ -1478,8 +1471,10 @@
 .bw-pagehero {
   position: relative;
   overflow: clip;
-  background: #ffffff;
-  border-bottom: 1px solid var(--homy-border);
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(10, 20, 36, 0.08);
   padding-top: 98px;
 }
 @media (max-width: 639px) { .bw-pagehero { padding-top: 82px; } }
@@ -1752,7 +1747,7 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
    BETTERWAY INSTITUTIONAL MORNING HERO & EXECUTIVE CANVAS
    ========================================================================== */
 .holo-canvas {
-  background: #f5f6f7;
+  background: transparent;
   padding: 14px var(--bw-canvas-pad) 24px;
   display: flex;
   flex-direction: column;
@@ -1762,16 +1757,16 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
 
 .holo-hero {
   position: relative;
-  min-height: clamp(640px, 88svh, 810px);
+  min-height: clamp(660px, 90svh, 840px);
   border-radius: 28px;
   overflow: hidden;
   isolation: isolate;
-  background: #1a3554;
+  background: #10243d;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(136px, 15vh, 172px) 0 clamp(46px, 5.2vw, 68px);
-  box-shadow: 0 32px 80px -36px rgba(10, 20, 36, 0.38);
+  justify-content: center;
+  padding: clamp(126px, 13.5vh, 156px) 0 clamp(46px, 5vw, 66px);
+  box-shadow: 0 36px 90px -36px rgba(10, 20, 36, 0.44);
 }
 .holo-hero__inner {
   position: relative;
@@ -1793,24 +1788,28 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   height: 100%;
   object-fit: cover;
   object-position: center 42%;
-  filter: brightness(1.06) saturate(1.06) contrast(1.02);
+  filter: brightness(1.04) saturate(1.06) contrast(1.02);
   image-rendering: auto;
 }
-/* Feather-light sunlit morning daylight scrim: keeps Dubai morning sky & architecture vividly visible while locking 100% logo readability top-left */
+/* Refined Light Frosted Legibility Veil: adds subtle luminous depth & blur so hero typography & floating iPhone/Laptop pop with 100% clarity */
 .holo-hero__scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
+  backdrop-filter: blur(2.5px) saturate(1.08);
+  -webkit-backdrop-filter: blur(2.5px) saturate(1.08);
   background:
-    radial-gradient(ellipse 34% 26% at 15% 7%, rgba(7, 15, 29, 0.56) 0%, rgba(7, 15, 29, 0.18) 58%, rgba(7, 15, 29, 0) 100%),
-    radial-gradient(ellipse 68% 82% at 18% 60%, rgba(9, 19, 36, 0.56) 0%, rgba(9, 19, 36, 0.28) 46%, rgba(9, 19, 36, 0) 78%),
-    linear-gradient(180deg, rgba(7, 15, 29, 0.44) 0%, rgba(9, 19, 36, 0.12) 17%, rgba(9, 19, 36, 0) 32%, rgba(9, 19, 36, 0) 74%, rgba(9, 19, 36, 0.48) 100%);
+    radial-gradient(ellipse 40% 30% at 15% 8%, rgba(6, 14, 28, 0.62) 0%, rgba(6, 14, 28, 0.22) 60%, rgba(6, 14, 28, 0) 100%),
+    linear-gradient(108deg, rgba(6, 14, 28, 0.68) 0%, rgba(8, 19, 38, 0.46) 46%, rgba(250, 249, 239, 0.16) 78%, rgba(10, 22, 42, 0.32) 100%),
+    linear-gradient(180deg, rgba(6, 14, 28, 0.46) 0%, rgba(255, 255, 255, 0.08) 38%, rgba(6, 14, 28, 0.56) 100%);
 }
 .holo-hero__scrim--rtl {
+  backdrop-filter: blur(2.5px) saturate(1.08);
+  -webkit-backdrop-filter: blur(2.5px) saturate(1.08);
   background:
-    radial-gradient(ellipse 34% 26% at 85% 7%, rgba(7, 15, 29, 0.56) 0%, rgba(7, 15, 29, 0.18) 58%, rgba(7, 15, 29, 0) 100%),
-    radial-gradient(ellipse 68% 82% at 82% 60%, rgba(9, 19, 36, 0.56) 0%, rgba(9, 19, 36, 0.28) 46%, rgba(9, 19, 36, 0) 78%),
-    linear-gradient(180deg, rgba(7, 15, 29, 0.44) 0%, rgba(9, 19, 36, 0.12) 17%, rgba(9, 19, 36, 0) 32%, rgba(9, 19, 36, 0) 74%, rgba(9, 19, 36, 0.48) 100%);
+    radial-gradient(ellipse 40% 30% at 85% 8%, rgba(6, 14, 28, 0.62) 0%, rgba(6, 14, 28, 0.22) 60%, rgba(6, 14, 28, 0) 100%),
+    linear-gradient(252deg, rgba(6, 14, 28, 0.68) 0%, rgba(8, 19, 38, 0.46) 46%, rgba(250, 249, 239, 0.16) 78%, rgba(10, 22, 42, 0.32) 100%),
+    linear-gradient(180deg, rgba(6, 14, 28, 0.46) 0%, rgba(255, 255, 255, 0.08) 38%, rgba(6, 14, 28, 0.56) 100%);
 }
 .bw-hero-chip {
   display: inline-flex;
@@ -1961,59 +1960,82 @@ html.bw-motion [data-reveal='horizon']:not(.is-in) { opacity: 0; transform: tran
   transform: translateX(3px);
 }
 
-/* Rounded Bento Ecosystem Sections (#FFFFFF, Soft Mint #EEF7F4, Pitch Black #0B1117) */
+/* Rounded Frosted Bento Fintech Sections Floating Cleanly Over Global 21st.dev Pipo Gradient */
 .holo-section {
   border-radius: 28px;
-  background: #ffffff;
-  padding: clamp(44px, 6vw, 88px) clamp(20px, 4.5vw, 68px);
-  box-shadow: 0 10px 40px -28px rgba(18, 18, 23, 0.12);
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  padding: clamp(44px, 5.6vw, 84px) clamp(20px, 4.2vw, 64px);
+  box-shadow: 0 18px 54px -32px rgba(10, 20, 36, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 .holo-section--mint {
-  background: #eef7f4;
+  background: rgba(238, 247, 244, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.75);
 }
 .holo-section--dark {
-  background: #0b1117;
+  background: #070d19;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #ffffff;
 }
 .holo-display-h2 {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4.8vw, 68px);
+  font-size: clamp(32px, 4.8vw, 64px);
   font-weight: 800;
   line-height: 1.03;
   letter-spacing: -0.032em;
-  color: #121217;
+  color: #0a1424;
 }
 .holo-display-h3 {
   font-family: var(--font-display);
-  font-size: clamp(26px, 3.1vw, 44px);
+  font-size: clamp(26px, 3.1vw, 42px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.025em;
-  color: #121217;
+  color: #0a1424;
 }
 .holo-lead {
-  font-size: clamp(16px, 1.4vw, 20px);
+  font-size: clamp(16px, 1.35vw, 19px);
   font-weight: 450;
   line-height: 1.55;
-  color: #464c5c;
+  color: #3f4b5b;
 }
 
-/* Deep Emerald-Obsidian UI Visual Stage (Betterway counterpart to Holo's indigo mockup cards) */
+/* Unified 21st.dev / Framer Institutional Fintech Stage — Identical Precision Grid + Aurora Mesh Across EVERY Card */
+.bw-fintech-stage,
 .holo-visual-stage {
   position: relative;
   border-radius: 24px;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(23, 147, 115, 0.34), transparent 65%),
-    radial-gradient(ellipse 70% 55% at 85% 90%, rgba(215, 177, 88, 0.2), transparent 65%),
-    linear-gradient(160deg, #10322e 0%, #0d1a2a 52%, #070b12 100%);
-  padding: clamp(22px, 3vw, 38px);
+  isolation: isolate;
+  background-color: #060c18;
+  background-image:
+    radial-gradient(ellipse 85% 65% at 14% 0%, rgba(0, 196, 140, 0.30), transparent 62%),
+    radial-gradient(ellipse 75% 60% at 88% 100%, rgba(236, 184, 68, 0.24), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 62% 28%, rgba(96, 165, 250, 0.14), transparent 65%),
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(155deg, #091426 0%, #060c18 55%, #040811 100%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px, 28px 28px, 100% 100%;
+  padding: 24px 26px;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  min-height: 410px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.bw-fintech-stage::before,
+.holo-visual-stage::before {
+  content: '';
+  position: absolute;
+  inset-inline: 18%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(52, 223, 172, 0.72), rgba(247, 195, 62, 0.78), transparent);
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Holo Split Tabbed Mortgage + DLD Calculator Card */

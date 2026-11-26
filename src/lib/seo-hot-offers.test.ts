@@ -8,8 +8,9 @@ import { enhancedOrgSchema, websiteSchema, speakablePageSchema, pdfCatalogSchema
 
 const repo = (rel: string) => path.resolve(process.cwd(), rel);
 
-test('all 3 executive CBUAE-compliant Betterway PDF guides exist on disk under public/docs/', () => {
-  assert.equal(PDF_RESOURCES.length, 3);
+test('all 52 executive CBUAE-compliant Betterway PDF guides exist on disk under public/docs/', () => {
+  assert.ok(PDF_RESOURCES.length >= 50, `Expected 50+ PDF guides, got ${PDF_RESOURCES.length}`);
+  assert.equal(PDF_RESOURCES.length, 52);
   for (const pdf of PDF_RESOURCES) {
     const abs = repo(path.join('public', pdf.file));
     assert.ok(existsSync(abs), `Missing PDF on disk: ${pdf.file}`);
@@ -73,6 +74,24 @@ test('SEO, AEO, AIO, GEO JSON-LD schemas emit valid Organization, WebSite, Speak
   assert.ok(Array.isArray(org['@type']) && org['@type'].includes('FinancialService'));
   assert.equal(web['@type'], 'WebSite');
   assert.equal(speak.speakable['@type'], 'SpeakableSpecification');
-  assert.equal(pdfs.itemListElement.length, 3);
+  assert.equal(pdfs.itemListElement.length, 52);
   assert.equal(pdfs.itemListElement[0].item['@type'], 'DigitalDocument');
+});
+
+test('global Pipo GradientBackground, FloatingDeviceMockups, InteractiveReadinessStudio, FlagshipCta, and Home Team removal are wired cleanly', () => {
+  const pipo = readFileSync(repo('src/components/ui/pipo.tsx'), 'utf8');
+  const enLayout = readFileSync(repo('src/app/(en)/layout.tsx'), 'utf8');
+  const arLayout = readFileSync(repo('src/app/(ar)/layout.tsx'), 'utf8');
+  const homeHero = readFileSync(repo('src/components/home/HomeHero.tsx'), 'utf8');
+  const homeExp = readFileSync(repo('src/components/home/HomeExperience.tsx'), 'utf8');
+  const aboutPage = readFileSync(repo('src/app/(en)/about-us/page.tsx'), 'utf8');
+
+  assert.match(pipo, /export function GradientBackground/);
+  assert.match(enLayout, /<GradientBackground\b/);
+  assert.match(arLayout, /<GradientBackground\b/);
+  assert.match(homeHero, /FloatingDeviceMockups/);
+  assert.match(homeExp, /InteractiveReadinessStudio/);
+  assert.match(homeExp, /FlagshipCta/);
+  assert.doesNotMatch(homeExp, /HomyAdvisorsCarousel/);
+  assert.match(aboutPage, /<TeamPortfolio\b/);
 });

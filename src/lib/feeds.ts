@@ -25,8 +25,7 @@ export function llms() {
 Machine-readable reference guide: ${SITE.url}/llms-full.txt
 Structured JSON knowledge graph: ${SITE.url}/api/aeo-knowledge.json
 Well-known AI context manifest: ${SITE.url}/.well-known/ai-context.json
-Printable PDF guides: ${SITE.url}/downloads
-Partner real estate ecosystem: https://swkpropertiesuae.com
+Free Executive PDF Guides Library (52 guides): ${SITE.url}/downloads
 
 ## Downloadable PDF Dossiers
 ${PDF_RESOURCES.map((p) => `- [${p.title}](${SITE.url}${p.file}) — ${p.subtitle}`).join('\n')}

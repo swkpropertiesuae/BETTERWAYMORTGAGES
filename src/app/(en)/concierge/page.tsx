@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { ArrowRight, Building2, CheckCircle2, FileCheck2, MapPin, ShieldCheck } from 'lucide-react';
 import { Cta, CtaBand, SectionTag } from '@/components/ui';
 import { SpotlightCard } from '@/components/ui/MotionPrimitives';
+import LogoMarquee from '@/components/LogoMarquee';
+import { BANKS } from '@/data/banks';
 import { COMMUNITIES } from '@/data/communities';
 
 export const metadata: Metadata = {
@@ -39,7 +41,7 @@ export default function ConciergePage() {
   const featuredAreas = COMMUNITIES.slice(0, 8);
 
   return (
-    <div className="holo-canvas pt-[112px] max-sm:pt-[94px]">
+    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
       {/* Rounded Concierge Hero */}
       <section className="holo-section">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
@@ -61,12 +63,12 @@ export default function ConciergePage() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-[24px] shadow-xl">
+          <div className="overflow-hidden rounded-[24px] border border-white/80 shadow-[0_24px_56px_-28px_rgba(8,15,28,0.3)]">
             <img
               src="/images/dubai-interior-2560.webp"
               srcSet="/images/dubai-interior-1280.webp 1280w, /images/dubai-interior-2560.webp 2560w"
               sizes="(min-width: 1024px) 46vw, 100vw"
-              alt="Concept image: sunlit luxury Dubai residence interior overlooking the skyline"
+              alt="Sunlit morning travertine luxury Dubai penthouse interior overlooking the marina skyline"
               width={2560}
               height={1440}
               className="aspect-[16/11] w-full object-cover"
@@ -85,15 +87,26 @@ export default function ConciergePage() {
           {PILLARS.map((p) => {
             const Icon = p.icon;
             return (
-              <SpotlightCard key={p.title} className="rounded-[22px] border border-[#eceef2] bg-[#f8f9fa] p-7">
-                <span className="grid h-12 w-12 place-items-center rounded-[14px] bg-[#0b1117] text-[#34dfac]">
-                  <Icon size={22} />
-                </span>
-                <h3 className="mt-5 font-display text-xl font-bold text-[#121217]">{p.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-[#4b5b63]">{p.body}</p>
-              </SpotlightCard>
-            );
-          })}
+            <SpotlightCard key={p.title} className="rounded-[22px] border border-[#dce7e2] bg-white/92 p-7 backdrop-blur-md">
+              <span className="grid h-12 w-12 place-items-center rounded-[14px] bg-[#080b0f] text-[#00d69a]">
+                <Icon size={22} />
+              </span>
+              <h3 className="mt-5 font-display text-xl font-bold text-[#080b0f]">{p.title}</h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-[#4f596b]">{p.body}</p>
+            </SpotlightCard>
+          );
+        })}
+        </div>
+
+        <div className="mt-10 rounded-[24px] border border-[#dce7e2] bg-white/88 p-6 backdrop-blur-md">
+          <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#4f596b]">
+            Pre-approval &amp; valuation coordinated across {BANKS.length} licensed UAE banks
+          </p>
+          <LogoMarquee
+            label="24 UAE banks coordinated by BetterClose"
+            items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))}
+            speed={64}
+          />
         </div>
       </section>
 

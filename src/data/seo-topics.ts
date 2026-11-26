@@ -1,48 +1,9 @@
 import type { Faq } from './products';
+import { PDF_LIBRARY, FEATURED_PDFS, PDF_CATEGORIES, type PdfGuide } from './pdf-library';
 
-export interface PdfResource {
-  id: string;
-  slug: string;
-  file: string;
-  title: string;
-  subtitle: string;
-  pages: number;
-  audience: string;
-  keywords: string[];
-}
-
-export const PDF_RESOURCES: readonly PdfResource[] = [
-  {
-    id: 'buyer-guide-2026',
-    slug: 'uae-mortgage-buyer-guide-2026',
-    file: '/docs/Betterway-UAE-Mortgage-Buyer-Guide-2026.pdf',
-    title: 'UAE & Dubai Mortgage Buyer Guide (2026–2027)',
-    subtitle: 'Statutory CBUAE LTV & 50% DBR caps, itemised 4% DLD closing fee sheet, and 24 licensed UAE banks directory.',
-    pages: 2,
-    audience: 'UAE Residents, Expats & First-Time Buyers',
-    keywords: ['Dubai mortgage guide PDF', 'UAE home loan rules 2026', 'CBUAE LTV DBR PDF', '4% DLD fee sheet'],
-  },
-  {
-    id: 'dld-transfer-checklist',
-    slug: 'dubai-dld-transfer-checklist',
-    file: '/docs/Betterway-Dubai-DLD-Transfer-Checklist.pdf',
-    title: 'Dubai Form F & DLD Trustee Transfer Day Checklist',
-    subtitle: 'Valuation addendum protection, seller liability letter, developer NOC, and manager’s cheque checklist.',
-    pages: 1,
-    audience: 'Secondary Market & Off-Plan Handover Buyers',
-    keywords: ['Dubai DLD transfer checklist PDF', 'RERA Form F valuation clause', 'Dubai trustee office cheques'],
-  },
-  {
-    id: 'non-resident-golden-visa',
-    slug: 'non-resident-golden-visa-mortgage-guide',
-    file: '/docs/Betterway-Non-Resident-and-Golden-Visa-Mortgage-Guide.pdf',
-    title: 'Non-Resident & AED 2M Golden Visa Mortgage Playbook',
-    subtitle: 'Overseas buyer documentation across 25 countries, AED 2,000,000 Golden Visa rules, FX, and remote PoA.',
-    pages: 1,
-    audience: 'International Investors & Golden Visa Applicants',
-    keywords: ['Non-resident mortgage Dubai PDF', 'Dubai Golden Visa AED 2M mortgage guide', 'overseas buyer UAE home loan'],
-  },
-] as const;
+export type PdfResource = PdfGuide;
+export const PDF_RESOURCES: readonly PdfResource[] = PDF_LIBRARY;
+export { FEATURED_PDFS, PDF_CATEGORIES };
 
 export interface SeoTopic {
   slug: string;
@@ -494,16 +455,16 @@ const SEEDS: readonly TopicSeed[] = [
     'Not all 24 banks cover every RAK project; screening lender Emirate panels upfront with Betterway matches your property directly to banks actively financing Al Marjan Island and Al Hamra.',
   ],
   [
-    'swk-properties-dubai-mortgage-partner-desk',
+    'betterclose-dubai-form-f-pre-approval-desk',
     'Refinance, Off-Plan & Closing',
-    'Betterway Mortgages × SWK Properties UAE: Integrated Property & Finance Desk',
-    ['SWK Properties Dubai mortgage', 'swkpropertiesuae.com financing', 'Dubai property and mortgage ecosystem'],
-    'Through our partner real estate bridge with SWK Properties UAE (swkpropertiesuae.com), Dubai homebuyers and investors align verified 50% CBUAE mortgage pre-approval directly with curated ready and 2026–2027 handover inventory across JVC, Business Bay, Dubai Marina, Dubai Creek Harbour, and DAMAC Hills.',
-    ['Verify exact 24-bank mortgage pre-approval before viewing properties on swkpropertiesuae.com', 'Coordinate RERA Form F valuation clauses cleanly between brokerage and underwriting desk', 'End-to-end handover and secondary conveyancing through DLD trustee e-Title Deed issuance', 'Access co-branded calculators, DLD closing sheets, and Betterway OS milestone tracking'],
+    'BetterClose Dubai: Aligning 24-Bank Pre-Approval With Form F & DLD Transfer',
+    ['BetterClose Dubai mortgage', 'Form F pre-approval Dubai', 'Dubai property closing and mortgage desk'],
+    'Through BetterClose, Dubai homebuyers and overseas investors align verified 50% CBUAE mortgage pre-approval directly with Form F valuation protection clauses, independent bank valuation prep, and DLD trustee manager’s cheque coordination across all 60 UAE freehold communities.',
+    ['Verify exact 24-bank mortgage pre-approval before committing booking deposits', 'Structure mortgage-contingent RERA Form F valuation clauses cleanly upfront', 'Coordinate developer NOCs, liability letters, and DLD trustee e-Title Deed issuance', 'Access multi-currency calculators, itemised 4% DLD sheets, and BetterVault milestone tracking'],
     '/concierge',
-    'Open Betterway Property Closing Desk',
-    'How do Betterway Mortgages and SWK Properties UAE work together for buyers?',
-    'Betterway handles independent 24-bank mortgage structuring and CBUAE DBR pre-approval while SWK Properties UAE (swkpropertiesuae.com) sources matching freehold homes — giving buyers one coordinated closing timeline.',
+    'Open BetterClose Buying Desk',
+    'How does BetterClose protect my deposit before I sign RERA Form F?',
+    'BetterClose verifies your 50% CBUAE DBR headroom and 24-bank lender appetite first, then helps structure valuation-contingent Form F addenda and DLD transfer cheques so your 10% security deposit stays protected.',
   ],
 ];
 

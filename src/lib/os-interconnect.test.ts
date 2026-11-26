@@ -24,19 +24,19 @@ test('buildOsLeadPayload normalizes website enquiries, partner RERA metadata, an
     topic: 'Calculator scenario: mortgage-repayment',
     preferredSlot: 'Today 3:00 PM',
     sourcePage: '/calculators/mortgage-repayment',
-    agencyName: 'SWK Properties LLC',
+    agencyName: 'Dubai Prime Realty LLC',
     reraOrn: 'ORN-51517',
     reraBrn: 'BRN-44210',
-    partnerRef: 'swk-brn44210',
+    partnerRef: 'rera-brn44210',
   });
 
   assert.equal(payload.contactName, 'Zayed Al Mansoori');
   assert.equal(payload.contactPhone, '+971 50 123 4567');
   assert.equal(payload.propertyPriceAed, 3_500_000);
   assert.equal(payload.preferredSlot, 'Today 3:00 PM');
-  assert.equal(payload.agencyName, 'SWK Properties LLC');
+  assert.equal(payload.agencyName, 'Dubai Prime Realty LLC');
   assert.equal(payload.reraOrn, 'ORN-51517');
-  assert.equal(payload.partnerRef, 'swk-brn44210');
+  assert.equal(payload.partnerRef, 'rera-brn44210');
   assert.match(createLocalEnquiryReference('Zayed Al Mansoori', '+971501234567'), /^BW-ENQ-/);
 });
 

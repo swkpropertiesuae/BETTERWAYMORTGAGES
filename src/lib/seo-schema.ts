@@ -15,7 +15,7 @@ export const TRENDING_UAE_KEYWORDS: string[] = [
   'UAE mortgage refinance buyout',
   '50% CBUAE DBR calculator',
   'Betterway Mortgages Dubai',
-  'SWK Properties UAE mortgage partner',
+  'BetterHub RERA mortgage platform',
 ];
 
 /** Complete Organization + FinancialService + LocalBusiness + GeoCoordinates + OfferCatalog JSON-LD */
@@ -78,7 +78,7 @@ export function enhancedOrgSchema() {
       'UAE 10-Year Golden Visa Mortgaged Property Eligibility',
       'Off-Plan Handover Mortgage Financing',
     ],
-    sameAs: ['https://swkpropertiesuae.com', SITE.osUrl],
+    sameAs: [SITE.osUrl],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'UAE Mortgage Advisory & Digital Tools',
