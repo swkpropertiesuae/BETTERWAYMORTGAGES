@@ -1,19 +1,25 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, FileDown, FileText, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import { Cta, Crumbs, JsonLd, SectionTag } from '@/components/ui';
 import { HotOffersTrigger } from '@/components/HotOffersPopup';
-import { PDF_RESOURCES } from '@/data/seo-topics';
+import PdfLibraryBrowser from '@/components/PdfLibraryBrowser';
+import LogoMarquee from '@/components/LogoMarquee';
+import FlagshipCta from '@/components/ui/FlagshipCta';
+import { BANKS } from '@/data/banks';
+import { PDF_CATEGORIES, PDF_RESOURCES } from '@/data/seo-topics';
 import { pdfCatalogSchema, speakablePageSchema } from '@/lib/seo-schema';
 
 export const metadata: Metadata = {
-  title: 'Free UAE Mortgage PDF Guides, DLD Checklists & Golden Visa Playbooks',
+  title: '52 Free UAE Mortgage PDF Guides, DLD Checklists & Neglected Policy Playbooks',
   description:
-    'Download free executive PDF guides from Betterway Mortgages Dubai: 2026 UAE Mortgage Buyer Guide, Form F & DLD Transfer Day Checklist, and Non-Resident & AED 2M Golden Visa Playbook.',
+    'Download 52 free executive PDF guides from Betterway Mortgages Dubai with zero email gate: CBUAE 5% credit card DBR trap, Form F valuation addenda, EIBOR floor audits, off-plan handover roadmaps, self-employed add-backs, Islamic finance, and AED 2M Golden Visa playbooks.',
   keywords: [
-    'Dubai mortgage PDF guide',
-    'UAE home loan checklist PDF',
-    'Dubai DLD transfer day checklist',
+    'Dubai mortgage PDF guides',
+    'UAE home loan checklists PDF',
+    '52 free UAE mortgage PDFs',
+    'Dubai DLD transfer day checklist PDF',
+    'CBUAE 5% credit card DBR rule PDF',
     'Golden Visa AED 2M mortgage PDF',
   ],
   alternates: { canonical: '/downloads' },
@@ -21,78 +27,57 @@ export const metadata: Metadata = {
 
 export default function DownloadsPage() {
   return (
-    <div className="holo-canvas pt-[112px] max-sm:pt-[94px]">
+    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
       <section className="holo-section">
-        <div className="mx-auto max-w-[1160px] space-y-6">
-          <Crumbs items={[{ name: 'PDF Guides & Downloads', href: '/downloads' }]} />
+        <div className="mx-auto max-w-[1220px] space-y-8">
+          <Crumbs items={[{ name: '52 Free PDF Guides', href: '/downloads' }]} />
+
+          {/* Hero Banner Over Global Pipo Background */}
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-3xl space-y-4">
-              <SectionTag>Executive PDF Library · Free Download</SectionTag>
+              <SectionTag>Executive PDF Library · {PDF_RESOURCES.length} Free Guides · Zero Email Gate</SectionTag>
               <h1 className="holo-display-h2">
-                Printable UAE mortgage guides &amp; DLD checklists.
+                {PDF_RESOURCES.length} essential &amp; neglected UAE mortgage PDF guides.
               </h1>
               <p className="holo-lead" data-aeo-answer="true">
-                Zero email gate. Download Betterway’s CBUAE-aligned statutory reference PDFs covering 80% / 85% LTV
-                caps, 50% DBR planning, 4% Dubai Land Department fees, Form F valuation addenda, and AED 2M Golden Visa
-                rules.
+                Every critical policy rule banks rarely explain before you sign Form F—written cleanly by our Dubai
+                mortgage specialists across {PDF_CATEGORIES.length} practical categories. Download any A4 print-ready
+                PDF instantly with zero email wall.
               </p>
             </div>
-            <HotOffersTrigger label="Open Hot Offers Desk" variant="dark" />
+            <div className="flex flex-wrap items-center gap-3">
+              <HotOffersTrigger label="Open BetterDesk Offers" variant="dark" />
+              <Cta href="/get-started" size="sm">
+                Start 60s Check
+              </Cta>
+            </div>
           </div>
 
-          <div className="grid gap-6 pt-4 md:grid-cols-3">
-            {PDF_RESOURCES.map((pdf) => (
-              <div
-                key={pdf.id}
-                className="flex flex-col justify-between rounded-[24px] border border-[#e5e7eb] bg-[#f8f9fa] p-7"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#070e1a] px-3 py-1 text-[11px] font-bold text-[#f1d57e]">
-                      <FileText size={12} /> PDF Dossier
-                    </span>
-                    <span className="num text-xs font-semibold text-[#464c5c]">
-                      {pdf.pages} {pdf.pages === 1 ? 'Page' : 'Pages'} · A4 Print Ready
-                    </span>
-                  </div>
-                  <h2 className="mt-4 font-display text-xl font-bold leading-snug text-[#070e1a]">{pdf.title}</h2>
-                  <p className="mt-2.5 text-sm leading-relaxed text-[#464c5c]">{pdf.subtitle}</p>
-                  <p className="mt-4 flex items-center gap-2 text-xs font-semibold text-[#0e6954]">
-                    <CheckCircle2 size={14} /> Built for: {pdf.audience}
-                  </p>
-                </div>
+          {/* Searchable + 8-Category Animated Filterable Library */}
+          <PdfLibraryBrowser />
 
-                <div className="mt-6 space-y-2.5 border-t border-[#e5e7eb] pt-5">
-                  <a href={pdf.file} download className="homy-btn w-full justify-between">
-                    <span className="inline-flex items-center gap-2">
-                      <FileDown size={15} /> Download PDF
-                    </span>
-                    <span className="homy-btn__disc" aria-hidden="true">
-                      <ArrowRight size={14} />
-                    </span>
-                  </a>
-                  <a
-                    href={pdf.file}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-center text-xs font-semibold text-[#464c5c] hover:text-[#070e1a] hover:underline"
-                  >
-                    Open in browser tab ↗
-                  </a>
-                </div>
-              </div>
-            ))}
+          {/* 24 Licensed UAE Banks Marquee */}
+          <div className="rounded-[26px] border border-[#dce7e2] bg-white/85 p-6 backdrop-blur-md sm:p-8">
+            <p className="mb-5 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#4f596b]">
+              Written rules cross-checked across {BANKS.length} licensed UAE conventional &amp; Islamic banks
+            </p>
+            <LogoMarquee
+              label="24 licensed UAE banks compared by Betterway Mortgages"
+              items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))}
+              speed={64}
+            />
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-[20px] border border-[#d5e7e0] bg-[#eef7f4] p-6">
+          {/* Need Unit-Specific AED Calculation Callout */}
+          <div className="flex flex-wrap items-center justify-between gap-4 rounded-[22px] border border-[#cce5dc] bg-white/90 p-6 backdrop-blur-md">
             <div className="flex items-start gap-3">
-              <ShieldCheck size={20} className="mt-0.5 shrink-0 text-[#0e6954]" />
+              <ShieldCheck size={22} className="mt-0.5 shrink-0 text-[#0e6954]" />
               <div>
-                <p className="font-display text-base font-bold text-[#070e1a]">
-                  Need an exact AED cash-to-close calculation for your specific unit?
+                <p className="font-display text-base font-bold text-[#080b0f]">
+                  Want an exact AED cash-to-close sheet for your specific unit?
                 </p>
-                <p className="text-sm text-[#464c5c]">
-                  Run our free 60-second Pre-Approval Readiness Wizard or explore 36 UAE mortgage insight guides.
+                <p className="text-sm text-[#4f596b]">
+                  Run our free 60-second Pre-Approval Readiness Wizard or explore 36 deep UAE mortgage insight briefs.
                 </p>
               </div>
             </div>
@@ -101,19 +86,23 @@ export default function DownloadsPage() {
                 Start 60s Check
               </Cta>
               <Link href="/insights" className="homy-btn homy-btn--outline bw-btn--sm">
-                Browse 36 Guides
+                Browse 36 Insights
               </Link>
             </div>
           </div>
         </div>
       </section>
 
+      <div className="px-4 pb-8 sm:px-6">
+        <FlagshipCta />
+      </div>
+
       <JsonLd data={pdfCatalogSchema()} />
       <JsonLd
         data={speakablePageSchema(
           '/downloads',
-          'Free UAE Mortgage PDF Guides & DLD Checklists | Betterway Mortgages',
-          'Download free CBUAE-compliant UAE mortgage buyer guides, DLD trustee transfer checklists, and Golden Visa playbooks.',
+          '52 Free UAE Mortgage PDF Guides & DLD Checklists | Betterway Mortgages',
+          'Download 52 free CBUAE-compliant UAE mortgage buyer guides, Form F checklists, credit card DBR traps, EIBOR floor audits, and Golden Visa playbooks.',
         )}
       />
     </div>

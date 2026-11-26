@@ -49,7 +49,7 @@ export const ROUTES: Route[] = [
   ...AR_COMMUNITIES.map((s) => COMMUNITIES.find((c) => c.slug === s)!).map((c) => r(`/ar/areas/${c.emirate}/${c.slug}`, 12, 3, c.ar ?? c.name, 'ar')),
 ];
 
-/** Navigational hub pages added on top of the 360 (not counted in the blueprint). */
-export const HUBS = ['/mortgages', '/calculators', '/rates', '/handover', '/areas', '/areas/dubai', '/areas/abu-dhabi', '/areas/northern', '/affordability', '/advisory', '/guides', '/sitemap'];
+/** Navigational hub pages & multilingual landing editions added on top of the 360 blueprint. */
+export const HUBS = ['/mortgages', '/calculators', '/rates', '/handover', '/areas', '/areas/dubai', '/areas/abu-dhabi', '/areas/northern', '/affordability', '/advisory', '/guides', '/sitemap', '/ru', '/zh', '/fr', '/es'];
 
 export const indexable = (x: Route) => x.silo !== 11 && !x.path.endsWith('.txt');

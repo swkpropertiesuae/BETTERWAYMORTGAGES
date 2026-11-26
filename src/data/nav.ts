@@ -17,7 +17,7 @@ export const NAV: NavItem[] = [
       {
         title: 'Mortgages & Financing',
         links: [
-          { label: 'Priority Lender Desk', href: '/hot-offers', desc: '24-bank advisory' },
+          { label: 'BetterDesk · Priority Offers', href: '/hot-offers', desc: '24-bank advisory' },
           { label: 'Pre-Approval Eligibility Check', href: '/get-started', desc: '60s DBR & DLD brief' },
           { label: 'UAE Resident Mortgages', href: '/mortgages/uae-residents', desc: 'Up to 80% LTV' },
           { label: 'UAE National Mortgages', href: '/mortgages/uae-nationals', desc: 'Up to 85% LTV' },
@@ -27,9 +27,9 @@ export const NAV: NavItem[] = [
         ],
       },
       {
-        title: 'Property & Closing Desk',
+        title: 'BetterClose · Closing Desk',
         links: [
-          { label: 'Property Closing Desk', href: '/concierge', desc: 'Budget & Form F prep' },
+          { label: 'BetterClose Buying Desk', href: '/concierge', desc: 'Budget & Form F prep' },
           { label: 'Off-Plan & Handover Finance', href: '/handover/dubai-off-plan-handover-mortgage-guide', desc: '80+ projects' },
           { label: 'Commercial Property Finance', href: '/advisory/commercial-property-finance' },
           { label: 'RERA Conveyancing Services', href: '/advisory/rera-conveyancing-services' },
@@ -59,19 +59,19 @@ export const NAV: NavItem[] = [
     href: '/hub',
     cols: [
       {
-        title: 'Real Estate Agencies & Brokers',
+        title: 'BetterHub · RERA Agencies',
         links: [
-          { label: 'Betterway Partner Desk', href: '/hub', desc: 'RERA referral & buyer portal' },
-          { label: 'Become a Partner', href: '/partners', desc: 'RERA agency onboarding' },
+          { label: 'BetterHub Agent Portal', href: '/hub', desc: 'RERA referral & buyer desk' },
+          { label: 'Join BetterHub', href: '/partners', desc: 'RERA agency onboarding' },
           { label: 'Co-Branded Calculators', href: '/partners/co-branded-tools', desc: 'Share with buyers' },
-          { label: 'Partner Dashboard', href: '/partners/dashboard', desc: 'Live case milestones' },
+          { label: 'Live Case Dashboard', href: '/partners/dashboard', desc: 'Track milestones' },
         ],
       },
       {
-        title: 'Brokerage Operating System',
+        title: 'BetterCore & BetterVault',
         links: [
-          { label: 'Betterway Brokerage Platform', href: '/edge', desc: 'Practice infrastructure' },
-          { label: 'Betterway OS Login', href: '/portal/login', desc: 'Client & staff access' },
+          { label: 'BetterCore Platform', href: '/edge', desc: 'Practice infrastructure' },
+          { label: 'BetterVault Sign-In', href: '/portal/login', desc: 'Client & staff access' },
           { label: 'Conveyancing Desk', href: '/advisory/rera-conveyancing-services', desc: 'Trustee execution' },
         ],
       },
@@ -80,7 +80,7 @@ export const NAV: NavItem[] = [
       title: 'Keep buyer deals moving to transfer',
       body: 'Confirm buyer DBR headroom ahead of viewings and track mortgage files from Form F to DLD trustee day.',
       href: '/hub',
-      cta: 'Explore Partner Desk',
+      cta: 'Explore BetterHub',
     },
   },
   {

@@ -78,6 +78,7 @@ test('source files and explainer video contain zero unverified marketing claims,
     [/November 2026|February 2026|Feb 2026|نوفمبر 2026/i, 'unverified future-dated 2026 claim'],
     [/Villa 14,\s*Dubai Hills|ValuStrat|35%\s*of\s*0\.80%|Business Bay buyout/i, 'fictional portal or partner payout transaction'],
     [/15-minute Dubai Courts|Pre-approved in 48 hours|48h SLA/i, 'unverified turnaround time claim'],
+    [/\bswk\b|swkproperties/i, 'prohibited unrelated third-party company reference (SWK)'],
   ];
 
   const files = [...walkSourceFiles(repo('src')), repo('scripts/video/explainer.html')];

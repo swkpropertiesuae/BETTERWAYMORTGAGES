@@ -8,6 +8,8 @@ import ResumeJourneyToast from '@/components/ecosystem/ResumeJourneyToast';
 import HotOffersPopup from '@/components/HotOffersPopup';
 import Analytics from '@/components/Analytics';
 import MotionKit from '@/components/MotionKit';
+import { LocaleCurrencyProvider } from '@/components/LocaleCurrencyContext';
+import { GradientBackground } from '@/components/ui/pipo';
 import { Footer, JsonLd } from '@/components/ui';
 import { SITE } from '@/data/site';
 import { TRENDING_UAE_KEYWORDS, enhancedOrgSchema, websiteSchema } from '@/lib/seo-schema';
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     template: '%s | Betterway Mortgages UAE',
   },
   description:
-    'Independent Dubai & UAE mortgage advisory comparing 24 licensed conventional & Islamic banks. Live CBUAE EIBOR rates, 50% DBR check, 4% DLD closing calculator, free PDF guides, and priority pre-approval.',
+    'Independent Dubai & UAE mortgage advisory comparing 24 licensed conventional & Islamic banks in 6 languages and live currencies. CBUAE EIBOR tracker, 50% DBR check, 4% DLD calculator, and 1-on-1 advisory.',
   keywords: TRENDING_UAE_KEYWORDS,
   authors: [{ name: SITE.legalName, url: SITE.url }],
   creator: SITE.legalName,
@@ -66,15 +68,15 @@ export const metadata: Metadata = {
     url: SITE.url,
     title: 'Betterway Mortgages — Dubai Home Mortgages & 24 UAE Banks Compared',
     description:
-      'Compare 24 licensed UAE conventional & Islamic lenders, live CBUAE EIBOR fixings, 50% DBR headroom, and 4% DLD upfront fees in one clear platform.',
+      'Compare 24 licensed UAE conventional & Islamic lenders, live CBUAE EIBOR fixings, 50% DBR headroom, and 4% DLD upfront fees across 6 languages & live currencies.',
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Betterway Mortgages — Dubai Home Mortgages & UAE Advisory' }],
     locale: 'en_AE',
-    alternateLocale: ['ar_AE'],
+    alternateLocale: ['ar_AE', 'ru_RU', 'zh_CN', 'fr_FR', 'es_ES'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Betterway Mortgages — Independent Dubai & UAE Mortgage Advisory',
-    description: 'Compare 24 UAE banks, daily CBUAE EIBOR fixings, 4% DLD closing fees, and printable 2026 mortgage PDF guides.',
+    description: 'Compare 24 UAE banks, daily CBUAE EIBOR fixings, 4% DLD closing fees, and multi-currency mortgage planning.',
     images: ['/og.png'],
   },
   alternates: {
@@ -82,6 +84,10 @@ export const metadata: Metadata = {
     languages: {
       'en-AE': '/',
       'ar-AE': '/ar',
+      ru: '/ru',
+      'zh-Hans': '/zh',
+      fr: '/fr',
+      es: '/es',
       'x-default': '/',
     },
   },
@@ -92,20 +98,29 @@ export const viewport: Viewport = { themeColor: '#070E1A', width: 'device-width'
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr">
-      <body>
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[60] focus:rounded-btn focus:bg-white focus:px-4 focus:py-2">
-          Skip to content
-        </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <HotOffersPopup />
-        <ResumeJourneyToast />
-        <CoPilot />
-        <MotionKit />
-        <Analytics />
-        <JsonLd data={enhancedOrgSchema()} />
-        <JsonLd data={websiteSchema()} />
+      <body className="relative min-h-screen bg-transparent">
+        {/* Global 21st.dev "Pipo" Ambient Gradient Backdrop Consistent Across Every Page */}
+        <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
+          <GradientBackground className="h-full w-full" />
+        </div>
+        <LocaleCurrencyProvider initialLocale="en">
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[60] focus:rounded-btn focus:bg-white focus:px-4 focus:py-2"
+          >
+            Skip to content
+          </a>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+          <HotOffersPopup />
+          <ResumeJourneyToast />
+          <CoPilot />
+          <MotionKit />
+          <Analytics />
+          <JsonLd data={enhancedOrgSchema()} />
+          <JsonLd data={websiteSchema()} />
+        </LocaleCurrencyProvider>
       </body>
     </html>
   );

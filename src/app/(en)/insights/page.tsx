@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, FileDown, Flame, Sparkles } from 'lucide-react';
 import { Cta, Crumbs, JsonLd, SectionTag } from '@/components/ui';
 import { HotOffersTrigger } from '@/components/HotOffersPopup';
-import { PDF_RESOURCES, SEO_TOPICS } from '@/data/seo-topics';
+import { FEATURED_PDFS, PDF_RESOURCES, SEO_TOPICS } from '@/data/seo-topics';
 import { speakablePageSchema, pdfCatalogSchema } from '@/lib/seo-schema';
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ const CATEGORIES = [
 
 export default function InsightsHubPage() {
   return (
-    <div className="holo-canvas pt-[112px] max-sm:pt-[94px]">
+    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
       <section className="holo-section">
         <div className="mx-auto max-w-[1220px] space-y-6">
           <Crumbs items={[{ name: 'Insights & Guides', href: '/insights' }]} />
@@ -99,30 +99,35 @@ export default function InsightsHubPage() {
         <div className="mx-auto max-w-[1220px]">
           <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
             <div className="space-y-2">
-              <SectionTag>Executive PDF Library</SectionTag>
+              <SectionTag>Executive PDF Library · {PDF_RESOURCES.length} Free Guides</SectionTag>
               <h2 className="holo-display-h3">Download printable UAE mortgage dossiers</h2>
             </div>
-            <Link href="/hot-offers" className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0e6954] hover:underline">
-              <Flame size={15} /> View Hot UAE Mortgage Offers →
-            </Link>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link href="/downloads" className="inline-flex items-center gap-1.5 text-sm font-bold text-[#080b0f] hover:text-[#0e6954] hover:underline">
+                Browse All {PDF_RESOURCES.length} Free PDFs →
+              </Link>
+              <Link href="/hot-offers" className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0e6954] hover:underline">
+                <Flame size={15} /> View BetterDesk Offers →
+              </Link>
+            </div>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {PDF_RESOURCES.map((pdf) => (
+          <div className="grid gap-5 md:grid-cols-3">
+            {FEATURED_PDFS.map((pdf) => (
               <a
                 key={pdf.id}
                 href={pdf.file}
                 download
-                className="flex flex-col justify-between rounded-[20px] border border-[#d5e7e0] bg-white p-6 transition-colors hover:border-[#179373]"
+                className="flex flex-col justify-between rounded-[22px] border border-[#dce7e2] bg-white/90 p-6 backdrop-blur-md transition hover:-translate-y-0.5 hover:border-[#179373] hover:bg-white hover:shadow-[0_18px_38px_-24px_rgba(8,15,28,0.22)]"
               >
                 <div>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef7f4] px-3 py-1 text-[11px] font-bold text-[#0e6954]">
-                    <FileDown size={12} /> PDF · {pdf.pages} {pdf.pages === 1 ? 'Page' : 'Pages'}
+                    <FileDown size={12} /> {pdf.category} · {pdf.pages}p PDF
                   </span>
-                  <h3 className="mt-3 font-display text-lg font-bold text-[#070e1a]">{pdf.title}</h3>
+                  <h3 className="mt-3 font-display text-lg font-bold leading-snug text-[#070e1a]">{pdf.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-[#464c5c]">{pdf.subtitle}</p>
                 </div>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-[#070e1a]">
-                  Download PDF <ArrowRight size={13} />
+                  Download Free PDF <ArrowRight size={13} />
                 </span>
               </a>
             ))}

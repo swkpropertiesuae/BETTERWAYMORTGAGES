@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, CheckCircle2, Expand, Mail, X } from 'lucide-react';
-import { TEAM_SPECIALISTS, type TeamSpecialist } from '@/data/team';
+import { ArrowRight, CheckCircle2, Expand, Mail, X } from 'lucide-react';
+import { ALL_TEAM_MEMBERS, type TeamSpecialist } from '@/data/team';
 
 export type HomyServiceItem = {
   index: string;
@@ -116,32 +116,9 @@ export function HomyFaqAccordion({ faqs }: { faqs: readonly { q: string; a: stri
   );
 }
 
-const ADVISORY_NOTES = [
-  {
-    quote:
-      'Every borrower sees the fixed period, post-fixed EIBOR revert margin, floor clause, and DLD fees side by side before a single bank form is signed.',
-    advisorIdx: 0,
-  },
-  {
-    quote:
-      'Understanding how credit card limits and existing liabilities impact your 50% CBUAE debt burden ratio prevents last-minute pre-approval surprises.',
-    advisorIdx: 1,
-  },
-  {
-    quote:
-      'Document readiness starts on day one — salary certificates, six-month statements, and property papers checked cleanly before formal bank submission.',
-    advisorIdx: 2,
-  },
-  {
-    quote:
-      'From bank valuation panels and developer NOCs to final offer letters and DLD trustee transfer, every milestone is tracked in one timeline.',
-    advisorIdx: 3,
-  },
-] as const;
-
 /**
- * Clean, static, zero-animation Advisor Portrait & Insight Grid (replaces infinite scrolling carousel).
- * Clicking any specialist card opens their high-resolution 8K studio profile modal.
+ * Eye-level aligned 8-member leadership & advisor portrait grid (all 8 calibrated 3:4 portraits at y = 33.0%).
+ * Clicking any portrait opens their full profile and 1-on-1 booking modal.
  */
 export function HomyAdvisorsCarousel() {
   const [selected, setSelected] = useState<TeamSpecialist | null>(null);
@@ -176,70 +153,41 @@ export function HomyAdvisorsCarousel() {
 
   return (
     <>
-      <div className="space-y-6">
-        {/* Clean Static 6-Specialist Studio Portrait Grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {TEAM_SPECIALISTS.map((member) => (
+      <div className="mx-auto max-w-[1220px]">
+        {/* Exact 3:4 Eye-Level Aligned 8-Person Team Grid (4x2 on Desktop) */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {ALL_TEAM_MEMBERS.map((member, idx) => (
             <button
               key={member.slug}
               type="button"
               onClick={() => openProfile(member)}
-              aria-label={`Inspect ${member.name} profile`}
-              className="homy-portrait-card !w-full text-left cursor-pointer border border-[#e5e7eb]"
+              aria-label={`Inspect ${member.name} — ${member.designation}`}
+              className="group relative aspect-[3/4] w-full overflow-hidden rounded-[22px] border border-[#e5e7eb] bg-[#0a1424] text-left shadow-[0_14px_38px_-22px_rgba(10,20,36,0.38)] transition duration-300 hover:-translate-y-1 hover:border-[#c8a352] hover:shadow-[0_24px_52px_-20px_rgba(10,20,36,0.5)] cursor-pointer"
             >
               <img
-                src={member.portrait1080}
-                alt={`${member.name} — ${member.designation}`}
-                loading="lazy"
+                src={member.portrait}
+                srcSet={`${member.portrait1080} 900w, ${member.portrait8k} 1500w`}
+                sizes="(min-width: 1024px) 23vw, (min-width: 640px) 46vw, 94vw"
+                alt={`${member.name} — ${member.designation} at Betterway Mortgages Dubai`}
+                width={900}
+                height={1200}
+                loading={idx < 4 ? 'eager' : 'lazy'}
                 decoding="async"
+                className="h-full w-full object-cover object-center transition duration-500 ease-out group-hover:scale-[1.03]"
               />
-              <span className="absolute right-4 top-4 z-[2] grid h-9 w-9 place-items-center rounded-full border border-white/25 bg-[#080b0f]/60 text-white backdrop-blur-md">
-                <Expand size={14} />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080b0f]/94 via-[#080b0f]/45 to-transparent"
+              />
+              <span className="absolute end-3.5 top-3.5 z-[2] grid h-8 w-8 place-items-center rounded-full border border-white/25 bg-[#080b0f]/60 text-white backdrop-blur-md transition group-hover:border-[#f1d57e] group-hover:text-[#f1d57e]">
+                <Expand size={13} />
               </span>
-              <div className="homy-portrait-card__meta">
-                <h4>{member.name}</h4>
-                <p>{member.designation}</p>
+              <div className="absolute inset-x-4 bottom-4 z-[2] text-white">
+                <h4 className="font-display text-lg font-semibold leading-tight text-white">{member.name}</h4>
+                <p className="mt-0.5 text-xs font-medium text-[#f1d57e]">{member.designation}</p>
               </div>
             </button>
           ))}
-        </div>
-
-        {/* Clean Static 4-Column Advisory Principles Strip */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {ADVISORY_NOTES.map((note, i) => {
-            const member = TEAM_SPECIALISTS[note.advisorIdx];
-            if (!member) return null;
-            return (
-              <article
-                key={`note-${i}`}
-                onClick={() => openProfile(member)}
-                className="flex cursor-pointer flex-col justify-between rounded-[20px] border border-[#e5e7eb] bg-[#f6f6f6] p-6 transition-colors hover:border-[#179373]"
-              >
-                <div>
-                  <span className="homy-review-card__mark" aria-hidden="true">
-                    “
-                  </span>
-                  <p className="text-[14.5px] leading-relaxed text-[#1f2429]">{note.quote}</p>
-                </div>
-                <div className="mt-5 flex items-center gap-3 border-t border-[#e5e7eb] pt-4">
-                  <img
-                    src={member.avatarWebp}
-                    alt={member.name}
-                    width={42}
-                    height={42}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-10 w-10 rounded-[10px] object-cover object-top"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate font-display text-sm font-semibold text-[#0c0c0c]">{member.name}</p>
-                    <p className="truncate text-xs text-[#606060]">{member.designation}</p>
-                  </div>
-                  <ArrowUpRight size={15} className="shrink-0 text-[#4b5b63]" />
-                </div>
-              </article>
-            );
-          })}
         </div>
       </div>
 
@@ -273,11 +221,11 @@ export function HomyAdvisorsCarousel() {
                 <X size={18} />
               </button>
 
-              <div className="relative min-h-[320px] bg-[#080b0f] md:min-h-[520px]">
+              <div className="relative aspect-[3/4] bg-[#080b0f] md:aspect-auto md:min-h-[520px]">
                 <img
                   src={view8k ? selected.portrait8k : selected.portrait}
                   alt={`${selected.name} studio portrait`}
-                  className="h-full w-full object-cover object-top"
+                  className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute bottom-3 start-3 flex items-center gap-2">
                   <button

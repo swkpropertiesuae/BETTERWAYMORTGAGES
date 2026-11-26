@@ -2,12 +2,15 @@ import type { Metadata } from 'next';
 import { Building2, CheckCircle2, Cpu, Globe2, Layers, ShieldCheck } from 'lucide-react';
 import { Cta, SectionTag } from '@/components/ui';
 import { SpotlightCard } from '@/components/ui/MotionPrimitives';
+import LogoMarquee from '@/components/LogoMarquee';
+import FlagshipCta from '@/components/ui/FlagshipCta';
+import { BANKS } from '@/data/banks';
 import { SITE } from '@/data/site';
 
 export const metadata: Metadata = {
-  title: 'Betterway Brokerage Platform — UAE Mortgage Operating Infrastructure',
+  title: 'BetterCore — UAE Mortgage Operating Infrastructure | Betterway Mortgages',
   description:
-    'Operate your UAE mortgage practice on the Betterway Brokerage Platform: Betterway OS CRM, 24-bank policy matrices, CBUAE KFS & DBR tools, and bilingual EN/AR client portals.',
+    'Operate your UAE mortgage practice on BetterCore: 24-bank policy matrices, CBUAE KFS & DBR workflows, BetterVault client rooms, and 6-language digital tools.',
   alternates: { canonical: '/edge' },
 };
 
@@ -38,13 +41,13 @@ const TIERS = [
 
 export default function EdgePage() {
   return (
-    <div className="holo-canvas pt-[112px] max-sm:pt-[94px]">
-      <section className="holo-section holo-section--dark">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
+      <section className="holo-section bw-fintech-stage !min-h-0 !rounded-[28px] !border-0">
+        <div className="relative z-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
-            <SectionTag light>Betterway Brokerage Platform · Betterway OS</SectionTag>
+            <SectionTag light>BetterCore · Proprietary Operating Core</SectionTag>
             <h1 className="font-display text-[clamp(36px,4.8vw,68px)] font-extrabold leading-[1.03] tracking-[-0.03em] text-white">
-              Run your UAE mortgage practice on Betterway OS.
+              Run your UAE mortgage practice on BetterCore.
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-white/75">
               Our 24-bank comparison schedules, daily CBUAE EIBOR calculators, and structured transfer-day workflows —
@@ -52,10 +55,10 @@ export default function EdgePage() {
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Cta href="/contact" tone="light">
-                Request Platform Demo
+                Request BetterCore Demo
               </Cta>
               <Cta href={SITE.osLoginUrl} tone="ghost" external className="!border-white/30 !text-white hover:!bg-white/10">
-                Sign in to Betterway OS
+                Sign in to BetterVault
               </Cta>
             </div>
           </div>
@@ -85,34 +88,49 @@ export default function EdgePage() {
 
       <section className="holo-section">
         <div className="mb-10 max-w-2xl space-y-3">
-          <SectionTag>Two Ways To Run On Edge</SectionTag>
+          <SectionTag>Two Ways To Run On BetterCore</SectionTag>
           <h2 className="holo-display-h3">Choose the structure that fits your practice</h2>
         </div>
         <div className="grid gap-6 md:grid-cols-2">
           {TIERS.map((t) => (
-            <SpotlightCard key={t.name} className="flex flex-col justify-between rounded-[24px] border border-[#e5e7eb] bg-[#f8f9fa] p-8">
+            <SpotlightCard key={t.name} className="flex flex-col justify-between rounded-[24px] border border-[#dce7e2] bg-white/92 p-8 backdrop-blur-md">
               <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-[#0e6954] border border-[#e5e7eb]">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef7f4] px-3 py-1 text-xs font-bold text-[#0e6954] border border-[#cce5dc]">
                   <Building2 size={13} /> {t.badge}
                 </span>
-                <h3 className="mt-4 font-display text-3xl font-extrabold text-[#121217]">{t.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#4b5b63]">{t.desc}</p>
-                <ul className="mt-6 space-y-3 text-sm text-[#121217]">
+                <h3 className="mt-4 font-display text-3xl font-extrabold text-[#080b0f]">{t.name}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#4f596b]">{t.desc}</p>
+                <ul className="mt-6 space-y-3 text-sm text-[#080b0f]">
                   {t.points.map((pt) => (
                     <li key={pt} className="flex items-start gap-2.5">
-                      <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#179373]" />
+                      <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#0e6954]" />
                       <span>{pt}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="mt-8">
+              <div className="mt-8 border-t border-[#ebf0ee] pt-5">
                 <Cta href="/contact">{`Discuss ${t.name}`}</Cta>
               </div>
             </SpotlightCard>
           ))}
         </div>
+
+        <div className="mt-10 rounded-[24px] border border-[#dce7e2] bg-white/88 p-6 backdrop-blur-md">
+          <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#4f596b]">
+            BetterCore structured policy matrix across {BANKS.length} UAE lenders
+          </p>
+          <LogoMarquee
+            label="24 licensed UAE lenders in BetterCore matrix"
+            items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))}
+            speed={64}
+          />
+        </div>
       </section>
+
+      <div className="px-4 pb-6 sm:px-6">
+        <FlagshipCta />
+      </div>
     </div>
   );
 }

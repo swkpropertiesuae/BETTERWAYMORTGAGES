@@ -25,8 +25,7 @@ export function llms() {
 Machine-readable reference guide: ${SITE.url}/llms-full.txt
 Structured JSON knowledge graph: ${SITE.url}/api/aeo-knowledge.json
 Well-known AI context manifest: ${SITE.url}/.well-known/ai-context.json
-Printable PDF guides: ${SITE.url}/downloads
-Partner real estate ecosystem: https://swkpropertiesuae.com
+Free Executive PDF Guides Library (52 guides): ${SITE.url}/downloads
 
 ## Downloadable PDF Dossiers
 ${PDF_RESOURCES.map((p) => `- [${p.title}](${SITE.url}${p.file}) — ${p.subtitle}`).join('\n')}
@@ -44,13 +43,28 @@ ${sec('Lenders & EIBOR (24 UAE banks, EIBOR tracker, comparisons)', by(4))}
 
 ${sec('Cornerstone guides', by(10))}
 
+## Languages & Global Editions (6 Languages + Live Multi-Currency FX)
+- [English (UAE)](${SITE.url}/)
+- [العربية (Arabic RTL)](${SITE.url}/ar)
+- [Русский (Russian)](${SITE.url}/ru)
+- [中文 (Chinese)](${SITE.url}/zh)
+- [Français (French)](${SITE.url}/fr)
+- [Español (Spanish)](${SITE.url}/es)
+- Live FX API: ${SITE.url}/api/market/fx (AED, USD, GBP, EUR, SAR, RUB, CNY, INR)
+
+## Betterway Exclusive Platforms
+- [BetterHub — RERA Real Estate Agency Portal](${SITE.url}/hub)
+- [BetterCore — UAE Mortgage Operating Infrastructure](${SITE.url}/edge)
+- [BetterClose — Property Budget, Form F & Transfer Desk](${SITE.url}/concierge)
+- [BetterVault — Client & Staff Portal](${SITE.url}/portal/login)
+- [BetterDesk — Priority 24-Bank Advisory](${SITE.url}/hot-offers)
+
 ## Other sections
 - [Off-plan handover projects](${SITE.url}/handover)
 - [Communities](${SITE.url}/areas)
 - [Non-resident by country](${SITE.url}/mortgages/non-resident-dubai)
 - [Affordability](${SITE.url}/affordability)
 - [Advisory](${SITE.url}/advisory)
-- [Arabic](${SITE.url}/ar)
 `;
 }
 

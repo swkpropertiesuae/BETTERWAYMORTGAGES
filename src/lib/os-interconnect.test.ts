@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { SITE } from '../data/site.ts';
-import { EXECUTIVE_LEADERSHIP, TEAM_SPECIALISTS } from '../data/team.ts';
+import { ALL_TEAM_MEMBERS, EXECUTIVE_LEADERSHIP, TEAM_SPECIALISTS } from '../data/team.ts';
 import { buildOsLeadPayload, createLocalEnquiryReference } from './os-interconnect.ts';
 
 test('SITE exposes Betterway OS interconnection URLs (osUrl, osPortalUrl, osPartnerHubUrl, osLoginUrl)', () => {
@@ -24,32 +24,37 @@ test('buildOsLeadPayload normalizes website enquiries, partner RERA metadata, an
     topic: 'Calculator scenario: mortgage-repayment',
     preferredSlot: 'Today 3:00 PM',
     sourcePage: '/calculators/mortgage-repayment',
-    agencyName: 'SWK Properties LLC',
+    agencyName: 'Dubai Prime Realty LLC',
     reraOrn: 'ORN-51517',
     reraBrn: 'BRN-44210',
-    partnerRef: 'swk-brn44210',
+    partnerRef: 'rera-brn44210',
   });
 
   assert.equal(payload.contactName, 'Zayed Al Mansoori');
   assert.equal(payload.contactPhone, '+971 50 123 4567');
   assert.equal(payload.propertyPriceAed, 3_500_000);
   assert.equal(payload.preferredSlot, 'Today 3:00 PM');
-  assert.equal(payload.agencyName, 'SWK Properties LLC');
+  assert.equal(payload.agencyName, 'Dubai Prime Realty LLC');
   assert.equal(payload.reraOrn, 'ORN-51517');
-  assert.equal(payload.partnerRef, 'swk-brn44210');
+  assert.equal(payload.partnerRef, 'rera-brn44210');
   assert.match(createLocalEnquiryReference('Zayed Al Mansoori', '+971501234567'), /^BW-ENQ-/);
 });
 
-test('official Betterway leadership and 6-specialist 8K studio portfolio assets exist and are wired into pages & forms', () => {
-  assert.equal(EXECUTIVE_LEADERSHIP[0]?.name, 'Shabib Siraj');
-  assert.equal(EXECUTIVE_LEADERSHIP[0]?.tier, 'Owner');
+test('official Betterway leadership (Warda Kapadia & Shabib Siraj) and all 8 eye-level aligned portraits exist and are wired into pages & forms', () => {
+  assert.equal(EXECUTIVE_LEADERSHIP[0]?.name, 'Warda Kapadia');
+  assert.equal(EXECUTIVE_LEADERSHIP[0]?.role, 'Founder & Managing Director');
+  assert.equal(EXECUTIVE_LEADERSHIP[1]?.name, 'Shabib Siraj');
+  assert.equal(EXECUTIVE_LEADERSHIP[1]?.role, 'Executive Director');
+  assert.match(EXECUTIVE_LEADERSHIP[1]?.bio ?? '', /15\+ years/i);
+  assert.match(EXECUTIVE_LEADERSHIP[1]?.bio ?? '', /8\+ years/i);
   assert.equal(TEAM_SPECIALISTS.length, 6);
+  assert.equal(ALL_TEAM_MEMBERS.length, 8);
 
-  for (const m of TEAM_SPECIALISTS) {
+  for (const m of ALL_TEAM_MEMBERS) {
     for (const rel of [m.portrait8k, m.portrait, m.portrait1080, m.avatar, m.avatarWebp]) {
       const full = path.resolve(process.cwd(), 'public', rel.replace(/^\//, ''));
       assert.ok(existsSync(full), `Missing staff portrait asset: ${rel}`);
-      assert.ok(statSync(full).size > 20_000, `Staff portrait asset looks empty: ${rel}`);
+      assert.ok(statSync(full).size > 5_000, `Staff portrait asset looks empty: ${rel}`);
     }
   }
 

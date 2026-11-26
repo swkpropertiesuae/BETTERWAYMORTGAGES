@@ -13,7 +13,7 @@ export default function MotionKit() {
     const root = document.documentElement;
     root.classList.remove('bw-motion');
     const header = document.querySelector('.bw-header');
-    const isHome = path === '/';
+    const isHome = path === '/' || path === '/ru' || path === '/zh' || path === '/fr' || path === '/es';
 
     let raf = 0;
     const syncScroll = () => {

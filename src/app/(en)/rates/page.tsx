@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { PageHero, Section, LinkGrid, CtaBand } from '@/components/ui';
+import LogoMarquee from '@/components/LogoMarquee';
 import { BANKS } from '@/data/banks';
 import { COMPARISONS } from '@/data/compare';
 
@@ -38,6 +39,13 @@ export default function Page() {
         />
       </Section>
       <Section tone="mist" title="24 UAE mortgage lenders">
+        <div className="mb-8 rounded-[22px] border border-[#dce7e2] bg-white/90 p-5 backdrop-blur-md">
+          <LogoMarquee
+            label="24 licensed UAE conventional and Islamic banks"
+            items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))}
+            speed={64}
+          />
+        </div>
         <LinkGrid
           cols={4}
           links={BANKS.map((b) => ({

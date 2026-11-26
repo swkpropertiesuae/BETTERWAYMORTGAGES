@@ -3,12 +3,14 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { PDF_RESOURCES, SEO_TOPICS } from '../data/seo-topics.ts';
+import { CURRENCIES, I18N, LOCALES, convertFromAed, formatMoneyFromAed } from '../data/i18n.ts';
 import { enhancedOrgSchema, websiteSchema, speakablePageSchema, pdfCatalogSchema } from './seo-schema.ts';
 
 const repo = (rel: string) => path.resolve(process.cwd(), rel);
 
-test('all 3 executive CBUAE-compliant Betterway PDF guides exist on disk under public/docs/', () => {
-  assert.equal(PDF_RESOURCES.length, 3);
+test('all 52 executive CBUAE-compliant Betterway PDF guides exist on disk under public/docs/', () => {
+  assert.ok(PDF_RESOURCES.length >= 50, `Expected 50+ PDF guides, got ${PDF_RESOURCES.length}`);
+  assert.equal(PDF_RESOURCES.length, 52);
   for (const pdf of PDF_RESOURCES) {
     const abs = repo(path.join('public', pdf.file));
     assert.ok(existsSync(abs), `Missing PDF on disk: ${pdf.file}`);
@@ -36,16 +38,31 @@ test('21st.dev HotOffersPopup features official female advisors, border-beam fra
   assert.match(src, /Betterway-UAE-Mortgage-Buyer-Guide-2026\.pdf/);
 });
 
-test('cards, carousels, and bank marquee have infinite/exiting animations cleanly removed', () => {
+test('24-bank marquee runs endless slow horizontal CSS animation and zero 24s/1080p strings exist in UI', () => {
   const marquee = readFileSync(repo('src/components/LogoMarquee.tsx'), 'utf8');
-  const sections = readFileSync(repo('src/components/home/HomySections.tsx'), 'utf8');
-  const reveal = readFileSync(repo('src/components/MotionReveal.tsx'), 'utf8');
   const brand = readFileSync(repo('src/app/brand.css'), 'utf8');
+  const motionPrim = readFileSync(repo('src/components/ui/MotionPrimitives.tsx'), 'utf8');
+  const hero = readFileSync(repo('src/components/home/HomeHero.tsx'), 'utf8');
+  const homeExp = readFileSync(repo('src/components/home/HomeExperience.tsx'), 'utf8');
 
-  assert.doesNotMatch(marquee, /requestAnimationFrame/);
-  assert.doesNotMatch(sections, /homy-reviews-track/);
-  assert.doesNotMatch(reveal, /whileInView/);
-  assert.doesNotMatch(brand, /animation:\s*homy-marquee/);
+  assert.match(marquee, /bw-bank-marquee/);
+  assert.match(brand, /@keyframes\s+bw-bank-scroll/);
+  for (const src of [motionPrim, hero, homeExp]) {
+    assert.doesNotMatch(src, /\b24s\b|0:24|24-second|1080p|Full HD/i);
+  }
+});
+
+test('6 full languages (EN, AR, RU, ZH, FR, ES) and live multi-currency FX conversion work deterministically', () => {
+  assert.equal(LOCALES.length, 6);
+  assert.equal(CURRENCIES.length, 8);
+  for (const loc of LOCALES) {
+    assert.ok(I18N[loc.code]?.hero.title.length > 12, `Missing hero title for ${loc.code}`);
+    assert.ok(I18N[loc.code]?.faq.items.length >= 4, `Missing FAQs for ${loc.code}`);
+  }
+  const usd = convertFromAed(3_672_500, 'USD');
+  assert.ok(Math.abs(usd - 1_000_000) < 100, `Expected ~1,000,000 USD, got ${usd}`);
+  assert.match(formatMoneyFromAed(2_000_000, 'GBP'), /^£/);
+  assert.match(formatMoneyFromAed(2_000_000, 'AED'), /^AED /);
 });
 
 test('SEO, AEO, AIO, GEO JSON-LD schemas emit valid Organization, WebSite, Speakable & DigitalDocument structures', () => {
@@ -57,6 +74,24 @@ test('SEO, AEO, AIO, GEO JSON-LD schemas emit valid Organization, WebSite, Speak
   assert.ok(Array.isArray(org['@type']) && org['@type'].includes('FinancialService'));
   assert.equal(web['@type'], 'WebSite');
   assert.equal(speak.speakable['@type'], 'SpeakableSpecification');
-  assert.equal(pdfs.itemListElement.length, 3);
+  assert.equal(pdfs.itemListElement.length, 52);
   assert.equal(pdfs.itemListElement[0].item['@type'], 'DigitalDocument');
+});
+
+test('global Pipo GradientBackground, FloatingDeviceMockups, InteractiveReadinessStudio, FlagshipCta, and Home Team removal are wired cleanly', () => {
+  const pipo = readFileSync(repo('src/components/ui/pipo.tsx'), 'utf8');
+  const enLayout = readFileSync(repo('src/app/(en)/layout.tsx'), 'utf8');
+  const arLayout = readFileSync(repo('src/app/(ar)/layout.tsx'), 'utf8');
+  const homeHero = readFileSync(repo('src/components/home/HomeHero.tsx'), 'utf8');
+  const homeExp = readFileSync(repo('src/components/home/HomeExperience.tsx'), 'utf8');
+  const aboutPage = readFileSync(repo('src/app/(en)/about-us/page.tsx'), 'utf8');
+
+  assert.match(pipo, /export function GradientBackground/);
+  assert.match(enLayout, /<GradientBackground\b/);
+  assert.match(arLayout, /<GradientBackground\b/);
+  assert.match(homeHero, /FloatingDeviceMockups/);
+  assert.match(homeExp, /InteractiveReadinessStudio/);
+  assert.match(homeExp, /FlagshipCta/);
+  assert.doesNotMatch(homeExp, /HomyAdvisorsCarousel/);
+  assert.match(aboutPage, /<TeamPortfolio\b/);
 });

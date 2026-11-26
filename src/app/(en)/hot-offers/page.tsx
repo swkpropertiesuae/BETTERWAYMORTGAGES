@@ -24,7 +24,7 @@ const ADVISORS = TEAM_SPECIALISTS.filter((m) => m.slug === 'reshma-rajan' || m.s
 
 export default function HotOffersPage() {
   return (
-    <div className="holo-canvas pt-[112px] max-sm:pt-[94px]">
+    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
       <section className="holo-section holo-section--dark">
         <div className="mx-auto max-w-[1160px] space-y-6">
           <Crumbs items={[{ name: 'Hot Offers Desk', href: '/hot-offers' }]} />

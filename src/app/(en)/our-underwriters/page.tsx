@@ -52,6 +52,8 @@ export default function Page() {
       name: e.name,
       jobTitle: e.role,
       email: e.email,
+      image: `${SITE.url}${e.portrait}`,
+      description: e.bio,
       worksFor: { '@id': `${SITE.url}/#org` },
     })),
     ...TEAM_SPECIALISTS.map((s) => ({
@@ -75,7 +77,7 @@ export default function Page() {
             name="advisor-consultation"
             priority
             sizes="(min-width: 1024px) 540px, 100vw"
-            alt="Concept image: an advisor reviewing a mortgage offer with a client"
+            alt="Sunlit morning Dubai executive private banking boardroom overlooking the skyline"
             className="bw-window aspect-[16/10] w-full"
           />
         }

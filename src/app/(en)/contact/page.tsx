@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 export default function Page() {
   const q = encodeURIComponent(`${SITE.address.building}, ${SITE.address.street}, ${SITE.address.district}, Dubai`);
   return (
-    <div className="bw-page-spacer bg-white">
-      {/* Homy Contact Page Split Header + Dark Commitment Card & #f6f6f6 Form */}
+    <div className="bw-page-spacer bg-transparent">
+      {/* Fintech Contact Page Split Header + Dark Commitment Card & Frosted Form */}
       <section className="py-12 lg:py-20">
         <div className="wrap">
           <div className="homy-head">
@@ -34,9 +34,9 @@ export default function Page() {
           </div>
 
           <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-            {/* Left: Homy Dark Radial-Gradient Commitment Card + Office Details */}
+            {/* Left: Fintech Commitment Card + Office Details */}
             <div className="space-y-6">
-              <div className="homy-commitment-card">
+              <div className="homy-commitment-card bw-fintech-stage !min-h-0 !rounded-[26px]">
                 <div className="space-y-4">
                   <img
                     src="/brand/icon.png"
@@ -88,13 +88,13 @@ export default function Page() {
                   </div>
                 </div>
 
-                <div className="-mx-8 mt-8 overflow-hidden">
+                <div className="relative z-10 -mx-8 mt-8 overflow-hidden rounded-b-[24px]">
                   <img
                     src="/images/footer-dubai-night-villa.webp"
-                    alt="Concept image: modern Dubai residence at twilight"
+                    alt="Sunlit morning view of Dubai Marina crystal waterfront residences"
                     width={1376}
                     height={768}
-                    className="h-56 w-full object-cover object-center opacity-90"
+                    className="h-56 w-full object-cover object-center"
                   />
                 </div>
               </div>

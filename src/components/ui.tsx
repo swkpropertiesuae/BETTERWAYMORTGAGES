@@ -21,7 +21,7 @@ export function Rich({ text }: { text: string }) {
 export const plain = (text: string) => text.replace(/\*/g, '');
 
 /** Homy Dot-Ring Section Tag */
-export function SectionTag({ children, light = false }: { children: string; light?: boolean }) {
+export function SectionTag({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
     <span className={`homy-tag ${light ? 'homy-tag--light' : ''}`}>
       <span className="homy-tag__ring" aria-hidden="true" />
@@ -143,36 +143,36 @@ export function Crumbs({ items }: { items: { name: string; href: string }[] }) {
   );
 }
 
-/** Clean Homy summary card shown beside inner-page headers: statutory CBUAE benchmarks. */
+/** Sleek 21st.dev fintech CBUAE benchmark summary card shown beside inner-page headers. */
 export function MiniPhone() {
   return (
     <div
-      className="relative mx-auto hidden w-[268px] rounded-[24px] border border-[#e5e7eb] bg-[#f6f6f6] p-5 lg:block"
+      className="bw-fintech-stage relative mx-auto hidden w-[280px] !min-h-0 !rounded-[24px] !p-5 shadow-[0_24px_60px_-26px_rgba(7,13,25,0.55)] lg:block"
       aria-hidden="true"
     >
-      <div className="flex items-center gap-2.5">
+      <div className="relative z-10 flex items-center gap-2.5">
         <img src="/brand/icon.png" alt="" width={34} height={34} className="h-[34px] w-[34px] object-contain" />
-        <span className="font-display text-sm font-semibold text-[#080b0f]">Betterway CBUAE Caps</span>
+        <span className="font-display text-sm font-bold text-white">Betterway CBUAE Caps</span>
       </div>
-      <div className="mt-4 rounded-[16px] bg-[#080b0f] p-4 text-white">
-        <p className="text-[11px] uppercase tracking-wider text-white/65">CBUAE max DBR</p>
-        <p className="num mt-1 text-[28px] font-semibold text-white">{BENCH.maxDbrPct}%</p>
+      <div className="relative z-10 mt-4 rounded-[16px] border border-white/14 bg-white/[0.07] p-4 text-white backdrop-blur-md">
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-[#ffe074]">CBUAE max DBR</p>
+        <p className="num mt-1 text-[28px] font-extrabold text-white">{BENCH.maxDbrPct}%</p>
       </div>
-      <div className="mt-2.5 space-y-1.5 text-[12px]">
+      <div className="relative z-10 mt-2.5 space-y-1.5 text-[12px]">
         {[
           ['Expat first home', `Up to ${BENCH.expatFirstHomeLtv}% LTV`],
           ['UAE National', `Up to ${BENCH.nationalFirstHomeLtv}% LTV`],
           ['Max tenure', `${BENCH.maxTenureYears} years`],
           ['Lender directory', `${BENCH.bankCount} banks`],
         ].map(([a, b]) => (
-          <div key={a} className="flex justify-between rounded-[10px] bg-white px-3 py-2">
-            <span className="text-[#606060]">{a}</span>
-            <span className="num font-semibold text-[#080b0f]">{b}</span>
+          <div key={a} className="flex justify-between rounded-[10px] border border-white/10 bg-white/[0.05] px-3 py-2">
+            <span className="text-white/70">{a}</span>
+            <span className="num font-semibold text-[#7ef7d2]">{b}</span>
           </div>
         ))}
       </div>
-      <div className="mt-3 rounded-[10px] bg-[#080b0f] py-2.5 text-center text-[12px] font-medium text-white">
-        Plan your mortgage
+      <div className="relative z-10 mt-3 rounded-[10px] bg-white py-2.5 text-center text-[12px] font-bold text-[#080b0f]">
+        Compare 24 UAE Banks
       </div>
     </div>
   );
@@ -255,11 +255,16 @@ export function Section({
   tone?: 'white' | 'mist' | 'navy';
   action?: { label: string; href: string };
 }) {
-  const bg = tone === 'mist' ? 'bg-[#f6f6f6]' : tone === 'navy' ? 'bg-[#0b1117] text-white' : 'bg-white';
+  const bg =
+    tone === 'mist'
+      ? 'bg-white/58 backdrop-blur-[10px] border-y border-white/65'
+      : tone === 'navy'
+        ? 'bw-fintech-stage !min-h-0 !rounded-none !border-0 text-white'
+        : 'bg-transparent';
   const dark = tone === 'navy';
   return (
     <section id={id} className={`${bg} py-16 lg:py-20`}>
-      <MotionReveal className="wrap">
+      <MotionReveal className="wrap relative z-10">
         <div className="homy-head">
           <div className="homy-head__left">
             {eyebrow && <SectionTag light={dark}>{eyebrow}</SectionTag>}
@@ -286,11 +291,14 @@ export function Section({
 
 export function Facts({ facts }: { facts: [string, string][] }) {
   return (
-    <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+    <dl className="grid grid-cols-2 gap-3.5 sm:grid-cols-3">
       {facts.map(([k, v]) => (
-        <div key={k} className="rounded-[12px] bg-[#eeeff0] p-5 max-sm:odd:last:col-span-2">
-          <dt className="text-xs font-medium uppercase tracking-wide text-[#4b5b63]">{k}</dt>
-          <dd className={`mt-1.5 text-lg font-semibold text-[#080b0f] ${/^[\d+−-]|^AED|^3M/.test(v) ? 'num' : 'font-display'}`}>{v}</dd>
+        <div
+          key={k}
+          className="rounded-[16px] border border-[#dce7e2] bg-white/88 p-5 shadow-[0_12px_30px_-24px_rgba(8,15,28,0.16)] backdrop-blur-md max-sm:odd:last:col-span-2"
+        >
+          <dt className="text-xs font-semibold uppercase tracking-wide text-[#4b5b63]">{k}</dt>
+          <dd className={`mt-1.5 text-lg font-bold text-[#080b0f] ${/^[\d+−-]|^AED|^3M/.test(v) ? 'num' : 'font-display'}`}>{v}</dd>
         </div>
       ))}
     </dl>
@@ -336,16 +344,28 @@ export function LinkGrid({
   return (
     <div className={`grid gap-4 sm:grid-cols-2 ${c}`}>
       {links.map((l) => (
-        <Link key={l.href} href={l.href} className="card group flex flex-col">
+        <Link
+          key={l.href}
+          href={l.href}
+          className="card group flex flex-col !border-[#dce7e2] !bg-white/90 backdrop-blur-md transition duration-200 hover:!-translate-y-1 hover:!border-[#179373] hover:!bg-white"
+        >
           {l.logo && (
-            <span className="mb-4 inline-flex h-10 w-32 items-center justify-start">
-              <img src={l.logo} alt="" className="max-h-7 w-auto max-w-[120px] object-contain object-left" loading="lazy" decoding="async" />
+            <span className="mb-4 inline-flex h-11 w-[136px] items-center justify-start rounded-[12px] border border-[#ebf0ee] bg-white px-3 py-1.5 shadow-[0_4px_14px_-10px_rgba(8,15,28,0.2)]">
+              <img
+                src={l.logo}
+                alt=""
+                width={112}
+                height={28}
+                className="h-7 w-[112px] object-contain object-left"
+                loading="eager"
+                decoding="sync"
+              />
             </span>
           )}
           {l.tag && <span className="tag mb-3 self-start">{l.tag}</span>}
-          <span className="font-display text-[17px] font-semibold text-[#080b0f] group-hover:text-[#0e6954]">{l.title}</span>
-          {l.body && <span className="mt-2 text-sm leading-relaxed text-[#606060]">{l.body}</span>}
-          <span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-[#080b0f] group-hover:text-[#0e6954]">
+          <span className="font-display text-[17px] font-bold text-[#080b0f] group-hover:text-[#0e6954]">{l.title}</span>
+          {l.body && <span className="mt-2 text-sm leading-relaxed text-[#4f596b]">{l.body}</span>}
+          <span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-bold text-[#080b0f] group-hover:text-[#0e6954]">
             Explore <ArrowRight size={14} className="transition group-hover:translate-x-0.5" />
           </span>
         </Link>
@@ -356,27 +376,44 @@ export function LinkGrid({
 
 export function CtaBand({
   title = 'Plan your Dubai mortgage with clarity.',
-  body = 'Compare lender criteria, review statutory CBUAE caps, and prepare your documents before making an offer.',
+  body = 'Compare lender criteria across 24 licensed UAE banks, verify CBUAE caps, and prepare every dirham before signing Form F.',
 }: {
   title?: string;
   body?: string;
 }) {
   return (
-    <section className="bg-white py-14 lg:py-20">
+    <section className="bg-transparent py-14 lg:py-20">
       <div className="wrap">
-        <div className="rounded-[24px] bg-[#f6f6f6] p-8 sm:p-12 lg:flex lg:items-end lg:justify-between lg:gap-12">
-          <div className="max-w-2xl">
-            <SectionTag>Talk to an advisor</SectionTag>
-            <h2 className="homy-h2 mt-4">
-              <Rich text={title} />
-            </h2>
-            <p className="homy-sub mt-4">{body}</p>
-          </div>
-          <div className="mt-7 flex flex-wrap gap-3 lg:mt-0 lg:shrink-0">
-            <Cta href="/contact">Get in Touch</Cta>
-            <Cta href={waLink()} tone="ghost">
-              Ask a Question
-            </Cta>
+        <div className="bw-hot-beam-shell overflow-hidden rounded-[28px] p-[2px] shadow-[0_30px_76px_-30px_rgba(7,13,25,0.52)]">
+          <div className="bw-fintech-stage !min-h-0 !rounded-[26px] !border-0 !p-8 sm:!p-12 lg:flex lg:items-end lg:justify-between lg:gap-12">
+            <div className="relative z-10 max-w-2xl">
+              <div className="mb-4 flex flex-wrap items-center gap-3">
+                <img
+                  src="/brand/logo-horizontal-dark.png"
+                  alt="Betterway Mortgages"
+                  width={1400}
+                  height={419}
+                  className="h-9 w-auto"
+                />
+                <SectionTag light>1-on-1 Dubai Advisory Desk</SectionTag>
+              </div>
+              <h2 className="homy-h2 mt-2 !text-white">
+                <Rich text={title} />
+              </h2>
+              <p className="mt-4 max-w-xl text-[15.5px] leading-relaxed text-white/76">{body}</p>
+            </div>
+            <div className="relative z-10 mt-7 flex flex-wrap gap-3 lg:mt-0 lg:shrink-0">
+              <Cta href="/contact" tone="light">
+                Book Advisory Call
+              </Cta>
+              <a
+                href={waLink()}
+                rel="noopener"
+                className="inline-flex h-12 items-center gap-2 rounded-[12px] border border-white/25 bg-white/10 px-5 text-sm font-bold text-white backdrop-blur-md transition hover:border-[#00d69a] hover:bg-white/18"
+              >
+                Ask on WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -393,7 +430,7 @@ const FOOT: { title: string; links: [string, string][] }[] = [
       ['UAE National Mortgages', '/mortgages/uae-nationals'],
       ['Non-Resident Buyers', '/mortgages/non-resident-dubai'],
       ['Islamic Home Finance', '/mortgages/islamic-home-finance'],
-      ['Property Closing Desk', '/concierge'],
+      ['BetterClose · Closing Desk', '/concierge'],
     ],
   },
   {
@@ -408,12 +445,12 @@ const FOOT: { title: string; links: [string, string][] }[] = [
     ],
   },
   {
-    title: 'Partners & OS',
+    title: 'Betterway Suite',
     links: [
-      ['Betterway Partner Desk (Agents)', '/hub'],
-      ['Betterway Brokerage Platform', '/edge'],
-      ['Become a RERA Partner', '/partners'],
-      ['Client & Staff Portal Login', '/portal/login'],
+      ['BetterHub · RERA Agencies', '/hub'],
+      ['BetterCore · Brokerage OS', '/edge'],
+      ['Join BetterHub', '/partners'],
+      ['BetterVault · Portal Login', '/portal/login'],
       ['About Betterway', '/about-us'],
       ['Our Dubai Specialists', '/our-underwriters'],
     ],
@@ -445,7 +482,7 @@ export function Footer() {
           <div className="homy-footer-villa">
             <img
               src="/images/footer-dubai-night-villa.webp"
-              alt="High-resolution twilight aerial view of Downtown Dubai, Burj Khalifa, and illuminated Sheikh Zayed Road"
+              alt="Sunlit morning aerial view of turquoise Dubai Marina waterfront residences and skyline"
               width={2560}
               height={1440}
               loading="lazy"
@@ -466,7 +503,7 @@ export function Footer() {
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={421}
+                  height={419}
                   className="h-14 w-auto sm:h-16"
                 />
               </Link>
@@ -531,28 +568,29 @@ export function Footer() {
             </p>
             <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-white/75">
               <p>© 2026 {SITE.legalName}. All rights reserved.</p>
-              <nav aria-label="Legal and SEO links" className="flex flex-wrap items-center gap-5">
+              <nav aria-label="Legal and SEO links" className="flex flex-wrap items-center gap-4">
                 <Link href="/hot-offers" className="ulink">
-                  Hot Offers
+                  BetterDesk
                 </Link>
                 <Link href="/insights" className="ulink">
                   36 UAE Insights
                 </Link>
                 <Link href="/downloads" className="ulink">
-                  PDF Guides
+                  52 Free PDF Guides
                 </Link>
-                <a href="https://swkpropertiesuae.com" target="_blank" rel="noopener noreferrer" className="ulink">
-                  SWK Properties UAE ↗
-                </a>
                 <Link href="/privacy-and-cbuae-disclosure" className="ulink">
                   Privacy &amp; CBUAE Disclosure
                 </Link>
                 <Link href="/sitemap" className="ulink">
                   Sitemap
                 </Link>
-                <Link href="/ar" lang="ar" className="ulink">
-                  العربية
-                </Link>
+                <span className="inline-flex items-center gap-2.5 border-s border-white/15 ps-3">
+                  <Link href="/ar" lang="ar" className="ulink">العربية</Link>
+                  <Link href="/ru" lang="ru" className="ulink">RU</Link>
+                  <Link href="/zh" lang="zh" className="ulink">中文</Link>
+                  <Link href="/fr" lang="fr" className="ulink">FR</Link>
+                  <Link href="/es" lang="es" className="ulink">ES</Link>
+                </span>
               </nav>
             </div>
           </div>
