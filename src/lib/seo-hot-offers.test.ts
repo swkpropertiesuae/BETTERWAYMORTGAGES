@@ -4,7 +4,7 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { PDF_RESOURCES, SEO_TOPICS } from '../data/seo-topics.ts';
 import { CURRENCIES, I18N, LOCALES, convertFromAed, formatMoneyFromAed } from '../data/i18n.ts';
-import { EXT_I18N } from '../data/i18n-extended.ts';
+import { EXT_I18N, SWISS_UI_I18N } from '../data/i18n-extended.ts';
 import { enhancedOrgSchema, websiteSchema, speakablePageSchema, pdfCatalogSchema } from './seo-schema.ts';
 
 const repo = (rel: string) => path.resolve(process.cwd(), rel);
@@ -30,13 +30,15 @@ test('SEO_TOPICS provides 36 unique high-intent UAE/Dubai guides pushing total b
   }
 });
 
-test('21st.dev HotOffersPopup features official female advisors, border-beam frame, and GA4 tracking', () => {
+test('HotOffersPopup features official female advisors, refined hairline frame, GA4 tracking, and zero auto-popup timer ambush', () => {
   const src = readFileSync(repo('src/components/HotOffersPopup.tsx'), 'utf8');
   assert.match(src, /reshma-rajan/);
   assert.match(src, /rahaba-azeez/);
   assert.match(src, /bw-hot-beam-shell/);
   assert.match(src, /trackEvent/);
   assert.match(src, /Betterway-UAE-Mortgage-Buyer-Guide-2026\.pdf/);
+  assert.doesNotMatch(src, /8500/);
+  assert.doesNotMatch(src, /auto_timer/);
 });
 
 test('24-bank marquee runs endless slow horizontal CSS animation and zero 24s/1080p strings exist in UI', () => {
@@ -59,6 +61,9 @@ test('6 full languages (EN, AR, RU, ZH, FR, ES) and live multi-currency FX conve
   for (const loc of LOCALES) {
     assert.ok(I18N[loc.code]?.hero.title.length > 12, `Missing hero title for ${loc.code}`);
     assert.ok(I18N[loc.code]?.faq.items.length >= 4, `Missing FAQs for ${loc.code}`);
+    assert.ok(SWISS_UI_I18N[loc.code]?.concierge.launcher.length > 3, `Missing Swiss UI copy for ${loc.code}`);
+    assert.equal(SWISS_UI_I18N[loc.code]?.mandates.length, 4, `Expected 4 Swiss mandates for ${loc.code}`);
+    assert.equal(SWISS_UI_I18N[loc.code]?.metrics.length, 4, `Expected 4 institutional proof metrics for ${loc.code}`);
   }
   const usd = convertFromAed(3_672_500, 'USD');
   assert.ok(Math.abs(usd - 1_000_000) < 100, `Expected ~1,000,000 USD, got ${usd}`);
@@ -79,44 +84,39 @@ test('SEO, AEO, AIO, GEO JSON-LD schemas emit valid Organization, WebSite, Speak
   assert.equal(pdfs.itemListElement[0].item['@type'], 'DigitalDocument');
 });
 
-test('21st.dev PhoneCarousel hero, pure white bg, animated border lines, Obsidian Silk stages, and Home Team removal are wired cleanly', () => {
-  const phoneMockup = readFileSync(repo('src/components/ui/phone-mockups-1.tsx'), 'utf8');
-  const phoneCarousel = readFileSync(repo('src/components/ui/phone-mockups-1-utils/phone-carousel.tsx'), 'utf8');
-  const uiButton = readFileSync(repo('src/components/ui/button.tsx'), 'utf8');
+test('Swiss / DIFC Institutional Light architecture replaces WebGL clutter with HeroPreCheckConsole, ExecutiveConciergeDock, and clean inner shells', () => {
   const enLayout = readFileSync(repo('src/app/(en)/layout.tsx'), 'utf8');
   const arLayout = readFileSync(repo('src/app/(ar)/layout.tsx'), 'utf8');
   const brandCss = readFileSync(repo('src/app/brand.css'), 'utf8');
   const homeHero = readFileSync(repo('src/components/home/HomeHero.tsx'), 'utf8');
   const homeExp = readFileSync(repo('src/components/home/HomeExperience.tsx'), 'utf8');
   const aboutPage = readFileSync(repo('src/app/(en)/about-us/page.tsx'), 'utf8');
+  const dock = readFileSync(repo('src/components/ExecutiveConciergeDock.tsx'), 'utf8');
+  const preCheck = readFileSync(repo('src/components/home/HeroPreCheckConsole.tsx'), 'utf8');
 
-  assert.match(phoneMockup, /PhoneCarousel/);
-  assert.match(phoneCarousel, /export function PhoneCarousel/);
-  assert.match(uiButton, /@radix-ui\/react-slot/);
-  for (const s of ['screen-1-rates.webp', 'screen-2-dbr.webp', 'screen-3-dld.webp', 'screen-4-vault.webp']) {
-    assert.ok(existsSync(repo(`public/images/phone-screens/${s}`)), `Missing phone screen asset: ${s}`);
-  }
-  assert.match(enLayout, /<GlobalShaderBackdrop\b/);
-  assert.match(enLayout, /bg-transparent/);
-  assert.doesNotMatch(enLayout, /<GradientBackground\b/);
-  assert.match(arLayout, /<GlobalShaderBackdrop\b/);
-  assert.match(arLayout, /bg-transparent/);
-  assert.doesNotMatch(arLayout, /<GradientBackground\b/);
-  assert.ok(existsSync(repo('src/components/ui/shader-art.tsx')), 'Missing ShaderArt component');
-  assert.match(readFileSync(repo('src/components/ui/shader-art.tsx'), 'utf8'), /export function ShaderArt/);
+  assert.doesNotMatch(enLayout, /<GlobalShaderBackdrop\b/);
+  assert.doesNotMatch(arLayout, /<GlobalShaderBackdrop\b/);
+  assert.match(enLayout, /bg-white/);
+  assert.match(arLayout, /bg-white/);
+  assert.match(enLayout, /<ExecutiveConciergeDock\b/);
+  assert.match(arLayout, /<ExecutiveConciergeDock\b/);
+  assert.match(arLayout, /showHotOffersTrigger=\{false\}/);
+  assert.match(dock, /OsLiveChat/);
+  assert.match(dock, /CoPilot/);
+
+  assert.match(homeHero, /HeroPreCheckConsole/);
+  assert.match(preCheck, /4\.19/);
+  assert.match(preCheck, /rate=4\.19/);
+  assert.doesNotMatch(homeHero, /PhoneMockupBasic/);
+  assert.doesNotMatch(homeHero, /MorningHeroCarousel/);
+
   assert.match(brandCss, /\.holo-canvas--page/);
-  assert.match(brandCss, /@keyframes\s+bw-border-trace/);
-  assert.match(brandCss, /\.bw-beam-box/);
-  assert.doesNotMatch(brandCss, /background-size:\s*100%\s+100%,[^;]*28px\s+28px/);
   assert.doesNotMatch(readFileSync(repo('public/favicon.svg'), 'utf8'), /fill="#070E1A"/);
-  assert.match(homeHero, /PhoneMockupBasic/);
-  assert.doesNotMatch(homeHero, /FloatingDeviceMockups/);
   assert.match(homeExp, /InteractiveReadinessStudio/);
   assert.match(homeExp, /FlagshipCta/);
   assert.doesNotMatch(homeExp, /HomyAdvisorsCarousel/);
+  assert.doesNotMatch(homeExp, /DisclosureToast/);
   assert.match(aboutPage, /<TeamPortfolio\b/);
-  assert.match(enLayout, /<OsLiveChat\b/);
-  assert.match(arLayout, /<OsLiveChat\b/);
   assert.ok(existsSync(repo('src/app/api/os/live-chat/route.ts')), 'Missing Betterway OS live-chat API route');
   assert.match(readFileSync(repo('src/app/(en)/contact/page.tsx'), 'utf8'), /ContactLocationMap/);
   assert.ok(existsSync(repo('public/images/dubai-oud-metha-map.webp')), 'Missing Oud Metha Dubai map asset');

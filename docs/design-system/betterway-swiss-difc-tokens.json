@@ -1,0 +1,53 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Betterway Mortgages LLC — Swiss / DIFC Institutional Light Design Tokens (Figma Variables / Tokens Studio compatible, synced 1:1 with brand-tokens.json and src/app/globals.css)",
+  "color": {
+    "surface": {
+      "canvas": { "$value": "#FFFFFF", "$type": "color", "$description": "Primary pure white page canvas" },
+      "stone": { "$value": "#F7F8FA", "$type": "color", "$description": "Alternating Swiss stone section background" },
+      "stoneElevated": { "$value": "#EFF2F5", "$type": "color", "$description": "Segmented tracks, hover wells, table headers" },
+      "emeraldTint": { "$value": "#EDF7F4", "$type": "color", "$description": "Subtle light-mode institutional badge fill" }
+    },
+    "brand": {
+      "midnightNavy": { "$value": "#070E1A", "$type": "color", "$description": "Official brand Midnight Navy primary dark anchor & ink" },
+      "navySurface": { "$value": "#0C1524", "$type": "color", "$description": "Elevated executive panel surface on dark bands" },
+      "emeraldLight": { "$value": "#34DFAC", "$type": "color", "$description": "Live indicators & numeric highlights on Midnight Navy" },
+      "emeraldMid": { "$value": "#179373", "$type": "color", "$description": "Brand ribbon mid emerald (icons, strokes, active borders)" },
+      "emeraldAccessible": { "$value": "#0E6954", "$type": "color", "$description": "WCAG 2.1 AA >= 4.5:1 emerald text on white/stone/tint" },
+      "emeraldDeep": { "$value": "#0A4A3E", "$type": "color", "$description": "Deep emerald pressed/hover state" },
+      "goldGleam": { "$value": "#FCF1B7", "$type": "color", "$description": "Champagne highlight on Midnight Navy" },
+      "goldMid": { "$value": "#D7B158", "$type": "color", "$description": "Fine 1px architectural hairline & dark-surface accent" },
+      "goldRich": { "$value": "#BA8D36", "$type": "color", "$description": "Rich gold brand mark accent" },
+      "goldAccessible": { "$value": "#8A6518", "$type": "color", "$description": "WCAG 2.1 AA bronze/gold text on light canvas" }
+    },
+    "ink": {
+      "primary": { "$value": "#0B1320", "$type": "color" },
+      "secondary": { "$value": "#4A5568", "$type": "color" },
+      "hairlineLight": { "$value": "#E3E7EE", "$type": "color" },
+      "hairlineDark": { "$value": "rgba(255, 255, 255, 0.12)", "$type": "color" }
+    }
+  },
+  "typography": {
+    "display": { "$value": "'Plus Jakarta Sans Variable', 'Inter Variable', system-ui, sans-serif", "$type": "fontFamily" },
+    "serifAccent": { "$value": "'Instrument Serif', 'Times New Roman', serif", "$type": "fontFamily" },
+    "body": { "$value": "'Inter Variable', 'Plus Jakarta Sans Variable', system-ui, sans-serif", "$type": "fontFamily" },
+    "tabularNumeric": { "$value": "'JetBrains Mono Variable', ui-monospace, monospace", "$type": "fontFamily" },
+    "arabic": { "$value": "'IBM Plex Sans Arabic', 'Inter Variable', sans-serif", "$type": "fontFamily" }
+  },
+  "layout": {
+    "railMax": { "$value": "1320px", "$type": "dimension" },
+    "headerHeightDesktop": { "$value": "80px", "$type": "dimension" },
+    "headerHeightMobile": { "$value": "68px", "$type": "dimension" },
+    "radiusButton": { "$value": "10px", "$type": "dimension" },
+    "radiusCard": { "$value": "16px", "$type": "dimension" },
+    "radiusStage": { "$value": "20px", "$type": "dimension" }
+  },
+  "motion": {
+    "easeSwiss": { "$value": [0.22, 1, 0.36, 1], "$type": "cubicBezier" },
+    "springInstitutional": {
+      "stiffness": 360,
+      "damping": 34,
+      "mass": 0.9
+    }
+  }
+}

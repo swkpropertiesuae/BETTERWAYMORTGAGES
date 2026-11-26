@@ -1165,3 +1165,451 @@ export const FOOTER_LINKS_I18N: Record<
     ],
   },
 };
+
+export type SwissUiCopy = {
+  regulatoryMicro: string;
+  heroConsole: {
+    heading: string;
+    rateNote: string;
+    residencyTabs: readonly [string, string, string];
+    priceLabel: string;
+    downLabel: string;
+    monthlyLabel: string;
+    loanLabel: string;
+    dldLabel: string;
+    totalCashLabel: string;
+    ctaLabel: string;
+  };
+  metrics: readonly [
+    readonly [string, string],
+    readonly [string, string],
+    readonly [string, string],
+    readonly [string, string],
+  ];
+  mandates: readonly [
+    { badge: string; title: string; body: string; href: string; cta: string },
+    { badge: string; title: string; body: string; href: string; cta: string },
+    { badge: string; title: string; body: string; href: string; cta: string },
+    { badge: string; title: string; body: string; href: string; cta: string },
+  ];
+  leadershipBanner: {
+    eyebrow: string;
+    heading: string;
+    sub: string;
+    cta: string;
+  };
+  concierge: {
+    launcher: string;
+    mobileLauncher: string;
+    deskSubtitle: string;
+    tabLive: string;
+    tabGuide: string;
+    priorityOffersBtn: string;
+    ratesDirectoryLink: string;
+  };
+};
+
+export const SWISS_UI_I18N: Record<LocaleCode, SwissUiCopy> = {
+  en: {
+    regulatoryMicro:
+      'Betterway Mortgages LLC is an independent UAE mortgage advisor, not a bank. Final pricing and approvals are issued in writing by licensed lenders under CBUAE rules.',
+    heroConsole: {
+      heading: 'Instant Mortgage Preview',
+      rateNote: 'Illustrative 4.19% p.a. · 25y',
+      residencyTabs: ['Expat Resident', 'UAE National', 'Non-Resident'],
+      priceLabel: 'Property Value',
+      downLabel: 'Down Payment',
+      monthlyLabel: 'Est. Monthly Payment',
+      loanLabel: 'Loan & LTV',
+      dldLabel: '4% DLD & Closing Fees',
+      totalCashLabel: 'Total Cash at Transfer',
+      ctaLabel: 'Compare 24 UAE Banks',
+    },
+    metrics: [
+      ['24', 'Licensed UAE Conventional & Islamic Banks'],
+      ['50%', 'CBUAE Maximum Debt Burden Ratio (DBR) Cap'],
+      ['80% / 85%', 'First-Home LTV Cap (Expat / National ≤ AED 5M)'],
+      ['AED 0', 'Upfront Advisory Consultation Fee'],
+    ],
+    mandates: [
+      {
+        badge: 'Up to 80% / 85% LTV',
+        title: 'First-Home Resident',
+        body: 'Compare fixed periods, EIBOR revert margins, and written 24-bank terms before signing Form F.',
+        href: '/mortgages/uae-residents',
+        cta: 'Resident guide',
+      },
+      {
+        badge: '1% / AED 10k Cap',
+        title: 'Buyout & Revert Audit',
+        body: 'Verify your post-fixed EIBOR rate and break-even month under the statutory CBUAE early-settlement cap.',
+        href: '/calculators/buyout-refinance-savings',
+        cta: 'Audit revert rate',
+      },
+      {
+        badge: 'AED 2M+ Threshold',
+        title: 'Non-Resident & Golden Visa',
+        body: 'Cross-border underwriting across 25 countries with remote POA and Title Deed lender NOC support.',
+        href: '/mortgages/non-resident-dubai',
+        cta: 'Overseas desk',
+      },
+      {
+        badge: '80 UAE Projects',
+        title: 'Off-Plan Handover SOA',
+        body: 'Prepare valuation, developer Statement of Account, and final completion financing ahead of keys.',
+        href: '/handover',
+        cta: 'Handover tracker',
+      },
+    ],
+    leadershipBanner: {
+      eyebrow: 'Dubai Executive Advisory Desk',
+      heading: 'Led by senior UAE underwriting & banking specialists in Oud Metha.',
+      sub: 'Meet Founder Warda Kapadia, Co-Founder Shabib Siraj, and our 8-specialist Dubai mortgage advisory team.',
+      cta: 'Meet All 8 Specialists',
+    },
+    concierge: {
+      launcher: 'Advisory Desk',
+      mobileLauncher: 'Desk',
+      deskSubtitle: 'Al Nasr Plaza · Oud Metha, Dubai',
+      tabLive: 'Live Desk',
+      tabGuide: 'CBUAE Guide',
+      priorityOffersBtn: 'Priority Offers Desk',
+      ratesDirectoryLink: '24-Bank Directory',
+    },
+  },
+  ar: {
+    regulatoryMicro:
+      'بيترواي للتمويل العقاري مستشار تمويل عقاري مستقل في الإمارات وليس بنكاً. تصدر الموافقات والعروض النهائية كتابياً من البنوك المرخصة وفق أنظمة المصرف المركزي.',
+    heroConsole: {
+      heading: 'معاينة التمويل الفورية',
+      rateNote: 'معدل استرشادي 4.19% سنوياً · 25 سنة',
+      residencyTabs: ['مقيم', 'مواطن إماراتي', 'غير مقيم'],
+      priceLabel: 'قيمة العقار',
+      downLabel: 'الدفعة الأولى',
+      monthlyLabel: 'القسط الشهري التقديري',
+      loanLabel: 'مبلغ التمويل والنسبة',
+      dldLabel: 'رسوم الأراضي 4% والتسجيل',
+      totalCashLabel: 'إجمالي النقد عند النقل',
+      ctaLabel: 'قارن 24 بنكاً في الإمارات',
+    },
+    metrics: [
+      ['24', 'بنكاً مرخصاً تقليدياً وإسلامياً في الإمارات'],
+      ['50%', 'الحد الأقصى لنسبة الاستقطاع (DBR) لدى المركزي'],
+      ['80% / 85%', 'سقف تمويل المسكن الأول (مقيم / مواطن حتى 5 مليون)'],
+      ['0 درهم', 'رسوم استشارة تمويلية مسبقة'],
+    ],
+    mandates: [
+      {
+        badge: 'حتى 80% / 85% تمويل',
+        title: 'تمويل المسكن الأول للمقيمين',
+        body: 'قارن فترات التثبيت وهوامش إيبور وشروط 24 بنكاً كتابياً قبل توقيع نموذج F.',
+        href: '/ar/mortgages/uae-residents',
+        cta: 'دليل المقيمين',
+      },
+      {
+        badge: 'سقف 1% أو 10 آلاف درهم',
+        title: 'إعادة التمويل وشراء المديونية',
+        body: 'راجع هامش إيبور بعد انتهاء التثبيت واحسب نقطة التعادل ضمن سقف السداد المبكر.',
+        href: '/ar/calculators/buyout-refinance-savings',
+        cta: 'احسب إعادة التمويل',
+      },
+      {
+        badge: 'عتبة 2 مليون درهم',
+        title: 'غير المقيمين والإقامة الذهبية',
+        body: 'هيكلة التمويل للمستثمرين الدوليين مع دعم الوكالة القانونية وخطاب عدم الممانعة.',
+        href: '/ar/mortgages/non-resident-dubai',
+        cta: 'مكتب غير المقيمين',
+      },
+      {
+        badge: '80 مشروعاً في الإمارات',
+        title: 'تمويل تسليم العقارات قيد الإنشاء',
+        body: 'تجهيز التقييم وكشف حساب المطور وتمويل الدفعة النهائية قبل موعد التسليم.',
+        href: '/handover',
+        cta: 'دليل التسليم',
+      },
+    ],
+    leadershipBanner: {
+      eyebrow: 'مكتب الاستشارات التنفيذي في دبي',
+      heading: 'بإشراف قيادات متخصصة في التمويل العقاري والائتمان في عود ميثاء، دبي.',
+      sub: 'تعرّف على المؤسسة وردة كباديا والشريك المؤسس شبيب سراج وفريق المستشارين الثمانية.',
+      cta: 'تعرّف على الفريق',
+    },
+    concierge: {
+      launcher: 'مكتب الاستشارات',
+      mobileLauncher: 'المكتب',
+      deskSubtitle: 'النصر بلازا · عود ميثاء، دبي',
+      tabLive: 'محادثة مباشرة',
+      tabGuide: 'دليل المركزي',
+      priorityOffersBtn: 'عروض البنوك',
+      ratesDirectoryLink: 'دليل 24 بنكاً',
+    },
+  },
+  ru: {
+    regulatoryMicro:
+      'Betterway Mortgages LLC — независимый ипотечный консультант в ОАЭ, не банк. Итоговые ставки и одобрения выдаются письменно лицензированными банками по правилам CBUAE.',
+    heroConsole: {
+      heading: 'Мгновенный расчёт ипотеки',
+      rateNote: 'Ориентир 4.19% годовых · 25 лет',
+      residencyTabs: ['Резидент ОАЭ', 'Гражданин ОАЭ', 'Нерезидент'],
+      priceLabel: 'Стоимость объекта',
+      downLabel: 'Первоначальный взнос',
+      monthlyLabel: 'Оценочный платёж/мес',
+      loanLabel: 'Кредит и LTV',
+      dldLabel: '4% DLD и сборы',
+      totalCashLabel: 'Итого наличными',
+      ctaLabel: 'Сравнить 24 банка ОАЭ',
+    },
+    metrics: [
+      ['24', 'Лицензированных банка ОАЭ (классика и исламские)'],
+      ['50%', 'Лимит долговой нагрузки (DBR) ЦБ ОАЭ'],
+      ['80% / 85%', 'Лимит LTV на первое жильё до AED 5M'],
+      ['AED 0', 'Авансовая комиссия за консультацию'],
+    ],
+    mandates: [
+      {
+        badge: 'До 80% / 85% LTV',
+        title: 'Покупка первого жилья',
+        body: 'Сравните фиксированные периоды, маржу EIBOR и условия 24 банков до подписания Form F.',
+        href: '/mortgages/uae-residents',
+        cta: 'Гид резидента',
+      },
+      {
+        badge: 'Лимит 1% / AED 10k',
+        title: 'Рефинансирование и аудит',
+        body: 'Проверьте ставку после фикс-периода и окупаемость перехода в рамках лимита ЦБ ОАЭ.',
+        href: '/calculators/buyout-refinance-savings',
+        cta: 'Проверить выгоду',
+      },
+      {
+        badge: 'Порог AED 2M+',
+        title: 'Нерезиденты и Golden Visa',
+        body: 'Андеррайтинг для покупателей из 25 стран, удалённая доверенность и NOC банка.',
+        href: '/mortgages/non-resident-dubai',
+        cta: 'Международный деск',
+      },
+      {
+        badge: '80 проектов ОАЭ',
+        title: 'Ипотека на сдачу Off-Plan',
+        body: 'Оценка, сверка счёта застройщика (SOA) и финансирование финального платежа к ключам.',
+        href: '/handover',
+        cta: 'Трекер сдачи',
+      },
+    ],
+    leadershipBanner: {
+      eyebrow: 'Исполнительный ипотечный деск в Дубае',
+      heading: 'Под руководством экспертов по андеррайтингу и банкам ОАЭ в Oud Metha.',
+      sub: 'Познакомьтесь с основателями Вардой Кападиа, Шабибом Сираджем и 8 специалистами Betterway.',
+      cta: 'Все 8 специалистов',
+    },
+    concierge: {
+      launcher: 'Консультация',
+      mobileLauncher: 'Чат',
+      deskSubtitle: 'Al Nasr Plaza · Oud Metha, Дубай',
+      tabLive: 'Онлайн-деск',
+      tabGuide: 'Гид CBUAE',
+      priorityOffersBtn: 'Приоритетные предложения',
+      ratesDirectoryLink: 'Каталог 24 банков',
+    },
+  },
+  zh: {
+    regulatoryMicro:
+      'Betterway Mortgages LLC 是阿联酋独立按揭顾问机构，并非银行。最终利率与批复均由阿联酋持牌银行依据央行（CBUAE）规定书面签发。',
+    heroConsole: {
+      heading: '即时按揭方案预览',
+      rateNote: '参考年利率 4.19% · 25年期',
+      residencyTabs: ['阿联酋居民', '阿联酋公民', '海外非居民'],
+      priceLabel: '房产总价',
+      downLabel: '首付比例',
+      monthlyLabel: '预估月供',
+      loanLabel: '贷款额与 LTV',
+      dldLabel: '4% DLD 与交易税费',
+      totalCashLabel: '过户所需总现金',
+      ctaLabel: '对比 24 家阿联酋银行',
+    },
+    metrics: [
+      ['24', '阿联酋持牌传统与伊斯兰银行'],
+      ['50%', '央行 CBUAE 最高月负债比（DBR）上限'],
+      ['80% / 85%', '首套房最高成数（500万迪拉姆以内）'],
+      ['AED 0', '前期顾问咨询零预付费'],
+    ],
+    mandates: [
+      {
+        badge: '最高 80% / 85% LTV',
+        title: '居民首套置业按揭',
+        body: '签署 Form F 前书面对比 24 家银行固定利率期与 EIBOR 浮动加点。',
+        href: '/mortgages/uae-residents',
+        cta: '居民置业指南',
+      },
+      {
+        badge: '1% / 1万迪拉姆封顶',
+        title: '转按揭与利率复核',
+        body: '依据央行提前结清费用上限，精准测算固定期后转贷回本周期。',
+        href: '/calculators/buyout-refinance-savings',
+        cta: '测算转按揭',
+      },
+      {
+        badge: '200万迪拉姆门槛',
+        title: '非居民与黄金签证',
+        body: '覆盖 25 国海外买家的跨境审核、远程授权书与银行 NOC 协同。',
+        href: '/mortgages/non-resident-dubai',
+        cta: '海外买家专席',
+      },
+      {
+        badge: '80 个阿联酋项目',
+        title: '期房交房尾款按揭',
+        body: '提前完成房产评估、开发商对账单（SOA）及交房尾款批复筹备。',
+        href: '/handover',
+        cta: '交房追踪',
+      },
+    ],
+    leadershipBanner: {
+      eyebrow: '迪拜资深按揭顾问管理团队',
+      heading: '由扎根迪拜 Oud Metha 的资深银行与风控专家领衔服务。',
+      sub: '认识创始人 Warda Kapadia、联合创始人 Shabib Siraj 及 8 位迪拜专属按揭专家。',
+      cta: '认识全部 8 位专家',
+    },
+    concierge: {
+      launcher: '顾问专席',
+      mobileLauncher: '专席',
+      deskSubtitle: 'Al Nasr Plaza · 迪拜 Oud Metha',
+      tabLive: '在线顾问',
+      tabGuide: '央行规则速查',
+      priorityOffersBtn: '优先银行方案',
+      ratesDirectoryLink: '24 家银行名录',
+    },
+  },
+  fr: {
+    regulatoryMicro:
+      'Betterway Mortgages LLC est un cabinet indépendant de conseil hypothécaire aux ÉAU, pas une banque. Les offres définitives sont émises par écrit par des banques agréées sous règles CBUAE.',
+    heroConsole: {
+      heading: 'Simulation Hypothécaire Instantanée',
+      rateNote: 'Taux indicatif 4,19 % / an · 25 ans',
+      residencyTabs: ['Résident ÉAU', 'Citoyen ÉAU', 'Non-Résident'],
+      priceLabel: 'Valeur du bien',
+      downLabel: 'Apport initial',
+      monthlyLabel: 'Mensualité estimée',
+      loanLabel: 'Prêt & LTV',
+      dldLabel: '4 % DLD & frais',
+      totalCashLabel: 'Trésorerie au transfert',
+      ctaLabel: 'Comparer 24 banques ÉAU',
+    },
+    metrics: [
+      ['24', 'Banques conventionnelles et islamiques agréées'],
+      ['50%', 'Plafond légal de taux d’endettement (DBR CBUAE)'],
+      ['80% / 85%', 'Plafond LTV premier achat (≤ 5 M AED)'],
+      ['0 AED', 'Frais initiaux de consultation conseil'],
+    ],
+    mandates: [
+      {
+        badge: 'Jusqu’à 80 % / 85 % LTV',
+        title: 'Premier achat résident',
+        body: 'Comparez périodes fixes, marges EIBOR et offres écrites de 24 banques avant le Form F.',
+        href: '/mortgages/uae-residents',
+        cta: 'Guide résident',
+      },
+      {
+        badge: 'Plafond 1 % / 10k AED',
+        title: 'Rachat & audit de taux',
+        body: 'Auditez votre taux variable EIBOR et calculez le seuil de rentabilité sous le plafond CBUAE.',
+        href: '/calculators/buyout-refinance-savings',
+        cta: 'Auditer mon taux',
+      },
+      {
+        badge: 'Seuil 2 M AED+',
+        title: 'Non-résidents & Golden Visa',
+        body: 'Financement transfrontalier dans 25 pays avec procuration à distance et NOC bancaire.',
+        href: '/mortgages/non-resident-dubai',
+        cta: 'Bureau international',
+      },
+      {
+        badge: '80 projets ÉAU',
+        title: 'Livraison VEFA (Off-Plan)',
+        body: 'Préparez l’évaluation, le relevé promoteur (SOA) et le financement final avant remise des clés.',
+        href: '/handover',
+        cta: 'Suivi livraisons',
+      },
+    ],
+    leadershipBanner: {
+      eyebrow: 'Direction & Conseil Hypothécaire à Dubaï',
+      heading: 'Dirigé par des spécialistes bancaires et crédit basés à Oud Metha.',
+      sub: 'Découvrez Warda Kapadia, Shabib Siraj et nos 8 spécialistes du financement immobilier à Dubaï.',
+      cta: 'Rencontrer nos 8 experts',
+    },
+    concierge: {
+      launcher: 'Bureau Conseil',
+      mobileLauncher: 'Conseil',
+      deskSubtitle: 'Al Nasr Plaza · Oud Metha, Dubaï',
+      tabLive: 'Chat Direct',
+      tabGuide: 'Guide CBUAE',
+      priorityOffersBtn: 'Offres Prioritaires',
+      ratesDirectoryLink: 'Annuaire 24 Banques',
+    },
+  },
+  es: {
+    regulatoryMicro:
+      'Betterway Mortgages LLC es un asesor hipotecario independiente en EAU, no un banco. Las ofertas finales y aprobaciones las emiten por escrito bancos con licencia bajo normas CBUAE.',
+    heroConsole: {
+      heading: 'Vista Previa Hipotecaria Instantánea',
+      rateNote: 'Tipo ilustrativo 4,19 % anual · 25 años',
+      residencyTabs: ['Residente EAU', 'Ciudadano EAU', 'No Residente'],
+      priceLabel: 'Valor de la propiedad',
+      downLabel: 'Entrada inicial',
+      monthlyLabel: 'Cuota mensual est.',
+      loanLabel: 'Préstamo y LTV',
+      dldLabel: '4 % DLD y cierre',
+      totalCashLabel: 'Efectivo total al cierre',
+      ctaLabel: 'Comparar 24 bancos EAU',
+    },
+    metrics: [
+      ['24', 'Bancos convencionales e islámicos con licencia'],
+      ['50%', 'Tope máximo de endeudamiento (DBR CBUAE)'],
+      ['80% / 85%', 'LTV máximo primera vivienda (≤ 5M AED)'],
+      ['0 AED', 'Honorario inicial por consulta'],
+    ],
+    mandates: [
+      {
+        badge: 'Hasta 80 % / 85 % LTV',
+        title: 'Primera vivienda residente',
+        body: 'Compare tramos fijos, márgenes EIBOR y condiciones de 24 bancos antes de firmar el Form F.',
+        href: '/mortgages/uae-residents',
+        cta: 'Guía residente',
+      },
+      {
+        badge: 'Tope 1 % / 10k AED',
+        title: 'Subrogación y auditoría',
+        body: 'Revise su tipo variable EIBOR y punto de equilibrio bajo el límite legal de cancelación CBUAE.',
+        href: '/calculators/buyout-refinance-savings',
+        cta: 'Auditar mi hipoteca',
+      },
+      {
+        badge: 'Umbral 2M+ AED',
+        title: 'No residentes y Golden Visa',
+        body: 'Estructuración internacional en 25 países con poder notarial remoto y NOC bancario.',
+        href: '/mortgages/non-resident-dubai',
+        cta: 'Mesa internacional',
+      },
+      {
+        badge: '80 proyectos EAU',
+        title: 'Entrega sobre plano (SOA)',
+        body: 'Prepare tasación, estado de cuenta del promotor y financiación final antes de recibir llaves.',
+        href: '/handover',
+        cta: 'Guía de entregas',
+      },
+    ],
+    leadershipBanner: {
+      eyebrow: 'Mesa Ejecutiva de Asesoría en Dubái',
+      heading: 'Dirigida por especialistas senior en banca y riesgo en Oud Metha.',
+      sub: 'Conozca a la fundadora Warda Kapadia, al cofundador Shabib Siraj y a nuestros 8 especialistas.',
+      cta: 'Conocer a los 8 especialistas',
+    },
+    concierge: {
+      launcher: 'Mesa de Asesoría',
+      mobileLauncher: 'Mesa',
+      deskSubtitle: 'Al Nasr Plaza · Oud Metha, Dubái',
+      tabLive: 'Chat en Vivo',
+      tabGuide: 'Guía CBUAE',
+      priorityOffersBtn: 'Ofertas Prioritarias',
+      ratesDirectoryLink: 'Directorio 24 Bancos',
+    },
+  },
+};
