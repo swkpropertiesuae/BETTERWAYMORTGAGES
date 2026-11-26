@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="bw-page-spacer bg-transparent">
+    <div className="bw-page-spacer bg-white">
       {/* Institutional Two-Column About Hero */}
       <section className="py-12 lg:py-20">
         <div className="wrap grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">

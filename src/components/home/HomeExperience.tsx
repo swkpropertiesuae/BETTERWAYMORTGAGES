@@ -53,7 +53,7 @@ export default function HomeExperience() {
             <HoloMortgageCalc />
 
             {/* Endless Slow Horizontal Infinite 24-Bank Marquee */}
-            <div className="mt-14 rounded-[24px] border border-[#dce7e2] bg-white/86 p-6 backdrop-blur-md sm:p-8">
+            <div className="bw-beam-box mt-14 p-6 sm:p-8">
               <p className="mb-5 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#4f596b]">
                 {t.calc.marqueeTitle}
               </p>
@@ -103,15 +103,15 @@ export default function HomeExperience() {
                     transition={{ duration: 0.24 }}
                     className={`flex h-full flex-col justify-between rounded-[24px] border p-7 text-left transition cursor-pointer ${
                       isSelected
-                        ? 'bw-fintech-stage !min-h-0 !rounded-[24px] !border-[#179373]/40 text-white shadow-[0_26px_58px_-22px_rgba(7,13,25,0.5)]'
-                        : 'border-[#dce7e2] bg-white/92 text-[#0a1424] backdrop-blur-md hover:border-[#179373] hover:bg-white'
+                        ? 'bw-fintech-stage !min-h-0 !rounded-[24px] !border-[#d7b158]/40 text-white shadow-[0_26px_58px_-22px_rgba(7,13,25,0.45)]'
+                        : 'bw-beam-box !rounded-[24px] text-[#0a1424] hover:border-[#d7b158]'
                     }`}
                   >
                     <div className="relative z-10 flex h-full flex-col">
                       <div className="flex items-center justify-between">
                         <span
                           className={`num inline-flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-extrabold ${
-                            isSelected ? 'bg-[#00d69a] text-[#07111f]' : 'bg-[#eef7f4] text-[#0e6954]'
+                            isSelected ? 'bg-[#f1d57e] text-[#0b0f17]' : 'bg-[#f4f6f8] text-[#0a1424]'
                           }`}
                         >
                           {step.num}
@@ -166,9 +166,9 @@ export default function HomeExperience() {
                   {/* Identical 36px Top Header Bar */}
                   <div className="relative z-10 flex h-9 items-center justify-between gap-2">
                     <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
-                      <Smartphone size={14} className="text-[#00d69a]" /> {t.suite.betterHubTag}
+                      <Smartphone size={14} className="text-[#f1d57e]" /> {t.suite.betterHubTag}
                     </span>
-                    <span className="rounded-full border border-[#00d69a]/35 bg-[#00d69a]/15 px-3 py-1 text-[11px] font-bold text-[#7ef7d2]">
+                    <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-bold text-[#f1d57e]">
                       RERA Portal
                     </span>
                   </div>
@@ -186,9 +186,9 @@ export default function HomeExperience() {
                         return (
                           <div
                             key={title as string}
-                            className="flex h-[84px] flex-col justify-center rounded-[14px] border border-white/14 bg-white/[0.06] px-3.5 py-2.5 backdrop-blur-md"
+                            className="flex h-[84px] flex-col justify-center rounded-[14px] border border-white/12 bg-white/[0.05] px-3.5 py-2.5 backdrop-blur-md"
                           >
-                            <Comp size={15} className="text-[#00d69a]" />
+                            <Comp size={15} className="text-[#f1d57e]" />
                             <p className="mt-1.5 font-display text-xs font-bold text-white">{title as string}</p>
                             <p className="text-[10.5px] text-white/65">{sub as string}</p>
                           </div>
@@ -200,10 +200,10 @@ export default function HomeExperience() {
                   {/* Identical 28px Footer Row */}
                   <div className="relative z-10 flex h-7 items-center justify-between text-[11px] font-medium text-white/68">
                     <span className="inline-flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#00d69a]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#f1d57e]" />
                       Live Dubai agency portal · Zero cost to join
                     </span>
-                    <span className="font-semibold text-[#ffe074]">BetterHub</span>
+                    <span className="font-semibold text-white">BetterHub</span>
                   </div>
                 </div>
 
@@ -277,7 +277,7 @@ export default function HomeExperience() {
                       <span className="h-1.5 w-1.5 rounded-full bg-[#ffe074]" />
                       Institutional underwriting &amp; live EIBOR engine
                     </span>
-                    <span className="font-semibold text-[#7ef7d2]">BetterCore</span>
+                    <span className="font-semibold text-white">BetterCore</span>
                   </div>
                 </div>
 
@@ -389,7 +389,7 @@ export default function HomeExperience() {
                     key={pdf.id}
                     href={pdf.file}
                     download
-                    className="group flex flex-col justify-between rounded-[22px] border border-[#dce7e2] bg-white/92 p-5 backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:border-[#179373] hover:bg-white hover:shadow-[0_18px_42px_-24px_rgba(14,105,84,0.25)]"
+                    className="bw-beam-box group flex flex-col justify-between !rounded-[22px] p-5 transition duration-200 hover:-translate-y-0.5 hover:border-[#d7b158]"
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2">

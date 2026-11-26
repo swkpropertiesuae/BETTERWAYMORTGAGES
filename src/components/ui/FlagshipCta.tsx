@@ -29,9 +29,9 @@ export default function FlagshipCta() {
                   className="h-11 w-auto sm:h-12"
                 />
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-bold text-white">
-                  <span className="h-2 w-2 rounded-full bg-[#00d69a]" />
+                  <span className="h-2 w-2 rounded-full bg-[#f1d57e]" />
                   <span>CBUAE 3M EIBOR</span>
-                  <strong className="num text-[#ffe074]">{data.latest.threeMonth.toFixed(2)}%</strong>
+                  <strong className="num text-[#f1d57e]">{data.latest.threeMonth.toFixed(2)}%</strong>
                 </span>
               </div>
 
@@ -60,9 +60,9 @@ export default function FlagshipCta() {
                 <a
                   href={waLink('Hi Betterway Mortgages, I would like a 1-on-1 UAE mortgage comparison.')}
                   rel="noopener"
-                  className="inline-flex h-12 items-center gap-2 rounded-[12px] border border-white/25 bg-white/10 px-5 text-sm font-bold text-white backdrop-blur-md transition hover:border-[#00d69a] hover:bg-white/18"
+                  className="inline-flex h-12 items-center gap-2 rounded-[12px] border border-white/25 bg-white/10 px-5 text-sm font-bold text-white backdrop-blur-md transition hover:border-[#f1d57e] hover:bg-white/18"
                 >
-                  <MessageCircle size={16} className="text-[#00d69a]" />
+                  <MessageCircle size={16} className="text-[#f1d57e]" />
                   <span>WhatsApp Dubai Desk</span>
                 </a>
               </div>

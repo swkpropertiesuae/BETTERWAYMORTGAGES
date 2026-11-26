@@ -78,18 +78,32 @@ test('SEO, AEO, AIO, GEO JSON-LD schemas emit valid Organization, WebSite, Speak
   assert.equal(pdfs.itemListElement[0].item['@type'], 'DigitalDocument');
 });
 
-test('global Pipo GradientBackground, FloatingDeviceMockups, InteractiveReadinessStudio, FlagshipCta, and Home Team removal are wired cleanly', () => {
-  const pipo = readFileSync(repo('src/components/ui/pipo.tsx'), 'utf8');
+test('21st.dev PhoneCarousel hero, pure white bg, animated border lines, Obsidian Silk stages, and Home Team removal are wired cleanly', () => {
+  const phoneMockup = readFileSync(repo('src/components/ui/phone-mockups-1.tsx'), 'utf8');
+  const phoneCarousel = readFileSync(repo('src/components/ui/phone-mockups-1-utils/phone-carousel.tsx'), 'utf8');
+  const uiButton = readFileSync(repo('src/components/ui/button.tsx'), 'utf8');
   const enLayout = readFileSync(repo('src/app/(en)/layout.tsx'), 'utf8');
   const arLayout = readFileSync(repo('src/app/(ar)/layout.tsx'), 'utf8');
+  const brandCss = readFileSync(repo('src/app/brand.css'), 'utf8');
   const homeHero = readFileSync(repo('src/components/home/HomeHero.tsx'), 'utf8');
   const homeExp = readFileSync(repo('src/components/home/HomeExperience.tsx'), 'utf8');
   const aboutPage = readFileSync(repo('src/app/(en)/about-us/page.tsx'), 'utf8');
 
-  assert.match(pipo, /export function GradientBackground/);
-  assert.match(enLayout, /<GradientBackground\b/);
-  assert.match(arLayout, /<GradientBackground\b/);
-  assert.match(homeHero, /FloatingDeviceMockups/);
+  assert.match(phoneMockup, /PhoneCarousel/);
+  assert.match(phoneCarousel, /export function PhoneCarousel/);
+  assert.match(uiButton, /@radix-ui\/react-slot/);
+  for (const s of ['screen-1-rates.webp', 'screen-2-dbr.webp', 'screen-3-dld.webp', 'screen-4-vault.webp']) {
+    assert.ok(existsSync(repo(`public/images/phone-screens/${s}`)), `Missing phone screen asset: ${s}`);
+  }
+  assert.match(enLayout, /bg-white/);
+  assert.doesNotMatch(enLayout, /<GradientBackground\b/);
+  assert.match(arLayout, /bg-white/);
+  assert.doesNotMatch(arLayout, /<GradientBackground\b/);
+  assert.match(brandCss, /@keyframes\s+bw-border-trace/);
+  assert.match(brandCss, /\.bw-beam-box/);
+  assert.doesNotMatch(brandCss, /background-size:\s*100%\s+100%,[^;]*28px\s+28px/);
+  assert.match(homeHero, /PhoneMockupBasic/);
+  assert.doesNotMatch(homeHero, /FloatingDeviceMockups/);
   assert.match(homeExp, /InteractiveReadinessStudio/);
   assert.match(homeExp, /FlagshipCta/);
   assert.doesNotMatch(homeExp, /HomyAdvisorsCarousel/);

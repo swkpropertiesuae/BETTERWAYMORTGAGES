@@ -160,7 +160,7 @@ export default function InteractiveAdvisoryCards() {
               {/* Row 3: Identical 32px Stage Footer */}
               <div className="relative z-10 flex h-8 items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 text-[11.5px] text-white/70">
-                  <CheckCircle2 size={13} className="text-[#00d69a]" />
+                  <CheckCircle2 size={13} className="text-[#f1d57e]" />
                   Neutral 24-bank directory · Zero AECB score impact
                 </span>
                 <div className="flex items-center gap-1.5">
@@ -264,7 +264,7 @@ export default function InteractiveAdvisoryCards() {
                 >
                   <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-white/12 pb-3">
                     <div>
-                      <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#00d69a]">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#f1d57e]">
                         {activeProfile.label} · {activeProfile.ltv}% Max LTV
                       </p>
                       <p className="num mt-1 font-display text-2xl font-extrabold text-white">
@@ -272,23 +272,23 @@ export default function InteractiveAdvisoryCards() {
                         <span className="text-xs font-medium text-white/65">property</span>
                       </p>
                     </div>
-                    <span className="rounded-full border border-[#ffe074]/35 bg-[#00d69a]/18 px-3 py-1 text-[11px] font-bold text-[#ffe074]">
+                    <span className="rounded-full border border-[#f1d57e]/35 bg-white/10 px-3 py-1 text-[11px] font-bold text-[#f1d57e]">
                       {currency} Live View
                     </span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2.5 text-xs">
-                    <div className="rounded-[12px] border border-white/10 bg-[#060c18]/75 p-3">
+                    <div className="rounded-[12px] border border-white/10 bg-[#070a10]/75 p-3">
                       <p className="text-[10.5px] text-white/60">Deposit ({activeProfile.downPct}%)</p>
                       <p className="num mt-1 font-bold text-white">{formatMoney(closing.down)}</p>
                     </div>
-                    <div className="rounded-[12px] border border-white/10 bg-[#060c18]/75 p-3">
+                    <div className="rounded-[12px] border border-white/10 bg-[#070a10]/75 p-3">
                       <p className="text-[10.5px] text-white/60">4% DLD + Title</p>
-                      <p className="num mt-1 font-bold text-[#ffe074]">{formatMoney(closing.dld)}</p>
+                      <p className="num mt-1 font-bold text-[#f1d57e]">{formatMoney(closing.dld)}</p>
                     </div>
-                    <div className="rounded-[12px] border border-white/10 bg-[#060c18]/75 p-3">
+                    <div className="rounded-[12px] border border-white/10 bg-[#070a10]/75 p-3">
                       <p className="text-[10.5px] text-white/60">Loan ({activeProfile.ltv}%)</p>
-                      <p className="num mt-1 font-bold text-[#00d69a]">{formatMoney(closing.loan)}</p>
+                      <p className="num mt-1 font-bold text-white">{formatMoney(closing.loan)}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -297,7 +297,7 @@ export default function InteractiveAdvisoryCards() {
               {/* Row 3: Identical 32px Stage Footer */}
               <div className="relative z-10 flex h-8 items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 text-[11.5px] text-white/70">
-                  <CheckCircle2 size={13} className="text-[#00d69a]" />
+                  <CheckCircle2 size={13} className="text-[#f1d57e]" />
                   {activeProfile.note}
                 </span>
                 <span className="num rounded-full border border-white/15 bg-white/10 px-2.5 py-0.5 text-[10.5px] font-semibold text-[#ffe074]">

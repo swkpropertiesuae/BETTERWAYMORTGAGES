@@ -9,7 +9,7 @@ import { useLocaleCurrency } from '@/components/LocaleCurrencyContext';
 import { VideoBriefingModal } from '@/components/ui/MotionPrimitives';
 import PropertyMatchmakerModal from '@/components/ecosystem/PropertyMatchmakerModal';
 import MorningHeroCarousel from '@/components/home/MorningHeroCarousel';
-import FloatingDeviceMockups from '@/components/home/FloatingDeviceMockups';
+import PhoneMockupBasic from '@/components/ui/phone-mockups-1';
 import { HotOffersTrigger } from '@/components/HotOffersPopup';
 import { buildHeroDossier } from '@/lib/hero-showcase';
 
@@ -29,10 +29,10 @@ export default function HomeHero() {
         {/* Bright Morning Daylight Dubai Architectural Photography + Light Frosted Legibility Veil */}
         <MorningHeroCarousel lang={locale === 'ar' ? 'ar' : 'en'} />
 
-        {/* Shared 1320px Header/Hero Rail — Split Executive Copy + Animated Floating Laptop & iPhone Dashboard */}
+        {/* Shared 1320px Header/Hero Rail — Split Executive Copy + Interactive 21st.dev iPhone Screen Carousel */}
         <div className="holo-hero__inner">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8">
-            <div className="max-w-[680px]">
+          <div className="grid min-w-0 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+            <div className="min-w-0 max-w-[680px]">
               {/* Live CBUAE EIBOR + Advisory Briefing + BetterDesk Bar */}
               <motion.div
                 initial={reduce ? false : { opacity: 0, y: 12 }}
@@ -132,9 +132,9 @@ export default function HomeHero() {
               </motion.div>
             </div>
 
-            {/* Right Column: Animated Floating MacBook + iPhone Betterway Fintech Dashboard */}
-            <div className="w-full">
-              <FloatingDeviceMockups />
+            {/* Right Column: Interactive 21st.dev PhoneCarousel (Betterway App Screens) */}
+            <div className="flex min-w-0 w-full items-center justify-center lg:justify-end">
+              <PhoneMockupBasic />
             </div>
           </div>
         </div>

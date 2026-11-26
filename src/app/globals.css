@@ -60,7 +60,7 @@
     font-synthesis: none;
   }
   body {
-    @apply bg-transparent font-sans text-ink antialiased;
+    @apply bg-white font-sans text-ink antialiased;
     overflow-x: clip;
     font-feature-settings: 'cv11', 'ss01';
     font-optical-sizing: auto;

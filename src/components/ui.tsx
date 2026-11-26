@@ -257,10 +257,10 @@ export function Section({
 }) {
   const bg =
     tone === 'mist'
-      ? 'bg-white/58 backdrop-blur-[10px] border-y border-white/65'
+      ? 'bg-[#fbfcfd] border-y border-[#eef1f5]'
       : tone === 'navy'
         ? 'bw-fintech-stage !min-h-0 !rounded-none !border-0 text-white'
-        : 'bg-transparent';
+        : 'bg-white';
   const dark = tone === 'navy';
   return (
     <section id={id} className={`${bg} py-16 lg:py-20`}>
@@ -347,7 +347,7 @@ export function LinkGrid({
         <Link
           key={l.href}
           href={l.href}
-          className="card group flex flex-col !border-[#dce7e2] !bg-white/90 backdrop-blur-md transition duration-200 hover:!-translate-y-1 hover:!border-[#179373] hover:!bg-white"
+          className="card bw-beam-box group flex flex-col !rounded-[20px] !border-[#e5eaf0] !bg-white transition duration-200 hover:!-translate-y-1 hover:!border-[#d7b158]"
         >
           {l.logo && (
             <span className="mb-4 inline-flex h-11 w-[136px] items-center justify-start rounded-[12px] border border-[#ebf0ee] bg-white px-3 py-1.5 shadow-[0_4px_14px_-10px_rgba(8,15,28,0.2)]">
@@ -382,7 +382,7 @@ export function CtaBand({
   body?: string;
 }) {
   return (
-    <section className="bg-transparent py-14 lg:py-20">
+    <section className="bg-white py-14 lg:py-20">
       <div className="wrap">
         <div className="bw-hot-beam-shell overflow-hidden rounded-[28px] p-[2px] shadow-[0_30px_76px_-30px_rgba(7,13,25,0.52)]">
           <div className="bw-fintech-stage !min-h-0 !rounded-[26px] !border-0 !p-8 sm:!p-12 lg:flex lg:items-end lg:justify-between lg:gap-12">
@@ -482,7 +482,7 @@ export function Footer() {
           <div className="homy-footer-villa">
             <img
               src="/images/footer-dubai-night-villa.webp"
-              alt="Sunlit morning aerial view of turquoise Dubai Marina waterfront residences and skyline"
+              alt="High-resolution twilight aerial view of Downtown Dubai, Burj Khalifa, and illuminated Sheikh Zayed Road"
               width={2560}
               height={1440}
               loading="lazy"

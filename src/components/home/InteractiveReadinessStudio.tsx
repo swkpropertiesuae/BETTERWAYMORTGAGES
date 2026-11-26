@@ -77,7 +77,7 @@ export default function InteractiveReadinessStudio() {
 
         <div className="mt-10 grid items-stretch gap-6 lg:grid-cols-[1.02fr_0.98fr]">
           {/* Left: Interactive Sliders Console */}
-          <div className="flex flex-col justify-between rounded-[26px] border border-[#e2e8f0] bg-white/90 p-7 shadow-[0_18px_50px_-28px_rgba(10,20,36,0.18)] backdrop-blur-md sm:p-8">
+          <div className="bw-beam-box flex flex-col justify-between p-7 sm:p-8">
             <div className="space-y-6">
               {/* Slider 1: Monthly Income */}
               <div>
@@ -168,14 +168,14 @@ export default function InteractiveReadinessStudio() {
             </div>
           </div>
 
-          {/* Right: 21st.dev Live Fintech Gauge & Borrowing Power Output */}
+          {/* Right: Live Corporate Obsidian Gauge & Borrowing Power Output */}
           <div className="bw-fintech-stage !min-h-0 !rounded-[26px] !p-7 sm:!p-8">
             <div className="relative z-10 flex items-center justify-between gap-2">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
-                <ShieldCheck size={14} className="text-[#00d69a]" />
+                <ShieldCheck size={14} className="text-[#f1d57e]" />
                 Live CBUAE Stressed Headroom
               </span>
-              <span className="num rounded-full border border-[#ffe074]/35 bg-[#ffe074]/15 px-3 py-1 text-[11px] font-bold text-[#ffe074]">
+              <span className="num rounded-full border border-[#f1d57e]/35 bg-white/10 px-3 py-1 text-[11px] font-bold text-[#f1d57e]">
                 {currency} · {BANKS.length} UAE Banks
               </span>
             </div>
@@ -185,9 +185,9 @@ export default function InteractiveReadinessStudio() {
               <svg viewBox="0 0 200 112" className="h-[136px] w-[240px]" aria-hidden="true">
                 <defs>
                   <linearGradient id="dbr-gauge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#00d69a" />
-                    <stop offset="65%" stopColor="#ffe074" />
-                    <stop offset="100%" stopColor="#f97316" />
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="55%" stopColor="#f1d57e" />
+                    <stop offset="100%" stopColor="#d49b22" />
                   </linearGradient>
                 </defs>
                 <path
@@ -221,11 +221,11 @@ export default function InteractiveReadinessStudio() {
 
             {/* Live Borrowing Power Metrics */}
             <div className="relative z-10 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-[16px] border border-white/15 bg-white/[0.06] p-4">
+              <div className="rounded-[16px] border border-white/15 bg-white/[0.05] p-4">
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-white/60">
                   Est. Max Mortgage (Stressed)
                 </p>
-                <p className="num mt-1 font-display text-2xl font-extrabold text-[#00d69a]">
+                <p className="num mt-1 font-display text-2xl font-extrabold text-white">
                   {formatMoney(metrics.maxLoanAed)}
                 </p>
                 <p className="mt-1 text-[11px] text-white/60">
@@ -233,15 +233,15 @@ export default function InteractiveReadinessStudio() {
                 </p>
               </div>
 
-              <div className="rounded-[16px] border border-white/15 bg-white/[0.06] p-4">
+              <div className="rounded-[16px] border border-white/15 bg-white/[0.05] p-4">
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-white/60">
                   Target Property (at 80% LTV)
                 </p>
-                <p className="num mt-1 font-display text-2xl font-extrabold text-[#ffe074]">
+                <p className="num mt-1 font-display text-2xl font-extrabold text-[#f1d57e]">
                   {formatMoney(metrics.maxPropertyAt80Ltv)}
                 </p>
                 <p className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-white/80">
-                  <Award size={12} className="text-[#ffe074]" />
+                  <Award size={12} className="text-[#f1d57e]" />
                   {metrics.goldenVisaReady ? 'Meets AED 2M Golden Visa threshold' : 'Below AED 2M Golden Visa mark'}
                 </p>
               </div>

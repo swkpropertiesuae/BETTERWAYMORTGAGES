@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function Page() {
   const q = encodeURIComponent(`${SITE.address.building}, ${SITE.address.street}, ${SITE.address.district}, Dubai`);
   return (
-    <div className="bw-page-spacer bg-transparent">
+    <div className="bw-page-spacer bg-white">
       {/* Fintech Contact Page Split Header + Dark Commitment Card & Frosted Form */}
       <section className="py-12 lg:py-20">
         <div className="wrap">
@@ -91,7 +91,7 @@ export default function Page() {
                 <div className="relative z-10 -mx-8 mt-8 overflow-hidden rounded-b-[24px]">
                   <img
                     src="/images/footer-dubai-night-villa.webp"
-                    alt="Sunlit morning view of Dubai Marina crystal waterfront residences"
+                    alt="Twilight aerial view of Downtown Dubai, Burj Khalifa, and illuminated Sheikh Zayed Road"
                     width={1376}
                     height={768}
                     className="h-56 w-full object-cover object-center"

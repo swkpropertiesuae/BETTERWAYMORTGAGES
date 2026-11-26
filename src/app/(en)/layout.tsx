@@ -9,7 +9,6 @@ import HotOffersPopup from '@/components/HotOffersPopup';
 import Analytics from '@/components/Analytics';
 import MotionKit from '@/components/MotionKit';
 import { LocaleCurrencyProvider } from '@/components/LocaleCurrencyContext';
-import { GradientBackground } from '@/components/ui/pipo';
 import { Footer, JsonLd } from '@/components/ui';
 import { SITE } from '@/data/site';
 import { TRENDING_UAE_KEYWORDS, enhancedOrgSchema, websiteSchema } from '@/lib/seo-schema';
@@ -98,11 +97,7 @@ export const viewport: Viewport = { themeColor: '#070E1A', width: 'device-width'
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr">
-      <body className="relative min-h-screen bg-transparent">
-        {/* Global 21st.dev "Pipo" Ambient Gradient Backdrop Consistent Across Every Page */}
-        <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
-          <GradientBackground className="h-full w-full" />
-        </div>
+      <body className="relative min-h-screen bg-white">
         <LocaleCurrencyProvider initialLocale="en">
           <a
             href="#main"

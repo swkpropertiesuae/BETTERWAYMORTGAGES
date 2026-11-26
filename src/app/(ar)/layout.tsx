@@ -3,7 +3,6 @@ import Link from 'next/link';
 import '../globals.css';
 import '../brand.css';
 import { JsonLd } from '@/components/ui';
-import { GradientBackground } from '@/components/ui/pipo';
 import Analytics from '@/components/Analytics';
 import { enhancedOrgSchema, websiteSchema } from '@/lib/seo-schema';
 import { SITE, waLink } from '@/data/site';
@@ -41,10 +40,7 @@ const NAV: [string, string][] = [[AR_UI.mortgages, '/ar#mortgages'], [AR_UI.calc
 export default function ArLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl">
-      <body className="relative min-h-screen bg-transparent">
-        <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
-          <GradientBackground className="h-full w-full" />
-        </div>
+      <body className="relative min-h-screen bg-white">
         <header className="bw-header" data-scrolled="true">
           <div className="wrap bw-header__bar">
             <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0">
