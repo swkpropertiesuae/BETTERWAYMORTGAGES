@@ -39,7 +39,7 @@ export default function Page() {
         />
       </Section>
       <Section tone="mist" title="24 UAE mortgage lenders">
-        <div className="mb-8 rounded-[22px] border border-[#dce7e2] bg-white/90 p-5 backdrop-blur-md">
+        <div className="mb-10 border-y border-[#0a1424]/[0.08] py-6">
           <LogoMarquee
             label="24 licensed UAE conventional and Islamic banks"
             items={BANKS.map((b) => ({ id: b.key, label: b.name, logo: b.logo, href: `/rates/${b.slug}` }))}

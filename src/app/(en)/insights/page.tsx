@@ -30,7 +30,7 @@ const CATEGORIES = [
 
 export default function InsightsHubPage() {
   return (
-    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
+    <div className="holo-canvas holo-canvas--page">
       <section className="holo-section">
         <div className="mx-auto max-w-[1220px] space-y-6">
           <Crumbs items={[{ name: 'Insights & Guides', href: '/insights' }]} />

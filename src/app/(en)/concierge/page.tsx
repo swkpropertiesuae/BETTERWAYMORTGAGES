@@ -41,7 +41,7 @@ export default function ConciergePage() {
   const featuredAreas = COMMUNITIES.slice(0, 8);
 
   return (
-    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
+    <div className="holo-canvas holo-canvas--page">
       {/* Rounded Concierge Hero */}
       <section className="holo-section">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
@@ -98,7 +98,7 @@ export default function ConciergePage() {
         })}
         </div>
 
-        <div className="mt-10 rounded-[24px] border border-[#dce7e2] bg-white/88 p-6 backdrop-blur-md">
+        <div className="mt-10 border-y border-[#0a1424]/[0.08] py-6">
           <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#4f596b]">
             Pre-approval &amp; valuation coordinated across {BANKS.length} licensed UAE banks
           </p>

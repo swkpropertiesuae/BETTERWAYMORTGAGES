@@ -14,21 +14,28 @@ function contrastRatio(hexA: string, hexB: string): number {
       const c = parseInt(clean.slice(i, i + 2), 16) / 255;
       return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
     });
-    return 0.2126 * r + 0.7152 * g + 0.7152 * 0 + 0.0722 * b;
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   };
   const [l1, l2] = [lum(hexA), lum(hexB)];
   return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
 }
 
-test('global theme defines Homy Editorial tokens (#080b0f ink, #0b1117 dark footer, #f6f6f6 surface) harmonized with Betterway Emerald & Gold', () => {
+test('global theme defines Swiss / DIFC Institutional tokens (#070E1A Midnight Navy, #0C1524 surface, #F7F8FA stone, #D7B158 gold, #0E6954 accessible emerald)', () => {
   const css = read('src/app/globals.css');
-  assert.match(css, /--color-navy:\s*#080b0f/i);
-  assert.match(css, /--color-obsidian:\s*#0b1117/i);
-  assert.match(css, /--color-mist:\s*#f6f6f6/i);
+  assert.match(css, /--color-navy:\s*#070e1a/i);
+  assert.match(css, /--color-obsidian:\s*#0c1524/i);
+  assert.match(css, /--color-mist:\s*#f7f8fa/i);
   assert.match(css, /--color-brass:\s*#d7b158/i);
   assert.match(css, /--color-teal:\s*#0e6954/i);
   assert.match(css, /@fontsource-variable\/plus-jakarta-sans/);
+  assert.match(css, /\.serif\s*\{[^}]*var\(--font-serif\)/);
   assert.match(css, /\.btn-primary\b/);
+
+  const tokenFile = path.resolve(process.cwd(), 'docs/design-system/betterway-swiss-difc-tokens.json');
+  assert.equal(existsSync(tokenFile), true, 'Missing Figma-ready W3C design tokens JSON');
+  const parsed = JSON.parse(readFileSync(tokenFile, 'utf8'));
+  assert.equal(parsed.color?.brand?.midnightNavy?.$value?.toUpperCase(), '#070E1A');
+  assert.equal(parsed.color?.brand?.emeraldAccessible?.$value?.toUpperCase(), '#0E6954');
 });
 
 test('uploaded Betterway 4K transparent PNG brand assets and complete favicon suite exist on disk', () => {
@@ -79,7 +86,7 @@ test('buttons, discs, CoPilot user bubbles, and MiniPhone maintain crisp accessi
   const ui = read('src/components/ui.tsx');
 
   assert.doesNotMatch(globals, /\.btn-primary\s*\{[^}]*bg-brass\s+text-white/);
-  assert.match(brand, /\.homy-btn[\s\S]*--hbtn-bg:\s*#080b0f;\s*--hbtn-fg:\s*#ffffff/);
+  assert.match(brand, /\.homy-btn[\s\S]*--hbtn-bg:\s*#070e1a;\s*--hbtn-fg:\s*#ffffff/i);
   assert.doesNotMatch(copilot, /bg-brass\s+text-white/);
   assert.doesNotMatch(ui, /bg-brass[^"]*text-white/);
 });
@@ -103,7 +110,7 @@ test('English and Arabic corporate headers render 4K transparent PNG logo-horizo
   assert.match(header, /\/brand\/logo-horizontal-light\.png/);
   assert.match(header, /\/brand\/logo-horizontal-dark\.png/);
   assert.match(header, /t\.nav\.home/);
-  assert.match(header, /Contact us/i);
+  assert.match(header, /Contact us|t\.nav\.contact/i);
   assert.match(header, /min-\[1200px\]/);
   assert.match(header, /LOCALES/);
   assert.match(header, /CURRENCIES/);
@@ -112,18 +119,16 @@ test('English and Arabic corporate headers render 4K transparent PNG logo-horizo
   assert.match(brand, /\.bw-header\[data-over-hero='true'\]\[data-scrolled='false'\]\s*\{[^}]*background:\s*transparent/);
 });
 
-test('desktop header container and hero rail share exact 1320px alignment and prevent horizontal overflow at 1200px+', () => {
+test('desktop sticky header container and hero rail share exact 1320px alignment and 80px institutional bar height', () => {
   const brand = read('src/app/brand.css');
   const hero = read('src/components/home/HomeHero.tsx');
-  const carousel = read('src/components/home/MorningHeroCarousel.tsx');
 
   assert.match(brand, /--bw-rail-max:\s*1320px/);
   assert.match(brand, /\.bw-header\s+\.wrap\s*\{[^}]*max-width:\s*var\(--bw-rail-max\)/);
   assert.match(brand, /\.holo-hero__inner\s*\{[^}]*max-width:\s*var\(--bw-rail-max\)/);
-  assert.match(brand, /\.bw-header__bar\s*\{[^}]*height:\s*98px/);
+  assert.match(brand, /\.bw-header__bar\s*\{[^}]*height:\s*80px/);
   assert.match(brand, /\.bw-nav\s+a,[\s\S]*?white-space:\s*nowrap/);
-  assert.match(hero, /className="holo-hero__inner"/);
-  assert.doesNotMatch(carousel, /holo-scene-switcher/);
+  assert.match(hero, /className="holo-hero__inner/);
 });
 
 test('Arabic header defers inline nav to lg breakpoint with nowrap links and mobile header scales logo cleanly', () => {
@@ -135,13 +140,13 @@ test('Arabic header defers inline nav to lg breakpoint with nowrap links and mob
   assert.match(brand, /@media\s*\(max-width:\s*639px\)\s*\{(?:[^{}]|\{[^{}]*\})*\.bw-header__logo\s+img\s*\{\s*height:\s*clamp\(/);
 });
 
-test('light-surface --color-teal accent meets WCAG 2.1 AA 4.5:1 contrast against white and #f6f6f6', () => {
+test('light-surface --color-teal accent meets WCAG 2.1 AA 4.5:1 contrast against white, #f7f8fa, and #edf7f4', () => {
   const globals = read('src/app/globals.css');
   const tealMatch = globals.match(/--color-teal:\s*(#[0-9a-f]{6})/i);
   assert.ok(tealMatch, 'Expected --color-teal hex token');
   const tealHex = tealMatch[1];
 
-  for (const bg of ['#ffffff', '#f6f6f6', '#edf7f4']) {
+  for (const bg of ['#ffffff', '#f7f8fa', '#edf7f4']) {
     const ratio = contrastRatio(tealHex, bg);
     assert.ok(ratio >= 4.5, `Expected ${tealHex} on ${bg} >= 4.5:1, got ${ratio.toFixed(2)}:1`);
   }

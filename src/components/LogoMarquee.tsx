@@ -3,8 +3,8 @@
 import Link from 'next/link';
 
 /**
- * Endless, silky-slow horizontal infinite marquee showcasing all 24 licensed UAE lenders.
- * Pauses smoothly on hover, fades cleanly at both edges, and honors prefers-reduced-motion.
+ * Endless, silky-slow horizontal infinite marquee showcasing all 24 licensed UAE lenders
+ * in crisp Swiss 1px architectural white tiles.
  */
 export default function LogoMarquee({
   items,
@@ -20,10 +20,7 @@ export default function LogoMarquee({
 
   return (
     <section aria-label={label} className="bw-bank-marquee">
-      <div
-        className="bw-bank-marquee__track"
-        style={{ animationDuration: `${speed}s` }}
-      >
+      <div className="bw-bank-marquee__track" style={{ animationDuration: `${speed}s` }}>
         {doubled.map((it, idx) => {
           const isClone = idx >= items.length;
           return (
@@ -34,15 +31,15 @@ export default function LogoMarquee({
               aria-hidden={isClone || undefined}
               tabIndex={isClone ? -1 : undefined}
               title={it.label}
-              className="flex h-16 w-[164px] shrink-0 items-center justify-center rounded-[16px] border border-[#e5e7eb] bg-white px-5 text-sm font-medium text-[#080b0f] shadow-[0_8px_22px_-16px_rgba(10,20,36,0.22)] transition duration-200 hover:-translate-y-0.5 hover:border-[#179373] hover:shadow-[0_14px_28px_-14px_rgba(19,118,94,0.28)]"
+              className="flex h-14 w-[158px] shrink-0 items-center justify-center rounded-[12px] border border-[#e3e7ee] bg-white px-4 text-sm font-medium text-[#070e1a] transition duration-200 hover:-translate-y-0.5 hover:border-[#070e1a]/45 hover:shadow-[0_12px_26px_-18px_rgba(7,14,26,0.28)]"
             >
               {it.logo ? (
                 <img
                   src={it.logo}
                   alt={isClone ? '' : it.label}
-                  width={116}
-                  height={28}
-                  className="h-7 w-[116px] object-contain"
+                  width={112}
+                  height={26}
+                  className="h-6 w-[112px] object-contain"
                   loading="eager"
                   decoding="sync"
                 />

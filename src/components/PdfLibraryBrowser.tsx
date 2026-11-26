@@ -48,8 +48,8 @@ export default function PdfLibraryBrowser() {
 
   return (
     <div className="space-y-7">
-      {/* Frosted Fintech Search + Live Filter Console */}
-      <div className="rounded-[26px] border border-[#dce7e2] bg-white/90 p-5 shadow-[0_18px_46px_-28px_rgba(8,15,28,0.18)] backdrop-blur-md sm:p-6">
+      {/* Premium White Search + Live Filter Console With Animated Border Beam */}
+      <div className="bw-beam-box p-5 sm:p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative flex-1">
             <Search
@@ -156,7 +156,7 @@ export default function PdfLibraryBrowser() {
           {filtered.map((pdf) => (
             <article
               key={pdf.id}
-              className="group flex flex-col justify-between rounded-[24px] border border-[#dce7e2] bg-white/92 p-6 shadow-[0_14px_38px_-26px_rgba(8,15,28,0.18)] backdrop-blur-md transition duration-200 hover:-translate-y-1 hover:border-[#179373] hover:bg-white hover:shadow-[0_24px_54px_-28px_rgba(14,105,84,0.28)]"
+              className="bw-beam-box group flex flex-col justify-between !rounded-[24px] p-6 transition duration-200 hover:-translate-y-1 hover:border-[#d7b158]"
             >
               <div>
                 <div className="flex items-center justify-between gap-2">

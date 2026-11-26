@@ -8,8 +8,8 @@ export default function AppShell({ title, nav, active, children }: { title: stri
   const isPartner = active.startsWith('/partners');
   const liveOsHref = isPartner ? SITE.osPartnerHubUrl : SITE.osPortalUrl;
   return (
-    <div className="bg-mist">
-      <div className="border-b border-line bg-white">
+    <div className="bw-page-spacer bg-transparent">
+      <div className="border-y border-[#0a1424]/[0.08] bg-white/70 backdrop-blur-md">
         <div className="wrap flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
           <p className="flex items-center gap-2 text-slate">
             <Info size={15} className="text-teal" /> Connected with Betterway OS. Browse the workflow guide below or launch the live portal.

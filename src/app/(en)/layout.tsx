@@ -3,13 +3,13 @@ import '../globals.css';
 import '../startup.css';
 import '../brand.css';
 import Header from '@/components/Header';
-import CoPilot from '@/components/CoPilot';
+import ExecutiveConciergeDock from '@/components/ExecutiveConciergeDock';
 import ResumeJourneyToast from '@/components/ecosystem/ResumeJourneyToast';
 import HotOffersPopup from '@/components/HotOffersPopup';
+import LiveAnnouncementBar from '@/components/LiveAnnouncementBar';
 import Analytics from '@/components/Analytics';
 import MotionKit from '@/components/MotionKit';
 import { LocaleCurrencyProvider } from '@/components/LocaleCurrencyContext';
-import { GradientBackground } from '@/components/ui/pipo';
 import { Footer, JsonLd } from '@/components/ui';
 import { SITE } from '@/data/site';
 import { TRENDING_UAE_KEYWORDS, enhancedOrgSchema, websiteSchema } from '@/lib/seo-schema';
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     ],
     shortcut: [{ url: '/favicon.ico' }],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
-    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#179373' }],
+    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#0E6954' }],
   },
   manifest: '/site.webmanifest',
   openGraph: {
@@ -98,11 +98,7 @@ export const viewport: Viewport = { themeColor: '#070E1A', width: 'device-width'
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr">
-      <body className="relative min-h-screen bg-transparent">
-        {/* Global 21st.dev "Pipo" Ambient Gradient Backdrop Consistent Across Every Page */}
-        <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
-          <GradientBackground className="h-full w-full" />
-        </div>
+      <body className="relative min-h-screen bg-white text-ink">
         <LocaleCurrencyProvider initialLocale="en">
           <a
             href="#main"
@@ -110,12 +106,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             Skip to content
           </a>
+          <LiveAnnouncementBar />
           <Header />
           <main id="main">{children}</main>
           <Footer />
           <HotOffersPopup />
           <ResumeJourneyToast />
-          <CoPilot />
+          <ExecutiveConciergeDock showHotOffersTrigger />
           <MotionKit />
           <Analytics />
           <JsonLd data={enhancedOrgSchema()} />

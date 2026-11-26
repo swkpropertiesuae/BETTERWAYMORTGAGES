@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function DownloadsPage() {
   return (
-    <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
+    <div className="holo-canvas holo-canvas--page">
       <section className="holo-section">
         <div className="mx-auto max-w-[1220px] space-y-8">
           <Crumbs items={[{ name: '52 Free PDF Guides', href: '/downloads' }]} />
@@ -57,7 +57,7 @@ export default function DownloadsPage() {
           <PdfLibraryBrowser />
 
           {/* 24 Licensed UAE Banks Marquee */}
-          <div className="rounded-[26px] border border-[#dce7e2] bg-white/85 p-6 backdrop-blur-md sm:p-8">
+          <div className="border-y border-[#0a1424]/[0.08] py-7">
             <p className="mb-5 text-center text-xs font-bold uppercase tracking-[0.14em] text-[#4f596b]">
               Written rules cross-checked across {BANKS.length} licensed UAE conventional &amp; Islamic banks
             </p>

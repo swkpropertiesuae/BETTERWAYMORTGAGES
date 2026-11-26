@@ -1,8 +1,11 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Expand, Mail, X } from 'lucide-react';
+import { EASE_SWISS } from '@/components/ui/MotionPrimitives';
 import { ALL_TEAM_MEMBERS, type TeamSpecialist } from '@/data/team';
 
 export type HomyServiceItem = {
@@ -15,12 +18,12 @@ export type HomyServiceItem = {
   alt: string;
 };
 
-/** Clean static 3-Card Services Selector (zero sliding/exiting card animations). */
+/** Clean 3-card Swiss selector kept exported for compatibility. */
 export function HomyServicesAccordion({ items }: { items: readonly HomyServiceItem[] }) {
   const [activeIdx, setActiveIdx] = useState(0);
 
   return (
-    <div className="homy-services-row" role="list">
+    <div className="grid gap-4 md:grid-cols-3" role="list">
       {items.map((item, idx) => {
         const active = idx === activeIdx;
         return (
@@ -36,44 +39,30 @@ export function HomyServicesAccordion({ items }: { items: readonly HomyServiceIt
                 setActiveIdx(idx);
               }
             }}
-            className={`homy-service-card ${active ? 'is-active' : ''}`}
+            className={`relative overflow-hidden rounded-[16px] border p-6 transition cursor-pointer ${
+              active
+                ? 'border-[#070e1a] bg-[#070e1a] text-white'
+                : 'border-[#e3e7ee] bg-white text-[#070e1a] hover:border-[#070e1a]/35'
+            }`}
           >
-            <div className="homy-service-card__bg" aria-hidden="true">
-              <img src={item.img} alt={item.alt} loading="lazy" decoding="async" />
-            </div>
-            <div className="homy-service-card__scrim" aria-hidden="true" />
-
-            {active && (
-              <span
-                className="absolute inset-x-0 top-0 z-[2] h-1 bg-gradient-to-r from-[#179373] via-[#34dfac] to-[#d7b158]"
-                aria-hidden="true"
-              />
-            )}
-
-            <span className="homy-service-card__idx" aria-hidden="true">
-              {item.index}
-            </span>
-
-            <div className="relative z-[1]">
-              <p className="homy-service-card__kicker">{item.kicker}</p>
-              <h3 className="homy-service-card__title">{item.title}</h3>
-              {active && (
-                <div>
-                  <p className="homy-service-card__desc">{item.body}</p>
-                  <div className="mt-5">
-                    <Link
-                      href={item.href}
-                      onClick={(e) => e.stopPropagation()}
-                      className="homy-btn homy-btn--white !h-10 !text-[13.5px]"
-                    >
-                      <span>Explore</span>
-                      <span className="homy-btn__disc !h-6 !w-6" aria-hidden="true">
-                        <ArrowRight size={13} strokeWidth={2.2} />
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-              )}
+            <span className="num text-xs font-semibold opacity-60">{item.index}</span>
+            <p className={`mt-3 text-[11px] font-semibold uppercase tracking-[0.14em] ${active ? 'text-[#d7b158]' : 'text-[#0e6954]'}`}>
+              {item.kicker}
+            </p>
+            <h3 className={`mt-2 font-display text-xl font-bold ${active ? 'text-white' : 'text-[#070e1a]'}`}>
+              {item.title}
+            </h3>
+            <p className={`mt-2.5 text-sm leading-relaxed ${active ? 'text-white/75' : 'text-[#4a5568]'}`}>
+              {item.body}
+            </p>
+            <div className="mt-5">
+              <Link
+                href={item.href}
+                onClick={(e) => e.stopPropagation()}
+                className={`inline-flex items-center gap-1.5 text-xs font-semibold ${active ? 'text-[#34dfac]' : 'text-[#070e1a]'}`}
+              >
+                Explore <ArrowRight size={13} />
+              </Link>
             </div>
           </div>
         );
@@ -82,9 +71,10 @@ export function HomyServicesAccordion({ items }: { items: readonly HomyServiceIt
   );
 }
 
-/** Crisp instant Sticky 2-Column FAQ Accordion (zero collapse/exit animation jitter). */
+/** Swiss Hairline FAQ Accordion with smooth Framer Motion AnimatePresence reveal. */
 export function HomyFaqAccordion({ faqs }: { faqs: readonly { q: string; a: string }[] }) {
   const [openIdx, setOpenIdx] = useState<number>(0);
+  const reduce = useReducedMotion();
 
   return (
     <div className="homy-faq-list">
@@ -100,15 +90,28 @@ export function HomyFaqAccordion({ faqs }: { faqs: readonly { q: string; a: stri
             >
               <span>{f.q}</span>
               <span
-                className={`homy-faq-icon rounded-full ${
-                  isOpen ? 'bg-[#080b0f] !text-white' : 'bg-white text-[#080b0f]'
+                className={`homy-faq-icon ${
+                  isOpen ? 'border-[#070e1a] bg-[#070e1a] text-white' : 'bg-[#f7f8fa] text-[#070e1a]'
                 }`}
                 aria-hidden="true"
               >
                 {isOpen ? '−' : '+'}
               </span>
             </button>
-            {isOpen && <p className="homy-faq-panel">{f.a}</p>}
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  key="panel"
+                  initial={reduce ? false : { height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={reduce ? undefined : { height: 0, opacity: 0 }}
+                  transition={{ duration: reduce ? 0 : 0.22, ease: EASE_SWISS }}
+                  className="overflow-hidden"
+                >
+                  <p className="homy-faq-panel">{f.a}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         );
       })}
@@ -116,10 +119,7 @@ export function HomyFaqAccordion({ faqs }: { faqs: readonly { q: string; a: stri
   );
 }
 
-/**
- * Eye-level aligned 8-member leadership & advisor portrait grid (all 8 calibrated 3:4 portraits at y = 33.0%).
- * Clicking any portrait opens their full profile and 1-on-1 booking modal.
- */
+/** Exported for legacy compatibility if referenced on dedicated team pages. */
 export function HomyAdvisorsCarousel() {
   const [selected, setSelected] = useState<TeamSpecialist | null>(null);
   const [view8k, setView8k] = useState(false);
@@ -153,8 +153,7 @@ export function HomyAdvisorsCarousel() {
 
   return (
     <>
-      <div className="mx-auto max-w-[1220px]">
-        {/* Exact 3:4 Eye-Level Aligned 8-Person Team Grid (4x2 on Desktop) */}
+      <div className="mx-auto max-w-[1320px]">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ALL_TEAM_MEMBERS.map((member, idx) => (
             <button
@@ -162,7 +161,7 @@ export function HomyAdvisorsCarousel() {
               type="button"
               onClick={() => openProfile(member)}
               aria-label={`Inspect ${member.name} — ${member.designation}`}
-              className="group relative aspect-[3/4] w-full overflow-hidden rounded-[22px] border border-[#e5e7eb] bg-[#0a1424] text-left shadow-[0_14px_38px_-22px_rgba(10,20,36,0.38)] transition duration-300 hover:-translate-y-1 hover:border-[#c8a352] hover:shadow-[0_24px_52px_-20px_rgba(10,20,36,0.5)] cursor-pointer"
+              className="group relative aspect-[3/4] w-full overflow-hidden rounded-[16px] border border-[#e3e7ee] bg-[#070e1a] text-left transition duration-300 hover:-translate-y-1 hover:border-[#d7b158] cursor-pointer"
             >
               <img
                 src={member.portrait}
@@ -177,21 +176,20 @@ export function HomyAdvisorsCarousel() {
               />
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080b0f]/94 via-[#080b0f]/45 to-transparent"
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#070e1a]/95 via-[#070e1a]/45 to-transparent"
               />
-              <span className="absolute end-3.5 top-3.5 z-[2] grid h-8 w-8 place-items-center rounded-full border border-white/25 bg-[#080b0f]/60 text-white backdrop-blur-md transition group-hover:border-[#f1d57e] group-hover:text-[#f1d57e]">
+              <span className="absolute end-3.5 top-3.5 z-[2] grid h-8 w-8 place-items-center rounded-[9px] border border-white/25 bg-[#070e1a]/70 text-white backdrop-blur-md transition group-hover:border-[#d7b158] group-hover:text-[#fcf1b7]">
                 <Expand size={13} />
               </span>
               <div className="absolute inset-x-4 bottom-4 z-[2] text-white">
                 <h4 className="font-display text-lg font-semibold leading-tight text-white">{member.name}</h4>
-                <p className="mt-0.5 text-xs font-medium text-[#f1d57e]">{member.designation}</p>
+                <p className="mt-0.5 text-xs font-medium text-[#fcf1b7]">{member.designation}</p>
               </div>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Crisp Portaled Specialist Quick-Inspect Modal */}
       {mounted &&
         selected &&
         createPortal(
@@ -200,14 +198,14 @@ export function HomyAdvisorsCarousel() {
               setSelected(null);
               setView8k(false);
             }}
-            className="fixed inset-0 z-[120] flex items-center justify-center bg-[#080b0f]/82 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-[120] flex items-center justify-center bg-[#070e1a]/82 p-4 backdrop-blur-md"
             role="dialog"
             aria-modal="true"
             aria-label={`${selected.name} specialist profile`}
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="relative grid max-h-[90dvh] w-full max-w-4xl overflow-hidden rounded-[26px] border border-[#e5e7eb] bg-white shadow-2xl md:grid-cols-[0.95fr_1.05fr]"
+              className="relative grid max-h-[90dvh] w-full max-w-4xl overflow-hidden rounded-[22px] border border-[#e3e7ee] bg-white shadow-2xl md:grid-cols-[0.95fr_1.05fr]"
             >
               <button
                 type="button"
@@ -216,44 +214,44 @@ export function HomyAdvisorsCarousel() {
                   setView8k(false);
                 }}
                 aria-label="Close specialist profile"
-                className="absolute end-4 top-4 z-20 grid h-10 w-10 place-items-center rounded-full border border-[#e5e7eb] bg-white/95 text-[#080b0f] shadow-md transition-colors hover:border-[#080b0f] cursor-pointer"
+                className="absolute end-4 top-4 z-20 grid h-9 w-9 place-items-center rounded-[10px] border border-[#e3e7ee] bg-white/95 text-[#070e1a] shadow-sm transition hover:border-[#070e1a] cursor-pointer"
               >
-                <X size={18} />
+                <X size={17} />
               </button>
 
-              <div className="relative aspect-[3/4] bg-[#080b0f] md:aspect-auto md:min-h-[520px]">
+              <div className="relative aspect-[3/4] bg-[#070e1a] md:aspect-auto md:min-h-[520px]">
                 <img
                   src={view8k ? selected.portrait8k : selected.portrait}
                   alt={`${selected.name} studio portrait`}
                   className="h-full w-full object-cover object-center"
                 />
-                <div className="absolute bottom-3 start-3 flex items-center gap-2">
+                <div className="absolute bottom-3 start-3">
                   <button
                     type="button"
                     onClick={() => setView8k((v) => !v)}
-                    className="rounded-full border border-[#d7b158]/50 bg-[#080b0f]/85 px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-[#f1d57e] backdrop-blur-md cursor-pointer"
+                    className="rounded-[9px] border border-[#d7b158]/50 bg-[#070e1a]/85 px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-[#fcf1b7] backdrop-blur-md cursor-pointer"
                   >
-                    {view8k ? '8K UHD Master Loaded' : 'Load 8K UHD Master'}
+                    {view8k ? 'Ultra-HD Loaded' : 'Load Ultra-HD'}
                   </button>
                 </div>
               </div>
 
               <div className="flex flex-col overflow-y-auto p-7 sm:p-9">
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[#edf7f4] px-3 py-1 font-mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#0a4a3e]">
+                <span className="inline-flex w-fit items-center rounded-[7px] bg-[#edf7f4] px-3 py-1 font-mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#0e6954]">
                   {selected.department}
                 </span>
-                <h3 className="mt-4 font-display text-3xl font-semibold tracking-tight text-[#080b0f]">
+                <h3 className="mt-4 font-display text-3xl font-semibold tracking-tight text-[#070e1a]">
                   {selected.name}
                 </h3>
                 <p className="mt-1 text-sm font-medium text-[#0e6954]">
                   {selected.designation} · <span lang="ar">{selected.nameAr}</span>
                 </p>
-                <p className="mt-4 text-[15px] leading-relaxed text-[#4b5b63]">{selected.summary}</p>
-                <div className="mt-5 rounded-[16px] bg-[#f6f6f6] p-5">
-                  <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#4b5b63]">
+                <p className="mt-4 text-[15px] leading-relaxed text-[#4a5568]">{selected.summary}</p>
+                <div className="mt-5 rounded-[14px] border border-[#e3e7ee] bg-[#f7f8fa] p-5">
+                  <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#4a5568]">
                     Core Focus Areas
                   </p>
-                  <ul className="mt-3 space-y-2 text-sm text-[#080b0f]">
+                  <ul className="mt-3 space-y-2 text-sm text-[#070e1a]">
                     {selected.specialties.map((s) => (
                       <li key={s} className="flex items-start gap-2.5">
                         <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[#0e6954]" />
