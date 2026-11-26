@@ -86,7 +86,7 @@ export default function Header() {
               src="/brand/logo-horizontal-light.png"
               alt="Betterway Mortgages"
               width={1400}
-              height={419}
+              height={435}
               fetchPriority="high"
             />
           </Link>
@@ -132,7 +132,7 @@ export default function Header() {
             src="/brand/logo-horizontal-dark.png"
             alt="Betterway Mortgages"
             width={1400}
-            height={419}
+            height={435}
             fetchPriority="high"
             className="bw-logo-over-hero"
           />
@@ -140,7 +140,7 @@ export default function Header() {
             src="/brand/logo-horizontal-light.png"
             alt="Betterway Mortgages"
             width={1400}
-            height={419}
+            height={435}
             fetchPriority="high"
             className="bw-logo-on-light"
           />

@@ -3,15 +3,17 @@
 import Link from 'next/link';
 import { ArrowRight, FileDown, Globe, MessageCircle, ShieldCheck } from 'lucide-react';
 import { useBenchmark } from '@/components/StartupExperience';
-import { BANKS } from '@/data/banks';
+import { useLocaleCurrency } from '@/components/LocaleCurrencyContext';
 import { waLink } from '@/data/site';
 
 /**
- * Flagship Brand-Quality Executive CTA Band (21st.dev Conic Border-Beam + Fintech Mesh).
- * Showcases Betterway's centered-MORTGAGES brand identity, live EIBOR telemetry, and 1-on-1 Dubai advisory craft.
+ * Flagship Brand-Quality Executive CTA Band (Obsidian Silk + Champagne Gold Animated Border Beam).
+ * 100% localized across EN, AR, RU, ZH, FR, ES.
  */
 export default function FlagshipCta() {
   const { data } = useBenchmark();
+  const { ext } = useLocaleCurrency();
+  const icons = [ShieldCheck, FileDown, Globe, ArrowRight] as const;
 
   return (
     <section className="mx-auto w-full max-w-[1320px] px-1" aria-labelledby="flagship-cta-title">
@@ -19,13 +21,12 @@ export default function FlagshipCta() {
         <div className="bw-fintech-stage !min-h-0 !rounded-[28px] !border-0 !p-8 sm:!p-12 lg:!p-14">
           <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-6">
-              {/* Brand Crest + Live Telemetry */}
               <div className="flex flex-wrap items-center gap-4">
                 <img
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={419}
+                  height={435}
                   className="h-11 w-auto sm:h-12"
                 />
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-bold text-white">
@@ -39,17 +40,16 @@ export default function FlagshipCta() {
                 id="flagship-cta-title"
                 className="font-display text-[clamp(30px,4vw,52px)] font-extrabold leading-[1.06] tracking-[-0.03em] text-white"
               >
-                Institutional mortgage clarity—delivered 1-on-1 in Dubai.
+                {ext.flagshipCta.heading}
               </h2>
 
               <p className="max-w-xl text-[16px] leading-relaxed text-white/78">
-                Speak directly with our Oud Metha advisory desk before booking a property. We compare {BANKS.length}{' '}
-                licensed UAE banks side by side, map every dirham of 4% DLD transfer fees, and guide you calmly to keys.
+                {ext.flagshipCta.sub}
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-1">
                 <Link href="/contact" className="homy-btn homy-btn--white !h-12 !px-6 !text-[14.5px]">
-                  <span>Book Your 1-on-1 Advisory Call</span>
+                  <span>{ext.flagshipCta.primaryCta}</span>
                   <span className="homy-btn__disc" aria-hidden="true">
                     <span className="homy-btn__arrow-track">
                       <ArrowRight size={14} strokeWidth={2.2} />
@@ -63,46 +63,24 @@ export default function FlagshipCta() {
                   className="inline-flex h-12 items-center gap-2 rounded-[12px] border border-white/25 bg-white/10 px-5 text-sm font-bold text-white backdrop-blur-md transition hover:border-[#f1d57e] hover:bg-white/18"
                 >
                   <MessageCircle size={16} className="text-[#f1d57e]" />
-                  <span>WhatsApp Dubai Desk</span>
+                  <span>{ext.flagshipCta.whatsappCta}</span>
                 </a>
               </div>
             </div>
 
-            {/* Right: Institutional Trust & Proof Bento */}
             <div className="grid gap-3.5 sm:grid-cols-2">
-              {[
-                {
-                  icon: ShieldCheck,
-                  metric: `${BANKS.length} UAE Banks`,
-                  label: 'Conventional & Islamic compared neutrally in writing',
-                },
-                {
-                  icon: FileDown,
-                  metric: '52 Free PDFs',
-                  label: 'Neglected CBUAE, Form F & DLD rules—zero email gate',
-                },
-                {
-                  icon: Globe,
-                  metric: '6 Languages',
-                  label: 'EN · العربية · RU · 中文 · FR · ES + 8 live currencies',
-                },
-                {
-                  icon: ArrowRight,
-                  metric: 'Zero Impact',
-                  label: 'Assess 50% DBR headroom with 0% AECB credit score hit',
-                },
-              ].map((item) => {
-                const Icon = item.icon;
+              {ext.flagshipCta.cards.map(([metric, label], i) => {
+                const Icon = icons[i];
                 return (
                   <div
-                    key={item.metric}
+                    key={metric}
                     className="rounded-[18px] border border-white/14 bg-white/[0.06] p-5 backdrop-blur-md"
                   >
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] bg-white/10 text-[#ffe074]">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] bg-white/10 text-[#f1d57e]">
                       <Icon size={17} />
                     </span>
-                    <p className="mt-3 font-display text-xl font-extrabold text-white">{item.metric}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-white/70">{item.label}</p>
+                    <p className="mt-3 font-display text-xl font-extrabold text-white">{metric}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-white/70">{label}</p>
                   </div>
                 );
               })}

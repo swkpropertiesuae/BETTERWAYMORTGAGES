@@ -4,6 +4,7 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { PDF_RESOURCES, SEO_TOPICS } from '../data/seo-topics.ts';
 import { CURRENCIES, I18N, LOCALES, convertFromAed, formatMoneyFromAed } from '../data/i18n.ts';
+import { EXT_I18N } from '../data/i18n-extended.ts';
 import { enhancedOrgSchema, websiteSchema, speakablePageSchema, pdfCatalogSchema } from './seo-schema.ts';
 
 const repo = (rel: string) => path.resolve(process.cwd(), rel);
@@ -108,4 +109,18 @@ test('21st.dev PhoneCarousel hero, pure white bg, animated border lines, Obsidia
   assert.match(homeExp, /FlagshipCta/);
   assert.doesNotMatch(homeExp, /HomyAdvisorsCarousel/);
   assert.match(aboutPage, /<TeamPortfolio\b/);
+  assert.match(enLayout, /<OsLiveChat\b/);
+  assert.match(arLayout, /<OsLiveChat\b/);
+  assert.ok(existsSync(repo('src/app/api/os/live-chat/route.ts')), 'Missing Betterway OS live-chat API route');
+  assert.match(readFileSync(repo('src/app/(en)/contact/page.tsx'), 'utf8'), /ContactLocationMap/);
+  assert.ok(existsSync(repo('public/images/dubai-oud-metha-map.webp')), 'Missing Oud Metha Dubai map asset');
+  assert.match(readFileSync(repo('next.config.mjs'), 'utf8'), /frame-src[^;]*openstreetmap\.org/);
+  assert.match(readFileSync(repo('src/components/TeamPortfolio.tsx'), 'utf8'), /motion\.article/);
+  assert.match(readFileSync(repo('src/components/CoPilot.tsx'), 'utf8'), /COPILOT_I18N/);
+  assert.match(readFileSync(repo('src/components/FooterClient.tsx'), 'utf8'), /FOOTER_LINKS_I18N/);
+  for (const loc of LOCALES) {
+    assert.ok(EXT_I18N[loc.code]?.liveChat.title.length > 5, `Missing extended i18n for ${loc.code}`);
+    assert.ok(EXT_I18N[loc.code]?.readiness.heading.length > 10, `Missing readiness i18n for ${loc.code}`);
+    assert.ok(EXT_I18N[loc.code]?.flagshipCta.heading.length > 10, `Missing CTA i18n for ${loc.code}`);
+  }
 });

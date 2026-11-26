@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, Play, ShieldCheck, Sparkles, X } from 'lucide-react';
+import { useLocaleCurrency } from '@/components/LocaleCurrencyContext';
 
 export const SPRING_SNAPPY = { type: 'spring', stiffness: 380, damping: 32, mass: 0.85 } as const;
 export const EASE_HOMY = [0.22, 1, 0.36, 1] as const;
@@ -135,7 +136,7 @@ export function VideoBriefingModal({
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={419}
+                  height={435}
                   className="h-9 w-auto sm:h-10"
                 />
                 <span className="hidden rounded-full border border-[#179373]/40 bg-[#179373]/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#34dfac] sm:inline-flex">
@@ -198,6 +199,8 @@ export function VideoBriefingModal({
  */
 export function VideoBriefingShowcase() {
   const [open, setOpen] = useState(false);
+  const { ext } = useLocaleCurrency();
+  const b = ext.briefing;
 
   return (
     <>
@@ -206,15 +209,12 @@ export function VideoBriefingShowcase() {
           <div className="space-y-5 text-white">
             <span className="homy-tag homy-tag--light">
               <span className="homy-tag__ring" aria-hidden="true" />
-              <span>Advisory Briefing</span>
+              <span>{b.badge}</span>
             </span>
             <h2 className="font-display text-[clamp(28px,3.2vw,42px)] font-semibold leading-[1.12] tracking-[-0.025em] text-white">
-              How Betterway compares 24 UAE banks in one clear dossier
+              {b.heading}
             </h2>
-            <p className="text-[15.5px] leading-relaxed text-white/75">
-              See how we line up fixed periods, post-fixed EIBOR revert margins, statutory 80% / 85% CBUAE caps, and
-              itemised Dubai Land Department transfer fees before you sign a single bank form.
-            </p>
+            <p className="text-[15.5px] leading-relaxed text-white/75">{b.sub}</p>
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <button
                 type="button"
@@ -222,14 +222,14 @@ export function VideoBriefingShowcase() {
                 className="homy-btn homy-btn--white"
               >
                 <Play size={14} fill="currentColor" />
-                <span>Watch Briefing</span>
+                <span>{b.playCta}</span>
                 <span className="homy-btn__disc" aria-hidden="true">
                   <ArrowRight size={14} strokeWidth={2.2} />
                 </span>
               </button>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-medium text-white/80">
-                <Sparkles size={13} className="text-[#d7b158]" />
-                Betterway Briefing · Zero sign-up required
+                <Sparkles size={13} className="text-[#f1d57e]" />
+                {b.badge}
               </span>
             </div>
           </div>

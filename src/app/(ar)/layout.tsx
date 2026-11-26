@@ -4,6 +4,8 @@ import '../globals.css';
 import '../brand.css';
 import { JsonLd } from '@/components/ui';
 import Analytics from '@/components/Analytics';
+import OsLiveChat from '@/components/OsLiveChat';
+import { LocaleCurrencyProvider } from '@/components/LocaleCurrencyContext';
 import { enhancedOrgSchema, websiteSchema } from '@/lib/seo-schema';
 import { SITE, waLink } from '@/data/site';
 import { AR_UI } from '@/data/ar';
@@ -41,10 +43,11 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl">
       <body className="relative min-h-screen bg-white">
+        <LocaleCurrencyProvider initialLocale="ar">
         <header className="bw-header" data-scrolled="true">
           <div className="wrap bw-header__bar">
             <Link href="/ar" aria-label="بيترواي" className="bw-header__logo shrink-0">
-              <img src="/brand/logo-horizontal-light.png" alt="Betterway Mortgages" width={1400} height={419} fetchPriority="high" />
+              <img src="/brand/logo-horizontal-light.png" alt="Betterway Mortgages" width={1400} height={435} fetchPriority="high" />
             </Link>
             <nav className="hidden gap-4 lg:flex" aria-label="الرئيسية">
               {NAV.map(([l, h]) => (
@@ -74,16 +77,18 @@ export default function ArLayout({ children }: { children: React.ReactNode }) {
         <div className="homy-footer-shell">
           <footer className="homy-footer-card px-6 py-12 text-sm">
             <div className="wrap space-y-4">
-              <img src="/brand/logo-horizontal-dark.png" alt="Betterway Mortgages" width={1400} height={421} className="h-auto w-[264px] max-w-full" />
+              <img src="/brand/logo-horizontal-dark.png" alt="Betterway Mortgages" width={1400} height={435} className="h-auto w-[264px] max-w-full" />
               <p className="text-white/75">{AR_UI.address}</p>
               <p className="text-xs text-white/55">{AR_UI.disclosure}</p>
               <p className="text-xs text-white/55">© 2026 Betterway Mortgages LLC · <Link href="/privacy-and-cbuae-disclosure" className="ulink text-white/80">الإفصاح والخصوصية</Link></p>
             </div>
           </footer>
         </div>
+        <OsLiveChat />
         <Analytics />
         <JsonLd data={enhancedOrgSchema()} />
         <JsonLd data={websiteSchema()} />
+        </LocaleCurrencyProvider>
       </body>
     </html>
   );

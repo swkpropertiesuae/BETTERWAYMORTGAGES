@@ -6,6 +6,9 @@ import { HotOffersTrigger } from '@/components/HotOffersPopup';
 import { TEAM_SPECIALISTS } from '@/data/team';
 import { BANKS } from '@/data/banks';
 import { speakablePageSchema } from '@/lib/seo-schema';
+import { fetchLiveCms } from '@/lib/cms-live';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Hot UAE Mortgage Offers & Priority Dubai Advisory Desk (2026–2027)',
@@ -22,7 +25,53 @@ export const metadata: Metadata = {
 
 const ADVISORS = TEAM_SPECIALISTS.filter((m) => m.slug === 'reshma-rajan' || m.slug === 'rahaba-azeez');
 
-export default function HotOffersPage() {
+export default async function HotOffersPage() {
+  const liveCms = await fetchLiveCms();
+  const displayTracks =
+    liveCms && liveCms.offers.length > 0
+      ? liveCms.offers.map((o) => ({
+          badge: o.badge,
+          title: o.title,
+          points: o.highlights.length > 0 ? o.highlights : [o.summary],
+          href: o.ctaHref || '/get-started',
+          cta: o.ctaLabel || 'Check Eligibility',
+        }))
+      : [
+          {
+            badge: 'Up to 80% / 85% LTV',
+            title: 'First-Home Resident Priority Desk',
+            points: [
+              'Compare 24 UAE conventional & Islamic lenders',
+              'Itemised 4% DLD, 0.25% mortgage reg & trustee sheet',
+              '50% CBUAE DBR & credit-card limit stress test',
+            ],
+            href: '/get-started?goal=new-mortgage',
+            cta: 'Check First-Home Eligibility',
+          },
+          {
+            badge: '1% / AED 10k Exit Cap',
+            title: 'Mortgage Buyout & Revert Audit',
+            points: [
+              'Full Year 4+ EIBOR revert margin & floor inspection',
+              'Exact break-even month refinance calculation',
+              'Liability letter & dual-bank settlement planning',
+            ],
+            href: '/calculators/buyout-refinance-savings',
+            cta: 'Run Buyout Calculator',
+          },
+          {
+            badge: 'AED 2M+ Golden Visa',
+            title: 'Non-Resident & Golden Visa Desk',
+            points: [
+              '25 overseas buyer country playbooks supported',
+              'Title Deed / Oqood & lender NOC coordination',
+              'Remote Power of Attorney & FX timing checklist',
+            ],
+            href: '/mortgages/non-resident-dubai',
+            cta: 'Explore Overseas Finance',
+          },
+        ];
+
   return (
     <div className="holo-canvas pt-[134px] max-sm:pt-[110px]">
       <section className="holo-section holo-section--dark">
@@ -75,41 +124,7 @@ export default function HotOffersPage() {
         <div className="mx-auto max-w-[1160px]">
           <SectionTag>Three CBUAE-Compliant Priority Tracks</SectionTag>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                badge: 'Up to 80% / 85% LTV',
-                title: 'First-Home Resident Priority Desk',
-                points: [
-                  'Compare 24 UAE conventional & Islamic lenders',
-                  'Itemised 4% DLD, 0.25% mortgage reg & trustee sheet',
-                  '50% CBUAE DBR & credit-card limit stress test',
-                ],
-                href: '/get-started?goal=new-mortgage',
-                cta: 'Check First-Home Eligibility',
-              },
-              {
-                badge: '1% / AED 10k Exit Cap',
-                title: 'Mortgage Buyout & Revert Audit',
-                points: [
-                  'Full Year 4+ EIBOR revert margin & floor inspection',
-                  'Exact break-even month refinance calculation',
-                  'Liability letter & dual-bank settlement planning',
-                ],
-                href: '/calculators/buyout-refinance-savings',
-                cta: 'Run Buyout Calculator',
-              },
-              {
-                badge: 'AED 2M+ Golden Visa',
-                title: 'Non-Resident & Golden Visa Desk',
-                points: [
-                  '25 overseas buyer country playbooks supported',
-                  'Title Deed / Oqood & lender NOC coordination',
-                  'Remote Power of Attorney & FX timing checklist',
-                ],
-                href: '/mortgages/non-resident-dubai',
-                cta: 'Explore Overseas Finance',
-              },
-            ].map((card) => (
+            {displayTracks.map((card) => (
               <div key={card.title} className="flex flex-col justify-between rounded-[22px] border border-[#e5e7eb] bg-[#f8f9fa] p-6">
                 <div>
                   <span className="rounded-full bg-[#eef7f4] px-3 py-1 text-xs font-bold text-[#0e6954]">{card.badge}</span>

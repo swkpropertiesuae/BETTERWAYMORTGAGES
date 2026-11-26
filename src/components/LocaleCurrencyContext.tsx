@@ -13,6 +13,7 @@ import {
   type LocaleCode,
   type SiteCopy,
 } from '@/data/i18n';
+import { EXT_I18N, type ExtendedUiCopy } from '@/data/i18n-extended';
 import { trackEvent } from '@/lib/analytics';
 
 type LocaleCurrencyValue = {
@@ -20,6 +21,7 @@ type LocaleCurrencyValue = {
   dir: 'ltr' | 'rtl';
   setLocale: (next: LocaleCode) => void;
   t: SiteCopy;
+  ext: ExtendedUiCopy;
   currency: CurrencyCode;
   setCurrency: (next: CurrencyCode) => void;
   fxRates: Record<CurrencyCode, number>;
@@ -141,6 +143,7 @@ export function LocaleCurrencyProvider({
       dir: locale === 'ar' ? 'rtl' : 'ltr',
       setLocale,
       t: I18N[locale] ?? I18N.en,
+      ext: EXT_I18N[locale] ?? EXT_I18N.en,
       currency,
       setCurrency,
       fxRates,
@@ -161,6 +164,7 @@ const FALLBACK_CTX: LocaleCurrencyValue = {
   dir: 'ltr',
   setLocale: () => {},
   t: I18N.en,
+  ext: EXT_I18N.en,
   currency: 'AED',
   setCurrency: () => {},
   fxRates: DEFAULT_FX_RATES,

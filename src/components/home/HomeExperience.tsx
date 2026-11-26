@@ -34,9 +34,11 @@ function trackSpotlight(e: MouseEvent<HTMLDivElement>) {
 }
 
 export default function HomeExperience() {
-  const { t } = useLocaleCurrency();
+  const { t, ext } = useLocaleCurrency();
   const reduce = useReducedMotion();
   const [activeStep, setActiveStep] = useState(0);
+  const hubIcons = [Smartphone, ShieldCheck, Building2, CheckCircle2] as const;
+  const coreIcons = [Layers, ShieldCheck, Building2, CheckCircle2] as const;
 
   return (
     <>
@@ -121,7 +123,7 @@ export default function HomeExperience() {
                             isSelected ? 'text-[#ffe074]' : 'text-[#64748b]'
                           }`}
                         >
-                          1-on-1 Guided
+                          {ext.suiteUi.guidedBadge}
                         </span>
                       </div>
                       <h3
@@ -169,28 +171,23 @@ export default function HomeExperience() {
                       <Smartphone size={14} className="text-[#f1d57e]" /> {t.suite.betterHubTag}
                     </span>
                     <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-bold text-[#f1d57e]">
-                      RERA Portal
+                      {ext.suiteUi.hubPortalBadge}
                     </span>
                   </div>
 
                   {/* Identical 184px Center Stage Slot */}
                   <div className="relative z-10 my-auto flex h-[184px] items-center">
                     <div className="grid w-full grid-cols-2 gap-2.5">
-                      {[
-                        [Smartphone, 'Co-Branded Links', '60s buyer readiness check'],
-                        [ShieldCheck, 'Verified Budgets', 'CBUAE 50% DBR cleared'],
-                        [Building2, 'Form F → DLD', 'Valuation & NOC alerts'],
-                        [CheckCircle2, '24-Bank Desk', 'Faster closing certainty'],
-                      ].map(([Icon, title, sub]) => {
-                        const Comp = Icon as typeof Smartphone;
+                      {ext.suiteUi.hubItems.map(([title, sub], idx) => {
+                        const Comp = hubIcons[idx];
                         return (
                           <div
-                            key={title as string}
+                            key={title}
                             className="flex h-[84px] flex-col justify-center rounded-[14px] border border-white/12 bg-white/[0.05] px-3.5 py-2.5 backdrop-blur-md"
                           >
                             <Comp size={15} className="text-[#f1d57e]" />
-                            <p className="mt-1.5 font-display text-xs font-bold text-white">{title as string}</p>
-                            <p className="text-[10.5px] text-white/65">{sub as string}</p>
+                            <p className="mt-1.5 font-display text-xs font-bold text-white">{title}</p>
+                            <p className="text-[10.5px] text-white/65">{sub}</p>
                           </div>
                         );
                       })}
@@ -201,7 +198,7 @@ export default function HomeExperience() {
                   <div className="relative z-10 flex h-7 items-center justify-between text-[11px] font-medium text-white/68">
                     <span className="inline-flex items-center gap-1.5">
                       <span className="h-1.5 w-1.5 rounded-full bg-[#f1d57e]" />
-                      Live Dubai agency portal · Zero cost to join
+                      {ext.suiteUi.hubFooter}
                     </span>
                     <span className="font-semibold text-white">BetterHub</span>
                   </div>
@@ -228,7 +225,7 @@ export default function HomeExperience() {
                       </span>
                     </Link>
                     <Link href="/partners" className="homy-btn homy-btn--outline bw-btn--sm">
-                      Join Agency Network
+                      {ext.suiteUi.hubSecondaryCta}
                     </Link>
                   </div>
                 </div>
@@ -243,28 +240,23 @@ export default function HomeExperience() {
                       <Cpu size={14} className="text-[#ffe074]" /> {t.suite.betterCoreTag}
                     </span>
                     <span className="rounded-full border border-[#ffe074]/35 bg-[#ffe074]/15 px-3 py-1 text-[11px] font-bold text-[#ffe074]">
-                      Betterway OS
+                      {ext.suiteUi.coreOsBadge}
                     </span>
                   </div>
 
                   {/* Identical 184px Center Stage Slot */}
                   <div className="relative z-10 my-auto flex h-[184px] items-center">
                     <div className="grid w-full grid-cols-2 gap-2.5">
-                      {[
-                        [Layers, '24-Bank Matrix', 'Conventional & Islamic'],
-                        [ShieldCheck, 'CBUAE KFS Flow', 'Audit-ready dossiers'],
-                        [Building2, '60 UAE Areas', 'Freehold & handover'],
-                        [CheckCircle2, '6 Languages', 'EN · AR · RU · 中文 · FR · ES'],
-                      ].map(([Icon, title, sub]) => {
-                        const Comp = Icon as typeof Layers;
+                      {ext.suiteUi.coreItems.map(([title, sub], idx) => {
+                        const Comp = coreIcons[idx];
                         return (
                           <div
-                            key={title as string}
+                            key={title}
                             className="flex h-[84px] flex-col justify-center rounded-[14px] border border-white/14 bg-white/[0.06] px-3.5 py-2.5 backdrop-blur-md"
                           >
                             <Comp size={15} className="text-[#ffe074]" />
-                            <p className="mt-1.5 font-display text-xs font-bold text-white">{title as string}</p>
-                            <p className="text-[10.5px] text-white/65">{sub as string}</p>
+                            <p className="mt-1.5 font-display text-xs font-bold text-white">{title}</p>
+                            <p className="text-[10.5px] text-white/65">{sub}</p>
                           </div>
                         );
                       })}
@@ -275,7 +267,7 @@ export default function HomeExperience() {
                   <div className="relative z-10 flex h-7 items-center justify-between text-[11px] font-medium text-white/68">
                     <span className="inline-flex items-center gap-1.5">
                       <span className="h-1.5 w-1.5 rounded-full bg-[#ffe074]" />
-                      Institutional underwriting &amp; live EIBOR engine
+                      {ext.suiteUi.coreFooter}
                     </span>
                     <span className="font-semibold text-white">BetterCore</span>
                   </div>
@@ -302,7 +294,7 @@ export default function HomeExperience() {
                       </span>
                     </Link>
                     <Link href="/portal/login" className="homy-btn homy-btn--outline bw-btn--sm">
-                      Open BetterVault
+                      {ext.suiteUi.coreSecondaryCta}
                     </Link>
                   </div>
                 </div>
@@ -362,18 +354,15 @@ export default function HomeExperience() {
                 <div className="max-w-2xl space-y-2">
                   <span className="homy-tag">
                     <span className="homy-tag__ring" aria-hidden="true" />
-                    <span>{PDF_RESOURCES.length} Free PDF Guides · Zero Email Gate</span>
+                    <span>{ext.pdfShowcase.eyebrow}</span>
                   </span>
                   <h3 className="font-display text-2xl font-bold tracking-tight text-[#080b0f] sm:text-3xl">
-                    Essential &amp; neglected UAE mortgage PDF playbooks
+                    {ext.pdfShowcase.heading}
                   </h3>
-                  <p className="text-sm text-[#4f596b]">
-                    Credit card 5% DBR traps, post-fixed EIBOR floor audits, Form F valuation clauses, DLD trustee
-                    cheque splitters, and {PDF_RESOURCES.length - 6} more free print-ready guides.
-                  </p>
+                  <p className="text-sm text-[#4f596b]">{ext.pdfShowcase.sub}</p>
                 </div>
                 <Link href="/downloads" className="homy-btn bw-btn--sm">
-                  <span>Explore All {PDF_RESOURCES.length} Free PDFs</span>
+                  <span>{ext.pdfShowcase.browseAllCta}</span>
                   <span className="homy-btn__disc" aria-hidden="true">
                     <span className="homy-btn__arrow-track">
                       <ArrowRight size={14} strokeWidth={2.2} />
@@ -407,23 +396,23 @@ export default function HomeExperience() {
                       </p>
                     </div>
                     <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#0e6954]">
-                      Download Free PDF <ArrowRight size={12} className="transition group-hover:translate-x-0.5" />
+                      {ext.pdfShowcase.downloadBtn} <ArrowRight size={12} className="transition group-hover:translate-x-0.5" />
                     </span>
                   </a>
                 ))}
               </div>
 
               <div className="mt-5 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-[#464c5c]">
-                <span>Explore 60 freehold community briefs, 36 UAE policy insights, and our full team directory:</span>
+                <span>{ext.pdfShowcase.footerPrompt}</span>
                 <div className="flex flex-wrap gap-4">
                   <Link href="/downloads" className="text-[#0e6954] hover:underline">
-                    All {PDF_RESOURCES.length} Free PDF Guides →
+                    {ext.pdfShowcase.linkAllPdfs}
                   </Link>
                   <Link href="/insights" className="text-[#070e1a] hover:underline">
-                    36 UAE Insights →
+                    {ext.pdfShowcase.linkInsights}
                   </Link>
                   <Link href="/about-us" className="text-[#070e1a] hover:underline">
-                    Meet Our Dubai Leadership →
+                    {ext.pdfShowcase.linkTeam}
                   </Link>
                 </div>
               </div>

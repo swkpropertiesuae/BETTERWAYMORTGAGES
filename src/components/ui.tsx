@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { ArrowRight, Clock, Info, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
-import { SITE, BENCH, DISCLOSURE_SHORT, DISCLOSURE_FULL, fullAddress, waLink } from '@/data/site';
+import { ArrowRight, Info, ShieldCheck } from 'lucide-react';
+import { SITE, BENCH, DISCLOSURE_SHORT, DISCLOSURE_FULL, waLink } from '@/data/site';
 import MotionReveal from '@/components/MotionReveal';
+import FooterClient from '@/components/FooterClient';
 import type { Faq as FaqT } from '@/data/products';
 
 export const aed = (n: number) => `AED ${Math.round(n).toLocaleString('en-US')}`;
@@ -392,7 +393,7 @@ export function CtaBand({
                   src="/brand/logo-horizontal-dark.png"
                   alt="Betterway Mortgages"
                   width={1400}
-                  height={419}
+                  height={435}
                   className="h-9 w-auto"
                 />
                 <SectionTag light>1-on-1 Dubai Advisory Desk</SectionTag>
@@ -421,183 +422,9 @@ export function CtaBand({
   );
 }
 
-const FOOT: { title: string; links: [string, string][] }[] = [
-  {
-    title: 'For Buyers',
-    links: [
-      ['Start 60s Pre-Approval', '/get-started'],
-      ['UAE Resident Mortgages', '/mortgages/uae-residents'],
-      ['UAE National Mortgages', '/mortgages/uae-nationals'],
-      ['Non-Resident Buyers', '/mortgages/non-resident-dubai'],
-      ['Islamic Home Finance', '/mortgages/islamic-home-finance'],
-      ['BetterClose · Closing Desk', '/concierge'],
-    ],
-  },
-  {
-    title: 'Rates & Tools',
-    links: [
-      ['24 UAE Banks & Revert Guide', '/rates/uae-mortgage-rates-eibor-revert-bible'],
-      ['Live CBUAE EIBOR Tracker', '/rates/eibor-live-tracker'],
-      ['Mortgage & DLD Calculator', '/calculators/mortgage-calculator'],
-      ['50% DBR Borrowing Power', '/calculators/dbr-borrowing-power'],
-      ['Rent vs Buy Calculator', '/calculators/rent-vs-buy-dubai'],
-      ['Form F Clause Generator', '/tools/form-f-clause-generator'],
-    ],
-  },
-  {
-    title: 'Betterway Suite',
-    links: [
-      ['BetterHub · RERA Agencies', '/hub'],
-      ['BetterCore · Brokerage OS', '/edge'],
-      ['Join BetterHub', '/partners'],
-      ['BetterVault · Portal Login', '/portal/login'],
-      ['About Betterway', '/about-us'],
-      ['Our Dubai Specialists', '/our-underwriters'],
-    ],
-  },
-];
-
-/** Corporate Institutional Dark Footer (#0b1117, radius: 30px) */
+/** Corporate Institutional Dark Footer (#0b1117, radius: 30px) — 100% localized across EN, AR, RU, ZH, FR, ES */
 export function Footer() {
-  return (
-    <div className="homy-footer-shell">
-      <footer className="homy-footer-card">
-        {/* Top Executive CTA Banner + Subtle BETTERWAY Architectural Watermark */}
-        <div className="homy-footer-cta">
-          <div className="homy-footer-cta__copy">
-            <SectionTag>Speak with our Oud Metha desk</SectionTag>
-            <h2>Review written terms before you sign Form F</h2>
-            <p>
-              Compare mortgage structures across 24 UAE lenders with daily CBUAE EIBOR benchmarks and itemised 4% DLD
-              closing schedules.
-            </p>
-            <div className="mt-2 flex flex-wrap justify-center gap-3">
-              <Cta href="/contact">Book an Advisory Call</Cta>
-              <Cta href="/calculators/mortgage-calculator" tone="ghost">
-                Run DLD Calculator
-              </Cta>
-            </div>
-          </div>
-
-          <div className="homy-footer-villa">
-            <img
-              src="/images/footer-dubai-night-villa.webp"
-              alt="High-resolution twilight aerial view of Downtown Dubai, Burj Khalifa, and illuminated Sheikh Zayed Road"
-              width={2560}
-              height={1440}
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="homy-footer-watermark" aria-hidden="true">
-              BETTERWAY
-            </div>
-          </div>
-        </div>
-
-        {/* Dark #0b1117 Footer Links Grid */}
-        <div className="homy-footer-body">
-          <div className="homy-footer-grid">
-            <div className="space-y-5">
-              <Link href="/" aria-label="Betterway Mortgages home" className="inline-block">
-                <img
-                  src="/brand/logo-horizontal-dark.png"
-                  alt="Betterway Mortgages"
-                  width={1400}
-                  height={419}
-                  className="h-14 w-auto sm:h-16"
-                />
-              </Link>
-              <p className="max-w-xs text-sm leading-relaxed text-white/68">
-                Independent Dubai &amp; UAE mortgage advisory for residents, overseas buyers, and investors. Compare the whole offer, not just the headline rate.
-              </p>
-              {SITE.licence && <p className="text-xs text-white/50">{SITE.licence}</p>}
-            </div>
-
-            {FOOT.map((col) => (
-              <div key={col.title} className="homy-footer-col">
-                <h3>{col.title}</h3>
-                <ul>
-                  {col.links.map(([label, href]) => (
-                    <li key={href}>
-                      <Link href={href} className="ulink">
-                        {label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-
-            <div className="homy-footer-col">
-              <h3>Contact</h3>
-              <div className="grid gap-3.5">
-                <a href={`mailto:${SITE.email}`} className="homy-contact-item hover:text-white">
-                  <span className="homy-contact-icon" aria-hidden="true">
-                    <Mail size={15} />
-                  </span>
-                  <span className="truncate">{SITE.email}</span>
-                </a>
-                {SITE.phone && (
-                  <a href={SITE.phoneHref} className="homy-contact-item hover:text-white">
-                    <span className="homy-contact-icon" aria-hidden="true">
-                      <Phone size={15} />
-                    </span>
-                    <span>{SITE.phone}</span>
-                  </a>
-                )}
-                <div className="homy-contact-item">
-                  <span className="homy-contact-icon" aria-hidden="true">
-                    <MapPin size={15} />
-                  </span>
-                  <span className="text-xs leading-snug text-white/75">{fullAddress}</span>
-                </div>
-                <div className="homy-contact-item">
-                  <span className="homy-contact-icon" aria-hidden="true">
-                    <Clock size={15} />
-                  </span>
-                  <span className="text-xs text-white/75">{SITE.hours}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="homy-footer-bottom">
-            <p className="leading-relaxed">{DISCLOSURE_FULL}</p>
-            <p>
-              Betterway Mortgages LLC is a mortgage adviser, not a bank. Lending decisions, rates and final offers are made solely in writing by the licensed UAE lender.
-            </p>
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-white/75">
-              <p>© 2026 {SITE.legalName}. All rights reserved.</p>
-              <nav aria-label="Legal and SEO links" className="flex flex-wrap items-center gap-4">
-                <Link href="/hot-offers" className="ulink">
-                  BetterDesk
-                </Link>
-                <Link href="/insights" className="ulink">
-                  36 UAE Insights
-                </Link>
-                <Link href="/downloads" className="ulink">
-                  52 Free PDF Guides
-                </Link>
-                <Link href="/privacy-and-cbuae-disclosure" className="ulink">
-                  Privacy &amp; CBUAE Disclosure
-                </Link>
-                <Link href="/sitemap" className="ulink">
-                  Sitemap
-                </Link>
-                <span className="inline-flex items-center gap-2.5 border-s border-white/15 ps-3">
-                  <Link href="/ar" lang="ar" className="ulink">العربية</Link>
-                  <Link href="/ru" lang="ru" className="ulink">RU</Link>
-                  <Link href="/zh" lang="zh" className="ulink">中文</Link>
-                  <Link href="/fr" lang="fr" className="ulink">FR</Link>
-                  <Link href="/es" lang="es" className="ulink">ES</Link>
-                </span>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FooterClient />;
 }
 
 export function orgSchema() {

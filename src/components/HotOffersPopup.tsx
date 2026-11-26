@@ -130,6 +130,18 @@ export default function HotOffersPopup() {
 
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+  const [liveOffers, setLiveOffers] = useState<
+    Array<{
+      id: string;
+      tab: string;
+      badge: string;
+      title: string;
+      summary: string;
+      highlights: readonly string[];
+      ctaHref: string;
+      ctaLabel: string;
+    }>
+  >([...HOT_OFFERS]);
   const [offerIdx, setOfferIdx] = useState(0);
   const [advisorIdx, setAdvisorIdx] = useState(0);
   const [name, setName] = useState('');
@@ -138,10 +150,30 @@ export default function HotOffersPopup() {
   const [sent, setSent] = useState(false);
 
   const advisor = FEMALE_ADVISORS[advisorIdx] ?? TEAM_SPECIALISTS[2];
-  const offer = HOT_OFFERS[offerIdx];
+  const offer = liveOffers[offerIdx] ?? liveOffers[0] ?? HOT_OFFERS[0];
 
   useEffect(() => {
     setMounted(true);
+    fetch('/api/cms/live')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        const rows = j?.cms?.offers;
+        if (Array.isArray(rows) && rows.length > 0) {
+          setLiveOffers(
+            rows.slice(0, 3).map((o: Record<string, unknown>, idx: number) => ({
+              id: String(o.id || `live-${idx}`),
+              tab: String(o.tab || 'Priority Desk'),
+              badge: String(o.badge || 'Live UAE Offer'),
+              title: String(o.title || HOT_OFFERS[0].title),
+              summary: String(o.summary || ''),
+              highlights: Array.isArray(o.highlights) && o.highlights.length > 0 ? (o.highlights as string[]) : HOT_OFFERS[0].highlights,
+              ctaHref: String(o.ctaHref || '/get-started'),
+              ctaLabel: String(o.ctaLabel || 'Check Eligibility'),
+            })),
+          );
+        }
+      })
+      .catch(() => {});
   }, []);
 
   // Listen for manual "Hot Offers" trigger clicks anywhere on the site
@@ -363,7 +395,7 @@ export default function HotOffersPopup() {
                     aria-label="Hot UAE mortgage offer tracks"
                     className="mt-5 grid grid-cols-3 gap-1.5 rounded-[16px] border border-[#e5e7eb] bg-[#f5f6f7] p-1.5"
                   >
-                    {HOT_OFFERS.map((item, i) => {
+                    {liveOffers.map((item, i) => {
                       const active = i === offerIdx;
                       return (
                         <button

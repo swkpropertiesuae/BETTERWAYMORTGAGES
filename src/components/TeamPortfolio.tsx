@@ -74,10 +74,16 @@ export function TeamPortfolio({
             {EXECUTIVE_LEADERSHIP.map((exec, idx) => {
               const asMember = ALL_TEAM_MEMBERS.find((m) => m.slug === exec.slug)!;
               return (
-                <article
+                <motion.article
                   key={exec.slug}
-                  className="group relative grid overflow-hidden rounded-[26px] border border-brass/30 bg-navy text-white shadow-[0_28px_60px_-28px_rgb(2_17_37/0.72)] sm:grid-cols-[210px_1fr]"
+                  initial={reduce ? false : { opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.52, delay: idx * 0.1, ease: EASE_EXPO }}
+                  whileHover={reduce ? undefined : { y: -5 }}
+                  className="bw-hot-beam-shell group relative overflow-hidden rounded-[28px] p-[1.5px] shadow-[0_28px_60px_-28px_rgb(2_17_37/0.72)]"
                 >
+                  <div className="bw-fintech-stage !min-h-0 !rounded-[26.5px] !border-0 !p-0 grid overflow-hidden text-white sm:grid-cols-[216px_1fr]">
                   <div
                     aria-hidden="true"
                     className="pointer-events-none absolute -end-20 -top-20 h-56 w-56 rounded-full"
@@ -142,13 +148,14 @@ export function TeamPortfolio({
                       </a>
                       <Link
                         href={`/contact?advisor=${encodeURIComponent(exec.name)}`}
-                        className="inline-flex items-center gap-1 font-semibold text-white/90 hover:text-[#34dfac]"
+                        className="inline-flex items-center gap-1 font-semibold text-white/90 hover:text-[#f1d57e]"
                       >
                         Consult 1-on-1 <ArrowUpRight size={13} />
                       </Link>
                     </div>
                   </div>
-                </article>
+                  </div>
+                </motion.article>
               );
             })}
           </div>
@@ -199,12 +206,25 @@ export function TeamPortfolio({
           </div>
         )}
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {visible.map((member, idx) => (
-            <article
-              key={member.slug}
-              className="bw-team-card group flex flex-col overflow-hidden rounded-[22px] border border-line bg-white shadow-[0_18px_46px_-26px_rgb(2_17_37/0.2)] transition duration-300 hover:-translate-y-1 hover:border-brass/60 hover:shadow-[0_28px_60px_-28px_rgb(2_17_37/0.32)]"
-            >
+        <motion.div layout className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <AnimatePresence mode="popLayout">
+            {visible.map((member, idx) => (
+              <motion.article
+                layout
+                key={member.slug}
+                initial={reduce ? false : { opacity: 0, y: 22, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
+                viewport={{ once: true, amount: 0.12 }}
+                transition={{
+                  layout: { type: 'spring', stiffness: 320, damping: 30 },
+                  duration: 0.48,
+                  delay: Math.min(idx * 0.055, 0.35),
+                  ease: EASE_EXPO,
+                }}
+                whileHover={reduce ? undefined : { y: -6 }}
+                className="bw-team-card bw-beam-box group flex flex-col overflow-hidden !rounded-[22px] border border-[#e5eaf0] bg-white shadow-[0_18px_46px_-26px_rgb(2_17_37/0.2)] transition-shadow duration-300 hover:border-[#d7b158]/70 hover:shadow-[0_30px_66px_-26px_rgb(2_17_37/0.34)]"
+              >
               {/* Exact 3:4 Portrait Container matching 900x1200 eye-level aligned master => identical eye-line across all 8 cards */}
               <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#0a1424]">
                 <img
@@ -260,13 +280,14 @@ export function TeamPortfolio({
                     href={`/contact?advisor=${encodeURIComponent(member.name)}`}
                     className="inline-flex items-center gap-1 rounded-full bg-navy px-3 py-1.5 text-[11.5px] font-semibold text-white transition hover:bg-navy-800"
                   >
-                    Consult <ArrowUpRight size={12} className="text-brass" />
+                    Consult <ArrowUpRight size={12} className="text-brass transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 </div>
               </div>
-            </article>
-          ))}
-        </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       {/* Full Profile & High-Resolution Portrait Modal */}

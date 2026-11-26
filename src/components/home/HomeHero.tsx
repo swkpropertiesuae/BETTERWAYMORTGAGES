@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, Calculator, Play } from 'lucide-react';
 import { useBenchmark } from '@/components/StartupExperience';
 import { useLocaleCurrency } from '@/components/LocaleCurrencyContext';
@@ -13,12 +12,9 @@ import PhoneMockupBasic from '@/components/ui/phone-mockups-1';
 import { HotOffersTrigger } from '@/components/HotOffersPopup';
 import { buildHeroDossier } from '@/lib/hero-showcase';
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
 export default function HomeHero() {
   const { data } = useBenchmark();
   const { locale, currency, formatCompact, t } = useLocaleCurrency();
-  const reduce = useReducedMotion();
   const dossier = buildHeroDossier(data.latest.threeMonth);
   const [videoOpen, setVideoOpen] = useState(false);
   const [matchmakerOpen, setMatchmakerOpen] = useState(false);
@@ -34,12 +30,7 @@ export default function HomeHero() {
           <div className="grid min-w-0 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
             <div className="min-w-0 max-w-[680px]">
               {/* Live CBUAE EIBOR + Advisory Briefing + BetterDesk Bar */}
-              <motion.div
-                initial={reduce ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, ease: EASE }}
-                className="mb-5 flex flex-wrap items-center gap-2.5"
-              >
+              <div className="mb-5 flex flex-wrap items-center gap-2.5">
                 <span className="bw-hero-chip">
                   <span className="bw-live-dot" aria-hidden="true" />
                   <span>{t.hero.eiborLabel}</span>
@@ -54,39 +45,26 @@ export default function HomeHero() {
                   <span>{t.hero.watchBriefing}</span>
                 </button>
                 <HotOffersTrigger label={t.hero.priorityDesk} variant="hero" />
-              </motion.div>
+              </div>
 
-              <motion.h1
+              <h1
                 id="hero-title"
-                initial={reduce ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.52, delay: 0.06, ease: EASE }}
                 className="holo-hero__title !text-[clamp(36px,4.3vw,62px)]"
               >
                 {t.hero.title}
-              </motion.h1>
+              </h1>
 
-              <motion.p
-                initial={reduce ? false : { opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.52, delay: 0.12, ease: EASE }}
-                className="holo-hero__sub !text-[clamp(15.5px,1.25vw,18.5px)]"
-              >
+              <p className="holo-hero__sub !text-[clamp(15.5px,1.25vw,18.5px)]">
                 {t.hero.subtitle}
                 {currency !== 'AED' && (
                   <span className="ms-2 inline-flex items-center rounded-full border border-white/25 bg-[#070d19]/60 px-2.5 py-0.5 text-xs font-semibold text-[#ffe074] backdrop-blur-md">
                     1st-Home LTV up to {formatCompact(5_000_000)}
                   </span>
                 )}
-              </motion.p>
+              </p>
 
               {/* Executive Dual Action Cards — Flush Equal Height */}
-              <motion.div
-                initial={reduce ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.18, ease: EASE }}
-                className="holo-hero__cards"
-              >
+              <div className="holo-hero__cards">
                 <Link href="/get-started" className="holo-cta-card">
                   <div>
                     <span className="holo-cta-card__title">{t.hero.card1Title}</span>
@@ -110,15 +88,10 @@ export default function HomeHero() {
                     <ArrowRight size={20} strokeWidth={2.2} />
                   </span>
                 </button>
-              </motion.div>
+              </div>
 
               {/* Executive Quick-Jump Links */}
-              <motion.div
-                initial={reduce ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.26 }}
-                className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] font-semibold text-white"
-              >
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] font-semibold text-white">
                 <a href="#calculator" className="bw-hero-link inline-flex items-center gap-1.5">
                   <Calculator size={14} className="text-[#00d69a]" />
                   <span>{t.hero.jumpCalc}</span>
@@ -129,7 +102,7 @@ export default function HomeHero() {
                 <Link href="/hub" className="bw-hero-link">
                   {t.hero.jumpHub}
                 </Link>
-              </motion.div>
+              </div>
             </div>
 
             {/* Right Column: Interactive 21st.dev PhoneCarousel (Betterway App Screens) */}

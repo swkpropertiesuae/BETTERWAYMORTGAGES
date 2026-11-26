@@ -20,7 +20,7 @@ const RESIDENCY_KEYS: { key: ResidencyKey; capLabel: string }[] = [
 
 export default function HoloMortgageCalc() {
   const { data } = useBenchmark();
-  const { currency, setCurrency, formatMoney, t } = useLocaleCurrency();
+  const { currency, setCurrency, formatMoney, t, ext } = useLocaleCurrency();
   const reduce = useReducedMotion();
 
   const [residency, setResidency] = useState<ResidencyKey>('resident');
@@ -71,7 +71,7 @@ export default function HoloMortgageCalc() {
         {/* Inline Live Currency Strip inside Calculator */}
         <div className="space-y-2">
           <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#64748b]">
-            Live Display Currency
+            {ext.calcUi.liveDisplayCurrency}
           </p>
           <div className="flex flex-wrap gap-1.5">
             {CURRENCIES.map((cur) => {
@@ -96,9 +96,9 @@ export default function HoloMortgageCalc() {
 
         <ul className="space-y-2.5 pt-1 text-sm text-[#4b5b63]">
           {[
-            `CBUAE statutory LTV caps (${RESIDENCY_KEYS.find((k) => k.key === residency)?.capLabel})`,
-            'Itemises 4% DLD transfer, 0.25% mortgage reg & trustee fee',
-            `Live CBUAE 3M EIBOR fixing (${calc.eibor3m.toFixed(2)}%) shown in revert preview`,
+            `${ext.calcUi.bullet1} (${ext.calcUi.residencyCaps[RESIDENCY_KEYS.findIndex((k) => k.key === residency)]})`,
+            ext.calcUi.bullet2,
+            `${ext.calcUi.bullet3} (${calc.eibor3m.toFixed(2)}%)`,
           ].map((point) => (
             <li key={point} className="flex items-start gap-2.5">
               <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#eef7f4] text-[#0e6954]">

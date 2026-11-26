@@ -6,6 +6,8 @@ import { ArrowRight, MessageCircle, Send, Sparkles, X } from 'lucide-react';
 import { cashToClose, borrowingPower, earlySettlementFee } from '@/lib/math';
 import { waLink } from '@/data/site';
 import { SPRING_SNAPPY } from '@/components/ui/MotionPrimitives';
+import { useLocaleCurrency } from '@/components/LocaleCurrencyContext';
+import { COPILOT_I18N } from '@/data/i18n-extended';
 
 const aed = (n: number) => `AED ${Math.round(n).toLocaleString('en-US')}`;
 
@@ -53,6 +55,8 @@ const INTENTS: { chip: string; answer: () => Omit<Msg, 'id'> }[] = [
 ];
 
 export default function CoPilot() {
+  const { locale } = useLocaleCurrency();
+  const cp = COPILOT_I18N[locale] ?? COPILOT_I18N.en;
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
 
@@ -68,9 +72,17 @@ export default function CoPilot() {
     {
       id: 'welcome',
       from: 'bot',
-      text: 'Select a common CBUAE or DLD rule question below, or connect with an advisor. Preset planning notes only — not a lending assessment.',
+      text: cp.welcome,
     },
   ]);
+
+  useEffect(() => {
+    setMsgs((prev) =>
+      prev.length === 1 && prev[0].id === 'welcome'
+        ? [{ id: 'welcome', from: 'bot', text: cp.welcome }]
+        : prev
+    );
+  }, [cp.welcome]);
 
   const ask = (intent: (typeof INTENTS)[number]) => {
     const stamp = `${Date.now()}-${Math.random()}`;
@@ -106,9 +118,9 @@ export default function CoPilot() {
                 />
                 <div>
                   <p className="font-display text-sm font-semibold leading-tight text-white">
-                    Mortgage rulebook guide
+                    {cp.title}
                   </p>
-                  <p className="text-[11px] text-white/60">CBUAE &amp; DLD Statutory Notes</p>
+                  <p className="text-[11px] text-white/60">{cp.subtitle}</p>
                 </div>
               </div>
               <button
@@ -167,7 +179,7 @@ export default function CoPilot() {
                 className="homy-btn w-full justify-between"
               >
                 <span className="inline-flex items-center gap-2">
-                  <MessageCircle size={15} /> Ask an advisor
+                  <MessageCircle size={15} /> {cp.askAdvisor}
                 </span>
                 <span className="homy-btn__disc" aria-hidden="true">
                   <span className="homy-btn__arrow-track">
@@ -193,8 +205,8 @@ export default function CoPilot() {
           <Sparkles size={14} className="text-[#34dfac]" />
           <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-[#d7b158]" />
         </span>
-        <span className="hidden sm:inline">Advisory desk</span>
-        <span className="sm:hidden">Help</span>
+        <span className="hidden sm:inline">{cp.launcher}</span>
+        <span className="sm:hidden">{cp.mobileLauncher}</span>
       </motion.button>
     </div>
   );

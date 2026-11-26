@@ -29,7 +29,7 @@ function trackSpotlight(e: MouseEvent<HTMLDivElement>) {
  * equalized 2-line heading height, equalized 3-line summary height, and flush-aligned CTA buttons.
  */
 export default function InteractiveAdvisoryCards() {
-  const { currency, formatMoney, t } = useLocaleCurrency();
+  const { currency, formatMoney, t, ext } = useLocaleCurrency();
   const reduce = useReducedMotion();
 
   const [bankTrack, setBankTrack] = useState<'Conventional' | 'Islamic'>('Conventional');
@@ -112,7 +112,9 @@ export default function InteractiveAdvisoryCards() {
                             className="absolute inset-0 rounded-full bg-white"
                           />
                         )}
-                        <span className="relative z-10">{track}</span>
+                        <span className="relative z-10">
+                          {track === 'Conventional' ? ext.cardsUi.conventional : ext.cardsUi.islamic}
+                        </span>
                       </button>
                     );
                   })}
@@ -161,7 +163,7 @@ export default function InteractiveAdvisoryCards() {
               <div className="relative z-10 flex h-8 items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 text-[11.5px] text-white/70">
                   <CheckCircle2 size={13} className="text-[#f1d57e]" />
-                  Neutral 24-bank directory · Zero AECB score impact
+                  {ext.cardsUi.neutralNote}
                 </span>
                 <div className="flex items-center gap-1.5">
                   <button
@@ -246,7 +248,7 @@ export default function InteractiveAdvisoryCards() {
                             className="absolute inset-0 rounded-full bg-white"
                           />
                         )}
-                        <span className="relative z-10">{prof.short}</span>
+                        <span className="relative z-10">{ext.cardsUi.buyerShort[idx]}</span>
                       </button>
                     );
                   })}
@@ -265,29 +267,29 @@ export default function InteractiveAdvisoryCards() {
                   <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-white/12 pb-3">
                     <div>
                       <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#f1d57e]">
-                        {activeProfile.label} · {activeProfile.ltv}% Max LTV
+                        {ext.cardsUi.buyerFull[profileIdx]} · {activeProfile.ltv}% {ext.cardsUi.maxLtvWord}
                       </p>
                       <p className="num mt-1 font-display text-2xl font-extrabold text-white">
                         {formatMoney(activeProfile.samplePrice)}{' '}
-                        <span className="text-xs font-medium text-white/65">property</span>
+                        <span className="text-xs font-medium text-white/65">{ext.cardsUi.propertyWord}</span>
                       </p>
                     </div>
                     <span className="rounded-full border border-[#f1d57e]/35 bg-white/10 px-3 py-1 text-[11px] font-bold text-[#f1d57e]">
-                      {currency} Live View
+                      {currency} {ext.cardsUi.liveView}
                     </span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2.5 text-xs">
                     <div className="rounded-[12px] border border-white/10 bg-[#070a10]/75 p-3">
-                      <p className="text-[10.5px] text-white/60">Deposit ({activeProfile.downPct}%)</p>
+                      <p className="text-[10.5px] text-white/60">{ext.cardsUi.deposit} ({activeProfile.downPct}%)</p>
                       <p className="num mt-1 font-bold text-white">{formatMoney(closing.down)}</p>
                     </div>
                     <div className="rounded-[12px] border border-white/10 bg-[#070a10]/75 p-3">
-                      <p className="text-[10.5px] text-white/60">4% DLD + Title</p>
+                      <p className="text-[10.5px] text-white/60">{ext.cardsUi.dldTitle}</p>
                       <p className="num mt-1 font-bold text-[#f1d57e]">{formatMoney(closing.dld)}</p>
                     </div>
                     <div className="rounded-[12px] border border-white/10 bg-[#070a10]/75 p-3">
-                      <p className="text-[10.5px] text-white/60">Loan ({activeProfile.ltv}%)</p>
+                      <p className="text-[10.5px] text-white/60">{ext.cardsUi.loanWord} ({activeProfile.ltv}%)</p>
                       <p className="num mt-1 font-bold text-white">{formatMoney(closing.loan)}</p>
                     </div>
                   </div>
@@ -298,10 +300,10 @@ export default function InteractiveAdvisoryCards() {
               <div className="relative z-10 flex h-8 items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 text-[11.5px] text-white/70">
                   <CheckCircle2 size={13} className="text-[#f1d57e]" />
-                  {activeProfile.note}
+                  {ext.cardsUi.buyerNotes[profileIdx]}
                 </span>
                 <span className="num rounded-full border border-white/15 bg-white/10 px-2.5 py-0.5 text-[10.5px] font-semibold text-[#ffe074]">
-                  Total {formatMoney(closing.total)}
+                  {ext.cardsUi.totalWord} {formatMoney(closing.total)}
                 </span>
               </div>
             </div>

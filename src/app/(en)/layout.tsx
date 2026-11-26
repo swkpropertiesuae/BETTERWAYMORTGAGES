@@ -4,8 +4,10 @@ import '../startup.css';
 import '../brand.css';
 import Header from '@/components/Header';
 import CoPilot from '@/components/CoPilot';
+import OsLiveChat from '@/components/OsLiveChat';
 import ResumeJourneyToast from '@/components/ecosystem/ResumeJourneyToast';
 import HotOffersPopup from '@/components/HotOffersPopup';
+import LiveAnnouncementBar from '@/components/LiveAnnouncementBar';
 import Analytics from '@/components/Analytics';
 import MotionKit from '@/components/MotionKit';
 import { LocaleCurrencyProvider } from '@/components/LocaleCurrencyContext';
@@ -109,7 +111,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main">{children}</main>
           <Footer />
           <HotOffersPopup />
+          <LiveAnnouncementBar />
           <ResumeJourneyToast />
+          <OsLiveChat />
           <CoPilot />
           <MotionKit />
           <Analytics />

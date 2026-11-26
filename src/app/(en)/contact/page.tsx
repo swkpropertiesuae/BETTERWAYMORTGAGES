@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 import { SectionTag } from '@/components/ui';
 import { SlotPicker, LeadForm } from '@/components/client';
+import ContactLocationMap from '@/components/ContactLocationMap';
 import { SITE, fullAddress, waLink } from '@/data/site';
 
 export const metadata: Metadata = {
@@ -110,18 +111,10 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Dubai Office Map */}
-      <section aria-label="Dubai office map" className="pb-12">
+      {/* Interactive Dubai Office Location Map & Directions Suite */}
+      <section aria-label="Dubai office location and directions" className="pb-14">
         <div className="wrap">
-          <div className="h-[420px] overflow-hidden rounded-[20px] border border-[#eaeaea] bg-[#f6f6f6]">
-            <iframe
-              title="Map to Al Nasr Plaza, Oud Metha, Dubai"
-              className="h-full w-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              src={`https://www.google.com/maps?q=${q}&output=embed`}
-            />
-          </div>
+          <ContactLocationMap />
         </div>
       </section>
     </div>
